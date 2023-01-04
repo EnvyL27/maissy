@@ -545,4 +545,16 @@ export class CountService {
   getOxonia(){
     return this.httpClient.get(api + "oxonia");
   }
+  getContainerOff(){
+    return this.httpClient.get(api + "containeroff");
+  }
+  getRobotpackerOff(){
+    return this.httpClient.get(api + "robopackeroff");
+  }
+  getResealerOff(){
+    return this.httpClient.get(api + "resealeroff");
+  }
+  getPackConveyorOff(){
+    return this.httpClient.get(api + "packconveyoroff");
+  }
 };

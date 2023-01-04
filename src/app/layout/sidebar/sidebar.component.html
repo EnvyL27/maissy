@@ -790,7 +790,12 @@ else lain6
         router.url === '/filterpress1'||
         router.url === '/filterpress2'||
         router.url === '/dpcpump'||
-        router.url === '/oxonia';
+        router.url === '/oxonia'||
+        router.url === '/containeroffline'||
+        router.url === '/robopacker'||
+        router.url === '/resealeroff'||
+        router.url === '/emptybox'||
+        router.url === '/packconveyoroff';
         else lubricantplant
     ">
         <li class="py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors">
@@ -895,7 +900,12 @@ else lain6
                   Room</a>
               </li>
             </ng-template>
-            <div *ngIf="router.url === '/offlinepacking'; else offlinepacking2">
+            <div *ngIf="router.url === '/offlinepacking' ||
+            router.url === '/containeroffline'||
+            router.url === '/robopacker'||
+            router.url === '/resealeroff'||
+            router.url === '/emptybox'||
+            router.url === '/packconveyoroff'; else offlinepacking2">
               <li class="ml-6">
                 <a routerLink="offlinepacking"
                   class="rounded-lg shadow-soft-md bg-white flex items-center w-1/2 p-1 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Offline
@@ -1981,7 +1991,12 @@ else lain6
         router.url === '/filterpress1'||
         router.url === '/filterpress2'||
         router.url === '/dpcpump'||
-        router.url === '/oxonia';
+        router.url === '/oxonia'||
+        router.url === '/containeroffline'||
+        router.url === '/robopacker'||
+        router.url === '/resealeroff'||
+        router.url === '/emptybox'||
+        router.url === '/packconveyoroff';
         else lubricantplant
     ">
           <li
@@ -2087,7 +2102,12 @@ else lain6
                     Room</a>
                 </li>
               </ng-template>
-              <div *ngIf="router.url === '/offlinepacking'; else offlinepacking2">
+              <div *ngIf="router.url === '/offlinepacking'||
+              router.url === '/containeroffline'||
+              router.url === '/robopacker'||
+              router.url === '/resealeroff'||
+              router.url === '/emptybox'||
+              router.url === '/packconveyoroff'; else offlinepacking2">
                 <li class="ml-6">
                   <a routerLink="offlinepacking"
                     class="rounded-lg shadow-soft-md bg-white flex items-center w-1/2 p-1 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Offline
@@ -2981,6 +3001,76 @@ else lain6
               aria-current="page">Paste</li>
           </ol>
           <h6 class="mb-0 font-bold capitalize">Paste</h6>
+        </nav>
+      </div>
+      <div *ngIf="router.url === '/containeroffline'">
+        <nav>
+          <!-- breadcrumb -->
+          <ol class="flex flex-wrap pt-1 mr-12 bg-transparent rounded-lg sm:mr-16">
+            <li class="leading-normal text-sm">
+              <a class="opacity-50 text-slate-700" routerLink="/">Pages</a>
+            </li>
+            <li
+              class="text-sm pl-2 capitalize leading-normal text-slate-700 before:float-left before:pr-2 before:text-gray-600 before:content-['/']"
+              aria-current="page">Container Conveyor</li>
+          </ol>
+          <h6 class="mb-0 font-bold capitalize">Container Conveyor</h6>
+        </nav>
+      </div>
+      <div *ngIf="router.url === '/robopacker'">
+        <nav>
+          <!-- breadcrumb -->
+          <ol class="flex flex-wrap pt-1 mr-12 bg-transparent rounded-lg sm:mr-16">
+            <li class="leading-normal text-sm">
+              <a class="opacity-50 text-slate-700" routerLink="/">Pages</a>
+            </li>
+            <li
+              class="text-sm pl-2 capitalize leading-normal text-slate-700 before:float-left before:pr-2 before:text-gray-600 before:content-['/']"
+              aria-current="page">Robo Packer</li>
+          </ol>
+          <h6 class="mb-0 font-bold capitalize">Robo Packer</h6>
+        </nav>
+      </div>
+      <div *ngIf="router.url === '/resealeroff'">
+        <nav>
+          <!-- breadcrumb -->
+          <ol class="flex flex-wrap pt-1 mr-12 bg-transparent rounded-lg sm:mr-16">
+            <li class="leading-normal text-sm">
+              <a class="opacity-50 text-slate-700" routerLink="/">Pages</a>
+            </li>
+            <li
+              class="text-sm pl-2 capitalize leading-normal text-slate-700 before:float-left before:pr-2 before:text-gray-600 before:content-['/']"
+              aria-current="page">Resealer</li>
+          </ol>
+          <h6 class="mb-0 font-bold capitalize">Resealer</h6>
+        </nav>
+      </div>
+      <div *ngIf="router.url === '/emptybox'">
+        <nav>
+          <!-- breadcrumb -->
+          <ol class="flex flex-wrap pt-1 mr-12 bg-transparent rounded-lg sm:mr-16">
+            <li class="leading-normal text-sm">
+              <a class="opacity-50 text-slate-700" routerLink="/">Pages</a>
+            </li>
+            <li
+              class="text-sm pl-2 capitalize leading-normal text-slate-700 before:float-left before:pr-2 before:text-gray-600 before:content-['/']"
+              aria-current="page">Empty Box</li>
+          </ol>
+          <h6 class="mb-0 font-bold capitalize">Empty Box</h6>
+        </nav>
+      </div>
+      <div *ngIf="router.url === '/packconveyoroff'">
+        <nav>
+          <!-- breadcrumb -->
+          <ol class="flex flex-wrap pt-1 mr-12 bg-transparent rounded-lg sm:mr-16">
+            <li class="leading-normal text-sm">
+              <a class="opacity-50 text-slate-700" routerLink="/">Pages</a>
+            </li>
+            <li
+              class="text-sm pl-2 capitalize leading-normal text-slate-700 before:float-left before:pr-2 before:text-gray-600 before:content-['/']"
+              aria-current="page">Pack Conveyor</li>
+          </ol>
+          <h6 class="mb-0 font-bold capitalize">Pack Conveyor</h6>
         </nav>
       </div>
       <div class="flex items-center mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
