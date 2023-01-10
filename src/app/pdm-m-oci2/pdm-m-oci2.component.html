@@ -41,11 +41,11 @@
             <div class="flex-none w-2/3 max-w-full px-3">
               <div>
                 <p class="mb-0 font-sans font-semibold leading-normal text-sm">
-                  Finish Check
+                  Total Good
                 </p>
                 <h5 class="mb-0 font-bold">
-                  {{this.finish2.length}}
-                  <span class="text-lime-500 ml-1">({{(this.finish2.length * 100 / totalasset).toFixed(1)}} %)</span>
+                  {{good2}}
+                  <span class="text-lime-500 ml-1">({{((good2) * 100 / totalasset).toFixed(1)}} %)</span>
                 </h5>
               </div>
             </div>
@@ -65,11 +65,11 @@
             <div class="flex-none w-2/3 max-w-full px-3">
               <div>
                 <p class="mb-0 font-sans font-semibold leading-normal text-xs">
-                  Total Good And SatisFactory
+                  Total Satisfactory
                 </p>
                 <h5 class="mb-0 font-bold">
-                  {{good2+satis2}}
-                  <span class="text-lime-500 ml-1">({{((good2+satis2) * 100 / totalasset).toFixed(1)}} %)</span>
+                  {{satis2}}
+                  <span class="text-lime-500 ml-1">({{((satis2) * 100 / totalasset).toFixed(1)}} %)</span>
                 </h5>
               </div>
             </div>

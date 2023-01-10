@@ -731,7 +731,7 @@ export class PdmMFsbComponent implements OnInit {
         })
       }
       );
-      this.service.getReadGoodAndSatisfsb().subscribe(data => {
+      this.service.getReadFinishTodayfsbabnormal().subscribe(data => {
         this.subbarlistobj = data;
         Object.values(this.subbarlistobj).forEach(data => {
           var array = Object.keys(data).map(function (key) {
@@ -741,13 +741,13 @@ export class PdmMFsbComponent implements OnInit {
             this.subbarlistarr.splice(this.subbarlistarr.lenght, 0, array[i]);
           }
           for (let elem of this.subbarlistarr) {
-            if (elem.status == 'Good') {
+            if (elem.Stat == 'Good') {
               this.good2 += 1;
-            } else if (elem.status == 'Satisfactory') {
+            } else if (elem.Stat == 'Satisfactory') {
               this.satis2 += 1;
-            } else if (elem.status == 'Unsatisfactory') {
+            } else if (elem.Stat == 'Unsatisfactory') {
               this.unsatisf2 += 1;
-            } else if (elem.status == 'Unacceptable') {
+            } else if (elem.Stat == 'Unacceptable') {
               this.unacc2 += 1;
             }
             //// console.log(this.good);
@@ -756,7 +756,7 @@ export class PdmMFsbComponent implements OnInit {
         })
       }
       );
-      this.service.getReadGoodAndSatisfsby().subscribe(data => {
+      this.service.getReadFinishTodayfsbabnormal().subscribe(data => {
         this.goodsatis = data;
         Object.values(this.goodsatis).forEach(data => {
           var array = Object.keys(data).map(function (key) {
@@ -766,13 +766,13 @@ export class PdmMFsbComponent implements OnInit {
             this.goodsatis2.splice(this.goodsatis2.lenght, 0, array[i]);
           }
           for (let elem of this.goodsatis2) {
-            if (elem.status == 'Good') {
+            if (elem.Stat == 'Good') {
               this.good += 1;
-            } else if (elem.status == 'Satisfactory') {
+            } else if (elem.Stat == 'Satisfactory') {
               this.satis += 1;
-            } else if (elem.status == 'Unsatisfactory') {
+            } else if (elem.Stat == 'Unsatisfactory') {
               this.unsatisf += 1;
-            } else if (elem.status == 'Unacceptable') {
+            } else if (elem.Stat == 'Unacceptable') {
               this.unacc += 1;
             }
             //// console.log(this.good);
