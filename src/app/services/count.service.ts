@@ -557,4 +557,7 @@ export class CountService {
   getPackConveyorOff(){
     return this.httpClient.get(api + "packconveyoroff");
   }
+  getAmTotalData1Year(){
+    return this.httpClient.get(api + "total1year");
+  }
 };
