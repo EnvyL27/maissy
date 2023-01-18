@@ -122,18 +122,18 @@
           <div class="flex-auto p-6">
             <canvas id="dum" height="150px"></canvas>
             <div class="px-6 pt-4 pb-2 text-center">
-              <span style="background-color: red;"
-                class="text-white inline-block bg-red rounded-full text-md px-3 py-1 font-semibold mr-2 mb-2">Total:
-                {{this.totalfm2.length}}</span>
-              <span style="background-color: rgb(112, 112, 0);"
-                class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Pending:
-                {{pendingexecute}}</span>
-              <span style="background-color: blue;"
-                class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Ready:
-                {{readyexecute}}</span>
-              <span style="background-color: green;"
-                class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Finish:
-                {{finishexecute}}</span>
+              <span style="background-color: #ddbc95;"
+              class="text-white inline-block bg-red rounded-full text-md px-3 py-1 font-semibold mr-2 mb-2">Total:
+              {{this.totalfm2.length}}</span>
+            <span style="background-color:#ff6e40"
+              class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Pending:
+              {{pendingexecute}}</span>
+            <span style="background-color: #ffc13b;"
+              class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Ready:
+              {{readyexecute}}</span>
+            <span style="background-color: #1e3d59;"
+              class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Finish:
+              {{finishexecute}}</span>
             </div>
           </div>
         </div>
@@ -151,18 +151,15 @@
             <div class="flex-auto p-6">
               <canvas id="donut" width="575" height="480"></canvas>
               <div class="px-6 pt-4 pb-2 text-center">
-                <span style="background-color: red;"
-                  class="text-white inline-block bg-red rounded-full text-md px-3 py-1 font-semibold mr-2 mb-2">Total:
-                  {{this.totalfm2.length}}</span>
-                <span style="background-color: rgb(112, 112, 0);"
-                  class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Pending:
-                  {{pendingexecute}}</span>
-                <span style="background-color: blue;"
-                  class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Ready:
-                  {{readyexecute}}</span>
-                <span style="background-color: green;"
-                  class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Finish:
-                  {{finishexecute}}</span>
+                <span style="background-color: #ff6e40"
+                class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Pending:
+                {{pendingexecute}}</span>
+              <span style="background-color: #ffc13b;"
+                class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Ready:
+                {{readyexecute}}</span>
+              <span style="background-color: #1e3d59;"
+                class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Finish:
+                {{finishexecute}}</span>
               </div>
             </div>
           </div>
@@ -179,15 +176,15 @@
             <div class="flex-auto p-6">
               <canvas id="donut2" width="575" height="480"></canvas>
               <div class="px-6 pt-4 pb-2 text-center">
-                <span style="background-color: red;"
-                  class="text-white inline-block bg-red rounded-full text-md px-3 py-1 font-semibold mr-2 mb-2">Low:
-                  {{this.low}}</span>
-                <span style="background-color: rgb(112, 112, 0);"
-                  class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Medium:
-                  {{this.medium}}</span>
-                <span style="background-color: blue;"
-                  class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">High:
-                  {{this.high}}</span>
+                <span style="background-color: #626d71;"
+                class="text-white inline-block bg-red rounded-full text-md px-3 py-1 font-semibold mr-2 mb-2">Low:
+                {{this.low}}</span>
+              <span style="background-color: #ffc13b;"
+                class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Medium:
+                {{this.medium}}</span>
+              <span style="background-color: #ff6e40;"
+                class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">High:
+                {{this.high}}</span>
               </div>
             </div>
           </div>
@@ -230,7 +227,7 @@
                         Machine
                       </th>
                       <th scope="col" class="py-3 px-6">
-                        Area
+                        Section
                       </th>
                     </tr>
                   </thead>
@@ -250,7 +247,7 @@
                         {{findingpending.func_loc}}
                       </td>
                       <td class="py-4 px-6">
-                        {{findingpending.area}}
+                        {{findingpending.section}}
                       </td>
                     </tr>
                   </tbody>
@@ -278,7 +275,7 @@
                       class="text-sm ease-soft leading-5.6 absolute z-50 -ml-px flex h-full items-center whitespace-nowrap rounded-lg rounded-tr-none rounded-br-none border border-r-0 border-transparent bg-transparent py-2 px-2.5 text-center font-normal text-slate-500 transition-all">
                       <i class="fas fa-search"></i>
                     </span>
-                    <input type="text"
+                    <input type="text" id="target" #target
                       class="pl-8.75 text-sm focus:shadow-soft-primary-outline ease-soft w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 pr-3 text-gray-700 transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none focus:transition-shadow"
                       placeholder="Type here..." name="search" [(ngModel)]="searchText2" />
                   </div>
@@ -291,7 +288,7 @@
                         No
                       </th>
                       <th scope="col" class="py-3 px-6">
-                        Actual End
+                        Tanggal Pengerjaan
                       </th>
                       <th scope="col" class="py-3 px-6">
                         Finding

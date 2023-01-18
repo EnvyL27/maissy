@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CountService } from '../services/count.service';
@@ -56,8 +56,14 @@ export class AmMOci2Component implements OnInit {
   pendingexecute: number = 0;
   finishexecute: number = 0;
   readyexecute: number = 0;
+  @ViewChild("target")
+  target!: ElementRef;
   data($event: any) {
-    //// console.log($event);
+    this.target.nativeElement.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+      inline: 'center',
+    });
     this.funloclist = [];
     this.funloc = $event;
     // console.log(this.funloc);
@@ -121,13 +127,11 @@ export class AmMOci2Component implements OnInit {
                 label: '# of Votes',
                 data: [this.low, this.medium, this.high],
                 backgroundColor: [
-                  'red',
-                  'rgb(112, 112, 0)',
-                  'blue',
-                  'green',
+                  '#626d71',
+                  '#ffc13b',
+                  '#ff6e40',
                 ],
                 borderColor: [
-                  'white',
                   'white',
                   'white',
                   'white',
@@ -192,7 +196,7 @@ export class AmMOci2Component implements OnInit {
                   label: 'Total Finding',
                   data: [this.totalfm2.length],
                   backgroundColor: [
-                    'red',
+                    '#ddbc95',
                   ],
                   borderColor: [
                     'white',
@@ -204,7 +208,7 @@ export class AmMOci2Component implements OnInit {
                   label: 'Pending Execute',
                   data: [this.pendingexecute],
                   backgroundColor: [
-                    'rgb(112, 112, 0)',
+                    '#ff6e40',
                   ],
                   borderColor: [
                     'white',
@@ -215,7 +219,7 @@ export class AmMOci2Component implements OnInit {
                   label: 'Ready Execute',
                   data: [this.readyexecute],
                   backgroundColor: [
-                    'blue',
+                    '#ffc13b',
                   ],
                   borderColor: [
                     'white',
@@ -226,7 +230,7 @@ export class AmMOci2Component implements OnInit {
                   label: 'Finish Execute',
                   data: [this.finishexecute],
                   backgroundColor: [
-                    'green',
+                    '#1e3d59',
                   ],
                   borderColor: [
                     'white',
@@ -248,15 +252,14 @@ export class AmMOci2Component implements OnInit {
           new Chart('donut', {
             type: 'doughnut',
             data: {
-              labels: ['Total finding', 'Pending execute', 'Ready execute', 'Finish execute'],
+              labels: ['Pending execute', 'Ready execute', 'Finish execute'],
               datasets: [{
                 label: '# of Votes',
-                data: [this.totalfm2.length, this.pendingexecute, this.readyexecute, this.finishexecute],
+                data: [this.pendingexecute, this.readyexecute, this.finishexecute],
                 backgroundColor: [
-                  'red',
-                  'rgb(112, 112, 0)',
-                  'blue',
-                  'green',
+                  '#ff6e40',
+                  '#ffc13b',
+                  '#1e3d59',
                 ],
                 borderColor: [
                   'white',

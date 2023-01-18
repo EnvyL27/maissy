@@ -294,7 +294,7 @@
                     </tbody>
                   </table>
                 </div>
-                <h5 class="text-right text-md mt-4 mr-4" *ngIf="exportdata == true">Total Data :
+                <h5 class="text-right text-md mt-4 mr-4"  *ngIf="exportdata == true">Total Data :
                   {{filterMetadata.count}}</h5>
               </div>
               <pagination-controls class="text-center" (pageChange)="currentPage = $event"></pagination-controls>
@@ -304,7 +304,7 @@
       </div>
     </div>
     <div class="flex flex-wrap -mx-3">
-      <div class="w-full px-1 py-1 mx-auto">
+      <div class="w-full px-1 py-1 mx-auto" id="target" #target >
         <div class="flex flex-wrap -mx-1 lg:-mx-3">
           <div class="my-1 px-1 w-full max-w-full md:w-1/2 lg:my-6 lg:px-6">
             <div

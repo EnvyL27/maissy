@@ -60,9 +60,9 @@ export class DashboardComponent implements OnInit {
                 label: 'Data',
                 data: [this.Setting, this.Replacement, this.Improvement],
                 backgroundColor: [
-                  'red',
-                  'rgb(112, 112, 0)',
-                  'green',
+                  '#316879',
+                  '#f47a60',
+                  '#7fe7dc',
                 ],
                 borderColor: [
                   'white',
@@ -108,7 +108,7 @@ export class DashboardComponent implements OnInit {
                   label: 'Pending Execute',
                   data: [Math.round((this.pendingexecute / this.const2.length)*100)],
                   backgroundColor: [
-                    'red'
+                    '#f47a60'
                   ],
                   borderColor: [
                     'white'
@@ -119,7 +119,7 @@ export class DashboardComponent implements OnInit {
                   label: 'Finish Execute',
                   data: [Math.round((this.finishexecute / this.const2.length)*100)],
                   backgroundColor: [
-                    'rgb(112, 112, 0)'
+                    '#7fe7dc'
                   ],
                   borderColor: [
                     'white'
@@ -130,7 +130,7 @@ export class DashboardComponent implements OnInit {
                   label: 'Ready Execute',
                   data: [Math.round((this.readyexecute / this.const2.length)*100)],
                   backgroundColor: [
-                    'green'
+                    '#316879'
                   ],
                   borderColor: [
                     'white'
