@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
+import { NgxCaptureService } from 'ngx-capture';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CountService } from '../services/count.service';
 
@@ -9,7 +10,7 @@ import { CountService } from '../services/count.service';
   styleUrls: ['./am-m-fsb.component.css']
 })
 export class AmMFsbComponent implements OnInit {
-  constructor(private service: CountService, private spinner: NgxSpinnerService) { }
+  constructor(private service: CountService, private spinner: NgxSpinnerService,private captureService: NgxCaptureService) { }
   itemsPerPage: number = 0;
   currentPage: number = 1;
   absoluteIndex(indexOnPage: number): number {
@@ -83,6 +84,26 @@ export class AmMFsbComponent implements OnInit {
   readyexecute: number = 0;
   @ViewChild("target")
   target!: ElementRef;
+  @ViewChild("ss")
+  taptap!: ElementRef;
+  imgBase64 = '';
+  capture() {
+    this.captureService
+      .getImage(this.taptap.nativeElement, true)
+      .subscribe((img: any) => {
+        this.imgBase64 = img;
+        this.downloadJson();
+      });
+  }
+
+  downloadJson() {
+    var element = document.createElement('a');
+    element.setAttribute('href', this.imgBase64);
+    element.setAttribute('download', 'reportingdaily.png');
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+  }
   data($event: any) {
     this.target.nativeElement.scrollIntoView({
       behavior: 'smooth',
@@ -213,12 +234,12 @@ export class AmMFsbComponent implements OnInit {
               {
                 "label": "Total",
                 "data": [Math.round(this.januari), Math.round(this.febuari), Math.round(this.maret), Math.round(this.april), Math.round(this.mei), Math.round(this.juni), Math.round(this.juli), Math.round(this.agustus), Math.round(this.september), Math.round(this.oktober), Math.round(this.november), Math.round(this.desember)],
-                "backgroundColor": "#34568B"
+                "backgroundColor": "#626d71"
               },
               {
                 "label": "Close",
                 "data": [Math.round(this.januariclose), Math.round(this.febuariclose), Math.round(this.maretclose), Math.round(this.aprilclose), Math.round(this.meiclose), Math.round(this.juniclose), Math.round(this.juliclose), Math.round(this.agustusclose), Math.round(this.septemberclose), Math.round(this.oktoberclose), Math.round(this.novemberclose), Math.round(this.desemberclose)],
-                "backgroundColor": "#FF6F61"
+                "backgroundColor": "#6f6edb"
               },
             ]
 

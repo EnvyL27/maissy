@@ -44,7 +44,7 @@
             <div class="flex-none w-2/3 max-w-full px-3">
               <div>
                 <p class="mb-0 font-sans font-semibold leading-normal text-sm">
-                  Pending execute
+                  On Progres WO
                 </p>
                 <h5 class="mb-0 font-bold">
                   {{pendingexecute}}
@@ -126,7 +126,7 @@
               class="text-white inline-block bg-red rounded-full text-md px-3 py-1 font-semibold mr-2 mb-2">Total:
               {{this.totalfm2.length}}</span>
             <span style="background-color:#ff6e40"
-              class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Pending:
+              class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">On Progres:
               {{pendingexecute}}</span>
             <span style="background-color: #ffc13b;"
               class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Ready:
@@ -152,7 +152,7 @@
               <canvas id="donut" width="575" height="480"></canvas>
               <div class="px-6 pt-4 pb-2 text-center">
                 <span style="background-color: #ff6e40"
-                class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Pending:
+                class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">On Progres:
                 {{pendingexecute}}</span>
               <span style="background-color: #ffc13b;"
                 class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Ready:
@@ -338,8 +338,12 @@
           </div>
           <div class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
             <div class="flex-auto p-6">
+              <button
+              class="inline-block px-0 py-3 mb-0 ml-4 font-bold leading-normal uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none cursor-pointer ease-soft-in bg-150 text-md active:opacity-85 hover:scale-102 tracking-tight-soft bg-x-25 text-slate-700"
+              (click)="capture()"><i class="fa fa-camera fa-1"></i>
+              Capture</button>
               <!-- <p class="text-center" style="color: red;">Device Name : {{funloc}}</p> -->
-              <div class="flex flex-wrap -mx-1 lg:-mx-3">
+              <div class="flex flex-wrap -mx-1 lg:-mx-3" id="ss" #ss>
                 <canvas id="valuepermonthchart"></canvas>
               </div>
             </div>

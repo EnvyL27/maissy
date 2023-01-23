@@ -86,15 +86,20 @@ export class DashboardComponent implements OnInit {
             this.const2.splice(this.const2.lenght, 0, array[i]);
           }
           for (let elem of this.const2) {
-            if (elem.status == 'Done') {
-              this.finishexecute += 1;
-            }
-            else if (elem.status == 'Draft' || elem.status == 'Submit' || elem.status == 'Revise') {
-              this.pendingexecute += 1;
-            }
-            else if (elem.status == 'Approved') {
-              this.readyexecute += 1;
-            }
+              if (elem.status2 == 'CLOSED' || elem.status2 == 'TECO') {
+                this.finishexecute += 1;
+
+              }
+              else if (elem.status2 == 'READY') {
+                this.readyexecute += 1;
+              } else if (elem.status1 == 'Done' || elem.status1 == 'None') {
+                if (elem.status2 == 'RELEASED') {
+                  this.pendingexecute += 1;
+                }
+              }
+              else if (elem.status1 == 'Draft' || elem.status1 == 'Submit' || elem.status1 == 'Revise' || elem.status1 == 'Approved' || elem.status1 == 'Not Yet') {
+                this.pendingexecute += 1;
+              }
           }
           this.spinner.hide();
           this.resolved = true;
