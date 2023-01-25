@@ -245,3 +245,9 @@ h1 {
     transform: translateX(25%);
   }
 }
+a.styled-pointer:not([href]) {
+	cursor: pointer;
+}
+a.styled-pointer:hover {
+	color: blue;
+}

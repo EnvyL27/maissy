@@ -176,6 +176,7 @@ export class AmMOci1Component implements OnInit {
 
   }
   detailpart(no_wo:any){
+    this.currentPage4 = 1;
     this.spinner.show();
     this.resolved = false;
     this.detailpartarr.splice(0);
@@ -525,18 +526,21 @@ export class AmMOci1Component implements OnInit {
               "backgroundColor": "#1e3d59",
             },
           ],
-
-
         },
         options: {
           scales: {
-            yAxes: [
-              {
-                ticks: {
-                  beginAtZero: true
-                }
+            yAxes: [{
+              ticks: {
+                min: 0,
+                max: 100,
+                callback: function (value) { return value + "%" },
+                //beginAtZero: true
+              },
+              scaleLabel: {
+                display: true,
+                labelString: "Percentage"
               }
-            ]
+            }]
           }
         }
       });
@@ -678,13 +682,18 @@ export class AmMOci1Component implements OnInit {
           },
           options: {
             scales: {
-              yAxes: [
-                {
-                  ticks: {
-                    beginAtZero: true
-                  }
+              yAxes: [{
+                ticks: {
+                  min: 0,
+                  max: 100,
+                  callback: function (value) { return value + "%" },
+                  //beginAtZero: true
+                },
+                scaleLabel: {
+                  display: true,
+                  labelString: "Percentage"
                 }
-              ]
+              }]
             }
           }
         });

@@ -288,7 +288,7 @@
                         {{findingpending.level}}
                       </td>
                       <td (click)="data(findingpending.func_loc)" class="py-4 px-6">
-                        {{findingpending.func_loc}}
+                        <a class="styled-pointer">{{findingpending.func_loc}}</a>
                       </td>
                       <td class="py-4 px-6">
                         {{findingpending.section}}
@@ -399,7 +399,7 @@
                 </div>
               </div>
               <div class="overflow-x-auto relative shadow-lg sm:rounded-lg">
-                <table border="1" class="w-full text-lg text-gray-500 dark:text-gray-400 text-center">
+                <table border="1" class="w-full text-lg text-gray-500 dark:text-gray-400 text-center mb-6">
                   <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                       <th scope="col" class="py-3 px-6">
@@ -434,7 +434,7 @@
                       </td>
                       <ng-template #nowoclear>
                         <td (click)="detailpart(item.no_wo)">
-                          {{item.no_wo}}
+                          <a class="styled-pointer"> {{item.no_wo}} </a>
                         </td>
                       </ng-template>
                       <td>
@@ -449,7 +449,7 @@
                         <div class="row">
                           <div class="column text-center center" *ngFor="let item2 of item.foto;">
                             <label for="modal-btn">
-                            <img (click)="getphoto(item2)" src="http://192.168.9.47/plan_am/files/{{item2}}" style="width: 100%;
+                            <img class="animasi" (click)="getphoto(item2)" src="http://192.168.9.47/plan_am/files/{{item2}}" style="width: 100%;
                               max-width: 150px;
                               height: auto;">
                               </label>
