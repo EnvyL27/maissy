@@ -76,7 +76,7 @@ export class DashboardComponent implements OnInit {
         })
       }
       );
-      this.service.getTotalFeeding().subscribe(data => {
+      this.service.getCountTotalFinding().subscribe(data => {
         this.const = data;
         Object.values(this.const).forEach(data => {
           var array = Object.keys(data).map(function (key) {
@@ -93,13 +93,13 @@ export class DashboardComponent implements OnInit {
               else if (elem.status2 == 'READY') {
                 this.readyexecute += 1;
               } else if (elem.status1 == 'Done' || elem.status1 == 'None') {
-                if (elem.status2 == 'RELEASED') {
+                if (elem.status2 == 'RELEASED' || elem.status2 == 'CREATED') {
                   this.pendingexecute += 1;
                 }
               }
               else if (elem.status1 == 'Draft' || elem.status1 == 'Submit' || elem.status1 == 'Revise' || elem.status1 == 'Approved' || elem.status1 == 'Not Yet') {
                 this.pendingexecute += 1;
-              }
+            }
           }
           this.spinner.hide();
           this.resolved = true;
