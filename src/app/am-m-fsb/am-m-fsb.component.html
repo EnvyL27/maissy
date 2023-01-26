@@ -48,7 +48,7 @@
                 </p>
                 <h5 class="mb-0 font-bold">
                   {{pendingexecute}}
-                  <span class="text-lime-500 ml-1">({{(pendingexecute * 100 / this.totalfm2.length).toFixed(1)}}
+                  <span class="text-lime-500 ml-1">({{(pendingexecute * 100 / (pendingexecute + finishexecute + readyexecute)).toFixed(1)}}
                     %)</span>
                 </h5>
               </div>
@@ -73,7 +73,7 @@
                 </p>
                 <h5 class="mb-0 font-bold">
                   {{readyexecute}}
-                  <span class="text-lime-500 ml-1">({{(readyexecute * 100 / this.totalfm2.length).toFixed(1)}} %)</span>
+                  <span class="text-lime-500 ml-1">({{(readyexecute * 100 / (pendingexecute + finishexecute + readyexecute)).toFixed(1)}} %)</span>
                 </h5>
               </div>
             </div>
@@ -97,7 +97,7 @@
                 </p>
                 <h5 class="mb-0 font-bold">
                   {{finishexecute}}
-                  <span class="text-lime-500 ml-1">({{(finishexecute * 100 / this.totalfm2.length).toFixed(1)}}
+                  <span class="text-lime-500 ml-1">({{(finishexecute * 100 / (pendingexecute + finishexecute + readyexecute)).toFixed(1)}}
                     %)</span>
                 </h5>
               </div>
@@ -166,7 +166,7 @@
             <div class="px-6 pt-4 pb-2 text-center">
               <span style="background-color: #7fe7dc;"
                 class="text-white inline-block bg-red rounded-full text-md px-3 py-1 font-semibold mr-2 mb-2">Total:
-                {{this.totalfm2.length}}</span>
+                {{pendingexecute + finishexecute + readyexecute}}</span>
               <span style="background-color:#ffc13b"
                 class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">On
                 Progres:
@@ -565,7 +565,7 @@
                 (click)="capture()"><i class="fa fa-camera fa-1"></i>
                 Capture</button>
               <div id="ss" #ss>
-                <h2 class="text-center" style="color: blue;">Grafik Work Order OC1 {{autodate}}</h2>
+                <h2 class="text-center" style="color: blue;">Grafik Work Order FSB {{autodate}}</h2>
                 <div class="flex flex-wrap -mx-1 lg:-mx-3">
                   <canvas id="valuepermonthchart"></canvas>
                 </div>
@@ -615,10 +615,35 @@
                   <div class="w-full max-w-full md:w-1/2 xl:w-1/2 xs:w-1/2">
                     <h4 class="text-center" style="color: blue;">WORK ORDER MONTH DATE</h4>
                     <canvas id="barreport"></canvas>
+                      <div class="px-6 pt-4 pb-2 text-center">
+                        <span style="background-color: #7fe7dc;"
+                          class="text-white inline-block bg-red rounded-full text-md px-3 py-1 font-semibold mr-2 mb-2">Total WO:
+                          {{this.totalwo02report + this.totalwo03report + this.totalwo06report + this.totalwo07report}}</span>
+                        <span style="background-color: #ffc13b;"
+                          class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Done WO:
+                          {{this.wo02donereport + this.wo03donereport + this.wo06donereport + this.wo07donereport}}</span>
+                        <span style="background-color: #ff6e40;"
+                          class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Pending WO:
+                          {{this.wo02report + this.wo03report + this.wo06report + this.wo07report}}</span>
+                      </div>
                   </div>
                   <div class="w-full max-w-full md:w-1/2 xl:w-1/2 xs:w-1/2">
                     <h4 class="text-center" style="color: blue;">COMPLETION RATIO</h4>
                     <canvas id="barreport2"></canvas>
+                    <div class="px-6 pt-4 pb-2 text-center">
+                      <span style="background-color: #ffc13b;"
+                        class="text-white inline-block bg-red rounded-full text-md px-3 py-1 font-semibold mr-2 mb-2">WO02:
+                        {{math.round((this.wo02donereport / this.totalwo02report) * 100)}} %</span>
+                      <span style="background-color: #7fe7dc;"
+                        class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">WO03:
+                        {{math.round((this.wo03donereport / this.totalwo03report) * 100)}} %</span>
+                      <span style="background-color: #ff6e40;"
+                        class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">WO06:
+                        {{math.round((this.wo06donereport / this.totalwo06report) * 100)}} %</span>
+                        <span style="background-color: #1e3d59;"
+                        class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">WO07:
+                        {{math.round((this.wo07donereport / this.totalwo07report) * 100)}} %</span>
+                    </div>
                   </div>
                 </div>
               </div>

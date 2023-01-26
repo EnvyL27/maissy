@@ -15,6 +15,7 @@ export class AmMOci2Component implements OnInit {
   constructor(private service: CountService, private spinner: NgxSpinnerService, private captureService: NgxCaptureService, private httpClient: HttpClient) { }
   itemsPerPage: number = 0;
   currentPage: number = 1;
+  math = Math;
   absoluteIndex(indexOnPage: number): number {
     return this.itemsPerPage * (this.currentPage - 1) + indexOnPage;
   }
@@ -480,7 +481,7 @@ export class AmMOci2Component implements OnInit {
               "backgroundColor": "#ffc13b",
             },
             {
-              "label": "On Progress WO",
+              "label": "Pending WO",
               "data": [this.wo02report + this.wo03report + this.wo06report + this.wo07report],
               "backgroundColor": "#ff6e40",
             },
@@ -631,7 +632,7 @@ export class AmMOci2Component implements OnInit {
                 "backgroundColor": "#ffc13b",
               },
               {
-                "label": "On Progress WO",
+                "label": "Pending WO",
                 "data": [this.wo02report + this.wo03report + this.wo06report + this.wo07report],
                 "backgroundColor": "#ff6e40",
               },
@@ -878,7 +879,7 @@ export class AmMOci2Component implements OnInit {
 
       }
       );
-      this.service.getReadLevelTotaloci2().subscribe(data => {
+      this.service.getTotalFeeding().subscribe(data => {
         this.totallevel = data;
         Object.values(this.totallevel).forEach(data => {
           // // console.log(data);
@@ -890,6 +891,7 @@ export class AmMOci2Component implements OnInit {
             this.totallevel2.splice(this.totallevel2.lenght, 0, array[i]);
           }
           for (var i = 0; i < this.totallevel2.length; i++) {
+            if(this.totallevel2[i].id_area == 2){
             if (this.totallevel2[i].level === 'Low') {
               this.low += 1;
             }
@@ -899,6 +901,7 @@ export class AmMOci2Component implements OnInit {
             if (this.totallevel2[i].level === 'High') {
               this.high += 1;
             }
+          }
           }
           new Chart('donut2', {
             type: 'doughnut',
@@ -981,7 +984,7 @@ export class AmMOci2Component implements OnInit {
               datasets: [
                 {
                   label: 'Total Finding',
-                  data: [this.totalfm2.length],
+                  data: [this.pendingexecute + this.readyexecute + this.finishexecute],
                   backgroundColor: [
                     '#7fe7dc',
                   ],

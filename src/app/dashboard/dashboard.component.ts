@@ -30,7 +30,7 @@ export class DashboardComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     window.scrollTo(0, 0);
     this.loaddata = new Promise(resolve => {
-      this.service.getKategori().subscribe(data => {
+      this.service.getCountTotalFinding().subscribe(data => {
         this.totalkategori = data;
         Object.values(this.totalkategori).forEach(data => {
           // // console.log(data);
@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit {
             this.totalkategoriarr.splice(this.totalkategoriarr.lenght, 0, array[i]);
           }
           for (var i = 0; i < this.totalkategoriarr.length; i++) {
-            if (this.totalkategoriarr[i].kategori === 'Setting') {
+            if (this.totalkategoriarr[i].kategori === 'Preventive') {
               this.Setting += 1;
             }
             if (this.totalkategoriarr[i].kategori === 'Replacement') {
