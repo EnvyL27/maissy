@@ -291,6 +291,10 @@
                         <td class="py-4 px-6 font-medium font-semibold" style="color: black">
                           {{header.Frequency}}
                         </td>
+                        <td *ngIf="header.VC == '2'" class="py-4 px-6 font-medium font-semibold"
+                          style="background-color: #FED033;color: #000000;">
+                          {{header.VC}}
+                        </td>
                         <td *ngIf="header.VC == '3'" class="py-4 px-6 font-medium font-semibold"
                           style="background-color: #FED033;color: #000000;">
                           {{header.VC}}
@@ -299,7 +303,11 @@
                           style="background-color: #FED033;color: #000000;">
                           {{header.VC}}
                         </td>
-                        <td *ngIf="header.VC == '1' || header.VC == '2' || header.VC == '-'"
+                        <td *ngIf="header.VC == '1' && header.Stat == 'Satisfactory'"
+                          class="py-4 px-6 font-medium font-semibold" style="background-color: #F5FF25; color: black">
+                          {{header.VC}}
+                        </td>
+                        <td *ngIf="header.VC == '1' && header.Stat != 'Satisfactory' || header.VC == '-'"
                           class="py-4 px-6 font-medium font-semibold" style="color: black">
                           {{header.VC}}
                         </td>
