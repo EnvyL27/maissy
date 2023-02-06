@@ -68,6 +68,12 @@ export class AmMOci2Component implements OnInit {
   searchText3: any;
   totalfm2: any = [];
   findingpending: object = {};
+  preparation: number = 0;
+  injection: number = 0;
+  blow: number = 0;
+  packing: number = 0;
+  preform: number = 0;
+  filling: number = 0;
   findingpending2: any = [];
   orderobj: object = {};
   orderarr: any = [];
@@ -478,7 +484,7 @@ export class AmMOci2Component implements OnInit {
             {
               "label": "Done WO",
               "data": [this.wo02donereport + this.wo03donereport + this.wo06donereport + this.wo07donereport],
-              "backgroundColor": "#ffc13b",
+              "backgroundColor": "#316879",
             },
             {
               "label": "Pending WO",
@@ -629,7 +635,7 @@ export class AmMOci2Component implements OnInit {
               {
                 "label": "Done WO",
                 "data": [this.wo02donereport + this.wo03donereport + this.wo06donereport + this.wo07donereport],
-                "backgroundColor": "#ffc13b",
+                "backgroundColor": "#316879",
               },
               {
                 "label": "Pending WO",
@@ -943,8 +949,58 @@ export class AmMOci2Component implements OnInit {
             this.findingpending2.splice(this.findingpending2.lenght, 0, array[i]);
           }
 
-          //  console.log(this.findingpending2);
+          for (var i = 0; i < this.findingpending2.length; i++) {
+            if(this.findingpending2[i].area == "OCI-2"){
+            if (this.findingpending2[i].section === 'Preparation') {
+              this.preparation += 1;
+            }
+            if (this.findingpending2[i].section === 'Injection') {
+              this.injection += 1;
+            }
+            if (this.findingpending2[i].section === 'Blow') {
+              this.blow += 1;
+            }
+            if (this.findingpending2[i].section === 'Packing') {
+              this.packing += 1;
+            }
+            if (this.findingpending2[i].section === 'Preform Transfer') {
+              this.preform += 1;
+            }
+            if (this.findingpending2[i].section === 'Filling') {
+              this.filling += 1;
+            }
+          }
+          }
+
         })
+
+        new Chart('donutfp', {
+          type: 'doughnut',
+          data: {
+            labels: ['Preparation', 'Injection', 'Blow', 'Packing', 'Preform', 'Filling'],
+            datasets: [{
+              label: '# of Votes',
+              data: [this.preparation, this.injection, this.blow, this.packing, this.preform, this.filling],
+              backgroundColor: [
+                '#006d77',
+                '#83c5be',
+                '#BCD9B4',
+                '#FF9C7A',
+                '#e29578',
+                '#c6ac8f',
+              ],
+              borderColor: [
+                'white',
+                'white',
+                'white',
+                'white',
+                'white',
+                'white',
+              ],
+              borderWidth: 1
+            }]
+          },
+        });
 
 
       }
@@ -961,11 +1017,10 @@ export class AmMOci2Component implements OnInit {
 
           for (let elem of this.totalfm2) {
             if (elem.id_area == 2) {
-              if (elem.status2 == 'CLOSED' || elem.status2 == 'TECO') {
+              if (elem.status_pengerjaan == 'Done') {
                 this.finishexecute += 1;
-
               }
-              else if (elem.status2 == 'READY') {
+              if (elem.status2 == 'READY') {
                 this.readyexecute += 1;
               } else if (elem.status1 == 'Done' || elem.status1 == 'None') {
                 if (elem.status2 == 'RELEASED' || elem.status2 == 'CREATED') {
@@ -1020,7 +1075,7 @@ export class AmMOci2Component implements OnInit {
                   label: 'Finish Execute',
                   data: [this.finishexecute],
                   backgroundColor: [
-                    '#1e3d59',
+                    '#316879',
                   ],
                   borderColor: [
                     'white',
@@ -1049,7 +1104,7 @@ export class AmMOci2Component implements OnInit {
                 backgroundColor: [
                   '#ffc13b',
                   '#ff6e40',
-                  '#1e3d59',
+                  '#316879',
                 ],
                 borderColor: [
                   'white',

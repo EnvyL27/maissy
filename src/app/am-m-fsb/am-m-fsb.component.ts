@@ -68,6 +68,11 @@ export class AmMFsbComponent implements OnInit {
   searchText3: any;
   totalfm2: any = [];
   findingpending: object = {};
+  bakingcooling: number = 0;
+  mixing: number = 0;
+  weighing: number = 0;
+  packaging: number = 0;
+  forming: number = 0;
   findingpending2: any = [];
   orderobj: object = {};
   orderarr: any = [];
@@ -478,7 +483,7 @@ export class AmMFsbComponent implements OnInit {
             {
               "label": "Done WO",
               "data": [this.wo02donereport + this.wo03donereport + this.wo06donereport + this.wo07donereport],
-              "backgroundColor": "#ffc13b",
+              "backgroundColor": "#316879",
             },
             {
               "label": "Pending WO",
@@ -629,7 +634,7 @@ export class AmMFsbComponent implements OnInit {
               {
                 "label": "Done WO",
                 "data": [this.wo02donereport + this.wo03donereport + this.wo06donereport + this.wo07donereport],
-                "backgroundColor": "#ffc13b",
+                "backgroundColor": "#316879",
               },
               {
                 "label": "Pending WO",
@@ -943,8 +948,53 @@ export class AmMFsbComponent implements OnInit {
             this.findingpending2.splice(this.findingpending2.lenght, 0, array[i]);
           }
 
-          //  console.log(this.findingpending2);
+          for (var i = 0; i < this.findingpending2.length; i++) {
+            if(this.findingpending2[i].area == "FSB"){
+            if (this.findingpending2[i].section === 'Baking-Cooling') {
+              this.bakingcooling += 1;
+            }
+            if (this.findingpending2[i].section === 'Mixing') {
+              this.mixing += 1;
+            }
+            if (this.findingpending2[i].section === 'Weighing') {
+              this.weighing += 1;
+            }
+            if (this.findingpending2[i].section === 'Packaging') {
+              this.packaging += 1;
+            }
+            if (this.findingpending2[i].section === 'forming') {
+              this.forming += 1;
+            }
+          }
+          }
+
         })
+
+        new Chart('donutfp', {
+          type: 'doughnut',
+          data: {
+            labels: ['Baking-Cooling', 'Mixing', 'Weighing', 'Packaging', 'Forming'],
+            datasets: [{
+              label: '# of Votes',
+              data: [this.bakingcooling, this.mixing, this.weighing, this.packaging, this.forming],
+              backgroundColor: [
+                '#006d77',
+                '#83c5be',
+                '#BCD9B4',
+                '#FF9C7A',
+                '#e29578',
+              ],
+              borderColor: [
+                'white',
+                'white',
+                'white',
+                'white',
+                'white',
+              ],
+              borderWidth: 1
+            }]
+          },
+        });
 
 
       }
@@ -961,7 +1011,7 @@ export class AmMFsbComponent implements OnInit {
 
           for (let elem of this.totalfm2) {
             if (elem.id_area == 3) {
-              if (elem.status2 == 'CLOSED' || elem.status2 == 'TECO') {
+              if (elem.status2 == 'Done') {
                 this.finishexecute += 1;
 
               }
@@ -1020,7 +1070,7 @@ export class AmMFsbComponent implements OnInit {
                   label: 'Finish Execute',
                   data: [this.finishexecute],
                   backgroundColor: [
-                    '#1e3d59',
+                    '#316879',
                   ],
                   borderColor: [
                     'white',
@@ -1049,7 +1099,7 @@ export class AmMFsbComponent implements OnInit {
                 backgroundColor: [
                   '#ffc13b',
                   '#ff6e40',
-                  '#1e3d59',
+                  '#316879',
                 ],
                 borderColor: [
                   'white',

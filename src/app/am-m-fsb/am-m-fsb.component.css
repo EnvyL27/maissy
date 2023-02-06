@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 .wrapper {
   /*This part is important for centering*/
   /* height: 100vh; */
@@ -79,12 +86,6 @@
     flex: 100%;
     max-width: 100%;
   }
-}
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
 }
 
 .section{

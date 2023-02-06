@@ -6,7 +6,7 @@
     class="relative flex flex-col mb-4 min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
     <div class="flex-auto p-1">
       <div class="wrapper">
-        <h5 class="typing-demo">AM Monitoring - OCI 2
+        <h5 class="typing-demo">AM Monitoring - UTILITY ENGINE
         </h5>
       </div>
     </div>
@@ -293,9 +293,9 @@
                             <img src="http://192.168.9.47/plan_am/files/{{picture}}" class="center">
                           </div>
                         </div>
-                        <div *ngIf="findingpending.photo != null" class="row">
+                        <div *ngIf="findingpending.foto != null" class="row">
                             <label for="modal-btn">
-                            <img class="animasihf" (click)="getphoto(findingpending.photo)" src="http://192.168.9.47/plan_am/files/{{findingpending.photo}}" style="width: 100%;
+                            <img class="animasihf" (click)="getphoto(findingpending.foto)" src="http://192.168.9.47/plan_am/files/{{findingpending.foto}}" style="width: 100%;
                               max-width: 150px;
                               height: auto;">
                               </label>
@@ -349,9 +349,6 @@
                         Tanggal Pengerjaan
                       </th>
                       <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
-                        Foto
-                      </th>
-                      <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                         Finding
                       </th>
                       <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
@@ -367,32 +364,16 @@
                         {{(currentPage2-1) * 5 + i + 1}}
                       </th>
                       <td class="py-4 px-6">
-                        {{header.actual_end | date:'dd-MM-yyyy'}}
-                      </td>
-                      <td class="py-4 px-6">
-                        <input class="modal-btn" type="checkbox" id="modal-btn" name="modal-btn" />
-                        <label for="modal-btn">
-                        </label>
-                        <div class="modal">
-                          <div class="modal-wrap xl:ml-68.5">
-                            <img src="http://192.168.9.47/plan_am/files/{{picture}}" class="center">
-                          </div>
-                        </div>
-                        <div class="row">
-                            <label for="modal-btn">
-                            <img class="animasihf" (click)="getphoto(header.foto)" src="http://192.168.9.47/plan_am/files/{{header.foto}}" style="width: 100%;
-                              max-width: 150px;
-                              height: auto;">
-                              </label>
-                        </div>
+                        {{header.actual_end}}
                       </td>
                       <td class="py-4 px-6">
                         {{header.finding}}
                       </td>
-                      <td class="py-4 px-6" [innerHTML]="header.note_executor">
+                      <td class="py-4 px-6">
+                        {{header.note_executor}}
                       </td>
                       <td class="py-4 px-6">
-                        {{header.executor}}
+                        {{header.pic}}
                       </td>
                     </tr>
                   </thead>
@@ -403,35 +384,6 @@
             </div>
             <pagination-controls class="text-center" id="pagination2" (pageChange)="currentPage2 = $event">
             </pagination-controls>
-          </div>
-        </div>
-        <div class="my-1 px-1 w-full max-w-full md:w-full lg:my-8 lg:px-6">
-          <div class="flex items-center text-center mt-4 mb-4 flex-wrap bg-white shadow-soft-lg rounded-2xl bg-clip-border">
-              <div class="w-full max-w-full md:w-8/12 xl:w-8/12 p-4  xs:w-8/12">
-                <canvas id="donutfp" width="110"></canvas>
-              </div>
-              <div class="w-full max-w-full md:w-4/12 xl:w-4/12 xs:w-4/12">
-                <div class="px-6 pt-4 pb-2 text-center">
-                  <span style="background-color: #006d77;"
-                    class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Preparation:
-                    {{preparation}}</span>
-                  <span style="background-color: #83c5be;"
-                    class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Injection:
-                    {{injection}}</span>
-                  <span style="background-color: #BCD9B4;"
-                    class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Blow:
-                    {{blow}}</span>
-                  <span style="background-color: #FF9C7A;"
-                    class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Packing:
-                    {{packing}}</span>
-                  <span style="background-color: #e29578;"
-                    class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Preform:
-                    {{preform}}</span>
-                  <span style="background-color: #c6ac8f;"
-                    class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Filling:
-                    {{filling}}</span>
-                </div>
-              </div>
           </div>
         </div>
         <div class="my-1 px-1 w-full max-w-full md:w-full lg:my-6 lg:px-6">
@@ -525,7 +477,8 @@
                       <td>
                         {{item.desc}}
                       </td>
-                      <td [innerHTML]="item.note_executor">
+                      <td>
+                        {{item.note_executor}}
                       </td>
                       <td>
                         {{item.executor}}
@@ -630,7 +583,7 @@
                 (click)="capture()"><i class="fa fa-camera fa-1"></i>
                 Capture</button>
               <div id="ss" #ss>
-                <h2 class="text-center" style="color: blue;">Grafik Work Order OC2 {{autodate}}</h2>
+                <h2 class="text-center" style="color: blue;">Grafik Work Order UTILITY ENGINE {{autodate}}</h2>
                 <div class="flex flex-wrap -mx-1 lg:-mx-3">
                   <canvas id="valuepermonthchart"></canvas>
                 </div>

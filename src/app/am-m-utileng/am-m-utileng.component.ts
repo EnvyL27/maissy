@@ -7,15 +7,16 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { CountService } from '../services/count.service';
 
 @Component({
-  selector: 'app-am-m-oci1',
-  templateUrl: './am-m-oci1.component.html',
-  styleUrls: ['./am-m-oci1.component.css']
+  selector: 'app-am-m-utileng',
+  templateUrl: './am-m-utileng.component.html',
+  styleUrls: ['./am-m-utileng.component.css']
 })
-export class AmMOci1Component implements OnInit {
+
+export class AmMUtilengComponent implements OnInit {
   constructor(private service: CountService, private spinner: NgxSpinnerService, private captureService: NgxCaptureService, private httpClient: HttpClient) { }
   itemsPerPage: number = 0;
-  math = Math;
   currentPage: number = 1;
+  math = Math;
   absoluteIndex(indexOnPage: number): number {
     return this.itemsPerPage * (this.currentPage - 1) + indexOnPage;
   }
@@ -259,7 +260,7 @@ export class AmMOci1Component implements OnInit {
 
       for (let elem of this.totaldata1year[0]) {
         if (elem.bulan == 'January') {
-          if (elem.id_area == 1) {
+          if (elem.id_area == 4) {
             if (elem.teco_date != null) {
               this.januariclose += 1
             } else {
@@ -267,7 +268,7 @@ export class AmMOci1Component implements OnInit {
             }
           }
         } else if (elem.bulan == 'February') {
-          if (elem.id_area == 1) {
+          if (elem.id_area == 4) {
             if (elem.teco_date != null) {
               this.febuariclose += 1
             } else {
@@ -275,7 +276,7 @@ export class AmMOci1Component implements OnInit {
             }
           }
         } else if (elem.bulan == 'March') {
-          if (elem.id_area == 1) {
+          if (elem.id_area == 4) {
             if (elem.teco_date != null) {
               this.maretclose += 1;
             } else {
@@ -283,7 +284,7 @@ export class AmMOci1Component implements OnInit {
             }
           }
         } else if (elem.bulan == 'April') {
-          if (elem.id_area == 1) {
+          if (elem.id_area == 4) {
             if (elem.teco_date != null) {
               this.aprilclose += 1;
             }
@@ -292,7 +293,7 @@ export class AmMOci1Component implements OnInit {
             }
           }
         } else if (elem.bulan == 'May') {
-          if (elem.id_area == 1) {
+          if (elem.id_area == 4) {
             if (elem.teco_date != null) {
               this.meiclose += 1;
             } else {
@@ -300,7 +301,7 @@ export class AmMOci1Component implements OnInit {
             }
           }
         } else if (elem.bulan == 'June') {
-          if (elem.id_area == 1) {
+          if (elem.id_area == 4) {
             if (elem.teco_date != null) {
               this.juniclose += 1;
             } else {
@@ -308,7 +309,7 @@ export class AmMOci1Component implements OnInit {
             }
           }
         } else if (elem.bulan == 'July') {
-          if (elem.id_area == 1) {
+          if (elem.id_area == 4) {
             if (elem.teco_date != null) {
               this.juliclose += 1;
             } else {
@@ -316,7 +317,7 @@ export class AmMOci1Component implements OnInit {
             }
           }
         } else if (elem.bulan == 'August') {
-          if (elem.id_area == 1) {
+          if (elem.id_area == 4) {
             if (elem.teco_date != null) {
               this.agustusclose += 1;
             } else {
@@ -324,7 +325,7 @@ export class AmMOci1Component implements OnInit {
             }
           }
         } else if (elem.bulan == 'September') {
-          if (elem.id_area == 1) {
+          if (elem.id_area == 4) {
             if (elem.teco_date != null) {
               this.septemberclose += 1;
             } else {
@@ -332,7 +333,7 @@ export class AmMOci1Component implements OnInit {
             }
           }
         } else if (elem.bulan == 'October') {
-          if (elem.id_area == 1) {
+          if (elem.id_area == 4) {
             if (elem.teco_date != null) {
               this.oktoberclose += 1;
             } else {
@@ -340,7 +341,7 @@ export class AmMOci1Component implements OnInit {
             }
           }
         } else if (elem.bulan == 'November') {
-          if (elem.id_area == 1) {
+          if (elem.id_area == 4) {
             if (elem.teco_date != null) {
               this.novemberclose += 1;
             } else {
@@ -348,7 +349,7 @@ export class AmMOci1Component implements OnInit {
             }
           }
         } else if (elem.bulan == 'December') {
-          if (elem.id_area == 1) {
+          if (elem.id_area == 4) {
             if (elem.teco_date != null) {
               this.desemberclose += 1;
             } else {
@@ -397,7 +398,7 @@ export class AmMOci1Component implements OnInit {
     this.reportharian.splice(0);
     this.spinner.show();
     this.resolved = false;
-    this.service.getReportingHarianam(this.tglsearch, '1').subscribe(data => {
+    this.service.getReportingHarianam(this.tglsearch, '2').subscribe(data => {
       this.resolved = true;
       this.spinner.hide();
       this.reportharian.push(data);
@@ -430,7 +431,7 @@ export class AmMOci1Component implements OnInit {
     this.service.getTotalDataPost(this.tgl1, this.tgl2).subscribe(data => {
       this.datarange.push(data);
       for (let elem of this.datarange[0]) {
-        if (elem.id_area == 1) {
+        if (elem.id_area == 4) {
           if (elem.teco_date != null) {
             this.donereport += 1;
           } else {
@@ -440,7 +441,7 @@ export class AmMOci1Component implements OnInit {
         }
       }
       for (let elem of this.datarange[0]) {
-        if (elem.id_area == 1) {
+        if (elem.id_area == 4) {
           if (elem.order_type == 'WO02') {
             if (elem.teco_date != null) {
               this.wo02donereport += 1;
@@ -575,13 +576,13 @@ export class AmMOci1Component implements OnInit {
       this.wo03donereport = 0;
       this.wo06donereport = 0;
       this.wo07donereport = 0;
-      this.service.getReportingHarianam(this.tglsearch, '1').subscribe(data => {
+      this.service.getReportingHarianam(this.tglsearch, '2').subscribe(data => {
         this.reportharian.push(data);
       })
       this.service.getTotalDataPost(this.tgl1, this.tgl2).subscribe(data => {
         this.datarange.push(data);
         for (let elem of this.datarange[0]) {
-          if (elem.id_area == 1) {
+          if (elem.id_area == 4) {
             if (elem.teco_date != null) {
               this.donereport += 1;
             } else {
@@ -591,7 +592,7 @@ export class AmMOci1Component implements OnInit {
           }
         }
         for (let elem of this.datarange[0]) {
-          if (elem.id_area == 1) {
+          if (elem.id_area == 4) {
             if (elem.order_type == 'WO02') {
               if (elem.teco_date != null) {
                 this.wo02donereport += 1;
@@ -705,13 +706,13 @@ export class AmMOci1Component implements OnInit {
           }
         });
       });
-      this.service.getTotalApprovalOrderFinish('1').subscribe(data => {
+      this.service.getTotalApprovalOrderFinish('4').subscribe(data => {
         this.arrorderfinish.push(data);
       for(let elem of this.arrorderfinish[0]){
         this.orderfinish = elem.total;
       }
       });
-      this.service.getTotalApprovalShcedule('1').subscribe(data => {
+      this.service.getTotalApprovalShcedule('4').subscribe(data => {
         this.arrshecdule.push(data);
       for(let elem of this.arrshecdule[0]){
         this.ordershecdule = elem.total;
@@ -722,7 +723,7 @@ export class AmMOci1Component implements OnInit {
 
         for (let elem of this.totaldata1year[0]) {
           if (elem.bulan == 'January') {
-            if (elem.id_area == 1) {
+            if (elem.id_area == 4) {
               if (elem.teco_date != null) {
                 this.januariclose += 1
               } else {
@@ -730,7 +731,7 @@ export class AmMOci1Component implements OnInit {
               }
             }
           } else if (elem.bulan == 'February') {
-            if (elem.id_area == 1) {
+            if (elem.id_area == 4) {
               if (elem.teco_date != null) {
                 this.febuariclose += 1
               } else {
@@ -738,7 +739,7 @@ export class AmMOci1Component implements OnInit {
               }
             }
           } else if (elem.bulan == 'March') {
-            if (elem.id_area == 1) {
+            if (elem.id_area == 4) {
               if (elem.teco_date != null) {
                 this.maretclose += 1;
               } else {
@@ -746,7 +747,7 @@ export class AmMOci1Component implements OnInit {
               }
             }
           } else if (elem.bulan == 'April') {
-            if (elem.id_area == 1) {
+            if (elem.id_area == 4) {
               if (elem.teco_date != null) {
                 this.aprilclose += 1;
               }
@@ -755,7 +756,7 @@ export class AmMOci1Component implements OnInit {
               }
             }
           } else if (elem.bulan == 'May') {
-            if (elem.id_area == 1) {
+            if (elem.id_area == 4) {
               if (elem.teco_date != null) {
                 this.meiclose += 1;
               } else {
@@ -763,7 +764,7 @@ export class AmMOci1Component implements OnInit {
               }
             }
           } else if (elem.bulan == 'June') {
-            if (elem.id_area == 1) {
+            if (elem.id_area == 4) {
               if (elem.teco_date != null) {
                 this.juniclose += 1;
               } else {
@@ -771,7 +772,7 @@ export class AmMOci1Component implements OnInit {
               }
             }
           } else if (elem.bulan == 'July') {
-            if (elem.id_area == 1) {
+            if (elem.id_area == 4) {
               if (elem.teco_date != null) {
                 this.juliclose += 1;
               } else {
@@ -779,7 +780,7 @@ export class AmMOci1Component implements OnInit {
               }
             }
           } else if (elem.bulan == 'August') {
-            if (elem.id_area == 1) {
+            if (elem.id_area == 4) {
               if (elem.teco_date != null) {
                 this.agustusclose += 1;
               } else {
@@ -787,7 +788,7 @@ export class AmMOci1Component implements OnInit {
               }
             }
           } else if (elem.bulan == 'September') {
-            if (elem.id_area == 1) {
+            if (elem.id_area == 4) {
               if (elem.teco_date != null) {
                 this.septemberclose += 1;
               } else {
@@ -795,7 +796,7 @@ export class AmMOci1Component implements OnInit {
               }
             }
           } else if (elem.bulan == 'October') {
-            if (elem.id_area == 1) {
+            if (elem.id_area == 4) {
               if (elem.teco_date != null) {
                 this.oktoberclose += 1;
               } else {
@@ -803,7 +804,7 @@ export class AmMOci1Component implements OnInit {
               }
             }
           } else if (elem.bulan == 'November') {
-            if (elem.id_area == 1) {
+            if (elem.id_area == 4) {
               if (elem.teco_date != null) {
                 this.novemberclose += 1;
               } else {
@@ -811,7 +812,7 @@ export class AmMOci1Component implements OnInit {
               }
             }
           } else if (elem.bulan == 'December') {
-            if (elem.id_area == 1) {
+            if (elem.id_area == 4) {
               if (elem.teco_date != null) {
                 this.desemberclose += 1;
               } else {
@@ -856,7 +857,7 @@ export class AmMOci1Component implements OnInit {
       this.service.getTotalApproval().subscribe(data => {
         this.arrapproval.push(data);
         for(let elem of this.arrapproval[0].get){
-          if(elem.id_area == '1'){
+          if(elem.id_area == '4'){
             if(elem.status == 'Submit'){
               this.approvalfinding += 1;
             } else if (elem.status == 'Approved' || elem.status == 'Not Yet'){
@@ -897,7 +898,7 @@ export class AmMOci1Component implements OnInit {
             this.totallevel2.splice(this.totallevel2.lenght, 0, array[i]);
           }
           for (var i = 0; i < this.totallevel2.length; i++) {
-            if(this.totallevel2[i].id_area == 1){
+            if(this.totallevel2[i].id_area == 4){
             if (this.totallevel2[i].level === 'Low') {
               this.low += 1;
             }
@@ -937,10 +938,10 @@ export class AmMOci1Component implements OnInit {
 
       }
       );
-      this.service.getReadFindingPending().subscribe(data => {
+      this.service.getReadFindingPendingutileng().subscribe(data => {
         this.findingpending = data;
         Object.values(this.findingpending).forEach(data => {
-          console.log(data);
+          // // console.log(data);
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
@@ -948,8 +949,9 @@ export class AmMOci1Component implements OnInit {
           for (let i = 0; i < array.length; i++) {
             this.findingpending2.splice(this.findingpending2.lenght, 0, array[i]);
           }
+
           for (var i = 0; i < this.findingpending2.length; i++) {
-            if(this.findingpending2[i].area == "OCI-1"){
+            if(this.findingpending2[i].area == "Utility"){
             if (this.findingpending2[i].section === 'Preparation') {
               this.preparation += 1;
             }
@@ -968,40 +970,39 @@ export class AmMOci1Component implements OnInit {
             if (this.findingpending2[i].section === 'Filling') {
               this.filling += 1;
             }
-
+            console.log(this.findingpending2[i].photo);
           }
           }
 
-          //  console.log(this.findingpending2);
         })
 
         new Chart('donutfp', {
-            type: 'doughnut',
-            data: {
-              labels: ['Preparation', 'Injection', 'Blow', 'Packing', 'Preform', 'Filling'],
-              datasets: [{
-                label: '# of Votes',
-                data: [this.preparation, this.injection, this.blow, this.packing, this.preform, this.filling],
-                backgroundColor: [
-                  '#006d77',
-                  '#83c5be',
-                  '#BCD9B4',
-                  '#FF9C7A',
-                  '#e29578',
-                  '#c6ac8f',
-                ],
-                borderColor: [
-                  'white',
-                  'white',
-                  'white',
-                  'white',
-                  'white',
-                  'white',
-                ],
-                borderWidth: 1
-              }]
-            },
-          });
+          type: 'doughnut',
+          data: {
+            labels: ['Preparation', 'Injection', 'Blow', 'Packing', 'Preform', 'Filling'],
+            datasets: [{
+              label: '# of Votes',
+              data: [this.preparation, this.injection, this.blow, this.packing, this.preform, this.filling],
+              backgroundColor: [
+                '#006d77',
+                '#83c5be',
+                '#BCD9B4',
+                '#FF9C7A',
+                '#e29578',
+                '#c6ac8f',
+              ],
+              borderColor: [
+                'white',
+                'white',
+                'white',
+                'white',
+                'white',
+                'white',
+              ],
+              borderWidth: 1
+            }]
+          },
+        });
 
 
       }
@@ -1017,12 +1018,12 @@ export class AmMOci1Component implements OnInit {
           }
 
           for (let elem of this.totalfm2) {
-            if (elem.id_area == 1) {
+            if (elem.id_area == 4) {
               if (elem.status_pengerjaan == 'Done') {
                 this.finishexecute += 1;
 
               }
-              else if (elem.status2 == 'READY') {
+              if (elem.status2 == 'READY') {
                 this.readyexecute += 1;
               } else if (elem.status1 == 'Done' || elem.status1 == 'None') {
                 if (elem.status2 == 'RELEASED' || elem.status2 == 'CREATED') {

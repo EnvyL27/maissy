@@ -110,7 +110,7 @@ export class DashboardComponent implements OnInit {
               labels: ["Data %"],
               datasets: [
                 {
-                  label: 'Pending Execute',
+                  label: 'On Progress WO',
                   data: [Math.round((this.pendingexecute / this.const2.length)*100)],
                   backgroundColor: [
                     '#f47a60'
@@ -121,8 +121,8 @@ export class DashboardComponent implements OnInit {
                   borderWidth: 1
                 },
                 {
-                  label: 'Finish Execute',
-                  data: [Math.round((this.finishexecute / this.const2.length)*100)],
+                  label: 'Ready Execute',
+                  data: [Math.round((this.readyexecute / this.const2.length)*100)],
                   backgroundColor: [
                     '#7fe7dc'
                   ],
@@ -132,8 +132,8 @@ export class DashboardComponent implements OnInit {
                   borderWidth: 1
                 },
                 {
-                  label: 'Ready Execute',
-                  data: [Math.round((this.readyexecute / this.const2.length)*100)],
+                  label: 'Finish Execute',
+                  data: [Math.round((this.finishexecute / this.const2.length)*100)],
                   backgroundColor: [
                     '#316879'
                   ],

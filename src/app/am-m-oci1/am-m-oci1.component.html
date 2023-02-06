@@ -174,7 +174,7 @@
               <span style="background-color: #ff6e40;"
                 class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Ready:
                 {{readyexecute}}</span>
-              <span style="background-color: #1e3d59;"
+              <span style="background-color: #316879;"
                 class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Finish:
                 {{finishexecute}}</span>
             </div>
@@ -201,7 +201,7 @@
                 <span style="background-color: #ff6e40;"
                   class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Ready:
                   {{readyexecute}}</span>
-                <span style="background-color: #1e3d59;"
+                <span style="background-color: #316879;"
                   class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Finish:
                   {{finishexecute}}</span>
               </div>
@@ -240,9 +240,11 @@
               <h5 class="text-center">Finding Pending (Not Closed Yet)</h5>
             </div>
           </div>
+        </div>
+        <div class="my-1 px-1 w-full md:w-full lg:my-6 lg:px-6">
           <div class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
             <div class="flex-auto p-6">
-              <p class="text-center" style="color: red;">Click Funlock For Show History Finding Close</p>
+              <p class="text-center" style="color: red;">Click Funlock For Show History Finding Closed</p>
               <div class="flex items-center text-center p-4">
                 <div class="relative flex flex-wrap items-stretch w-full transition-all rounded-lg ease-soft">
                   <span
@@ -258,19 +260,19 @@
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                   <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                      <th scope="col" class="py-3 px-6">
+                      <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                         No
                       </th>
-                      <th scope="col" class="py-3 px-6">
+                      <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                         Deskripsi
                       </th>
-                      <th scope="col" class="py-3 px-6">
-                        Level
+                      <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
+                        Foto
                       </th>
-                      <th scope="col" class="py-3 px-6">
+                      <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                         Machine
                       </th>
-                      <th scope="col" class="py-3 px-6">
+                      <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                         Section
                       </th>
                     </tr>
@@ -285,7 +287,21 @@
                         {{findingpending.finding}}
                       </td>
                       <td class="py-4 px-6">
-                        {{findingpending.level}}
+                        <input class="modal-btn" type="checkbox" id="modal-btn" name="modal-btn" />
+                        <label for="modal-btn">
+                        </label>
+                        <div class="modal">
+                          <div class="modal-wrap xl:ml-68.5">
+                            <img src="http://192.168.9.47/plan_am/files/{{picture}}" class="center">
+                          </div>
+                        </div>
+                        <div *ngIf="findingpending.photo != null" class="row">
+                            <label for="modal-btn">
+                            <img class="animasihf" (click)="getphoto(findingpending.photo)" src="http://192.168.9.47/plan_am/files/{{findingpending.photo}}" style="width: 100%;
+                              max-width: 150px;
+                              height: auto;">
+                              </label>
+                        </div>
                       </td>
                       <td (click)="data(findingpending.func_loc)" class="py-4 px-6">
                         <a class="styled-pointer">{{findingpending.func_loc}}</a>
@@ -306,7 +322,7 @@
           <div
             class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl mb-2 bg-clip-border">
             <div class="flex-auto p-4">
-              <h5 class="text-center">History Finding Close</h5>
+              <h5 class="text-center">History Finding Closed</h5>
             </div>
           </div>
           <div
@@ -328,19 +344,22 @@
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                   <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                      <th scope="col" class="py-3 px-6">
+                      <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                         No
                       </th>
-                      <th scope="col" class="py-3 px-6">
+                      <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                         Tanggal Pengerjaan
                       </th>
-                      <th scope="col" class="py-3 px-6">
+                      <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
+                        Foto
+                      </th>
+                      <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                         Finding
                       </th>
-                      <th scope="col" class="py-3 px-6">
+                      <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                         Langkah Perbaikan
                       </th>
-                      <th scope="col" class="py-3 px-6">
+                      <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                         PIC
                       </th>
                     </tr>
@@ -351,6 +370,23 @@
                       </th>
                       <td class="py-4 px-6">
                         {{header.actual_end}}
+                      </td>
+                      <td class="py-4 px-6">
+                        <input class="modal-btn" type="checkbox" id="modal-btn" name="modal-btn" />
+                        <label for="modal-btn">
+                        </label>
+                        <div class="modal">
+                          <div class="modal-wrap xl:ml-68.5">
+                            <img src="http://192.168.9.47/plan_am/files/{{picture}}" class="center">
+                          </div>
+                        </div>
+                        <div class="row">
+                            <label for="modal-btn">
+                            <img class="animasihf" (click)="getphoto(header.foto)" src="http://192.168.9.47/plan_am/files/{{header.foto}}" style="width: 100%;
+                              max-width: 150px;
+                              height: auto;">
+                              </label>
+                        </div>
                       </td>
                       <td class="py-4 px-6">
                         {{header.finding}}
@@ -372,11 +408,44 @@
             </pagination-controls>
           </div>
         </div>
+        <div class="my-1 px-1 w-full max-w-full md:w-full lg:my-8 lg:px-6">
+          <div class="flex items-center text-center mt-4 mb-4 flex-wrap bg-white shadow-soft-lg rounded-2xl bg-clip-border">
+              <div class="w-full max-w-full md:w-8/12 xl:w-8/12 p-4  xs:w-8/12">
+                <canvas id="donutfp" width="110"></canvas>
+              </div>
+              <div class="w-full max-w-full md:w-4/12 xl:w-4/12 xs:w-4/12">
+                <div class="px-6 pt-4 pb-2 text-center">
+                  <span style="background-color: #006d77;"
+                    class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Preparation:
+                    {{preparation}}</span>
+                  <span style="background-color: #83c5be;"
+                    class="text-dark inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Injection:
+                    {{injection}}</span>
+                  <span style="background-color: #BCD9B4;"
+                    class="text-dark inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Blow:
+                    {{blow}}</span>
+                  <span style="background-color: #FF9C7A;"
+                    class="text-dark inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Packing:
+                    {{packing}}</span>
+                  <span style="background-color: #e29578;"
+                    class="text-dark inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Preform:
+                    {{preform}}</span>
+                  <span style="background-color: #c6ac8f;"
+                    class="text-dark inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Filling:
+                    {{filling}}</span>
+                </div>
+              </div>
+          </div>
+        </div>
         <div class="my-1 px-1 w-full max-w-full md:w-full lg:my-6 lg:px-6">
+          <div
+            class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl mb-2 bg-clip-border">
+            <div class="flex-auto p-4">
+              <h5 class="text-center">List Job Finish Today</h5>
+            </div>
+          </div>
           <div class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
             <div class="flex-auto p-6">
-              <p class="text-left text-md">List Job Finish Today
-              </p>
               <p class="text-center" style="color: red;">Click NO WO Get Detail Part</p>
               <div class="flex items-center text-center mb-4">
                 <div class="relative flex flex-wrap items-stretch w-full transition-all rounded-lg ease-soft">
@@ -402,25 +471,25 @@
                 <table border="1" class="w-full text-lg text-gray-500 dark:text-gray-400 text-center mb-6">
                   <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                      <th scope="col" class="py-3 px-6">
+                      <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                         Section
                       </th>
-                      <th scope="col" class="py-3 px-6">
+                      <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                         NO WO
                       </th>
-                      <th scope="col" class="py-3 px-6">
+                      <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                         Foto
                       </th>
-                      <th scope="col" class="py-3 px-6">
+                      <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                         Deskripsi
                       </th>
-                      <th scope="col" class="py-3 px-6">
+                      <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                         Note Executor
                       </th>
-                      <th scope="col" class="py-3 px-6">
+                      <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                         Executor
                       </th>
-                      <th scope="col" class="py-3 px-6">
+                      <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                         Total
                       </th>
                     </tr>
@@ -488,17 +557,17 @@
                 <table border="1" class="w-full text-lg text-gray-500 dark:text-gray-400 text-center">
                   <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                      <th scope="col" class="py-3 px-6">
+                      <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                         Description Part
                       </th>
-                      <th scope="col" class="py-3 px-6">
+                      <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                         Quantity
                       </th>
-                      <th scope="col" class="py-3 px-6">
+                      <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                         Quantity Install
                       </th>
-                      <th scope="col" class="py-3 px-6">
-                        Prosentase
+                      <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
+                        Prosentase (%)
                       </th>
                     </tr>
                     <tr class="bg-white border-b Success:bg-gray-900 Success:border-gray-700"
@@ -619,7 +688,7 @@
                         <span style="background-color: #7fe7dc;"
                           class="text-white inline-block bg-red rounded-full text-md px-3 py-1 font-semibold mr-2 mb-2">Total WO:
                           {{this.totalwo02report + this.totalwo03report + this.totalwo06report + this.totalwo07report}}</span>
-                        <span style="background-color: #ffc13b;"
+                        <span style="background-color: #316879;"
                           class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Done WO:
                           {{this.wo02donereport + this.wo03donereport + this.wo06donereport + this.wo07donereport}}</span>
                         <span style="background-color: #ff6e40;"
@@ -693,7 +762,7 @@
                       <td class="font-bold">WO Closed</td>
                       <td class="font-bold">Pending Wo</td>
                       <td class="font-bold">Total Wo</td>
-                      <td class="font-bold">Prosentase</td>
+                      <td class="font-bold">Prosentase (%)</td>
                     </tr>
                     <tr>
                       <td>WO02 Corretive</td>
