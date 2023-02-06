@@ -123,10 +123,10 @@ export class PdmDashboardComponent implements OnInit {
                 label: '# of Votes',
                 data: [this.good, this.satis, this.unsatisf, this.unacc],
                 backgroundColor: [
-                  'green',
-                  'rgb(230, 230, 0)',
+                  '#3ed33e',
+                  'rgb(230, 230, 33)',
                   'orange',
-                  'red',
+                  '#ff3d3d'
                 ],
                 borderColor: [
                   'white',
@@ -195,10 +195,10 @@ export class PdmDashboardComponent implements OnInit {
                 label: 'oi',
                 data: [this.goodfsb, this.satisfsb, this.unsatisffsb, this.unaccfsb],
                 backgroundColor: [
-                  'green',
-                  'rgb(230, 230, 0)',
+                  '#3ed33e',
+                  'rgb(230, 230, 33)',
                   'orange',
-                  'red',
+                  '#ff3d3d'
                 ],
                 borderColor: [
                   'white',
@@ -244,10 +244,10 @@ export class PdmDashboardComponent implements OnInit {
                 label: '# of Votes',
                 data: [this.goodoci1, this.satisoci1, this.unsatisfoci1, this.unaccoci1],
                 backgroundColor: [
-                  'green',
-                  'rgb(230, 230, 0)',
+                  '#3ed33e',
+                  'rgb(230, 230, 33)',
                   'orange',
-                  'red',
+                  '#ff3d3d',
                 ],
                 borderColor: [
                   'white',

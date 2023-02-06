@@ -20,6 +20,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { NgxCaptureModule } from 'ngx-capture';
 import { FilterListPipe } from './filter-list.pipe';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { AmMUtilengComponent } from './am-m-utileng/am-m-utileng.component';
 
 
 
@@ -33,6 +34,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     FooterComponent,
     SpinnerComponent,
     FilterListPipe,
+    AmMUtilengComponent,
   ],
   imports: [
     Ng2SearchPipeModule,

@@ -134,7 +134,8 @@
       <div *ngIf="
       router.url === '/am_m_oci1' ||
         router.url === '/am_m_oci2' ||
-        router.url === '/am_m_fsb';
+        router.url === '/am_m_fsb' ||
+        router.url === '/am_m_utileng';
       else lain3
     ">
         <li class="py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors">
@@ -206,6 +207,18 @@
                   class="flex items-center w-full p-1 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">FSB</a>
               </li>
             </ng-template>
+            <div *ngIf="router.url === '/am_m_utileng'; else kategori4">
+              <li class="ml-6">
+                <a routerLink="am_m_utileng"
+                  class="rounded-lg shadow-soft-md bg-white flex items-center w-1/2 p-1 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">UTIL - ENG</a>
+              </li>
+            </div>
+            <ng-template #kategori4>
+              <li class="ml-6">
+                <a routerLink="am_m_utileng"
+                  class="flex items-center w-full p-1 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">UTIL - ENG</a>
+              </li>
+            </ng-template>
           </ul>
         </li>
       </div>
@@ -252,6 +265,10 @@
             <li class="ml-6">
               <a routerLink="am_m_fsb"
                 class="flex items-center w-full p-1 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">FSB</a>
+            </li>
+            <li class="ml-6">
+              <a routerLink="am_m_fsb"
+                class="flex items-center w-full p-1 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">UTIL - ENG</a>
             </li>
           </ul>
         </li>
@@ -1322,7 +1339,8 @@ else lain6
         <div *ngIf="
       router.url === '/am_m_oci1' ||
         router.url === '/am_m_oci2' ||
-        router.url === '/am_m_fsb';
+        router.url === '/am_m_fsb' ||
+        router.url === '/am_m_utileng';
       else lain3
     ">
           <li
@@ -1395,6 +1413,18 @@ else lain6
                     class="flex items-center w-full p-1 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">FSB</a>
                 </li>
               </ng-template>
+              <div *ngIf="router.url === '/am_m_utileng'; else kategori4">
+                <li class="ml-6">
+                  <a routerLink="am_m_utileng"
+                    class="rounded-lg shadow-soft-md bg-white flex items-center w-1/2 p-1 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">UTIL - ENG</a>
+                </li>
+              </div>
+              <ng-template #kategori4>
+                <li class="ml-6">
+                  <a routerLink="am_m_utileng"
+                    class="flex items-center w-full p-1 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">UTIL - ENG</a>
+                </li>
+              </ng-template>
             </ul>
           </li>
         </div>
@@ -1442,6 +1472,10 @@ else lain6
               <li class="ml-6">
                 <a routerLink="am_m_fsb"
                   class="flex items-center w-full p-1 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">FSB</a>
+              </li>
+              <li class="ml-6">
+                <a routerLink="am_m_fsb"
+                  class="flex items-center w-full p-1 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">UTIL - ENG</a>
               </li>
             </ul>
           </li>

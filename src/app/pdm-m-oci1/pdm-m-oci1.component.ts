@@ -713,10 +713,10 @@ export class PdmMOci1Component implements OnInit {
                 label: '# of Votes',
                 data: [this.good, this.satis, this.unsatisf, this.unacc],
                 backgroundColor: [
-                  'green',
-                  'rgb(230, 230, 0)',
+                  '#3ed33e',
+                  'rgb(230, 230, 33)',
                   'orange',
-                  'red',
+                  '#ff3d3d'
                 ],
                 borderColor: [
                   'white',

@@ -396,6 +396,17 @@ export class CountService {
   getReadLevelTotalfsb() {
     return this.httpClient.get(api + "levelamfsb");
   }
+
+  getTotalFindingMutileng() {
+    return this.httpClient.get(api + "TotalFindingMutileng");
+  }
+  getReadFindingPendingutileng() {
+    return this.httpClient.get(api + "findingpendingutileng");
+  }
+  getReadLevelTotalutileng() {
+    return this.httpClient.get(api + "levelamutileng");
+  }
+
   getReadFinishTodayoci1() {
     return this.httpClient.get(api + "finishtodaylistoci1");
   }
