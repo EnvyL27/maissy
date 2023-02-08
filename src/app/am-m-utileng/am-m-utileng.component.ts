@@ -938,75 +938,75 @@ export class AmMUtilengComponent implements OnInit {
 
       }
       );
-      this.service.getReadFindingPendingutileng().subscribe(data => {
-        this.findingpending = data;
-        Object.values(this.findingpending).forEach(data => {
-          // // console.log(data);
-          var array = Object.keys(data).map(function (key) {
-            return data[key];
-          });
-          // // console.log(array);
-          for (let i = 0; i < array.length; i++) {
-            this.findingpending2.splice(this.findingpending2.lenght, 0, array[i]);
-          }
+      // this.service.getReadFindingPendingutileng().subscribe(data => {
+      //   this.findingpending = data;
+      //   Object.values(this.findingpending).forEach(data => {
+      //     // // console.log(data);
+      //     var array = Object.keys(data).map(function (key) {
+      //       return data[key];
+      //     });
+      //     // // console.log(array);
+      //     for (let i = 0; i < array.length; i++) {
+      //       this.findingpending2.splice(this.findingpending2.lenght, 0, array[i]);
+      //     }
 
-          for (var i = 0; i < this.findingpending2.length; i++) {
-            if(this.findingpending2[i].area == "Utility"){
-            if (this.findingpending2[i].section === 'Preparation') {
-              this.preparation += 1;
-            }
-            if (this.findingpending2[i].section === 'Injection') {
-              this.injection += 1;
-            }
-            if (this.findingpending2[i].section === 'Blow') {
-              this.blow += 1;
-            }
-            if (this.findingpending2[i].section === 'Packing') {
-              this.packing += 1;
-            }
-            if (this.findingpending2[i].section === 'Preform Transfer') {
-              this.preform += 1;
-            }
-            if (this.findingpending2[i].section === 'Filling') {
-              this.filling += 1;
-            }
-            console.log(this.findingpending2[i].photo);
-          }
-          }
+      //     for (var i = 0; i < this.findingpending2.length; i++) {
+      //       if(this.findingpending2[i].area == "Utility"){
+      //       if (this.findingpending2[i].section === 'Preparation') {
+      //         this.preparation += 1;
+      //       }
+      //       if (this.findingpending2[i].section === 'Injection') {
+      //         this.injection += 1;
+      //       }
+      //       if (this.findingpending2[i].section === 'Blow') {
+      //         this.blow += 1;
+      //       }
+      //       if (this.findingpending2[i].section === 'Packing') {
+      //         this.packing += 1;
+      //       }
+      //       if (this.findingpending2[i].section === 'Preform Transfer') {
+      //         this.preform += 1;
+      //       }
+      //       if (this.findingpending2[i].section === 'Filling') {
+      //         this.filling += 1;
+      //       }
+      //       console.log(this.findingpending2[i].photo);
+      //     }
+      //     }
 
-        })
+      //   })
 
-        new Chart('donutfp', {
-          type: 'doughnut',
-          data: {
-            labels: ['Preparation', 'Injection', 'Blow', 'Packing', 'Preform', 'Filling'],
-            datasets: [{
-              label: '# of Votes',
-              data: [this.preparation, this.injection, this.blow, this.packing, this.preform, this.filling],
-              backgroundColor: [
-                '#006d77',
-                '#83c5be',
-                '#BCD9B4',
-                '#FF9C7A',
-                '#e29578',
-                '#c6ac8f',
-              ],
-              borderColor: [
-                'white',
-                'white',
-                'white',
-                'white',
-                'white',
-                'white',
-              ],
-              borderWidth: 1
-            }]
-          },
-        });
+      //   new Chart('donutfp', {
+      //     type: 'doughnut',
+      //     data: {
+      //       labels: ['Preparation', 'Injection', 'Blow', 'Packing', 'Preform', 'Filling'],
+      //       datasets: [{
+      //         label: '# of Votes',
+      //         data: [this.preparation, this.injection, this.blow, this.packing, this.preform, this.filling],
+      //         backgroundColor: [
+      //           '#006d77',
+      //           '#83c5be',
+      //           '#BCD9B4',
+      //           '#FF9C7A',
+      //           '#e29578',
+      //           '#c6ac8f',
+      //         ],
+      //         borderColor: [
+      //           'white',
+      //           'white',
+      //           'white',
+      //           'white',
+      //           'white',
+      //           'white',
+      //         ],
+      //         borderWidth: 1
+      //       }]
+      //     },
+      //   });
 
 
-      }
-      );
+      // }
+      // );
       this.service.getTotalFeeding().subscribe(data => {
         this.totalfm = data;
         Object.values(this.totalfm).forEach(data => {

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "dashboard-sms": {
+    "maissy-dashboard": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": { "allowedCommonJsDependencies": ["chart.js"],
-            "outputPath": "dist/dashboard-sms",
+            "outputPath": "dist/maissy-dashboard",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -68,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "dashboard-sms:build:production"
+              "browserTarget": "maissy-dashboard:build:production"
             },
             "development": {
-              "browserTarget": "dashboard-sms:build:development"
+              "browserTarget": "maissy-dashboard:build:development"
             }
           },
           "options": {
@@ -82,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "dashboard-sms:build"
+            "browserTarget": "maissy-dashboard:build"
           }
         },
         "test": {
