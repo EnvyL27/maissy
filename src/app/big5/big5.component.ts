@@ -179,7 +179,9 @@ export class Big5Component implements OnInit {
             clearInterval(b);
           }
         }, 50);
-        if (this.service.bigFiveByMachineValue != 0) {
+
+        // Before  if (this.service.bigFiveByMachineValue != 0)
+        if (this.service.bigFiveByMachineValue == 0 || this.service.bigFiveByMachineValue != 0) {
           //console.log("3");
           this.spinner.hide();
           this.resolved = true;

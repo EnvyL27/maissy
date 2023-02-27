@@ -397,16 +397,16 @@
                     class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Baking-Cooling:
                     {{bakingcooling}}</span>
                   <span style="background-color: #83c5be;"
-                    class="text-dark inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Mixing:
+                    class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Mixing:
                     {{mixing}}</span>
                   <span style="background-color: #BCD9B4;"
-                    class="text-dark inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Weighing:
+                    class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Weighing:
                     {{weighing}}</span>
                   <span style="background-color: #FF9C7A;"
-                    class="text-dark inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Packaging:
+                    class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Packaging:
                     {{packaging}}</span>
                   <span style="background-color: #e29578;"
-                    class="text-dark inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Forming:
+                    class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Forming:
                     {{forming}}</span>
               </div>
           </div>
@@ -499,13 +499,12 @@
                           </div>
                         </div>
                       </td>
-                      <td>
+                      <td class="text-left">
                         {{item.desc}}
                       </td>
-                      <td>
-                        {{item.note_executor}}
+                      <td class="text-left" [innerHTML]="item.note_executor">
                       </td>
-                      <td>
+                      <td class="text-left">
                         {{item.executor}}
                       </td>
                       <td *ngIf="item.total != null;else nulltotal">

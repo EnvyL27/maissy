@@ -264,13 +264,19 @@
                         No
                       </th>
                       <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
+                        No Order
+                      </th>
+                      <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
+                        Status Order
+                      </th>
+                      <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                         Deskripsi
                       </th>
                       <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                         Foto
                       </th>
                       <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
-                        Machine
+                        Funlock
                       </th>
                       <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                         Section
@@ -419,19 +425,19 @@
                     class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Preparation:
                     {{preparation}}</span>
                   <span style="background-color: #83c5be;"
-                    class="text-dark inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Injection:
+                    class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Injection:
                     {{injection}}</span>
                   <span style="background-color: #BCD9B4;"
-                    class="text-dark inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Blow:
+                    class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Blow:
                     {{blow}}</span>
                   <span style="background-color: #FF9C7A;"
-                    class="text-dark inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Packing:
+                    class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Packing:
                     {{packing}}</span>
                   <span style="background-color: #e29578;"
-                    class="text-dark inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Preform:
+                    class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Preform:
                     {{preform}}</span>
                   <span style="background-color: #c6ac8f;"
-                    class="text-dark inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Filling:
+                    class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Filling:
                     {{filling}}</span>
                 </div>
               </div>
@@ -525,11 +531,10 @@
                           </div>
                         </div>
                       </td>
-                      <td>
+                      <td class="text-left">
                         {{item.desc}}
                       </td>
-                      <td>
-                        {{item.note_executor}}
+                      <td class="text-left" [innerHTML]="item.note_executor">
                       </td>
                       <td>
                         {{item.executor}}
