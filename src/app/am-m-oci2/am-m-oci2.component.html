@@ -262,13 +262,19 @@
                         No
                       </th>
                       <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
+                        No Order
+                      </th>
+                      <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
+                        Status Order
+                      </th>
+                      <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                         Deskripsi
                       </th>
                       <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                         Foto
                       </th>
                       <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
-                        Machine
+                        Funlock
                       </th>
                       <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                         Section
@@ -281,6 +287,15 @@
                       <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         {{(currentPage-1) * 5 + i + 1}}
                       </th>
+                      <td *ngIf="findingpending.no_wo" class="py-4 px-6">
+                        {{findingpending.no_wo}}
+                      </td>
+                      <td *ngIf="!findingpending.no_wo" class="text-center font-bold py-4 px-6">
+                        -
+                      </td>
+                      <td class="py-4 px-6">
+                        {{findingpending.status}}
+                      </td>
                       <td class="py-4 px-6">
                         {{findingpending.finding}}
                       </td>
