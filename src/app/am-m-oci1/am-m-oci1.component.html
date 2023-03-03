@@ -298,8 +298,11 @@
                       <td *ngIf="!findingpending.no_wo" class="text-center font-bold py-4 px-6">
                         -
                       </td>
-                      <td class="py-4 px-6">
+                      <td *ngIf="findingpending.status" class="py-4 px-6">
                         {{findingpending.status}}
+                      </td>
+                      <td *ngIf="!findingpending.status" class="text-center font-bold py-4 px-6">
+                        -
                       </td>
                       <td class="py-4 px-6">
                         {{findingpending.finding}}

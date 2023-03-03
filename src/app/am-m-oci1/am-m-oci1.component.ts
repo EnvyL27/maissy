@@ -887,11 +887,15 @@ export class AmMOci1Component implements OnInit {
       );
       this.service.getTotalFeeding().subscribe(data => {
         this.totallevel = data;
+        console.log(this.totallevel);
+
         Object.values(this.totallevel).forEach(data => {
           // // console.log(data);
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
+          console.log(array);
+
           // // console.log(array);
           for (let i = 0; i < array.length; i++) {
             this.totallevel2.splice(this.totallevel2.lenght, 0, array[i]);
@@ -940,7 +944,7 @@ export class AmMOci1Component implements OnInit {
       this.service.getReadFindingPending().subscribe(data => {
         this.findingpending = data;
         Object.values(this.findingpending).forEach(data => {
-          // console.log(data);
+          console.log(data);
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
@@ -1008,6 +1012,8 @@ export class AmMOci1Component implements OnInit {
       );
       this.service.getTotalFeeding().subscribe(data => {
         this.totalfm = data;
+        console.log(this.totalfm);
+
         Object.values(this.totalfm).forEach(data => {
           var array = Object.keys(data).map(function (key) {
             return data[key];
