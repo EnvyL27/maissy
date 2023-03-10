@@ -21,6 +21,7 @@ import { NgxCaptureModule } from 'ngx-capture';
 import { FilterListPipe } from './filter-list.pipe';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { AmMUtilengComponent } from './am-m-utileng/am-m-utileng.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 
 
@@ -51,6 +52,7 @@ import { AmMUtilengComponent } from './am-m-utileng/am-m-utileng.component';
     MatFormFieldModule,
     NgxCaptureModule,
     PdfViewerModule,
+    NgApexchartsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],

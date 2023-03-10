@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CountService } from '../services/count.service';
@@ -6,16 +6,73 @@ import { TableUtil } from "../services/tabelUtil";
 import { NgxCaptureService } from 'ngx-capture';
 import { tap } from 'rxjs';
 import * as moment from 'moment';
+import { ChartOptions } from './chart';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-pdm-m-oci1',
   templateUrl: './pdm-m-oci1.component.html',
-  styleUrls: ['./pdm-m-oci1.component.css']
+  styleUrls: ['./pdm-m-oci1.component.css'],
+  providers: [
+    DatePipe,
+  ]
 })
 export class PdmMOci1Component implements OnInit {
+  public chartOptions!: Partial<ChartOptions> | any;
   currentDate = new Date();
+  newTanggal: any = new Date();
+  bulan: any;
+  tahun: any;
+  finishmonth: any;
+  monthArray: any = [];
+  yearArray: any = [];
+  constructor(private service: CountService, private spinner: NgxSpinnerService, private captureService: NgxCaptureService, private cdr: ChangeDetectorRef, private datePipe: DatePipe) { this.newTanggal = this.datePipe.transform(this.newTanggal, 'yyyy-MM-dd'); }
 
-  constructor(private service: CountService, private spinner: NgxSpinnerService, private captureService: NgxCaptureService) { }
+  boolprep: Boolean = false;
+  boolinj: Boolean = false;
+  boolblow: Boolean = false;
+  boolfill: Boolean = false;
+  boolpack: Boolean = false;
+  boolkanesho: Boolean = false;
+  boolstu1: Boolean = false;
+
+  changeprep() {
+    this.boolinj = this.boolblow = this.boolfill = this.boolpack = this.boolkanesho = this.boolstu1 = false;
+    this.boolprep = !this.boolprep;
+    this.cdr.detectChanges();
+  }
+  changeinj() {
+    this.boolprep = this.boolblow = this.boolfill = this.boolpack = this.boolkanesho = this.boolstu1 = false;
+    this.boolinj = !this.boolinj;
+    this.cdr.detectChanges();
+  }
+  changeblow() {
+    this.boolprep = this.boolinj = this.boolfill = this.boolpack = this.boolkanesho = this.boolstu1 = false;
+    this.boolblow = !this.boolblow;
+    this.cdr.detectChanges();
+  }
+  changefill() {
+    this.boolprep = this.boolinj = this.boolblow = this.boolpack = this.boolkanesho = this.boolstu1 = false;
+    this.boolfill = !this.boolfill;
+    this.cdr.detectChanges();
+  }
+  changepack() {
+    this.boolprep = this.boolinj = this.boolblow = this.boolfill = this.boolkanesho = this.boolstu1 = false;
+    this.boolpack = !this.boolpack;
+    this.cdr.detectChanges();
+  }
+  changekanesho() {
+    this.boolprep = this.boolinj = this.boolblow = this.boolfill = this.boolpack = this.boolstu1 = false;
+    this.boolkanesho = !this.boolkanesho;
+    this.cdr.detectChanges();
+  }
+  changestu() {
+    this.boolprep = this.boolinj = this.boolblow = this.boolfill = this.boolpack = this.boolkanesho = false;
+    this.boolstu1 = !this.boolstu1;
+    this.cdr.detectChanges();
+  }
+
+
   public resolved: boolean = false;
   public exportdata: boolean = false;
   public paginatereset: boolean = false;
@@ -216,12 +273,12 @@ export class PdmMOci1Component implements OnInit {
     this.exportdata = !this.exportdata;
   }
   resetPaginate() {
-    this.currentPage3  = 1;
+    this.currentPage3 = 1;
     this.showPaginate3 = 5;
     this.paginatereset = !this.paginatereset;
   }
   showallPaginate() {
-    this.currentPage3  = 1;
+    this.currentPage3 = 1;
     this.paginatereset = !this.paginatereset;
     this.showPaginate3 = this.totalfinishtoday2down.length;
   }
@@ -240,9 +297,9 @@ export class PdmMOci1Component implements OnInit {
     this.currentPage2 = 1;
     this.exportdata = !this.exportdata;
   }
-  exportTableExcel(){
+  exportTableExcel() {
     TableUtil.exportTableToExcel("printexcel");
-    this.currentPage3  = 1;
+    this.currentPage3 = 1;
     this.showPaginate3 = 5;
     this.paginatereset = !this.paginatereset;
   }
@@ -564,85 +621,180 @@ export class PdmMOci1Component implements OnInit {
             return data[key];
           });
 
-          // // console.log(array);
           for (let i = 0; i < array.length; i++) {
-            this.finishnotlist.splice(this.finishnotlist.lenght, 0, array[i]);
+
+            this.finishnotlist.splice(this.finishnotlist.get, 0, array[i]);
+
           }
-          for (let elem of this.finishnotlist) {
-            if (elem.name_area == 'PREPARATION') {
-              if (elem.value == null) {
+
+          console.log(this.finishnotlist);
+
+
+          for (let i = 0; i < array.length; i++) {
+            this.finishmonth = this.finishnotlist[i].plan_date;
+            const myArray = this.finishmonth.split("-");
+            this.finishmonth = myArray[1];
+            this.monthArray.push(this.finishmonth);
+          }
+
+          for (let i = 0; i < array.length; i++) {
+            this.finishmonth = this.finishnotlist[i].plan_date;
+            const myArray = this.finishmonth.split("-");
+            this.finishmonth = myArray[0];
+            this.yearArray.push(this.finishmonth);
+          }
+
+          this.bulan = this.newTanggal.split("-");
+          this.bulan = this.bulan[1];
+
+          this.tahun = this.newTanggal.split("-");
+          this.tahun = this.tahun[0];
+
+          // // console.log(array);
+
+          for (let i = 0; i < this.finishnotlist.length; i++) {
+            if (this.finishnotlist[i].name_area == 'PREPARATION') {
+              if (this.finishnotlist[i].value == null) {
                 this.preparationnull += 1;
               } else {
-                this.preparation += 1;
+                if (this.monthArray[i] == this.bulan && this.yearArray[i] == this.tahun) {
+                  this.preparation += 1;
+                }
               }
-            } else if (elem.name_area == 'INJECTION') {
-              if (elem.value == null) {
+            } else if (this.finishnotlist[i].name_area == 'INJECTION') {
+              if (this.finishnotlist[i].value == null) {
                 this.injectionnnull += 1;
               } else {
-                this.injection += 1;
+                if (this.monthArray[i] == this.bulan && this.yearArray[i] == this.tahun) {
+                  this.injection += 1;
+                }
               }
-            } else if (elem.name_area == 'BLOW') {
-              if (elem.value == null) {
+            } else if (this.finishnotlist[i].name_area == 'BLOW') {
+              if (this.finishnotlist[i].value == null) {
                 this.blownull += 1;
               } else {
-                this.blow += 1;
+                if (this.monthArray[i] == this.bulan && this.yearArray[i] == this.tahun) {
+                  this.blow += 1;
+                }
               }
-            } else if (elem.name_area == 'FILL') {
-              if (elem.value == null) {
+            } else if (this.finishnotlist[i].name_area == 'FILL') {
+              if (this.finishnotlist[i].value == null) {
                 this.fillnull += 1;
               } else {
-                this.fill += 1;
+                if (this.monthArray[i] == this.bulan && this.yearArray[i] == this.tahun) {
+                  this.fill += 1;
+                }
               }
-            } else if (elem.name_area == 'PACK') {
-              if (elem.value == null) {
+            } else if (this.finishnotlist[i].name_area == 'PACK') {
+              if (this.finishnotlist[i].value == null) {
                 this.packnull += 1;
               } else {
-                this.pack += 1;
+                if (this.monthArray[i] == this.bulan && this.yearArray[i] == this.tahun) {
+                  this.pack += 1;
+                }
               }
-            } else if (elem.name_area == 'PF Transfer/KANESHO') {
-              if (elem.value == null) {
+            } else if (this.finishnotlist[i].name_area == 'PF Transfer/KANESHO') {
+              if (this.finishnotlist[i].value == null) {
                 this.pfnull += 1;
               } else {
-                this.pf += 1;
+                if (this.monthArray[i] == this.bulan && this.yearArray[i] == this.tahun) {
+                  this.pf += 1;
+                }
               }
-            } else if (elem.name_area == 'STU1') {
-              if (elem.value == null) {
+            } else if (this.finishnotlist[i].name_area == 'STU1') {
+              if (this.finishnotlist[i].value == null) {
                 this.stunull += 1;
               } else {
-                this.stu += 1;
+                if (this.monthArray[i] == this.bulan && this.yearArray[i] == this.tahun) {
+                  this.stu += 1;
+                }
               }
             }
           }
-          new Chart("pdmchartfinishnot", {
-            type: "bar",
-            data: {
-              labels: ["PREPARATION", "INJECTION", "BLOW", "FILL", "PACK", "KANESHO", "STU1"],
-              datasets: [
-                {
-                  "label": "Done",
-                  "data": [this.preparation, this.injection, this.blow, this.fill, this.pack, this.pf, this.stu],
-                  "backgroundColor": "#34568B"
-                },
-                {
-                  "label": "Not Yet",
-                  "data": [this.preparationnull, this.injectionnnull, this.blownull, this.fillnull, this.packnull, this.pfnull, this.stunull],
-                  "backgroundColor": "#FF6F61"
-                },
-              ]
 
-            },
-            options: {
-              scales: {
-                yAxes: [
-                  {
-                    ticks: {
-                      beginAtZero: true
-                    }
-                  }
-                ]
+          this.chartOptions = {
+            series: [
+              {
+                name: "Done",
+                data: [this.preparation, this.injection, this.blow, this.fill, this.pack, this.pf, this.stu]
+              },
+              {
+                name: "Not Yet",
+                data: [this.preparationnull, this.injectionnnull, this.blownull, this.fillnull, this.packnull, this.pfnull, this.stunull]
               }
-            }
-          });
+            ],
+            chart: {
+              type: "bar",
+              height: 500,
+              events: {
+                click: (event: any, chartContext: any, config: any) => {
+                  console.log(config.dataPointIndex);
+
+                  if (config.dataPointIndex == '0') {
+                    this.changeprep();
+                  }
+                  if (config.dataPointIndex == '1') {
+                    this.changeinj();
+                  }
+                  if (config.dataPointIndex == '2') {
+                    this.changeblow();
+                  }
+                  if (config.dataPointIndex == '3') {
+                    this.changefill();
+                  }
+                  if (config.dataPointIndex == '4') {
+                    this.changepack();
+                  }
+                  if (config.dataPointIndex == '5') {
+                    this.changekanesho();
+                  }if (config.dataPointIndex == '6') {
+                    this.changestu();
+                  }
+                   if (config.dataPointIndex == '-1') {
+                    this.boolprep = this.boolinj = this.boolblow = this.boolfill = this.boolpack = this.boolkanesho = this.boolstu1 = false;
+                  }
+                },
+              },
+            },
+            plotOptions: {
+              bar: {
+                horizontal: false,
+                columnWidth: "60%",
+              }
+            },
+            dataLabels: {
+              enabled: false
+            },
+            xaxis: {
+              axixTicks: {
+                show: false,
+              },
+              crosshairs: {
+                show: false,
+              },
+              categories: [
+                "PREPARATION", "INJECTION", "BLOW", "FILL", "PACK", "KANESHO", "STU1"
+              ]
+            },
+            yaxis: {
+              axixTicks: {
+                show: false,
+              },
+              crosshairs: {
+                show: false,
+              },
+              title: {
+                text: ""
+              }
+            },
+            fill: {
+              opacity: 1,
+              colors: ['#34568B','#FF6F61']
+            },legend: {
+            },colors: ['#34568B','#FF6F61']
+          };
+
+
 
         }
         )

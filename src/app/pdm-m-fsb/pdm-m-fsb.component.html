@@ -551,12 +551,219 @@
             <div class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
               <div class="flex-auto p-6">
                 <!-- <p class="text-center" style="color: red;">Device Name : {{funloc}}</p> -->
-                <div class="flex flex-wrap -mx-1 lg:-mx-3">
-                  <canvas id="pdmchartfinishnot">{{ pdmchartfinishnot }}</canvas>
+                <div class="w-full">
+                  <!-- <canvas id="pdmchartfinishnot">{{ pdmchartfinishnot }}</canvas> -->
+                  <apx-chart
+                  [series]="chartOptions.series"
+                  [chart]="chartOptions.chart"
+                  [dataLabels]="chartOptions.dataLabels"
+                  [plotOptions]="chartOptions.plotOptions"
+                  [yaxis]="chartOptions.yaxis"
+                  [legend]="chartOptions.legend"
+                  [fill]="chartOptions.fill"
+                  [stroke]="chartOptions.stroke"
+                  [tooltip]="chartOptions.tooltip"
+                  [xaxis]="chartOptions.xaxis"
+                  [colors]="chartOptions.colors"
+                ></apx-chart>
                 </div>
               </div>
             </div>
           </div>
+
+          <div *ngIf="boolwtp" class="max-lg:grow p-2 w-full">
+            <div
+              class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl"
+            >
+              <h1 class="font-manrope font-[500] text-xl py-2">
+                FINDING CHECK AND NOT YET
+              </h1>
+              <div class="relative overflow-x-auto rounded-lg shadow-md">
+                <table
+                  class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium"
+                >
+                  <thead
+                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900"
+                  >
+                    <tr>
+                      <!-- <th scope="col" class="px-3 py-2 text-center">Area</th> -->
+                      <!-- <th scope="col" class="px-3 py-2 text-center">Done</th> -->
+                      <th scope="col" class="px-3 py-2 text-center">Device Name</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let finish of finishnotlist">
+                    <tr *ngIf="this.finish.value == null && this.finish.name_area == 'WTP2'"  class="bg-white dark:border-gray-700">
+                      <!-- <td  *ngIf="this.finish.value == null && this.finish.name_area == 'PREPARATION'" class="px-3 py-2 text-center">PREPARATION</td> -->
+                      <!-- <td class="px-3 py-2 text-center">{{ this.blow }}</td> -->
+                      <td class="px-3 py-2 text-center">{{ this.finish.device_name }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="boolbc" class="max-lg:grow p-2 w-full">
+            <div
+              class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl"
+            >
+              <h1 class="font-manrope font-[500] text-xl py-2">
+                FINDING CHECK AND NOT YET
+              </h1>
+              <div class="relative overflow-x-auto rounded-lg shadow-md">
+                <table
+                  class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium"
+                >
+                  <thead
+                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900"
+                  >
+                    <tr>
+                      <!-- <th scope="col" class="px-3 py-2 text-center">Area</th> -->
+                      <!-- <th scope="col" class="px-3 py-2 text-center">Done</th> -->
+                      <th scope="col" class="px-3 py-2 text-center">Device Name</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let finish of finishnotlist">
+                    <tr *ngIf="this.finish.value == null && this.finish.name_area == 'Baking Cooling'"  class="bg-white dark:border-gray-700">
+                      <!-- <td  *ngIf="this.finish.value == null && this.finish.name_area == 'PREPARATION'" class="px-3 py-2 text-center">PREPARATION</td> -->
+                      <!-- <td class="px-3 py-2 text-center">{{ this.blow }}</td> -->
+                      <td class="px-3 py-2 text-center">{{ this.finish.device_name }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="boolform" class="max-lg:grow p-2 w-full">
+            <div
+              class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl"
+            >
+              <h1 class="font-manrope font-[500] text-xl py-2">
+                FINDING CHECK AND NOT YET
+              </h1>
+              <div class="relative overflow-x-auto rounded-lg shadow-md">
+                <table
+                  class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium"
+                >
+                  <thead
+                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900"
+                  >
+                    <tr>
+                      <!-- <th scope="col" class="px-3 py-2 text-center">Area</th> -->
+                      <!-- <th scope="col" class="px-3 py-2 text-center">Done</th> -->
+                      <th scope="col" class="px-3 py-2 text-center">Device Name</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let finish of finishnotlist">
+                    <tr *ngIf="this.finish.value == null && this.finish.name_area == 'Forming'"  class="bg-white dark:border-gray-700">
+                      <!-- <td  *ngIf="this.finish.value == null && this.finish.name_area == 'PREPARATION'" class="px-3 py-2 text-center">PREPARATION</td> -->
+                      <!-- <td class="px-3 py-2 text-center">{{ this.blow }}</td> -->
+                      <td class="px-3 py-2 text-center">{{ this.finish.device_name }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="boolmix" class="max-lg:grow p-2 w-full">
+            <div
+              class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl"
+            >
+              <h1 class="font-manrope font-[500] text-xl py-2">
+                FINDING CHECK AND NOT YET
+              </h1>
+              <div class="relative overflow-x-auto rounded-lg shadow-md">
+                <table
+                  class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium"
+                >
+                  <thead
+                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900"
+                  >
+                    <tr>
+                      <!-- <th scope="col" class="px-3 py-2 text-center">Area</th> -->
+                      <!-- <th scope="col" class="px-3 py-2 text-center">Done</th> -->
+                      <th scope="col" class="px-3 py-2 text-center">Device Name</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let finish of finishnotlist">
+                    <tr *ngIf="this.finish.value == null && this.finish.name_area == 'Mixing'"  class="bg-white dark:border-gray-700">
+                      <!-- <td  *ngIf="this.finish.value == null && this.finish.name_area == 'PREPARATION'" class="px-3 py-2 text-center">PREPARATION</td> -->
+                      <!-- <td class="px-3 py-2 text-center">{{ this.blow }}</td> -->
+                      <td class="px-3 py-2 text-center">{{ this.finish.device_name }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="boolpack" class="max-lg:grow p-2 w-full">
+            <div
+              class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl"
+            >
+              <h1 class="font-manrope font-[500] text-xl py-2">
+                FINDING CHECK AND NOT YET
+              </h1>
+              <div class="relative overflow-x-auto rounded-lg shadow-md">
+                <table
+                  class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium"
+                >
+                  <thead
+                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900"
+                  >
+                    <tr>
+                      <!-- <th scope="col" class="px-3 py-2 text-center">Area</th> -->
+                      <!-- <th scope="col" class="px-3 py-2 text-center">Done</th> -->
+                      <th scope="col" class="px-3 py-2 text-center">Device Name</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let finish of finishnotlist">
+                    <tr *ngIf="this.finish.value == null && this.finish.name_area == 'Packing'"  class="bg-white dark:border-gray-700">
+                      <!-- <td  *ngIf="this.finish.value == null && this.finish.name_area == 'PREPARATION'" class="px-3 py-2 text-center">PREPARATION</td> -->
+                      <!-- <td class="px-3 py-2 text-center">{{ this.blow }}</td> -->
+                      <td class="px-3 py-2 text-center">{{ this.finish.device_name }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="boolweight" class="max-lg:grow p-2 w-full">
+            <div
+              class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl"
+            >
+              <h1 class="font-manrope font-[500] text-xl py-2">
+                FINDING CHECK AND NOT YET
+              </h1>
+              <div class="relative overflow-x-auto rounded-lg shadow-md">
+                <table
+                  class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium"
+                >
+                  <thead
+                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900"
+                  >
+                    <tr>
+                      <!-- <th scope="col" class="px-3 py-2 text-center">Area</th> -->
+                      <!-- <th scope="col" class="px-3 py-2 text-center">Done</th> -->
+                      <th scope="col" class="px-3 py-2 text-center">Device Name</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let finish of finishnotlist">
+                    <tr *ngIf="this.finish.value == null && this.finish.name_area == 'Weighing'"  class="bg-white dark:border-gray-700">
+                      <!-- <td  *ngIf="this.finish.value == null && this.finish.name_area == 'PREPARATION'" class="px-3 py-2 text-center">PREPARATION</td> -->
+                      <!-- <td class="px-3 py-2 text-center">{{ this.blow }}</td> -->
+                      <td class="px-3 py-2 text-center">{{ this.finish.device_name }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+
           <div class="w-full px-1 py-1 mx-auto">
             <div
               class="relative flex flex-col min-w-0 break-words bg-white mb-1 shadow-soft-lg rounded-2xl bg-clip-border">

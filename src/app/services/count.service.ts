@@ -452,6 +452,9 @@ export class CountService {
   getOci2fNotFinish(){
     return this.httpClient.get(api + "oci2fnotfinish");
   }
+  getFsbfFinish(){
+    return this.httpClient.get(api + "fsbfnotfinish");
+  }
   getFsbfNotFinish(){
     return this.httpClient.get(api + "fsbfnotfinish");
   }

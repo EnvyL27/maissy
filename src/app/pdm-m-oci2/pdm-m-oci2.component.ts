@@ -5,6 +5,7 @@ import { NgxCaptureService } from 'ngx-capture';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CountService } from '../services/count.service';
 import { TableUtil } from "../services/tabelUtil";
+import { ChartOptions } from './chart';
 
 @Component({
   selector: 'app-pdm-m-oci2',
@@ -639,10 +640,10 @@ export class PdmMOci2Component implements OnInit {
 
         }
         )
-        //console.log(this.finishnotlist);
 
       }
       );
+      
       this.service.getNotePdm().subscribe(data => {
         this.notepdm = data;
         Object.values(this.notepdm).forEach(data => {

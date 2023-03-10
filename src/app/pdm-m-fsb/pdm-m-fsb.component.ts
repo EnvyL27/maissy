@@ -1,18 +1,66 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
 import * as moment from 'moment';
 import { NgxCaptureService } from 'ngx-capture';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { forkJoin } from 'rxjs';
 import { CountService } from '../services/count.service';
 import { TableUtil } from "../services/tabelUtil";
+import { ChartOptions } from './chart';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-pdm-m-fsb',
   templateUrl: './pdm-m-fsb.component.html',
-  styleUrls: ['./pdm-m-fsb.component.css']
+  styleUrls: ['./pdm-m-fsb.component.css'],
+  providers: [
+    DatePipe,
+  ]
 })
 export class PdmMFsbComponent implements OnInit {
-  constructor(private service: CountService, private spinner: NgxSpinnerService,private captureService: NgxCaptureService) { }
+  public chartOptions!: Partial<ChartOptions> | any;
+  newTanggal: any = new Date();
+  bulan: any;
+  tahun: any;
+  constructor(private service: CountService, private spinner: NgxSpinnerService, private captureService: NgxCaptureService, private cdr: ChangeDetectorRef, private datePipe: DatePipe) { this.newTanggal = this.datePipe.transform(this.newTanggal, 'yyyy-MM-dd'); }
+  boolwtp: Boolean = false;
+  boolbc: Boolean = false;
+  boolform: Boolean = false;
+  boolmix: Boolean = false;
+  boolpack: Boolean = false;
+  boolweight: Boolean = false;
+
+  changewtp() {
+    this.boolbc = this.boolform = this.boolmix = this.boolpack = this.boolweight = false;
+    this.boolwtp = !this.boolwtp;
+    this.cdr.detectChanges();
+  }
+  changebc() {
+    this.boolwtp = this.boolform = this.boolmix = this.boolpack = this.boolweight = false;
+    this.boolbc = !this.boolbc;
+    this.cdr.detectChanges();
+  }
+  changeform() {
+    this.boolwtp = this.boolbc = this.boolmix = this.boolpack = this.boolweight = false;
+    this.boolform = !this.boolform;
+    this.cdr.detectChanges();
+  }
+  changemix() {
+    this.boolwtp = this.boolbc = this.boolform = this.boolpack = this.boolweight = false;
+    this.boolmix = !this.boolmix;
+    this.cdr.detectChanges();
+  }
+  changepack() {
+    this.boolwtp = this.boolbc = this.boolform = this.boolmix = this.boolweight = false;
+    this.boolpack = !this.boolpack;
+    this.cdr.detectChanges();
+  }
+  changeweight() {
+    this.boolwtp = this.boolbc = this.boolform = this.boolmix = this.boolpack = false;
+    this.boolweight = !this.boolweight;
+    this.cdr.detectChanges();
+  }
+
   public resolved: boolean = false;
   public exportdata: boolean = false;
   public paginatereset: boolean = false;
@@ -41,7 +89,7 @@ export class PdmMFsbComponent implements OnInit {
   capture() {
     this.captureService
       .getImage(this.taptap.nativeElement, true)
-      .subscribe((img:any) => {
+      .subscribe((img: any) => {
         this.imgBase64 = img;
         this.downloadJson();
       });
@@ -157,6 +205,10 @@ export class PdmMFsbComponent implements OnInit {
   picture: any;
   note: any;
   finishnot: object = {};
+  finishyes: object = {};
+  monthArray: any = [];
+  yearArray: any = [];
+  finishmonth: any = [];
   finishnotlist: any = [];
   private finishnotfinish: any;
   pdmchartfinishnot: any;
@@ -168,7 +220,7 @@ export class PdmMFsbComponent implements OnInit {
   formingnull: number = 0;
   mixing: number = 0;
   mixingnull: number = 0;
-  pack:number = 0;
+  pack: number = 0;
   packnull: number = 0;
   weig: number = 0;
   weignull: number = 0;
@@ -186,7 +238,7 @@ export class PdmMFsbComponent implements OnInit {
   oktober: number = 0;
   november: number = 0;
   desember: number = 0;
-  selectorarrabnormal:any = [];
+  selectorarrabnormal: any = [];
   filterMetadata = { count: 0 };
   filtre: any;
   subbar: any;
@@ -195,11 +247,11 @@ export class PdmMFsbComponent implements OnInit {
   }
   public toFloat(value: string): number {
     return parseFloat(value);
- }
+  }
   trackElement(index: number, element: any) {
     return element ? element.id : null;
   }
-  date(masukandate: HTMLInputElement){
+  date(masukandate: HTMLInputElement) {
     //console.log(moment(masukandate.value).format("DD-MM-YYYY"));
     this.currentPage = 1;
     this.searchDate = masukandate.value;
@@ -258,12 +310,12 @@ export class PdmMFsbComponent implements OnInit {
     popupWin.document.close();
   }
   showallPaginate() {
-    this.currentPage3  = 1;
+    this.currentPage3 = 1;
     this.paginatereset = !this.paginatereset;
     this.showPaginate3 = this.totalfinishtoday2down.length;
   }
   resetPaginate() {
-    this.currentPage3  = 1;
+    this.currentPage3 = 1;
     this.showPaginate3 = 5;
     this.paginatereset = !this.paginatereset;
   }
@@ -278,15 +330,15 @@ export class PdmMFsbComponent implements OnInit {
     });
 
   }
-  exportTableExcel(){
+  exportTableExcel() {
     TableUtil.exportTableToExcel("printexcel");
-    this.currentPage3  = 1;
+    this.currentPage3 = 1;
     this.showPaginate3 = 5;
     this.paginatereset = !this.paginatereset;
   }
-  data($event: any,$event2 : any) {
+  data($event: any, $event2: any) {
     this.target.nativeElement.scrollIntoView();
-    if(this.coba != null && this.coba2 != null && this.coba3 != null){
+    if (this.coba != null && this.coba2 != null && this.coba3 != null) {
       this.coba.destroy();
       this.coba2.destroy();
       this.coba3.destroy();
@@ -445,19 +497,19 @@ export class PdmMFsbComponent implements OnInit {
         },
       ],
     };
-      this.coba = new Chart('dum', {
-        type: 'line',
-        data: dataVibration,
-      }
-      );
-      this.coba2 = new Chart('dumdum', {
-        type: 'line',
-        data: dataAmpere,
-      });
-      this.coba3 = new Chart('dumdumdum', {
-        type: 'line',
-        data: dataTemperature,
-      });
+    this.coba = new Chart('dum', {
+      type: 'line',
+      data: dataVibration,
+    }
+    );
+    this.coba2 = new Chart('dumdum', {
+      type: 'line',
+      data: dataAmpere,
+    });
+    this.coba3 = new Chart('dumdumdum', {
+      type: 'line',
+      data: dataTemperature,
+    });
   }
   async ngOnInit(): Promise<void> {
     window.scrollTo(0, 0);
@@ -485,12 +537,12 @@ export class PdmMFsbComponent implements OnInit {
                 this.valuemonthlist.splice(this.valuemonthlist.lenght, 0, array[i]);
               }
               for (let elem of this.valuemonthlist) {
-                if(elem.bulan == 'January'){
+                if (elem.bulan == 'January') {
                   this.januari += 1;
                 } else if (elem.bulan == 'February') {
                   this.febuari += 1;
                 } else if (elem.bulan == 'March') {
-                  this.maret +=1;
+                  this.maret += 1;
                 } else if (elem.bulan == 'April') {
                   this.april += 1;
                 } else if (elem.bulan == 'May') {
@@ -499,7 +551,7 @@ export class PdmMFsbComponent implements OnInit {
                   this.juni += 1;
                 } else if (elem.bulan == 'July') {
                   this.juli += 1;
-                }else if (elem.bulan == 'August') {
+                } else if (elem.bulan == 'August') {
                   this.agustus += 1;
                 } else if (elem.bulan == 'September') {
                   this.september += 1;
@@ -514,11 +566,11 @@ export class PdmMFsbComponent implements OnInit {
               this.valuepermonthchart = new Chart("valuepermonthchart", {
                 type: "bar",
                 data: {
-                  labels: ["January", "February", "Maret","April","May","June","July","August","September","October", "November", "December"],
+                  labels: ["January", "February", "Maret", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
                   datasets: [
                     {
                       "label": "Total Data FSB Data %",
-                      "data": [Math.round(this.januari * 100 / this.totalasset), Math.round(this.febuari * 100 / this.totalasset), Math.round(this.maret * 100 / this.totalasset),Math.round(this.april * 100 / this.totalasset),Math.round(this.mei * 100 / this.totalasset),Math.round(this.juni * 100 / this.totalasset),Math.round(this.juli * 100 / this.totalasset),Math.round(this.agustus * 100 / this.totalasset),Math.round(this.september * 100 / this.totalasset),Math.round(this.oktober * 100 / this.totalasset),Math.round(this.november * 100 / this.totalasset),Math.round(this.desember * 100 / this.totalasset)],
+                      "data": [Math.round(this.januari * 100 / this.totalasset), Math.round(this.febuari * 100 / this.totalasset), Math.round(this.maret * 100 / this.totalasset), Math.round(this.april * 100 / this.totalasset), Math.round(this.mei * 100 / this.totalasset), Math.round(this.juni * 100 / this.totalasset), Math.round(this.juli * 100 / this.totalasset), Math.round(this.agustus * 100 / this.totalasset), Math.round(this.september * 100 / this.totalasset), Math.round(this.oktober * 100 / this.totalasset), Math.round(this.november * 100 / this.totalasset), Math.round(this.desember * 100 / this.totalasset)],
                       "backgroundColor": "#34568B"
                     },
                   ]
@@ -547,94 +599,183 @@ export class PdmMFsbComponent implements OnInit {
         })
       }
       );
-      this.service.getFsbfNotFinish().subscribe(data => {
+
+      this.service.getFsbfFinish().subscribe(data => {
         this.finishnot = data;
         Object.values(this.finishnot).forEach(data => {
-          // // console.log(data);
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
 
-          // // console.log(array);
           for (let i = 0; i < array.length; i++) {
-            this.finishnotlist.splice(this.finishnotlist.lenght, 0, array[i]);
+
+            this.finishnotlist.splice(this.finishnotlist.get, 0, array[i]);
+
           }
-          for (let elem of this.finishnotlist) {
-            if(elem.name_area == 'WTP2'){
-              if(elem.value == null){
+
+          for (let i = 0; i < array.length; i++) {
+            this.finishmonth = this.finishnotlist[i].plan_date;
+            const myArray = this.finishmonth.split("-");
+            this.finishmonth = myArray[1];
+            this.monthArray.push(this.finishmonth);
+          }
+
+          for (let i = 0; i < array.length; i++) {
+            this.finishmonth = this.finishnotlist[i].plan_date;
+            const myArray = this.finishmonth.split("-");
+            this.finishmonth = myArray[0];
+            this.yearArray.push(this.finishmonth);
+          }
+
+          this.bulan = this.newTanggal.split("-");
+          this.bulan = this.bulan[1];
+
+          this.tahun = this.newTanggal.split("-");
+          this.tahun = this.tahun[0];
+
+          for (let i = 0; i < this.finishnotlist.length; i++) {
+
+            if (this.finishnotlist[i].name_area == 'WTP2') {
+              if (this.finishnotlist[i].value == null) {
                 this.wtp2null += 1;
               } else {
-                this.wtp2 += 1;
+                if (this.monthArray[i] == this.bulan && this.yearArray[i] == this.tahun) {
+                  this.wtp2 += 1;
+                }
               }
-            } else if (elem.name_area == 'Baking Cooling'){
-              if(elem.value == null){
+            } else if (this.finishnotlist[i].name_area == 'Baking Cooling') {
+              if (this.finishnotlist[i].value == null) {
                 this.bakingnull += 1;
               } else {
-                this.baking += 1;
+                if (this.monthArray[i] == this.bulan && this.yearArray[i] == this.tahun) {
+                  this.baking += 1;
+                }
               }
-            } else if (elem.name_area == 'Forming'){
-              if(elem.value == null){
+            } else if (this.finishnotlist[i].name_area == 'Forming') {
+              if (this.finishnotlist[i].value == null) {
                 this.formingnull += 1;
               } else {
-                this.forming += 1;
+                if (this.monthArray[i] == this.bulan && this.yearArray[i] == this.tahun) {
+                  this.forming += 1;
+                }
               }
-            }else if (elem.name_area == 'Mixing'){
-              if(elem.value == null){
+            } else if (this.finishnotlist[i].name_area == 'Mixing') {
+              if (this.finishnotlist[i].value == null) {
                 this.mixingnull += 1;
               } else {
-                this.mixing += 1;
+                if (this.monthArray[i] == this.bulan && this.yearArray[i] == this.tahun) {
+                  this.mixing += 1;
+
+                }
               }
-            }else if (elem.name_area == 'Packing'){
-              if(elem.value == null){
+            } else if (this.finishnotlist[i].name_area == 'Packing') {
+              if (this.finishnotlist[i].value == null) {
                 this.packnull += 1;
               } else {
-                this.packnull += 1;
+                if (this.monthArray[i] == this.bulan && this.yearArray[i] == this.tahun) {
+                  this.pack += 1;
+
+                }
               }
-            }else if (elem.name_area == 'Weighing'){
-              if(elem.value == null){
+            } else if (this.finishnotlist[i].name_area == 'Weighing') {
+              if (this.finishnotlist[i].value == null) {
                 this.weignull += 1;
               } else {
-                this.weig += 1;
+                if (this.monthArray[i] == this.bulan && this.yearArray[i] == this.tahun) {
+                  this.weig += 1;
+
+                }
               }
             }
           }
-          this.pdmchartfinishnot = new Chart("pdmchartfinishnot", {
-            type: "bar",
-            data: {
-              labels: ["WTP2", "Baking Cooling", "Forming","Mixing","Packing","Weighing"],
-              datasets: [
-                {
-                  "label": "Done",
-                  "data": [this.wtp2, this.baking, this.forming,this.mixing,this.pack,this.weig],
-                  "backgroundColor": "#34568B"
-                },
-                {
-                  "label": "Not Yet",
-                  "data": [this.wtp2null, this.bakingnull, this.formingnull,this.mixingnull,this.weignull,this.packnull],
-                  "backgroundColor": "#FF6F61"
-                },
-              ]
 
-            },
-            options: {
-              scales: {
-                yAxes: [
-                  {
-                    ticks: {
-                      beginAtZero: true
-                    }
-                  }
-                ]
+          this.chartOptions = {
+            series: [
+              {
+                name: "Done",
+                data: [this.wtp2, this.baking, this.forming, this.mixing, this.pack, this.weig]
+              },
+              {
+                name: "Not Yet",
+                data: [this.wtp2null, this.bakingnull, this.formingnull, this.mixingnull, this.packnull, this.weignull]
               }
-            }
-          });
+            ],
+            chart: {
+              type: "bar",
+              height: 500,
+              events: {
+                click: (event: any, chartContext: any, config: any) => {
+                  console.log(config.dataPointIndex);
+
+                  if (config.dataPointIndex == '0') {
+                    this.changewtp();
+                  }
+                  if (config.dataPointIndex == '1') {
+                    this.changebc();
+                  }
+                  if (config.dataPointIndex == '2') {
+                    this.changeform();
+                  }
+                  if (config.dataPointIndex == '3') {
+                    this.changemix();
+                  }
+                  if (config.dataPointIndex == '4') {
+                    this.changepack();
+                  }
+                  if (config.dataPointIndex == '5') {
+                    this.changeweight();
+                  } if (config.dataPointIndex == '-1') {
+                    this.boolwtp = this.boolbc = this.boolform = this.boolmix = this.boolpack = this.boolweight = false;
+                  }
+                },
+              },
+            },
+            plotOptions: {
+              bar: {
+                horizontal: false,
+                columnWidth: "60%",
+              }
+            },
+            dataLabels: {
+              enabled: false
+            },
+            xaxis: {
+              axixTicks: {
+                show: false,
+              },
+              crosshairs: {
+                show: false,
+              },
+              categories: [
+                "WTP2", "Baking Cooling", "Forming", "Mixing", "Packing", "Weighing"
+              ]
+            },
+            yaxis: {
+              axixTicks: {
+                show: false,
+              },
+              crosshairs: {
+                show: false,
+              },
+              title: {
+                text: ""
+              }
+            },
+            fill: {
+              opacity: 1,
+              colors: ['#34568B','#FF6F61']
+            },legend: {
+            },colors: ['#34568B','#FF6F61']
+          };
+
+
 
         }
         )
-        //console.log(this.finishnotlist);
 
       }
       );
+
       this.service.getNotePdm().subscribe(data => {
         this.notepdm = data;
         Object.values(this.notepdm).forEach(data => {
@@ -715,8 +856,8 @@ export class PdmMFsbComponent implements OnInit {
           // this.abnormalassetlist = this.abnormalassetlist.filter((el: any, i: any, a: any) => i === a.indexOf(el))
           // console.log(this.abnormalassetlist);
           for (let i = 0; i < this.abnormalassetlist.length; i++) {
-            if(this.abnormalassetlist[i].Stat == 'Unsatisfactory' || this.abnormalassetlist[i].Stat == 'Unacceptable'){
-              this.selectorarrabnormal.splice(this.selectorarrabnormal,0,this.abnormalassetlist[i]);
+            if (this.abnormalassetlist[i].Stat == 'Unsatisfactory' || this.abnormalassetlist[i].Stat == 'Unacceptable') {
+              this.selectorarrabnormal.splice(this.selectorarrabnormal, 0, this.abnormalassetlist[i]);
             }
           }
         })
