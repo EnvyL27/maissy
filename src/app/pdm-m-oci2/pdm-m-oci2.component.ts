@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
 import * as moment from 'moment';
 import { NgxCaptureService } from 'ngx-capture';
@@ -7,13 +7,63 @@ import { CountService } from '../services/count.service';
 import { TableUtil } from "../services/tabelUtil";
 import { ChartOptions } from './chart';
 
+
 @Component({
   selector: 'app-pdm-m-oci2',
   templateUrl: './pdm-m-oci2.component.html',
   styleUrls: ['./pdm-m-oci2.component.css']
 })
+
+
+
 export class PdmMOci2Component implements OnInit {
-  constructor(private service: CountService, private spinner: NgxSpinnerService,private captureService: NgxCaptureService) { }
+  public chartOptions!: Partial<ChartOptions> | any;
+  constructor(private service: CountService, private spinner: NgxSpinnerService, private cdr: ChangeDetectorRef,private captureService: NgxCaptureService) { }
+
+  boolprep: Boolean = false;
+  boolinj: Boolean = false;
+  boolblow: Boolean = false;
+  boolfill: Boolean = false;
+  boolpack: Boolean = false;
+  boolpf: Boolean = false;
+  boolstu1: Boolean = false;
+
+  changeprep() {
+    this.boolinj = this.boolblow = this.boolfill = this.boolpack = this.boolpf = this.boolstu1 = false;
+    this.boolprep = !this.boolprep;
+    this.cdr.detectChanges();
+  }
+  changeinj() {
+    this.boolprep = this.boolblow = this.boolfill = this.boolpack = this.boolpf = this.boolstu1 = false;
+    this.boolinj = !this.boolinj;
+    this.cdr.detectChanges();
+  }
+  changeblow() {
+    this.boolprep = this.boolinj = this.boolfill = this.boolpack = this.boolpf = this.boolstu1 = false;
+    this.boolblow = !this.boolblow;
+    this.cdr.detectChanges();
+  }
+  changefill() {
+    this.boolprep = this.boolinj = this.boolblow = this.boolpack = this.boolpf = this.boolstu1 = false;
+    this.boolfill = !this.boolfill;
+    this.cdr.detectChanges();
+  }
+  changepack() {
+    this.boolprep = this.boolinj = this.boolblow = this.boolfill = this.boolpf = this.boolstu1 = false;
+    this.boolpack = !this.boolpack;
+    this.cdr.detectChanges();
+  }
+  changepf() {
+    this.boolprep = this.boolinj = this.boolblow = this.boolfill = this.boolpack = this.boolstu1 = false;
+    this.boolpf = !this.boolpf;
+    this.cdr.detectChanges();
+  }
+  changestu() {
+    this.boolprep = this.boolinj = this.boolblow = this.boolfill = this.boolpack = this.boolpf = false;
+    this.boolstu1 = !this.boolstu1;
+    this.cdr.detectChanges();
+  }
+
   public resolved: boolean = false;
   public exportdata: boolean = false;
   public paginatereset: boolean = false;
@@ -461,7 +511,94 @@ export class PdmMOci2Component implements OnInit {
         data: dataTemperature,
       });
   }
+
+  chartFunction(){
+    this.chartOptions = {
+      series: [
+        {
+          name: "Done",
+          data: [this.prep, this.pf, this.inject,this.blow,this.fill,this.pack,this.stu]
+        },
+        {
+          name: "Not Yet",
+          data: [this.prepnull, this.pfnull, this.injectnull,this.blownull,this.fillnull,this.packnull,this.stunull]
+        }
+      ],
+      chart: {
+        type: "bar",
+        height: 500,
+        events: {
+          click: (event: any, chartContext: any, config: any) => {
+            console.log(config.dataPointIndex);
+
+            if (config.dataPointIndex == '0') {
+              this.changeprep();
+            }
+            if (config.dataPointIndex == '1') {
+              this.changepf();
+            }
+            if (config.dataPointIndex == '2') {
+              this.changeinj();
+            }
+            if (config.dataPointIndex == '3') {
+              this.changeblow();
+            }
+            if (config.dataPointIndex == '4') {
+              this.changefill();
+            }
+            if (config.dataPointIndex == '5') {
+              this.changepack();
+            }
+            if (config.dataPointIndex == '6') {
+              this.changestu();
+            }
+             if (config.dataPointIndex == '-1') {
+              this.boolprep = this.boolpf = this.boolinj = this.boolblow = this.boolfill = this.boolpack = this.boolstu1 = false;
+            }
+          },
+        },
+      },
+      plotOptions: {
+        bar: {
+          horizontal: false,
+          columnWidth: "60%",
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      xaxis: {
+        axixTicks: {
+          show: false,
+        },
+        crosshairs: {
+          show: false,
+        },
+        categories: [
+          "PREPARATION", "PF TRANSFER", "INJECTION", "BLOW", "FILL", "PACK", "STU1"
+        ]
+      },
+      yaxis: {
+        axixTicks: {
+          show: false,
+        },
+        crosshairs: {
+          show: false,
+        },
+        title: {
+          text: ""
+        }
+      },
+      fill: {
+        opacity: 1,
+        colors: ['#34568B','#FF6F61']
+      },legend: {
+      },colors: ['#34568B','#FF6F61']
+    };
+
+  }
   async ngOnInit(): Promise<void> {
+    this.chartFunction();
     window.scrollTo(0, 0);
     this.loaddata = new Promise(resolve => {
       this.service.getReadTotalPdmAssetoci2().subscribe(data => {
@@ -607,43 +744,44 @@ export class PdmMOci2Component implements OnInit {
             }
           }
 
-          new Chart("pdmchartfinishnot", {
-            type: "bar",
-            data: {
-              labels: ["PREPARATION","PF TRANSFER" ,"INJECTION", "BLOW","FILL","PACK","STU1"],
-              datasets: [
-                {
-                  "label": "Done",
-                  "data": [this.prep, this.pf, this.inject,this.blow,this.fill,this.pack,this.stu],
-                  "backgroundColor": "#34568B"
-                },
-                {
-                  "label": "Not Yet",
-                  "data": [this.prepnull, this.pfnull, this.injectnull,this.blownull,this.fillnull,this.packnull,this.stunull],
-                  "backgroundColor": "#FF6F61"
-                },
-              ]
+          // new Chart("pdmchartfinishnot", {
+          //   type: "bar",
+          //   data: {
+          //     labels: ["PREPARATION","PF TRANSFER" ,"INJECTION", "BLOW","FILL","PACK","STU1"],
+          //     datasets: [
+          //       {
+          //         "label": "Done",
+          //         "data": [this.prep, this.pf, this.inject,this.blow,this.fill,this.pack,this.stu],
+          //         "backgroundColor": "#34568B"
+          //       },
+          //       {
+          //         "label": "Not Yet",
+          //         "data": [this.prepnull, this.pfnull, this.injectnull,this.blownull,this.fillnull,this.packnull,this.stunull],
+          //         "backgroundColor": "#FF6F61"
+          //       },
+          //     ]
 
-            },
-            options: {
-              scales: {
-                yAxes: [
-                  {
-                    ticks: {
-                      beginAtZero: true
-                    }
-                  }
-                ]
-              }
-            }
-          });
+          //   },
+          //   options: {
+          //     scales: {
+          //       yAxes: [
+          //         {
+          //           ticks: {
+          //             beginAtZero: true
+          //           }
+          //         }
+          //       ]
+          //     }
+          //   }
+          // });
+
+          this.chartFunction();
 
         }
         )
 
       }
       );
-      
       this.service.getNotePdm().subscribe(data => {
         this.notepdm = data;
         Object.values(this.notepdm).forEach(data => {

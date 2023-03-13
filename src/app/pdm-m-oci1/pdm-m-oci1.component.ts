@@ -524,9 +524,94 @@ export class PdmMOci1Component implements OnInit {
       data: dataTemperature,
     });
   }
-  async ngOnInit(): Promise<void> {
-    window.scrollTo(0, 0);
 
+  chartFunction(){
+    this.chartOptions = {
+      series: [
+        {
+          name: "Done",
+          data: [this.preparation, this.injection, this.blow, this.fill, this.pack, this.pf, this.stu]
+        },
+        {
+          name: "Not Yet",
+          data: [this.preparationnull, this.injectionnnull, this.blownull, this.fillnull, this.packnull, this.pfnull, this.stunull]
+        }
+      ],
+      chart: {
+        type: "bar",
+        height: 500,
+        events: {
+          click: (event: any, chartContext: any, config: any) => {
+            console.log(config.dataPointIndex);
+
+            if (config.dataPointIndex == '0') {
+              this.changeprep();
+            }
+            if (config.dataPointIndex == '1') {
+              this.changeinj();
+            }
+            if (config.dataPointIndex == '2') {
+              this.changeblow();
+            }
+            if (config.dataPointIndex == '3') {
+              this.changefill();
+            }
+            if (config.dataPointIndex == '4') {
+              this.changepack();
+            }
+            if (config.dataPointIndex == '5') {
+              this.changekanesho();
+            }if (config.dataPointIndex == '6') {
+              this.changestu();
+            }
+             if (config.dataPointIndex == '-1') {
+              this.boolprep = this.boolinj = this.boolblow = this.boolfill = this.boolpack = this.boolkanesho = this.boolstu1 = false;
+            }
+          },
+        },
+      },
+      plotOptions: {
+        bar: {
+          horizontal: false,
+          columnWidth: "60%",
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      xaxis: {
+        axixTicks: {
+          show: false,
+        },
+        crosshairs: {
+          show: false,
+        },
+        categories: [
+          "PREPARATION", "INJECTION", "BLOW", "FILL", "PACK", "KANESHO", "STU1"
+        ]
+      },
+      yaxis: {
+        axixTicks: {
+          show: false,
+        },
+        crosshairs: {
+          show: false,
+        },
+        title: {
+          text: ""
+        }
+      },
+      fill: {
+        opacity: 1,
+        colors: ['#34568B','#FF6F61']
+      },legend: {
+      },colors: ['#34568B','#FF6F61']
+    };
+  }
+
+  async ngOnInit(): Promise<void> {
+    this.chartFunction();
+    window.scrollTo(0, 0);
     this.loaddata = new Promise(resolve => {
       this.service.getReadTotalPdmAssetoci1().subscribe(data => {
         this.asset = data;
@@ -657,142 +742,48 @@ export class PdmMOci1Component implements OnInit {
               if (this.finishnotlist[i].value == null) {
                 this.preparationnull += 1;
               } else {
-                if (this.monthArray[i] == this.bulan && this.yearArray[i] == this.tahun) {
                   this.preparation += 1;
-                }
               }
             } else if (this.finishnotlist[i].name_area == 'INJECTION') {
               if (this.finishnotlist[i].value == null) {
                 this.injectionnnull += 1;
               } else {
-                if (this.monthArray[i] == this.bulan && this.yearArray[i] == this.tahun) {
                   this.injection += 1;
-                }
               }
             } else if (this.finishnotlist[i].name_area == 'BLOW') {
               if (this.finishnotlist[i].value == null) {
                 this.blownull += 1;
               } else {
-                if (this.monthArray[i] == this.bulan && this.yearArray[i] == this.tahun) {
                   this.blow += 1;
-                }
               }
             } else if (this.finishnotlist[i].name_area == 'FILL') {
               if (this.finishnotlist[i].value == null) {
                 this.fillnull += 1;
               } else {
-                if (this.monthArray[i] == this.bulan && this.yearArray[i] == this.tahun) {
                   this.fill += 1;
-                }
               }
             } else if (this.finishnotlist[i].name_area == 'PACK') {
               if (this.finishnotlist[i].value == null) {
                 this.packnull += 1;
               } else {
-                if (this.monthArray[i] == this.bulan && this.yearArray[i] == this.tahun) {
                   this.pack += 1;
-                }
               }
             } else if (this.finishnotlist[i].name_area == 'PF Transfer/KANESHO') {
               if (this.finishnotlist[i].value == null) {
                 this.pfnull += 1;
               } else {
-                if (this.monthArray[i] == this.bulan && this.yearArray[i] == this.tahun) {
                   this.pf += 1;
-                }
               }
             } else if (this.finishnotlist[i].name_area == 'STU1') {
               if (this.finishnotlist[i].value == null) {
                 this.stunull += 1;
               } else {
-                if (this.monthArray[i] == this.bulan && this.yearArray[i] == this.tahun) {
                   this.stu += 1;
-                }
               }
             }
           }
 
-          this.chartOptions = {
-            series: [
-              {
-                name: "Done",
-                data: [this.preparation, this.injection, this.blow, this.fill, this.pack, this.pf, this.stu]
-              },
-              {
-                name: "Not Yet",
-                data: [this.preparationnull, this.injectionnnull, this.blownull, this.fillnull, this.packnull, this.pfnull, this.stunull]
-              }
-            ],
-            chart: {
-              type: "bar",
-              height: 500,
-              events: {
-                click: (event: any, chartContext: any, config: any) => {
-                  console.log(config.dataPointIndex);
-
-                  if (config.dataPointIndex == '0') {
-                    this.changeprep();
-                  }
-                  if (config.dataPointIndex == '1') {
-                    this.changeinj();
-                  }
-                  if (config.dataPointIndex == '2') {
-                    this.changeblow();
-                  }
-                  if (config.dataPointIndex == '3') {
-                    this.changefill();
-                  }
-                  if (config.dataPointIndex == '4') {
-                    this.changepack();
-                  }
-                  if (config.dataPointIndex == '5') {
-                    this.changekanesho();
-                  }if (config.dataPointIndex == '6') {
-                    this.changestu();
-                  }
-                   if (config.dataPointIndex == '-1') {
-                    this.boolprep = this.boolinj = this.boolblow = this.boolfill = this.boolpack = this.boolkanesho = this.boolstu1 = false;
-                  }
-                },
-              },
-            },
-            plotOptions: {
-              bar: {
-                horizontal: false,
-                columnWidth: "60%",
-              }
-            },
-            dataLabels: {
-              enabled: false
-            },
-            xaxis: {
-              axixTicks: {
-                show: false,
-              },
-              crosshairs: {
-                show: false,
-              },
-              categories: [
-                "PREPARATION", "INJECTION", "BLOW", "FILL", "PACK", "KANESHO", "STU1"
-              ]
-            },
-            yaxis: {
-              axixTicks: {
-                show: false,
-              },
-              crosshairs: {
-                show: false,
-              },
-              title: {
-                text: ""
-              }
-            },
-            fill: {
-              opacity: 1,
-              colors: ['#34568B','#FF6F61']
-            },legend: {
-            },colors: ['#34568B','#FF6F61']
-          };
+          this.chartFunction();
 
 
 

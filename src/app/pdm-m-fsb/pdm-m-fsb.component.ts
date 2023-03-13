@@ -17,6 +17,7 @@ import { DatePipe } from '@angular/common';
     DatePipe,
   ]
 })
+
 export class PdmMFsbComponent implements OnInit {
   public chartOptions!: Partial<ChartOptions> | any;
   newTanggal: any = new Date();
@@ -511,7 +512,90 @@ export class PdmMFsbComponent implements OnInit {
       data: dataTemperature,
     });
   }
+
+  chartFunction(){
+    this.chartOptions = {
+      series: [
+        {
+          name: "Done",
+          data: [this.wtp2, this.baking, this.forming, this.mixing, this.pack, this.weig]
+        },
+        {
+          name: "Not Yet",
+          data: [this.wtp2null, this.bakingnull, this.formingnull, this.mixingnull, this.packnull, this.weignull]
+        }
+      ],
+      chart: {
+        type: "bar",
+        height: 500,
+        events: {
+          click: (event: any, chartContext: any, config: any) => {
+            console.log(config.dataPointIndex);
+
+            if (config.dataPointIndex == '0') {
+              this.changewtp();
+            }
+            if (config.dataPointIndex == '1') {
+              this.changebc();
+            }
+            if (config.dataPointIndex == '2') {
+              this.changeform();
+            }
+            if (config.dataPointIndex == '3') {
+              this.changemix();
+            }
+            if (config.dataPointIndex == '4') {
+              this.changepack();
+            }
+            if (config.dataPointIndex == '5') {
+              this.changeweight();
+            } if (config.dataPointIndex == '-1') {
+              this.boolwtp = this.boolbc = this.boolform = this.boolmix = this.boolpack = this.boolweight = false;
+            }
+          },
+        },
+      },
+      plotOptions: {
+        bar: {
+          horizontal: false,
+          columnWidth: "60%",
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      xaxis: {
+        axixTicks: {
+          show: false,
+        },
+        crosshairs: {
+          show: false,
+        },
+        categories: [
+          "WTP2", "Baking Cooling", "Forming", "Mixing", "Packing", "Weighing"
+        ]
+      },
+      yaxis: {
+        axixTicks: {
+          show: false,
+        },
+        crosshairs: {
+          show: false,
+        },
+        title: {
+          text: ""
+        }
+      },
+      fill: {
+        opacity: 1,
+        colors: ['#34568B','#FF6F61']
+      },legend: {
+      },colors: ['#34568B','#FF6F61']
+    };
+  }
+
   async ngOnInit(): Promise<void> {
+    this.chartFunction();
     window.scrollTo(0, 0);
     this.loaddata = new Promise(resolve => {
       this.service.getReadTotalPdmAssetfsb().subscribe(data => {
@@ -639,135 +723,43 @@ export class PdmMFsbComponent implements OnInit {
               if (this.finishnotlist[i].value == null) {
                 this.wtp2null += 1;
               } else {
-                if (this.monthArray[i] == this.bulan && this.yearArray[i] == this.tahun) {
                   this.wtp2 += 1;
-                }
               }
             } else if (this.finishnotlist[i].name_area == 'Baking Cooling') {
               if (this.finishnotlist[i].value == null) {
                 this.bakingnull += 1;
               } else {
-                if (this.monthArray[i] == this.bulan && this.yearArray[i] == this.tahun) {
                   this.baking += 1;
-                }
               }
             } else if (this.finishnotlist[i].name_area == 'Forming') {
               if (this.finishnotlist[i].value == null) {
                 this.formingnull += 1;
               } else {
-                if (this.monthArray[i] == this.bulan && this.yearArray[i] == this.tahun) {
                   this.forming += 1;
-                }
               }
             } else if (this.finishnotlist[i].name_area == 'Mixing') {
               if (this.finishnotlist[i].value == null) {
                 this.mixingnull += 1;
               } else {
-                if (this.monthArray[i] == this.bulan && this.yearArray[i] == this.tahun) {
                   this.mixing += 1;
-
-                }
               }
             } else if (this.finishnotlist[i].name_area == 'Packing') {
               if (this.finishnotlist[i].value == null) {
                 this.packnull += 1;
               } else {
-                if (this.monthArray[i] == this.bulan && this.yearArray[i] == this.tahun) {
                   this.pack += 1;
-
-                }
               }
             } else if (this.finishnotlist[i].name_area == 'Weighing') {
               if (this.finishnotlist[i].value == null) {
                 this.weignull += 1;
               } else {
-                if (this.monthArray[i] == this.bulan && this.yearArray[i] == this.tahun) {
                   this.weig += 1;
-
-                }
               }
             }
           }
 
-          this.chartOptions = {
-            series: [
-              {
-                name: "Done",
-                data: [this.wtp2, this.baking, this.forming, this.mixing, this.pack, this.weig]
-              },
-              {
-                name: "Not Yet",
-                data: [this.wtp2null, this.bakingnull, this.formingnull, this.mixingnull, this.packnull, this.weignull]
-              }
-            ],
-            chart: {
-              type: "bar",
-              height: 500,
-              events: {
-                click: (event: any, chartContext: any, config: any) => {
-                  console.log(config.dataPointIndex);
 
-                  if (config.dataPointIndex == '0') {
-                    this.changewtp();
-                  }
-                  if (config.dataPointIndex == '1') {
-                    this.changebc();
-                  }
-                  if (config.dataPointIndex == '2') {
-                    this.changeform();
-                  }
-                  if (config.dataPointIndex == '3') {
-                    this.changemix();
-                  }
-                  if (config.dataPointIndex == '4') {
-                    this.changepack();
-                  }
-                  if (config.dataPointIndex == '5') {
-                    this.changeweight();
-                  } if (config.dataPointIndex == '-1') {
-                    this.boolwtp = this.boolbc = this.boolform = this.boolmix = this.boolpack = this.boolweight = false;
-                  }
-                },
-              },
-            },
-            plotOptions: {
-              bar: {
-                horizontal: false,
-                columnWidth: "60%",
-              }
-            },
-            dataLabels: {
-              enabled: false
-            },
-            xaxis: {
-              axixTicks: {
-                show: false,
-              },
-              crosshairs: {
-                show: false,
-              },
-              categories: [
-                "WTP2", "Baking Cooling", "Forming", "Mixing", "Packing", "Weighing"
-              ]
-            },
-            yaxis: {
-              axixTicks: {
-                show: false,
-              },
-              crosshairs: {
-                show: false,
-              },
-              title: {
-                text: ""
-              }
-            },
-            fill: {
-              opacity: 1,
-              colors: ['#34568B','#FF6F61']
-            },legend: {
-            },colors: ['#34568B','#FF6F61']
-          };
-
+          this.chartFunction();
 
 
         }
