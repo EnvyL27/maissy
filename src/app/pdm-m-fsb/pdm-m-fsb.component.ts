@@ -30,35 +30,84 @@ export class PdmMFsbComponent implements OnInit {
   boolmix: Boolean = false;
   boolpack: Boolean = false;
   boolweight: Boolean = false;
+  boolwtpnull: Boolean = false;
+  boolbcnull: Boolean = false;
+  boolformnull: Boolean = false;
+  boolmixnull: Boolean = false;
+  boolpacknull: Boolean = false;
+  boolweightnull: Boolean = false;
 
   changewtp() {
+    this.boolwtpnull = this.boolbcnull = this.boolformnull = this.boolmixnull = this.boolpacknull = this.boolweightnull = false;
     this.boolbc = this.boolform = this.boolmix = this.boolpack = this.boolweight = false;
     this.boolwtp = !this.boolwtp;
     this.cdr.detectChanges();
   }
   changebc() {
+    this.boolwtpnull = this.boolbcnull = this.boolformnull = this.boolmixnull = this.boolpacknull = this.boolweightnull = false;
     this.boolwtp = this.boolform = this.boolmix = this.boolpack = this.boolweight = false;
     this.boolbc = !this.boolbc;
     this.cdr.detectChanges();
   }
   changeform() {
+    this.boolwtpnull = this.boolbcnull = this.boolformnull = this.boolmixnull = this.boolpacknull = this.boolweightnull = false;
     this.boolwtp = this.boolbc = this.boolmix = this.boolpack = this.boolweight = false;
     this.boolform = !this.boolform;
     this.cdr.detectChanges();
   }
   changemix() {
+    this.boolwtpnull = this.boolbcnull = this.boolformnull = this.boolmixnull = this.boolpacknull = this.boolweightnull = false;
     this.boolwtp = this.boolbc = this.boolform = this.boolpack = this.boolweight = false;
     this.boolmix = !this.boolmix;
     this.cdr.detectChanges();
   }
   changepack() {
+    this.boolwtpnull = this.boolbcnull = this.boolformnull = this.boolmixnull = this.boolpacknull = this.boolweightnull = false;
     this.boolwtp = this.boolbc = this.boolform = this.boolmix = this.boolweight = false;
     this.boolpack = !this.boolpack;
     this.cdr.detectChanges();
   }
   changeweight() {
+    this.boolwtpnull = this.boolbcnull = this.boolformnull = this.boolmixnull = this.boolpacknull = this.boolweightnull = false;
     this.boolwtp = this.boolbc = this.boolform = this.boolmix = this.boolpack = false;
     this.boolweight = !this.boolweight;
+    this.cdr.detectChanges();
+  }
+
+  changewtpnull() {
+    this.boolwtp = this.boolbc = this.boolform = this.boolmix = this.boolpack = this.boolweight = false;
+    this.boolbcnull = this.boolformnull = this.boolmixnull = this.boolpacknull = this.boolweightnull = false;
+    this.boolwtpnull = !this.boolwtpnull;
+    this.cdr.detectChanges();
+  }
+  changebcnull() {
+    this.boolwtp = this.boolbc = this.boolform = this.boolmix = this.boolpack = this.boolweight = false;
+    this.boolwtpnull = this.boolformnull = this.boolmixnull = this.boolpacknull = this.boolweightnull = false;
+    this.boolbcnull = !this.boolbcnull;
+    this.cdr.detectChanges();
+  }
+  changeformnull() {
+    this.boolwtp = this.boolbc = this.boolform = this.boolmix = this.boolpack = this.boolweight = false;
+    this.boolwtpnull = this.boolbcnull = this.boolmixnull = this.boolpacknull = this.boolweightnull = false;
+    this.boolformnull = !this.boolformnull;
+    this.cdr.detectChanges();
+  }
+  changemixnull() {
+    this.boolwtp = this.boolbc = this.boolform = this.boolmix = this.boolpack = this.boolweight = false;
+    this.boolwtpnull = this.boolbcnull = this.boolformnull = this.boolpacknull = this.boolweightnull = false;
+    this.boolmixnull = !this.boolmixnull;
+    this.cdr.detectChanges();
+  }
+  changepacknull() {
+    this.boolwtp = this.boolbc = this.boolform = this.boolmix = this.boolpack = this.boolweight = false;
+    this.boolwtpnull = this.boolbcnull = this.boolformnull = this.boolmixnull = this.boolweightnull = false;
+    this.boolpacknull = !this.boolpacknull;
+    this.cdr.detectChanges();
+  }
+  changeweightnull() {
+    this.boolwtp = this.boolbc = this.boolform = this.boolmix = this.boolpack = this.boolweight = false;
+    this.boolwtpnull = this.boolbcnull = this.boolformnull = this.boolmixnull = this.boolpacknull = false;
+    this.boolweightnull = !this.boolweightnull;
     this.cdr.detectChanges();
   }
 
@@ -530,26 +579,45 @@ export class PdmMFsbComponent implements OnInit {
         height: 500,
         events: {
           click: (event: any, chartContext: any, config: any) => {
-            console.log(config.dataPointIndex);
+            console.log(config);
 
-            if (config.dataPointIndex == '0') {
+            if (config.dataPointIndex == '0' && config.seriesIndex == '0') {
               this.changewtp();
             }
-            if (config.dataPointIndex == '1') {
+            if (config.dataPointIndex == '0' && config.seriesIndex == '1') {
+              this.changewtpnull();
+            }
+            if (config.dataPointIndex == '1' && config.seriesIndex == '0') {
               this.changebc();
             }
-            if (config.dataPointIndex == '2') {
+            if (config.dataPointIndex == '1' && config.seriesIndex == '1') {
+              this.changebcnull();
+            }
+            if (config.dataPointIndex == '2' && config.seriesIndex == '0') {
               this.changeform();
             }
-            if (config.dataPointIndex == '3') {
+            if (config.dataPointIndex == '2' && config.seriesIndex == '1') {
+              this.changeformnull();
+            }
+            if (config.dataPointIndex == '3' && config.seriesIndex == '0') {
               this.changemix();
             }
-            if (config.dataPointIndex == '4') {
+            if (config.dataPointIndex == '3' && config.seriesIndex == '1') {
+              this.changemixnull();
+            }
+            if (config.dataPointIndex == '4' && config.seriesIndex == '0') {
               this.changepack();
             }
-            if (config.dataPointIndex == '5') {
+            if (config.dataPointIndex == '4' && config.seriesIndex == '1') {
+              this.changepacknull();
+            }
+            if (config.dataPointIndex == '5' && config.seriesIndex == '0') {
               this.changeweight();
-            } if (config.dataPointIndex == '-1') {
+            }
+            if (config.dataPointIndex == '5' && config.seriesIndex == '1') {
+              this.changeweightnull();
+            }
+            if (config.dataPointIndex == '-1') {
               this.boolwtp = this.boolbc = this.boolform = this.boolmix = this.boolpack = this.boolweight = false;
             }
           },
