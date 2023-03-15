@@ -579,7 +579,7 @@ export class PdmMFsbComponent implements OnInit {
         height: 500,
         events: {
           click: (event: any, chartContext: any, config: any) => {
-            console.log(config);
+            // console.log(config);
 
             if (config.dataPointIndex == '0' && config.seriesIndex == '0') {
               this.changewtp();

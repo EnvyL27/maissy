@@ -576,7 +576,231 @@
               class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl"
             >
               <h1 class="font-manrope font-[500] text-xl py-2">
-                FINDING CHECK AND NOT YET
+                FINISH CHECK PREPARATION
+              </h1>
+              <div class="relative overflow-x-auto rounded-lg shadow-md">
+                <table
+                  class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium"
+                >
+                  <thead
+                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900"
+                  >
+                    <tr>
+                      <!-- <th scope="col" class="px-3 py-2 text-center">Area</th> -->
+                      <!-- <th scope="col" class="px-3 py-2 text-center">Done</th> -->
+                      <th scope="col" class="px-3 py-2 text-center">Device Name</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let finish of finishnotlist">
+                    <tr *ngIf="this.finish.value != null && this.finish.name_area == 'PREP'"  class="bg-white dark:border-gray-700">
+                      <!-- <td  *ngIf="this.finish.value == null && this.finish.name_area == 'PREPARATION'" class="px-3 py-2 text-center">PREPARATION</td> -->
+                      <!-- <td class="px-3 py-2 text-center">{{ this.blow }}</td> -->
+                      <td class="px-3 py-2 text-center">{{ this.finish.device_name }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="boolinj" class="max-lg:grow p-2 w-full">
+            <div
+              class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl"
+            >
+              <h1 class="font-manrope font-[500] text-xl py-2">
+                FINISH CHECK INJECTION
+              </h1>
+              <div class="relative overflow-x-auto rounded-lg shadow-md">
+                <table
+                  class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium"
+                >
+                  <thead
+                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900"
+                  >
+                    <tr>
+                      <!-- <th scope="col" class="px-3 py-2 text-center">Area</th> -->
+                      <!-- <th scope="col" class="px-3 py-2 text-center">Done</th> -->
+                      <th scope="col" class="px-3 py-2 text-center">Device Name</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let finish of finishnotlist">
+                    <tr *ngIf="this.finish.value != null && this.finish.name_area == 'INJECTION'"  class="bg-white dark:border-gray-700">
+                      <!-- <td  *ngIf="this.finish.value == null && this.finish.name_area == 'PREPARATION'" class="px-3 py-2 text-center">PREPARATION</td> -->
+                      <!-- <td class="px-3 py-2 text-center">{{ this.blow }}</td> -->
+                      <td class="px-3 py-2 text-center">{{ this.finish.device_name }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="boolblow" class="max-lg:grow p-2 w-full">
+            <div
+              class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl"
+            >
+              <h1 class="font-manrope font-[500] text-xl py-2">
+                FINISH CHECK BLOW
+              </h1>
+              <div class="relative overflow-x-auto rounded-lg shadow-md">
+                <table
+                  class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium"
+                >
+                  <thead
+                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900"
+                  >
+                    <tr>
+                      <!-- <th scope="col" class="px-3 py-2 text-center">Area</th> -->
+                      <!-- <th scope="col" class="px-3 py-2 text-center">Done</th> -->
+                      <th scope="col" class="px-3 py-2 text-center">Device Name</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let finish of finishnotlist">
+                    <tr *ngIf="this.finish.value != null && this.finish.name_area == 'BLOW'"  class="bg-white dark:border-gray-700">
+                      <!-- <td  *ngIf="this.finish.value == null && this.finish.name_area == 'PREPARATION'" class="px-3 py-2 text-center">PREPARATION</td> -->
+                      <!-- <td class="px-3 py-2 text-center">{{ this.blow }}</td> -->
+                      <td class="px-3 py-2 text-center">{{ this.finish.device_name }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="boolfill" class="max-lg:grow p-2 w-full">
+            <div
+              class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl"
+            >
+              <h1 class="font-manrope font-[500] text-xl py-2">
+                FINISH CHECK FILLER
+              </h1>
+              <div class="relative overflow-x-auto rounded-lg shadow-md">
+                <table
+                  class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium"
+                >
+                  <thead
+                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900"
+                  >
+                    <tr>
+                      <!-- <th scope="col" class="px-3 py-2 text-center">Area</th> -->
+                      <!-- <th scope="col" class="px-3 py-2 text-center">Done</th> -->
+                      <th scope="col" class="px-3 py-2 text-center">Device Name</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let finish of finishnotlist">
+                    <tr *ngIf="this.finish.value != null && this.finish.name_area == 'FILLER'"  class="bg-white dark:border-gray-700">
+                      <!-- <td  *ngIf="this.finish.value == null && this.finish.name_area == 'PREPARATION'" class="px-3 py-2 text-center">PREPARATION</td> -->
+                      <!-- <td class="px-3 py-2 text-center">{{ this.blow }}</td> -->
+                      <td class="px-3 py-2 text-center">{{ this.finish.device_name }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="boolpack" class="max-lg:grow p-2 w-full">
+            <div
+              class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl"
+            >
+              <h1 class="font-manrope font-[500] text-xl py-2">
+                FINISH CHECK PACKING
+              </h1>
+              <div class="relative overflow-x-auto rounded-lg shadow-md">
+                <table
+                  class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium"
+                >
+                  <thead
+                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900"
+                  >
+                    <tr>
+                      <!-- <th scope="col" class="px-3 py-2 text-center">Area</th> -->
+                      <!-- <th scope="col" class="px-3 py-2 text-center">Done</th> -->
+                      <th scope="col" class="px-3 py-2 text-center">Device Name</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let finish of finishnotlist">
+                    <tr *ngIf="this.finish.value != null && this.finish.name_area == 'PACKING'"  class="bg-white dark:border-gray-700">
+                      <!-- <td  *ngIf="this.finish.value == null && this.finish.name_area == 'PREPARATION'" class="px-3 py-2 text-center">PREPARATION</td> -->
+                      <!-- <td class="px-3 py-2 text-center">{{ this.blow }}</td> -->
+                      <td class="px-3 py-2 text-center">{{ this.finish.device_name }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="boolpf" class="max-lg:grow p-2 w-full">
+            <div
+              class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl"
+            >
+              <h1 class="font-manrope font-[500] text-xl py-2">
+                FINISH CHECK PF TRANSFER
+              </h1>
+              <div class="relative overflow-x-auto rounded-lg shadow-md">
+                <table
+                  class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium"
+                >
+                  <thead
+                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900"
+                  >
+                    <tr>
+                      <!-- <th scope="col" class="px-3 py-2 text-center">Area</th> -->
+                      <!-- <th scope="col" class="px-3 py-2 text-center">Done</th> -->
+                      <th scope="col" class="px-3 py-2 text-center">Device Name</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let finish of finishnotlist">
+                    <tr *ngIf="this.finish.value != null && this.finish.name_area == 'PF TRANSFER'"  class="bg-white dark:border-gray-700">
+                      <!-- <td  *ngIf="this.finish.value == null && this.finish.name_area == 'PREPARATION'" class="px-3 py-2 text-center">PREPARATION</td> -->
+                      <!-- <td class="px-3 py-2 text-center">{{ this.blow }}</td> -->
+                      <td class="px-3 py-2 text-center">{{ this.finish.device_name }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="boolstu1" class="max-lg:grow p-2 w-full">
+            <div
+              class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl"
+            >
+              <h1 class="font-manrope font-[500] text-xl py-2">
+                FINISH CHECK STU 1
+              </h1>
+              <div class="relative overflow-x-auto rounded-lg shadow-md">
+                <table
+                  class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium"
+                >
+                  <thead
+                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900"
+                  >
+                    <tr>
+                      <!-- <th scope="col" class="px-3 py-2 text-center">Area</th> -->
+                      <!-- <th scope="col" class="px-3 py-2 text-center">Done</th> -->
+                      <th scope="col" class="px-3 py-2 text-center">Device Name</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let finish of finishnotlist">
+                    <tr *ngIf="this.finish.value != null && this.finish.name_area == 'STU1'"  class="bg-white dark:border-gray-700">
+                      <!-- <td  *ngIf="this.finish.value == null && this.finish.name_area == 'PREPARATION'" class="px-3 py-2 text-center">PREPARATION</td> -->
+                      <!-- <td class="px-3 py-2 text-center">{{ this.blow }}</td> -->
+                      <td class="px-3 py-2 text-center">{{ this.finish.device_name }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="boolprepnull" class="max-lg:grow p-2 w-full">
+            <div
+              class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl"
+            >
+              <h1 class="font-manrope font-[500] text-xl py-2">
+                NOT YET CHECK PREPARATION
               </h1>
               <div class="relative overflow-x-auto rounded-lg shadow-md">
                 <table
@@ -603,12 +827,12 @@
             </div>
           </div>
 
-          <div *ngIf="boolinj" class="max-lg:grow p-2 w-full">
+          <div *ngIf="boolinjnull" class="max-lg:grow p-2 w-full">
             <div
               class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl"
             >
               <h1 class="font-manrope font-[500] text-xl py-2">
-                FINDING CHECK AND NOT YET
+                NOT YET CHECK INJECTION
               </h1>
               <div class="relative overflow-x-auto rounded-lg shadow-md">
                 <table
@@ -635,12 +859,12 @@
             </div>
           </div>
 
-          <div *ngIf="boolblow" class="max-lg:grow p-2 w-full">
+          <div *ngIf="boolblownull" class="max-lg:grow p-2 w-full">
             <div
               class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl"
             >
               <h1 class="font-manrope font-[500] text-xl py-2">
-                FINDING CHECK AND NOT YET
+                NOT YET CHECK BLOW
               </h1>
               <div class="relative overflow-x-auto rounded-lg shadow-md">
                 <table
@@ -667,12 +891,12 @@
             </div>
           </div>
 
-          <div *ngIf="boolfill" class="max-lg:grow p-2 w-full">
+          <div *ngIf="boolfillnull" class="max-lg:grow p-2 w-full">
             <div
               class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl"
             >
               <h1 class="font-manrope font-[500] text-xl py-2">
-                FINDING CHECK AND NOT YET
+                NOT YET CHECK FILLER
               </h1>
               <div class="relative overflow-x-auto rounded-lg shadow-md">
                 <table
@@ -699,12 +923,12 @@
             </div>
           </div>
 
-          <div *ngIf="boolpack" class="max-lg:grow p-2 w-full">
+          <div *ngIf="boolpacknull" class="max-lg:grow p-2 w-full">
             <div
               class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl"
             >
               <h1 class="font-manrope font-[500] text-xl py-2">
-                FINDING CHECK AND NOT YET
+                NOT YET CHECK PACKING
               </h1>
               <div class="relative overflow-x-auto rounded-lg shadow-md">
                 <table
@@ -731,12 +955,12 @@
             </div>
           </div>
 
-          <div *ngIf="boolpf" class="max-lg:grow p-2 w-full">
+          <div *ngIf="boolpfnull" class="max-lg:grow p-2 w-full">
             <div
               class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl"
             >
               <h1 class="font-manrope font-[500] text-xl py-2">
-                FINDING CHECK AND NOT YET
+                NOT YET CHECK PF TRANSFER
               </h1>
               <div class="relative overflow-x-auto rounded-lg shadow-md">
                 <table
@@ -763,12 +987,12 @@
             </div>
           </div>
 
-          <div *ngIf="boolstu1" class="max-lg:grow p-2 w-full">
+          <div *ngIf="boolstu1null" class="max-lg:grow p-2 w-full">
             <div
               class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl"
             >
               <h1 class="font-manrope font-[500] text-xl py-2">
-                FINDING CHECK AND NOT YET
+                NOT YET CHECK STU 1
               </h1>
               <div class="relative overflow-x-auto rounded-lg shadow-md">
                 <table

@@ -27,40 +27,97 @@ export class PdmMOci2Component implements OnInit {
   boolpack: Boolean = false;
   boolpf: Boolean = false;
   boolstu1: Boolean = false;
+  boolprepnull: Boolean = false;
+  boolinjnull: Boolean = false;
+  boolblownull: Boolean = false;
+  boolfillnull: Boolean = false;
+  boolpacknull: Boolean = false;
+  boolpfnull: Boolean = false;
+  boolstu1null: Boolean = false;
 
   changeprep() {
+    this.boolprepnull = this.boolinjnull = this.boolblownull = this.boolfillnull = this.boolpacknull = this.boolpfnull = this.boolstu1null = false;
     this.boolinj = this.boolblow = this.boolfill = this.boolpack = this.boolpf = this.boolstu1 = false;
     this.boolprep = !this.boolprep;
     this.cdr.detectChanges();
   }
   changeinj() {
+    this.boolprepnull = this.boolinjnull = this.boolblownull = this.boolfillnull = this.boolpacknull = this.boolpfnull = this.boolstu1null = false;
     this.boolprep = this.boolblow = this.boolfill = this.boolpack = this.boolpf = this.boolstu1 = false;
     this.boolinj = !this.boolinj;
     this.cdr.detectChanges();
   }
   changeblow() {
+    this.boolprepnull = this.boolinjnull = this.boolblownull = this.boolfillnull = this.boolpacknull = this.boolpfnull = this.boolstu1null = false;
     this.boolprep = this.boolinj = this.boolfill = this.boolpack = this.boolpf = this.boolstu1 = false;
     this.boolblow = !this.boolblow;
     this.cdr.detectChanges();
   }
   changefill() {
+    this.boolprepnull = this.boolinjnull = this.boolblownull = this.boolfillnull = this.boolpacknull = this.boolpfnull = this.boolstu1null = false;
     this.boolprep = this.boolinj = this.boolblow = this.boolpack = this.boolpf = this.boolstu1 = false;
     this.boolfill = !this.boolfill;
     this.cdr.detectChanges();
   }
   changepack() {
+    this.boolprepnull = this.boolinjnull = this.boolblownull = this.boolfillnull = this.boolpacknull = this.boolpfnull = this.boolstu1null = false;
     this.boolprep = this.boolinj = this.boolblow = this.boolfill = this.boolpf = this.boolstu1 = false;
     this.boolpack = !this.boolpack;
     this.cdr.detectChanges();
   }
   changepf() {
+    this.boolprepnull = this.boolinjnull = this.boolblownull = this.boolfillnull = this.boolpacknull = this.boolpfnull = this.boolstu1null = false;
     this.boolprep = this.boolinj = this.boolblow = this.boolfill = this.boolpack = this.boolstu1 = false;
     this.boolpf = !this.boolpf;
     this.cdr.detectChanges();
   }
   changestu() {
+    this.boolprepnull = this.boolinjnull = this.boolblownull = this.boolfillnull = this.boolpacknull = this.boolpfnull = this.boolstu1null = false;
     this.boolprep = this.boolinj = this.boolblow = this.boolfill = this.boolpack = this.boolpf = false;
     this.boolstu1 = !this.boolstu1;
+    this.cdr.detectChanges();
+  }
+
+  changeprepnull() {
+    this.boolinj = this.boolprep = this.boolblow = this.boolfill = this.boolpack = this.boolpf = this.boolstu1 = false;
+    this.boolinjnull = this.boolblownull = this.boolfillnull = this.boolpacknull = this.boolpfnull = this.boolstu1null = false;
+    this.boolprepnull = !this.boolprepnull;
+    this.cdr.detectChanges();
+  }
+  changeinjnull() {
+    this.boolinj = this.boolprep = this.boolblow = this.boolfill = this.boolpack = this.boolpf = this.boolstu1 = false;
+    this.boolprepnull = this.boolblownull = this.boolfillnull = this.boolpacknull = this.boolpfnull = this.boolstu1null = false;
+    this.boolinjnull = !this.boolinjnull;
+    this.cdr.detectChanges();
+  }
+  changeblownull() {
+    this.boolinj = this.boolprep = this.boolblow = this.boolfill = this.boolpack = this.boolpf = this.boolstu1 = false;
+    this.boolprepnull = this.boolinjnull = this.boolfillnull = this.boolpacknull = this.boolpfnull = this.boolstu1null = false;
+    this.boolblownull = !this.boolblownull;
+    this.cdr.detectChanges();
+  }
+  changefillnull() {
+    this.boolinj = this.boolprep = this.boolblow = this.boolfill = this.boolpack = this.boolpf = this.boolstu1 = false;
+    this.boolprepnull = this.boolinjnull = this.boolblownull = this.boolpacknull = this.boolpfnull = this.boolstu1null = false;
+    this.boolfillnull = !this.boolfillnull;
+    this.cdr.detectChanges();
+  }
+  changepacknull() {
+    this.boolinj = this.boolprep = this.boolblow = this.boolfill = this.boolpack = this.boolpf = this.boolstu1 = false;
+    this.boolprepnull = this.boolinjnull = this.boolblownull = this.boolfillnull = this.boolpfnull = this.boolstu1null = false;
+    this.boolpacknull = !this.boolpacknull;
+    this.cdr.detectChanges();
+  }
+  changepfnull() {
+    this.boolinj = this.boolprep = this.boolblow = this.boolfill = this.boolpack = this.boolpf = this.boolstu1 = false;
+    this.boolprepnull = this.boolinjnull = this.boolblownull = this.boolfillnull = this.boolpacknull = this.boolstu1null = false;
+    this.boolpfnull = !this.boolpfnull;
+    this.cdr.detectChanges();
+  }
+  changestunull() {
+    this.boolinj = this.boolprep = this.boolblow = this.boolfill = this.boolpack = this.boolpf = this.boolstu1 = false;
+    this.boolprepnull = this.boolinjnull = this.boolblownull = this.boolfillnull = this.boolpacknull = this.boolpfnull = false;
+    this.boolstu1null = !this.boolstu1null;
     this.cdr.detectChanges();
   }
 
@@ -531,26 +588,47 @@ export class PdmMOci2Component implements OnInit {
           click: (event: any, chartContext: any, config: any) => {
             console.log(config.dataPointIndex);
 
-            if (config.dataPointIndex == '0') {
+            if (config.dataPointIndex == '0' && config.seriesIndex == '0') {
               this.changeprep();
             }
-            if (config.dataPointIndex == '1') {
+            if (config.dataPointIndex == '0' && config.seriesIndex == '1') {
+              this.changeprepnull();
+            }
+            if (config.dataPointIndex == '1' && config.seriesIndex == '0') {
               this.changepf();
             }
-            if (config.dataPointIndex == '2') {
+            if (config.dataPointIndex == '1' && config.seriesIndex == '1') {
+              this.changepfnull();
+            }
+            if (config.dataPointIndex == '2' && config.seriesIndex == '0') {
               this.changeinj();
             }
-            if (config.dataPointIndex == '3') {
+            if (config.dataPointIndex == '2' && config.seriesIndex == '1') {
+              this.changeinjnull();
+            }
+            if (config.dataPointIndex == '3' && config.seriesIndex == '0') {
               this.changeblow();
             }
-            if (config.dataPointIndex == '4') {
+            if (config.dataPointIndex == '3' && config.seriesIndex == '1') {
+              this.changeblownull();
+            }
+            if (config.dataPointIndex == '4' && config.seriesIndex == '0') {
               this.changefill();
             }
-            if (config.dataPointIndex == '5') {
+            if (config.dataPointIndex == '4' && config.seriesIndex == '1') {
+              this.changefillnull();
+            }
+            if (config.dataPointIndex == '5' && config.seriesIndex == '0') {
               this.changepack();
             }
-            if (config.dataPointIndex == '6') {
+            if (config.dataPointIndex == '5' && config.seriesIndex == '1') {
+              this.changepacknull();
+            }
+            if (config.dataPointIndex == '6' && config.seriesIndex == '0') {
               this.changestu();
+            }
+            if (config.dataPointIndex == '6' && config.seriesIndex == '1') {
+              this.changestunull();
             }
              if (config.dataPointIndex == '-1') {
               this.boolprep = this.boolpf = this.boolinj = this.boolblow = this.boolfill = this.boolpack = this.boolstu1 = false;
@@ -698,6 +776,8 @@ export class PdmMOci2Component implements OnInit {
           for (let i = 0; i < array.length; i++) {
             this.finishnotlist.splice(this.finishnotlist.lenght, 0, array[i]);
           }
+          // console.log(this.finishnotlist);
+
           for (let elem of this.finishnotlist) {
             if(elem.name_area == 'PREP'){
               if(elem.value == null){

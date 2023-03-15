@@ -599,7 +599,7 @@ export class PdmMOci1Component implements OnInit {
         height: 500,
         events: {
           click: (event: any, chartContext: any, config: any) => {
-            console.log(config);
+            // console.log(config);
 
             if (config.dataPointIndex == '0' && config.seriesIndex == '0') {
               this.changeprep();
@@ -791,7 +791,7 @@ export class PdmMOci1Component implements OnInit {
 
           }
 
-          console.log(this.finishnotlist);
+          // console.log(this.finishnotlist);
 
 
           for (let i = 0; i < array.length; i++) {
