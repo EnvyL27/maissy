@@ -887,14 +887,14 @@ export class AmMOci1Component implements OnInit {
       );
       this.service.getTotalFeeding().subscribe(data => {
         this.totallevel = data;
-        console.log(this.totallevel);
+        // console.log(this.totallevel);
 
         Object.values(this.totallevel).forEach(data => {
           // // console.log(data);
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
-          console.log(array);
+          // console.log(array);
 
           // // console.log(array);
           for (let i = 0; i < array.length; i++) {
@@ -944,13 +944,15 @@ export class AmMOci1Component implements OnInit {
       this.service.getReadFindingPending().subscribe(data => {
         this.findingpending = data;
         Object.values(this.findingpending).forEach(data => {
-          console.log(data);
+          // console.log(data);
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
-          // // console.log(array);
+          // console.log(array);
           for (let i = 0; i < array.length; i++) {
-            this.findingpending2.splice(this.findingpending2.lenght, 0, array[i]);
+            if(array[i].status != "CLOSED"){
+              this.findingpending2.splice(this.findingpending2.lenght, 0, array[i]);
+            }
           }
           for (var i = 0; i < this.findingpending2.length; i++) {
             if(this.findingpending2[i].area == "OCI-1"){
@@ -1012,7 +1014,7 @@ export class AmMOci1Component implements OnInit {
       );
       this.service.getTotalFeeding().subscribe(data => {
         this.totalfm = data;
-        console.log(this.totalfm);
+        // console.log(this.totalfm);
 
         Object.values(this.totalfm).forEach(data => {
           var array = Object.keys(data).map(function (key) {

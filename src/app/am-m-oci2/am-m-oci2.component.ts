@@ -946,7 +946,9 @@ export class AmMOci2Component implements OnInit {
           });
           // // console.log(array);
           for (let i = 0; i < array.length; i++) {
-            this.findingpending2.splice(this.findingpending2.lenght, 0, array[i]);
+            if(array[i].status != "CLOSED"){
+              this.findingpending2.splice(this.findingpending2.lenght, 0, array[i]);
+            }
           }
 
           for (var i = 0; i < this.findingpending2.length; i++) {
