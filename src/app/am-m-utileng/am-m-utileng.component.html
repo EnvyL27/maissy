@@ -152,9 +152,99 @@
       </div>
     </div>
   </div>
+
+  <div class="flex flex-wrap -mx-3">
+    <div class="w-full px-2 py-2 mx-auto">
+      <div class="flex flex-wrap -mx-1 lg:-mx-3">
+        <div class="my-1 px-1 w-full max-w-full md:w-4/12 lg:my-6 lg:px-6">
+          <div
+            class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl mb-1 bg-clip-border">
+            <div class="flex-auto p-6">
+              <h5 class="text-center">Total Data</h5>
+            </div>
+          </div>
+          <div class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
+            <div class="flex-auto p-6">
+              <canvas id="dum" width="310" height="300"></canvas>
+              <div class="px-6 pt-4 pb-2 text-center">
+                <span style="background-color: #7fe7dc;"
+                  class="text-white inline-block bg-red rounded-full text-md px-3 py-1 font-semibold mr-2 mb-2">Total:
+                  {{pendingexecute + finishexecute + readyexecute}}</span>
+                <span style="background-color:#ffc13b"
+                  class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">On
+                  Progres:
+                  {{pendingexecute}}</span>
+                <span style="background-color: #ff6e40;"
+                  class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Ready:
+                  {{readyexecute}}</span>
+                <span style="background-color: #316879;"
+                  class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Finish:
+                  {{finishexecute}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="my-1 px-1 w-full md:w-4/12 lg:my-6 lg:px-6">
+          <div
+            class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl mb-1 bg-clip-border">
+            <div class="flex-auto p-6">
+              <h5 class="text-center">Type of Finding</h5>
+            </div>
+          </div>
+          <div
+            class="relative flex flex-col max-h-full min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
+            <div class="flex-auto p-6">
+              <canvas id="donut" width="310" height="300"></canvas>
+              <div class="px-6 pt-4 pb-2 text-center">
+                <span style="background-color: #ffc13b"
+                  class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">On
+                  Progres:
+                  {{pendingexecute}}</span>
+                <span style="background-color: #ff6e40;"
+                  class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Ready:
+                  {{readyexecute}}</span>
+                <span style="background-color: #316879;"
+                  class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Finish:
+                  {{finishexecute}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="my-1 px-1 w-full md:w-4/12 lg:my-6 lg:px-6">
+          <div
+            class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl mb-1 bg-clip-border">
+            <div class="flex-auto p-6">
+              <h5 class="text-center">Level of Finding</h5>
+            </div>
+          </div>
+          <div class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
+            <div class="flex-auto p-6">
+              <canvas id="donut2" width="310" height="300"></canvas>
+              <div class="px-6 pt-4 pb-2 text-center">
+                <div>
+                  <span style="background-color: #626d71;"
+                    class="text-white inline-block bg-red rounded-full text-md px-3 py-1 font-semibold mr-2 mb-2">Low:
+                    {{this.low}}</span>
+                  <span style="background-color: #ffc13b;"
+                    class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Medium:
+                    {{this.medium}}</span>
+                </div>
+                <div>
+                  <span style="background-color: #ff6e40;"
+                    class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">High:
+                    {{this.high}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="flex flex-wrap -mx-3">
     <div class="w-full px-1 py-1 mx-auto">
-      <div class="my-1 px-1 place-items-center max-w-full md:w-full lg:my-6 lg:px-6">
+      <!-- <div class="my-1 px-1 place-items-center max-w-full md:w-full lg:my-6 lg:px-6">
         <div class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl mb-2 bg-clip-border">
           <div class="flex-auto p-4">
             <h5 class="text-center">Total Data</h5>
@@ -180,9 +270,9 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="flex flex-wrap -mx-1 lg:-mx-4">
-        <div class="my-1 px-1 w-full md:w-1/2 lg:my-6 lg:px-6">
+        <!-- <div class="my-1 px-1 w-full md:w-1/2 lg:my-6 lg:px-6">
           <div
             class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl  mb-1 bg-clip-border">
             <div class="flex-auto p-4">
@@ -232,7 +322,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="my-1 px-1 w-full md:w-full lg:my-6 lg:px-6">
           <div
             class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl mb-1 bg-clip-border">
