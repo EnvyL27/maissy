@@ -356,6 +356,7 @@ export class AmMFsbComponent implements OnInit {
           }
         }
       }
+
       this.chartdestroy = new Chart("valuepermonthchart", {
         type: "bar",
         data: {
@@ -819,6 +820,18 @@ export class AmMFsbComponent implements OnInit {
             }
           }
         }
+        this.januari = this.januari + this.januariclose;
+        this.febuari = this.febuari + this.febuariclose;
+        this.maret = this.maret + this.maretclose;
+        this.april = this.april + this.aprilclose;
+        this.mei = this.mei + this.meiclose;
+        this.juni = this.juni + this.juniclose;
+        this.juli = this.juli + this.juliclose;
+        this.agustus = this.agustus + this.agustusclose;
+        this.september = this.september + this.septemberclose;
+        this.oktober = this.oktober + this.oktoberclose;
+        this.november = this.november + this.novemberclose;
+        this.desember = this.desember + this.desemberclose;
         new Chart("valuepermonthchart", {
           type: "bar",
           data: {
