@@ -363,7 +363,7 @@
                         Status Order
                       </th>
                       <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
-                        Scope
+                        Section
                       </th>
                       <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                         Deskripsi
@@ -375,7 +375,7 @@
                         Funlock
                       </th>
                       <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
-                        Section
+                        Category
                       </th>
                     </tr>
                   </thead>
@@ -396,12 +396,6 @@
                       </td>
                       <td *ngIf="!findingpending.status" class="text-center font-bold py-4 px-6">
                         -
-                      </td>
-                      <td *ngIf="findingpending.scope == 0" class="py-4 px-6">
-                        AM
-                      </td>
-                      <td *ngIf="findingpending.scope == 1" class="py-4 px-6">
-                        Improvement
                       </td>
                       <td class="py-4 px-6">
                         {{findingpending.finding}}
@@ -429,6 +423,9 @@
                       </td>
                       <td class="py-4 px-6">
                         {{findingpending.section}}
+                      </td>
+                      <td class="py-4 px-6">
+                        {{findingpending.kategori}}
                       </td>
                     </tr>
                   </tbody>
