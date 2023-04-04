@@ -363,9 +363,6 @@
                         Status Order
                       </th>
                       <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
-                        Section
-                      </th>
-                      <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                         Deskripsi
                       </th>
                       <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
@@ -373,6 +370,9 @@
                       </th>
                       <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                         Funlock
+                      </th>
+                      <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
+                        Section
                       </th>
                       <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                         Category
@@ -449,16 +449,30 @@
               <p class="text-center" style="color: red;">Name Machine : {{funloc}}</p>
               <div class="flex items-center text-center p-4">
                 <div class="relative flex flex-wrap items-stretch w-full transition-all rounded-lg ease-soft">
-                  <span
-                    class="text-sm ease-soft leading-5.6 absolute z-50 -ml-px flex h-full items-center whitespace-nowrap rounded-lg rounded-tr-none rounded-br-none border border-r-0 border-transparent bg-transparent py-2 px-2.5 text-center font-normal text-slate-500 transition-all">
-                    <i class="fas fa-search"></i>
-                  </span>
+                  <select
+                  class="pl-2 text-sm focus:shadow-soft-primary-outline ease-soft w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 pr-3 text-gray-700 transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none focus:transition-shadow"  [(ngModel)]="searchSect">
+                    <ng-container *ngFor="let user of fpsectarr">
+                      <option value={{user.section}}>
+                        {{ user.section }}
+                      </option>
+                    </ng-container>
+                  </select>
+                  <select
+                  class="pl-2 text-sm focus:shadow-soft-primary-outline ease-soft w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 pr-3 text-gray-700 transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none focus:transition-shadow" [(ngModel)]="funloc" (change)="data(funloc)">
+                    <ng-container *ngFor="let data of findingpending2">
+                      <option *ngIf="data.section == this.searchSect" value={{data.func_loc}}>
+                        {{ data.funclocdesc }}
+                      </option>
+                    </ng-container>
+                  </select>
+
                   <input type="text" id="target" #target
-                    class="pl-8.75 text-sm focus:shadow-soft-primary-outline ease-soft w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 pr-3 text-gray-700 transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none focus:transition-shadow"
+                    class="pl-2 text-sm focus:shadow-soft-primary-outline ease-soft w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 pr-3 text-gray-700 transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none focus:transition-shadow"
                     placeholder="Type here..." name="search" [(ngModel)]="searchText2" />
                 </div>
               </div>
               <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                   <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
@@ -481,8 +495,9 @@
                         PIC
                       </th>
                     </tr>
+
                     <tr class="bg-white border-b Success:bg-gray-900 Success:border-gray-700"
-                      *ngFor="let header of funloclist | filter:searchText2 | paginate: { id:'pagination2', currentPage: currentPage2, itemsPerPage: 5 }; let i = index ">
+                      *ngFor="let header of funloclist | filter:funloc | paginate: { id:'pagination2', currentPage: currentPage2, itemsPerPage: 5 }; let i = index ">
                       <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         {{(currentPage2-1) * 5 + i + 1}}
                       </th>
@@ -510,8 +525,8 @@
                       <td class="py-4 px-6">
                         {{header.finding}}
                       </td>
-                      <td class="py-4 px-6">
-                        {{header.note_executor}}
+                      <td class="py-4 px-6" [innerHTML]="header.note_executor">
+                        <!-- {{header.note_executor}} -->
                       </td>
                       <td class="py-4 px-6">
                         {{header.pic}}

@@ -63,11 +63,14 @@ export class AmMOci1Component implements OnInit {
   wo06donereport: number = 0;
   wo07donereport: number = 0;
   totalwo: number = 0;
+  searchSect: any;
   searchText: any;
   searchText2: any;
   searchText3: any;
   totalfm2: any = [];
   findingpending: object = {};
+  fpsect: object = {};
+  fpsectarr: any = [];
   preparation: number = 0;
   injection: number = 0;
   blow: number = 0;
@@ -893,10 +896,23 @@ export class AmMOci1Component implements OnInit {
 
           // // console.log(this.findingpending2);
         })
+      });
+      this.service.getReadfpSection().subscribe(data => {
+        this.fpsect = data;
+        Object.values(this.fpsect).forEach(data => {
+          // // console.log(data);
+          var array = Object.keys(data).map(function (key) {
+            return data[key];
+          });
+          console.log(array);
+          for (let i = 0; i < array.length; i++) {
+            this.fpsectarr.splice(this.fpsectarr.lenght, 0, array[i]);
+          }
+          console.log(this.fpsectarr);
 
-
-      }
-      );
+          // // console.log(this.findingpending2);
+        })
+      });
       this.service.getTotalFeeding().subscribe(data => {
         this.totallevel = data;
         // console.log(this.totallevel);

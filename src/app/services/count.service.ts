@@ -357,6 +357,9 @@ export class CountService {
   getReadFindingPending() {
     return this.httpClient.get(api + "findingpending");
   }
+  getReadfpSection() {
+    return this.httpClient.get(api + "findingpendingsection");
+  }
   getReadLevelTotal() {
     return this.httpClient.get(api + "levelam");
   }
