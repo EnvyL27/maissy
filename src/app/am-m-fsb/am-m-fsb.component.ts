@@ -63,6 +63,7 @@ export class AmMFsbComponent implements OnInit {
   wo06donereport: number = 0;
   wo07donereport: number = 0;
   totalwo: number = 0;
+  searchSect: any;
   searchText: any;
   searchText2: any;
   searchText3: any;
@@ -74,6 +75,8 @@ export class AmMFsbComponent implements OnInit {
   packaging: number = 0;
   forming: number = 0;
   findingpending2: any = [];
+  fpsect: object = {};
+  fpsectarr: any = [];
   orderobj: object = {};
   orderarr: any = [];
   totallevel: object = {};
@@ -897,6 +900,23 @@ export class AmMFsbComponent implements OnInit {
 
       }
       );
+
+      this.service.getReadfpSectionFSB().subscribe(data => {
+        this.fpsect = data;
+        Object.values(this.fpsect).forEach(data => {
+          // // console.log(data);
+          var array = Object.keys(data).map(function (key) {
+            return data[key];
+          });
+          console.log(array);
+          for (let i = 0; i < array.length; i++) {
+            this.fpsectarr.splice(this.fpsectarr.lenght, 0, array[i]);
+          }
+          console.log(this.fpsectarr);
+
+          // // console.log(this.findingpending2);
+        })
+      });
       this.service.getTotalFeeding().subscribe(data => {
         this.totallevel = data;
         Object.values(this.totallevel).forEach(data => {
