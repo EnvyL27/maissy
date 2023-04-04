@@ -360,6 +360,12 @@ export class CountService {
   getReadfpSection() {
     return this.httpClient.get(api + "findingpendingsection");
   }
+  getReadfpSectionOci2() {
+    return this.httpClient.get(api + "findingpendingsectionoci2");
+  }
+  getReadfpSectionFSB() {
+    return this.httpClient.get(api + "findingpendingsectionfsb");
+  }
   getReadLevelTotal() {
     return this.httpClient.get(api + "levelam");
   }

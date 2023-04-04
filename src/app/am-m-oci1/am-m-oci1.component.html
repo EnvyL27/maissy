@@ -447,11 +447,19 @@
             class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl mt-1 mb-1 bg-clip-border">
             <div class="flex-auto p-6">
               <p class="text-center" style="color: red;">Name Machine : {{funloc}}</p>
-              <div class="flex items-center text-center p-4">
+              <div class="flex items-center text-center">
+                <div class="relative flex flex-wrap items-stretch w-full transition-all rounded-lg ease-soft">
+                  <h6  class="pl-2 text-sm text-left focus:shadow-soft-primary-outline ease-soft w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg border border-transparent border-transparent bg-white bg-clip-padding pr-3 text-gray-700 transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none focus:transition-shadow">Section</h6>
+                  <h6  class="pl-2 text-sm text-left focus:shadow-soft-primary-outline ease-soft w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg border border-transparent border-transparent bg-white bg-clip-padding pr-3 text-gray-700 transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none focus:transition-shadow">Func Loc</h6>
+                  <h6  class="pl-2 text-sm text-left focus:shadow-soft-primary-outline ease-soft w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg border border-transparent border-transparent bg-white bg-clip-padding pr-3 text-gray-700 transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none focus:transition-shadow">Filter</h6>
+                </div>
+              </div>
+              <div class="flex items-center text-center mb-4">
                 <div class="relative flex flex-wrap items-stretch w-full transition-all rounded-lg ease-soft">
                   <select
                   class="pl-2 text-sm focus:shadow-soft-primary-outline ease-soft w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 pr-3 text-gray-700 transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none focus:transition-shadow"  [(ngModel)]="searchSect">
                     <ng-container *ngFor="let user of fpsectarr">
+
                       <option value={{user.section}}>
                         {{ user.section }}
                       </option>
@@ -497,7 +505,7 @@
                     </tr>
 
                     <tr class="bg-white border-b Success:bg-gray-900 Success:border-gray-700"
-                      *ngFor="let header of funloclist | filter:funloc | paginate: { id:'pagination2', currentPage: currentPage2, itemsPerPage: 5 }; let i = index ">
+                      *ngFor="let header of funloclist | filter:searchText2 | paginate: { id:'pagination2', currentPage: currentPage2, itemsPerPage: 5 }; let i = index ">
                       <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         {{(currentPage2-1) * 5 + i + 1}}
                       </th>
