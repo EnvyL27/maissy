@@ -406,6 +406,8 @@ export class AmMOci1Component implements OnInit {
       this.reportharian.push(data);
     })
 
+
+
   }
   finddata() {
     this.spinner.show();
@@ -904,11 +906,11 @@ export class AmMOci1Component implements OnInit {
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
-          console.log(array);
+          // console.log(array);
           for (let i = 0; i < array.length; i++) {
             this.fpsectarr.splice(this.fpsectarr.lenght, 0, array[i]);
           }
-          console.log(this.fpsectarr);
+          // console.log(this.fpsectarr);
 
           // // console.log(this.findingpending2);
         })
