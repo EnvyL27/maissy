@@ -1,0 +1,23 @@
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 5px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 20px 2px;
+  cursor: pointer;
+  border-radius: 15px;
+  color: black;
+}
+
+.button2 {background-color: #FFAEBC;} /* Pink */
+.button3 {background-color: #A0E7E5;} /* Tiffany bLue */
+.button4 {background-color: #D7DBE1;} /* gray */
+.button5 {background-color: #FBE7C6;} /* Yellow */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}

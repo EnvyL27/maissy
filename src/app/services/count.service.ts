@@ -357,6 +357,15 @@ export class CountService {
   getReadFindingPending() {
     return this.httpClient.get(api + "findingpending");
   }
+  getFuncLoc(){
+    return this.httpClient.get(api + "funcloc");
+  }
+  getFuncLocOci2(){
+    return this.httpClient.get(api + "funclococi2");
+  }
+  getFuncLocFsb(){
+    return this.httpClient.get(api + "funclocfsb");
+  }
   getReadfpSection() {
     return this.httpClient.get(api + "findingpendingsection");
   }
@@ -604,5 +613,14 @@ export class CountService {
   }
   getTotalPartReporting(no_wo:any){
     return this.httpClient.post(api + "totalpartreporting",{no_wo: no_wo});
+  }
+  getSectionDoc(){
+    return this.httpClient.get(api + "section");
+  }
+  getDbDoc(id: any){
+    return this.httpClient.get(api + "database/" + id);
+  }
+  getTableDoc(id: any){
+    return this.httpClient.get(api + "table/" + id);
   }
 };

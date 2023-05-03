@@ -65,6 +65,9 @@ import { ResealerOffComponent } from './kluberplant/offlinepacking/resealer-off/
 import { EmptyboxOffComponent } from './kluberplant/offlinepacking/emptybox-off/emptybox-off.component';
 import { PackConveyorOffComponent } from './kluberplant/offlinepacking/pack-conveyor-off/pack-conveyor-off.component';
 import { OxoniaComponent } from './kluberplant/preparationroom/oxonia/oxonia.component';
+import { DocsComponent } from './docs/docs.component';
+import { DatabaseComponent } from './docs/database/database.component';
+import { TablesComponent } from './docs/tables/tables.component';
 
 const routes: Routes = [
   {path: '', component: DashboardComponent},
@@ -128,6 +131,9 @@ const routes: Routes = [
   {path: 'resealeroff', component: ResealerOffComponent},
   {path: 'emptybox', component: EmptyboxOffComponent},
   {path: 'packconveyoroff', component: PackConveyorOffComponent},
+  {path: 'aboutus/docs', component: DocsComponent},
+  {path: 'database/:id', component: DatabaseComponent},
+  {path: 'table/:id', component: TablesComponent},
   {path: '**', component: NotFoundComponent},
 ];
 
@@ -197,5 +203,8 @@ export const routingComponent = [
   ResealerOffComponent,
   EmptyboxOffComponent,
   PackConveyorOffComponent,
-  OxoniaComponent
+  OxoniaComponent,
+  DocsComponent,
+  DatabaseComponent,
+  TablesComponent
 ]

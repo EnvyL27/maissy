@@ -75,6 +75,8 @@ export class AmMFsbComponent implements OnInit {
   packaging: number = 0;
   forming: number = 0;
   findingpending2: any = [];
+  funlock: object = {};
+  funlockarr: any = [];
   fpsect: object = {};
   fpsectarr: any = [];
   orderobj: object = {};
@@ -908,11 +910,11 @@ export class AmMFsbComponent implements OnInit {
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
-          console.log(array);
+          // console.log(array);
           for (let i = 0; i < array.length; i++) {
             this.fpsectarr.splice(this.fpsectarr.lenght, 0, array[i]);
           }
-          console.log(this.fpsectarr);
+          // console.log(this.fpsectarr);
 
           // // console.log(this.findingpending2);
         })
@@ -969,6 +971,23 @@ export class AmMFsbComponent implements OnInit {
 
       }
       );
+      this.service.getFuncLocFsb().subscribe(data => {
+        this.funlock = data;
+        Object.values(this.funlock).forEach(data => {
+          // console.log(data);
+          var array = Object.keys(data).map(function (key) {
+            return data[key];
+          });
+          // console.log(array);
+          for (let i = 0; i < array.length; i++) {
+            this.funlockarr.splice(this.funlockarr.lenght, 0, array[i]);
+          }
+
+          // console.log(this.funlockarr);
+
+          // // console.log(this.findingpending2);
+        })
+      });
       this.service.getReadFindingPendingfsb().subscribe(data => {
         this.findingpending = data;
         Object.values(this.findingpending).forEach(data => {
@@ -978,7 +997,7 @@ export class AmMFsbComponent implements OnInit {
           });
           // // console.log(array);
           for (let i = 0; i < array.length; i++) {
-            if(array[i].status != "CLOSED"){
+            if(array[i].status != "CLOSED" && array[i].status != "TECO"){
               this.findingpending2.splice(this.findingpending2.lenght, 0, array[i]);
             }
           }

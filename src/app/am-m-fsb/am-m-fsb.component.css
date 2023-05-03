@@ -262,7 +262,7 @@
 	  padding: 15px 20px 0 20px;
 	}
 }
-img.animasi {
+img.animasihf {
   --s: 250px;   /* the size of the image */
   --b: 8px;     /* the border thickness*/
   --g: 14px;    /* the gap */
@@ -274,7 +274,7 @@ img.animasi {
   cursor: pointer;
   transition: 0.3s;
 }
-img.animasi:hover {
+img.animasihf:hover {
   outline: var(--b) solid var(--c);
   outline-offset: var(--g);
 }

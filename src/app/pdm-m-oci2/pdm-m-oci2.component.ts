@@ -586,7 +586,7 @@ export class PdmMOci2Component implements OnInit {
         height: 500,
         events: {
           click: (event: any, chartContext: any, config: any) => {
-            console.log(config.dataPointIndex);
+            // console.log(config.dataPointIndex);
 
             if (config.dataPointIndex == '0' && config.seriesIndex == '0') {
               this.changeprep();

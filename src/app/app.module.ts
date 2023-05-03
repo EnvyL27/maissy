@@ -22,6 +22,9 @@ import { FilterListPipe } from './filter-list.pipe';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { AmMUtilengComponent } from './am-m-utileng/am-m-utileng.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { DocsComponent } from './docs/docs.component';
+import { DatabaseComponent } from './docs/database/database.component';
+import { TablesComponent } from './docs/tables/tables.component';
 
 
 
@@ -36,6 +39,9 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     SpinnerComponent,
     FilterListPipe,
     AmMUtilengComponent,
+    DocsComponent,
+    DatabaseComponent,
+    TablesComponent,
   ],
   imports: [
     Ng2SearchPipeModule,

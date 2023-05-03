@@ -78,6 +78,7 @@ export class AmMOci1Component implements OnInit {
   preform: number = 0;
   filling: number = 0;
   findingpending2: any = [];
+  funloc: any = [];
   orderobj: object = {};
   orderarr: any = [];
   totallevel: object = {};
@@ -129,7 +130,8 @@ export class AmMOci1Component implements OnInit {
   totalfinding4: any;
   bar1report: any;
   bar2report: any;
-  funloc: any;
+  funlock: object = {};
+  funlockarr: any = [];
   funloclist: any = [];
   deskripsi: any = 'Loading..';
   @ViewChild("ss")
@@ -257,6 +259,7 @@ export class AmMOci1Component implements OnInit {
     this.desemberclose = 0;
     this.spinner.show();
     this.resolved = false;
+
     this.service.getTotalDataPost(this.tgl3, this.tgl4).subscribe(data => {
       this.totaldata1year.push(data);
 
@@ -964,13 +967,31 @@ export class AmMOci1Component implements OnInit {
               }]
             },
           });
-          // // console.log(this.medium);
+          // // console.log(this.medium);m
           // // console.log(this.totallevel2);
         })
 
 
       }
       );
+      this.service.getFuncLoc().subscribe(data => {
+        this.funlock = data;
+        Object.values(this.funlock).forEach(data => {
+          // console.log(data);
+          var array = Object.keys(data).map(function (key) {
+            return data[key];
+          });
+          // console.log(array);
+          for (let i = 0; i < array.length; i++) {
+            this.funlockarr.splice(this.funlockarr.lenght, 0, array[i]);
+          }
+          console.log('disini');
+
+          console.log(this.funlockarr);
+
+          // // console.log(this.findingpending2);
+        })
+      });
       this.service.getReadFindingPending().subscribe(data => {
         this.findingpending = data;
         Object.values(this.findingpending).forEach(data => {
@@ -980,10 +1001,12 @@ export class AmMOci1Component implements OnInit {
           });
           // console.log(array);
           for (let i = 0; i < array.length; i++) {
-            if(array[i].status != "CLOSED"){
+            if(array[i].status != "CLOSED" && array[i].status != "TECO"){
               this.findingpending2.splice(this.findingpending2.lenght, 0, array[i]);
             }
           }
+          // console.log(this.findingpending2);
+
           for (var i = 0; i < this.findingpending2.length; i++) {
             if(this.findingpending2[i].area == "OCI-1"){
             if (this.findingpending2[i].section === 'Preparation') {

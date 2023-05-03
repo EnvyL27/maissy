@@ -1,0 +1,60 @@
+<div class="my-1 px-1 w-full max-w-full md:w-full lg:my-6 lg:px-6">
+  <div class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl mb-2 bg-clip-border">
+    <div class="flex p-4">
+      <div class="overflow-hidden w-1/5">
+        <a [routerLink]="['/aboutus/docs']">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24" fill="#344767">
+            <path d="M436 1017-6 576l442-442 109 110-332 332 332 332-109 109Z" />
+          </svg>
+        </a>
+      </div>
+      <div class="overflow-hidden w-3/5">
+        <h5 class="text-center font-bold">MAISSY DASHBOARD DOCUMENTATION</h5>
+      </div>
+    </div>
+  </div>
+  <div class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
+    <div class="flex-auto p-6">
+      <div class="overflow-x-auto relative shadow-lg sm:rounded-lg">
+        <table border="1" class="w-full text-lg text-gray-500 dark:text-gray-400 text-center mb-6">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+              <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#ECA0D9">
+                Section
+              </th>
+              <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#ECA0D9">
+                Database
+              </th>
+              <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#ECA0D9">
+                Server
+              </th>
+              <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#ECA0D9">
+                Tables
+              </th>
+            </tr>
+            <tr *ngFor="let db of databases" class="bg-white border-b Success:bg-gray-900 Success:border-gray-700">
+              <td class="px-3 py-6">
+                {{db.section}}
+              </td>
+              <td class="px-3 py-6">
+                {{db.db_name}}
+              </td>
+              <td class="button button4">
+                {{db.server}}
+              </td>
+              <td >
+                <div class="button button3">
+                  <a [routerLink]="['/table', db.id]">
+                    Tables
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+    <!-- <pagination-controls class="text-center" id="pagination3" (pageChange)="currentPage3 = $event">
+    </pagination-controls> -->
+  </div>
+</div>

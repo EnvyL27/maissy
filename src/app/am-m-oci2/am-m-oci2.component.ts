@@ -69,6 +69,8 @@ export class AmMOci2Component implements OnInit {
   searchText3: any;
   totalfm2: any = [];
   findingpending: object = {};
+  funlock: object = {};
+  funlockarr: any = [];
   fpsect: object = {};
   fpsectarr: any = [];
   preparation: number = 0;
@@ -257,6 +259,7 @@ export class AmMOci2Component implements OnInit {
     this.desemberclose = 0;
     this.spinner.show();
     this.resolved = false;
+
     this.service.getTotalDataPost(this.tgl3, this.tgl4).subscribe(data => {
       this.totaldata1year.push(data);
 
@@ -907,11 +910,11 @@ export class AmMOci2Component implements OnInit {
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
-          console.log(array);
+          // console.log(array);
           for (let i = 0; i < array.length; i++) {
             this.fpsectarr.splice(this.fpsectarr.lenght, 0, array[i]);
           }
-          console.log(this.fpsectarr);
+          // console.log(this.fpsectarr);
 
           // // console.log(this.findingpending2);
         })
@@ -968,6 +971,23 @@ export class AmMOci2Component implements OnInit {
 
       }
       );
+      this.service.getFuncLocOci2().subscribe(data => {
+        this.funlock = data;
+        Object.values(this.funlock).forEach(data => {
+          // console.log(data);
+          var array = Object.keys(data).map(function (key) {
+            return data[key];
+          });
+          // console.log(array);
+          for (let i = 0; i < array.length; i++) {
+            this.funlockarr.splice(this.funlockarr.lenght, 0, array[i]);
+          }
+
+          // console.log(this.funlockarr);
+
+          // // console.log(this.findingpending2);
+        })
+      });
       this.service.getReadFindingPendingoci2().subscribe(data => {
         this.findingpending = data;
         Object.values(this.findingpending).forEach(data => {
@@ -977,7 +997,7 @@ export class AmMOci2Component implements OnInit {
           });
           // // console.log(array);
           for (let i = 0; i < array.length; i++) {
-            if(array[i].status != "CLOSED"){
+            if(array[i].status != "CLOSED" && array[i].status != "TECO"){
               this.findingpending2.splice(this.findingpending2.lenght, 0, array[i]);
             }
           }
