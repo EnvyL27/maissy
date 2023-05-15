@@ -492,6 +492,9 @@
                       <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                         PIC
                       </th>
+                      <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
+                        Cost
+                      </th>
                     </tr>
                     <tr class="bg-white border-b Success:bg-gray-900 Success:border-gray-700"
                       *ngFor="let header of funloclist | filter:searchText2 | paginate: { id:'pagination2', currentPage: currentPage2, itemsPerPage: 5 }; let i = index ">
@@ -525,6 +528,9 @@
                       </td>
                       <td class="py-4 px-6">
                         {{header.lg_name}}
+                      </td>
+                      <td class="py-4 px-6">
+                        {{header.total_actual | currency:'IDR'}}
                       </td>
                     </tr>
                   </thead>

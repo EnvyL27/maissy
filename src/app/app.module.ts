@@ -25,6 +25,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { DocsComponent } from './docs/docs.component';
 import { DatabaseComponent } from './docs/database/database.component';
 import { TablesComponent } from './docs/tables/tables.component';
+import { CostComponent } from './cost/cost.component';
 
 
 
@@ -42,6 +43,7 @@ import { TablesComponent } from './docs/tables/tables.component';
     DocsComponent,
     DatabaseComponent,
     TablesComponent,
+    CostComponent,
   ],
   imports: [
     Ng2SearchPipeModule,

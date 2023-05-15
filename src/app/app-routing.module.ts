@@ -68,6 +68,7 @@ import { OxoniaComponent } from './kluberplant/preparationroom/oxonia/oxonia.com
 import { DocsComponent } from './docs/docs.component';
 import { DatabaseComponent } from './docs/database/database.component';
 import { TablesComponent } from './docs/tables/tables.component';
+import { CostComponent } from './cost/cost.component';
 
 const routes: Routes = [
   {path: '', component: DashboardComponent},
@@ -134,7 +135,9 @@ const routes: Routes = [
   {path: 'aboutus/docs', component: DocsComponent},
   {path: 'database/:id', component: DatabaseComponent},
   {path: 'table/:id', component: TablesComponent},
+  {path: 'cost_oci_1', component: CostComponent},
   {path: '**', component: NotFoundComponent},
+
 ];
 
 @NgModule({
@@ -206,5 +209,6 @@ export const routingComponent = [
   OxoniaComponent,
   DocsComponent,
   DatabaseComponent,
-  TablesComponent
+  TablesComponent,
+  CostComponent
 ]

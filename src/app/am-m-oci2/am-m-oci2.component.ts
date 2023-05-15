@@ -265,7 +265,7 @@ export class AmMOci2Component implements OnInit {
 
       for (let elem of this.totaldata1year[0]) {
         if (elem.bulan == 'January') {
-          if (elem.id_area == 2) {
+          if (elem.plant_section == "Prod OCI 2") {
             if (elem.teco_date != null) {
               this.januariclose += 1
             } else {
@@ -273,7 +273,7 @@ export class AmMOci2Component implements OnInit {
             }
           }
         } else if (elem.bulan == 'February') {
-          if (elem.id_area == 2) {
+          if (elem.plant_section == "Prod OCI 2") {
             if (elem.teco_date != null) {
               this.febuariclose += 1
             } else {
@@ -281,7 +281,7 @@ export class AmMOci2Component implements OnInit {
             }
           }
         } else if (elem.bulan == 'March') {
-          if (elem.id_area == 2) {
+          if (elem.plant_section == "Prod OCI 2") {
             if (elem.teco_date != null) {
               this.maretclose += 1;
             } else {
@@ -289,7 +289,7 @@ export class AmMOci2Component implements OnInit {
             }
           }
         } else if (elem.bulan == 'April') {
-          if (elem.id_area == 2) {
+          if (elem.plant_section == "Prod OCI 2") {
             if (elem.teco_date != null) {
               this.aprilclose += 1;
             }
@@ -298,7 +298,7 @@ export class AmMOci2Component implements OnInit {
             }
           }
         } else if (elem.bulan == 'May') {
-          if (elem.id_area == 2) {
+          if (elem.plant_section == "Prod OCI 2") {
             if (elem.teco_date != null) {
               this.meiclose += 1;
             } else {
@@ -306,7 +306,7 @@ export class AmMOci2Component implements OnInit {
             }
           }
         } else if (elem.bulan == 'June') {
-          if (elem.id_area == 2) {
+          if (elem.plant_section == "Prod OCI 2") {
             if (elem.teco_date != null) {
               this.juniclose += 1;
             } else {
@@ -314,7 +314,7 @@ export class AmMOci2Component implements OnInit {
             }
           }
         } else if (elem.bulan == 'July') {
-          if (elem.id_area == 2) {
+          if (elem.plant_section == "Prod OCI 2") {
             if (elem.teco_date != null) {
               this.juliclose += 1;
             } else {
@@ -322,7 +322,7 @@ export class AmMOci2Component implements OnInit {
             }
           }
         } else if (elem.bulan == 'August') {
-          if (elem.id_area == 2) {
+          if (elem.plant_section == "Prod OCI 2") {
             if (elem.teco_date != null) {
               this.agustusclose += 1;
             } else {
@@ -330,7 +330,7 @@ export class AmMOci2Component implements OnInit {
             }
           }
         } else if (elem.bulan == 'September') {
-          if (elem.id_area == 2) {
+          if (elem.plant_section == "Prod OCI 2") {
             if (elem.teco_date != null) {
               this.septemberclose += 1;
             } else {
@@ -338,7 +338,7 @@ export class AmMOci2Component implements OnInit {
             }
           }
         } else if (elem.bulan == 'October') {
-          if (elem.id_area == 2) {
+          if (elem.plant_section == "Prod OCI 2") {
             if (elem.teco_date != null) {
               this.oktoberclose += 1;
             } else {
@@ -346,7 +346,7 @@ export class AmMOci2Component implements OnInit {
             }
           }
         } else if (elem.bulan == 'November') {
-          if (elem.id_area == 2) {
+          if (elem.plant_section == "Prod OCI 2") {
             if (elem.teco_date != null) {
               this.novemberclose += 1;
             } else {
@@ -354,7 +354,7 @@ export class AmMOci2Component implements OnInit {
             }
           }
         } else if (elem.bulan == 'December') {
-          if (elem.id_area == 2) {
+          if (elem.plant_section == "Prod OCI 2") {
             if (elem.teco_date != null) {
               this.desemberclose += 1;
             } else {
@@ -436,7 +436,7 @@ export class AmMOci2Component implements OnInit {
     this.service.getTotalDataPost(this.tgl1, this.tgl2).subscribe(data => {
       this.datarange.push(data);
       for (let elem of this.datarange[0]) {
-        if (elem.id_area == 2) {
+        if (elem.plant_section == "Prod OCI 2") {
           if (elem.teco_date != null) {
             this.donereport += 1;
           } else {
@@ -446,7 +446,7 @@ export class AmMOci2Component implements OnInit {
         }
       }
       for (let elem of this.datarange[0]) {
-        if (elem.id_area == 2) {
+        if (elem.plant_section == "Prod OCI 2") {
           if (elem.order_type == 'WO02') {
             if (elem.teco_date != null) {
               this.wo02donereport += 1;
@@ -587,7 +587,7 @@ export class AmMOci2Component implements OnInit {
       this.service.getTotalDataPost(this.tgl1, this.tgl2).subscribe(data => {
         this.datarange.push(data);
         for (let elem of this.datarange[0]) {
-          if (elem.id_area == 2) {
+          if (elem.plant_section == "Prod OCI 2") {
             if (elem.teco_date != null) {
               this.donereport += 1;
             } else {
@@ -597,7 +597,7 @@ export class AmMOci2Component implements OnInit {
           }
         }
         for (let elem of this.datarange[0]) {
-          if (elem.id_area == 2) {
+          if (elem.plant_section == "Prod OCI 2") {
             if (elem.order_type == 'WO02') {
               if (elem.teco_date != null) {
                 this.wo02donereport += 1;
@@ -728,7 +728,7 @@ export class AmMOci2Component implements OnInit {
 
         for (let elem of this.totaldata1year[0]) {
           if (elem.bulan == 'January') {
-            if (elem.id_area == 2) {
+            if (elem.plant_section == "Prod OCI 2") {
               if (elem.teco_date != null) {
                 this.januariclose += 1
               } else {
@@ -736,7 +736,7 @@ export class AmMOci2Component implements OnInit {
               }
             }
           } else if (elem.bulan == 'February') {
-            if (elem.id_area == 2) {
+            if (elem.plant_section == "Prod OCI 2") {
               if (elem.teco_date != null) {
                 this.febuariclose += 1
               } else {
@@ -744,7 +744,7 @@ export class AmMOci2Component implements OnInit {
               }
             }
           } else if (elem.bulan == 'March') {
-            if (elem.id_area == 2) {
+            if (elem.plant_section == "Prod OCI 2") {
               if (elem.teco_date != null) {
                 this.maretclose += 1;
               } else {
@@ -752,7 +752,7 @@ export class AmMOci2Component implements OnInit {
               }
             }
           } else if (elem.bulan == 'April') {
-            if (elem.id_area == 2) {
+            if (elem.plant_section == "Prod OCI 2") {
               if (elem.teco_date != null) {
                 this.aprilclose += 1;
               }
@@ -761,7 +761,7 @@ export class AmMOci2Component implements OnInit {
               }
             }
           } else if (elem.bulan == 'May') {
-            if (elem.id_area == 2) {
+            if (elem.plant_section == "Prod OCI 2") {
               if (elem.teco_date != null) {
                 this.meiclose += 1;
               } else {
@@ -769,7 +769,7 @@ export class AmMOci2Component implements OnInit {
               }
             }
           } else if (elem.bulan == 'June') {
-            if (elem.id_area == 2) {
+            if (elem.plant_section == "Prod OCI 2") {
               if (elem.teco_date != null) {
                 this.juniclose += 1;
               } else {
@@ -777,7 +777,7 @@ export class AmMOci2Component implements OnInit {
               }
             }
           } else if (elem.bulan == 'July') {
-            if (elem.id_area == 2) {
+            if (elem.plant_section == "Prod OCI 2") {
               if (elem.teco_date != null) {
                 this.juliclose += 1;
               } else {
@@ -785,7 +785,7 @@ export class AmMOci2Component implements OnInit {
               }
             }
           } else if (elem.bulan == 'August') {
-            if (elem.id_area == 2) {
+            if (elem.plant_section == "Prod OCI 2") {
               if (elem.teco_date != null) {
                 this.agustusclose += 1;
               } else {
@@ -793,7 +793,7 @@ export class AmMOci2Component implements OnInit {
               }
             }
           } else if (elem.bulan == 'September') {
-            if (elem.id_area == 2) {
+            if (elem.plant_section == "Prod OCI 2") {
               if (elem.teco_date != null) {
                 this.septemberclose += 1;
               } else {
@@ -801,7 +801,7 @@ export class AmMOci2Component implements OnInit {
               }
             }
           } else if (elem.bulan == 'October') {
-            if (elem.id_area == 2) {
+            if (elem.plant_section == "Prod OCI 2") {
               if (elem.teco_date != null) {
                 this.oktoberclose += 1;
               } else {
@@ -809,7 +809,7 @@ export class AmMOci2Component implements OnInit {
               }
             }
           } else if (elem.bulan == 'November') {
-            if (elem.id_area == 2) {
+            if (elem.plant_section == "Prod OCI 2") {
               if (elem.teco_date != null) {
                 this.novemberclose += 1;
               } else {
@@ -817,7 +817,7 @@ export class AmMOci2Component implements OnInit {
               }
             }
           } else if (elem.bulan == 'December') {
-            if (elem.id_area == 2) {
+            if (elem.plant_section == "Prod OCI 2") {
               if (elem.teco_date != null) {
                 this.desemberclose += 1;
               } else {
@@ -931,7 +931,7 @@ export class AmMOci2Component implements OnInit {
             this.totallevel2.splice(this.totallevel2.lenght, 0, array[i]);
           }
           for (var i = 0; i < this.totallevel2.length; i++) {
-            if(this.totallevel2[i].id_area == 2){
+            if(this.totallevel2[i].id_area = 2){
             if (this.totallevel2[i].level === 'Low') {
               this.low += 1;
             }
@@ -1069,7 +1069,7 @@ export class AmMOci2Component implements OnInit {
           }
 
           for (let elem of this.totalfm2) {
-            if (elem.id_area == 2) {
+            if (elem.id_area = 2) {
               if (elem.status_pengerjaan == 'Done') {
                 this.finishexecute += 1;
               }

@@ -623,4 +623,7 @@ export class CountService {
   getTableDoc(id: any){
     return this.httpClient.get(api + "table/" + id);
   }
+  getCostOci1(){
+    return this.httpClient.get(api + "costoci1");
+  }
 };
