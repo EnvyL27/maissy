@@ -16,10 +16,11 @@ export class SidebarComponent implements OnInit {
   public sub1: boolean = false;
   public sub2: boolean = false;
   public sub3: boolean = false;
+  public sub4: boolean = false;
+  public sub5: boolean = false;
   public lubisub: boolean = false;
   public lubiplantsub: boolean = false;
   currentDate = new Date();
-  public sub4: boolean = false;
   constructor(public router: Router,@Inject(DOCUMENT) private document: Document) {}
   ngOnInit(): void {
     setInterval(() => {
@@ -44,6 +45,9 @@ export class SidebarComponent implements OnInit {
   }
   pdmmonitoringsub(){
     this.sub2 = !this.sub2;
+  }
+  costmonitoringsub(){
+    this.sub5 = !this.sub5;
   }
   gamessub(){
     this.sub3 = !this.sub3;
