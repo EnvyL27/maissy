@@ -69,6 +69,8 @@ import { DocsComponent } from './docs/docs.component';
 import { DatabaseComponent } from './docs/database/database.component';
 import { TablesComponent } from './docs/tables/tables.component';
 import { CostComponent } from './cost/cost.component';
+import { CostOci2Component } from './cost-oci2/cost-oci2.component';
+import { CostFsbComponent } from './cost-fsb/cost-fsb.component';
 
 const routes: Routes = [
   {path: '', component: DashboardComponent},
@@ -136,6 +138,8 @@ const routes: Routes = [
   {path: 'database/:id', component: DatabaseComponent},
   {path: 'table/:id', component: TablesComponent},
   {path: 'cost_oci_1', component: CostComponent},
+  {path: 'cost_oci_2', component: CostOci2Component},
+  {path: 'cost_fsb', component: CostFsbComponent},
   {path: '**', component: NotFoundComponent},
 
 ];

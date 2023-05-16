@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
 import * as moment from 'moment';
+import * as XLSX from 'xlsx';
 import { NgxCaptureService } from 'ngx-capture';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CountService } from '../services/count.service';
@@ -12,6 +13,33 @@ import { CountService } from '../services/count.service';
   styleUrls: ['./am-m-oci2.component.css']
 })
 export class AmMOci2Component implements OnInit {
+
+  exportexcel(): void
+  {
+    /* pass here the table id */
+    let element = document.getElementById('excel-table');
+    console.log(this.findingpending2);
+
+    const ws: XLSX.WorkSheet =XLSX.utils.json_to_sheet(this.findingpending2);
+    ws["!cols"] = [ { wch: 10 },
+                    { wch: 60 },
+                    { wch: 10 },
+                    { wch: 40 },
+                    { wch: 30 },
+                    { wch: 15 },
+                    { wch: 15 },
+                    { wch: 10 },
+                    { wch: 15 }  ];
+
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    /* save to file */
+    XLSX.writeFile(wb, this.fileName);
+
+  }
+
   constructor(private service: CountService, private spinner: NgxSpinnerService, private captureService: NgxCaptureService, private httpClient: HttpClient) { }
   itemsPerPage: number = 0;
   currentPage: number = 1;
@@ -34,6 +62,7 @@ export class AmMOci2Component implements OnInit {
   absoluteIndex4(indexOnPage: number): number {
     return this.itemsPerPage4 * (this.currentPage4 - 1) + indexOnPage;
   }
+  fileName= 'ExcelSheet.xlsx';
   public resolved: boolean = false;
   public resolvedchart: boolean = false;
   totalfm: object = {};
@@ -127,6 +156,7 @@ export class AmMOci2Component implements OnInit {
   desemberclose: number = 0;
   totalfinding2: any;
   totalfinding3: any;
+  total_cost: number = 0;
   public loaddata: any;
   totalfinding4: any;
   bar1report: any;
@@ -166,7 +196,17 @@ export class AmMOci2Component implements OnInit {
     //// console.log($event);
     this.funloclist = [];
     this.funloc = $event;
-    // console.log(this.funloc);
+    console.log(this.funloc);
+    this.total_cost = 0;
+    for (let i = 0; i < this.orderarr.length; i++) {
+      if (this.orderarr[i].func_loc === this.funloc) {
+        console.log(this.orderarr);
+
+        this.total_cost += this.orderarr[i].total_actual;
+      }
+    }
+    console.log(this.total_cost);
+
     for (let i = 0; i < this.orderarr.length; i++) {
       if (this.orderarr[i].func_loc === this.funloc) {
         this.funloclist[i] = this.orderarr[i];
@@ -886,6 +926,7 @@ export class AmMOci2Component implements OnInit {
       });
       this.service.getOrder().subscribe(data => {
         this.orderobj = data;
+
         Object.values(this.orderobj).forEach(data => {
           // // console.log(data);
           var array = Object.keys(data).map(function (key) {
@@ -896,6 +937,7 @@ export class AmMOci2Component implements OnInit {
             this.orderarr.splice(this.orderarr.lenght, 0, array[i]);
           }
           // console.log(this.orderarr);
+
 
           // // console.log(this.findingpending2);
         })

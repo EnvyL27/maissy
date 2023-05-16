@@ -334,6 +334,7 @@
             <div class="flex-auto p-6">
               <p class="text-center" style="color: red;">Click Funlock For Show History Finding Closed</p>
               <div class="flex items-center text-center p-4">
+                <button (click)="exportexcel()" class="buttonn">Export to Excel</button>
                 <div class="relative flex flex-wrap items-stretch w-full transition-all rounded-lg ease-soft">
                   <span
                     class="text-sm ease-soft leading-5.6 absolute z-50 -ml-px flex h-full items-center whitespace-nowrap rounded-lg rounded-tr-none rounded-br-none border border-r-0 border-transparent bg-transparent py-2 px-2.5 text-center font-normal text-slate-500 transition-all">
@@ -438,6 +439,7 @@
             class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl mt-1 mb-1 bg-clip-border">
             <div class="flex-auto p-6">
               <p class="text-center" style="color: red;">Name Machine : {{funloc}}</p>
+              <p class="text-right" style="color: #42A3A7">Cost : {{total_cost | currency : 'IDR '}}</p>
               <div class="flex items-center text-center">
                 <div class="relative flex flex-wrap items-stretch w-full transition-all rounded-lg ease-soft">
                   <h6  class="pl-2 text-sm text-left focus:shadow-soft-primary-outline ease-soft w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg border border-transparent border-transparent bg-white bg-clip-padding pr-3 text-gray-700 transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none focus:transition-shadow">Section</h6>
@@ -530,7 +532,7 @@
                         {{header.lg_name}}
                       </td>
                       <td class="py-4 px-6">
-                        {{header.total_actual | currency:'IDR'}}
+                        {{header.total_actual | currency:'IDR '}}
                       </td>
                     </tr>
                   </thead>

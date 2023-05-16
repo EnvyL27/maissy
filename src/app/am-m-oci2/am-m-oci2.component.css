@@ -303,3 +303,17 @@ img.animasi:hover {
 img.animasi + img.animasi {
   border-radius: 50%;
 }
+
+.buttonn {
+  background-color: #006D77;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin-right: 8px;
+  cursor: pointer;
+  border-radius: 10px;
+}

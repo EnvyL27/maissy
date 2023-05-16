@@ -154,6 +154,7 @@ export class AmMOci1Component implements OnInit {
   oktoberclose: number = 0;
   novemberclose: number = 0;
   desemberclose: number = 0;
+  total_cost: number = 0;
   totalfinding2: any;
   totalfinding3: any;
   public loaddata: any;
@@ -197,6 +198,13 @@ export class AmMOci1Component implements OnInit {
     this.funloclist = [];
     this.funloc = $event;
     // console.log(this.funloc);
+    for (let i = 0; i < this.orderarr.length; i++) {
+      if (this.orderarr[i].func_loc === this.funloc) {
+        console.log(this.orderarr);
+
+        this.total_cost += this.orderarr[i].total_actual;
+      }
+    }
     for (let i = 0; i < this.orderarr.length; i++) {
       if (this.orderarr[i].func_loc === this.funloc) {
         this.funloclist[i] = this.orderarr[i];

@@ -26,6 +26,8 @@ import { DocsComponent } from './docs/docs.component';
 import { DatabaseComponent } from './docs/database/database.component';
 import { TablesComponent } from './docs/tables/tables.component';
 import { CostComponent } from './cost/cost.component';
+import { CostOci2Component } from './cost-oci2/cost-oci2.component';
+import { CostFsbComponent } from './cost-fsb/cost-fsb.component';
 
 
 
@@ -44,6 +46,8 @@ import { CostComponent } from './cost/cost.component';
     DatabaseComponent,
     TablesComponent,
     CostComponent,
+    CostOci2Component,
+    CostFsbComponent,
   ],
   imports: [
     Ng2SearchPipeModule,
