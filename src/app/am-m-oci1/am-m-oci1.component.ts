@@ -63,7 +63,7 @@ export class AmMOci1Component implements OnInit {
   absoluteIndex4(indexOnPage: number): number {
     return this.itemsPerPage4 * (this.currentPage4 - 1) + indexOnPage;
   }
-  fileName= 'ExcelSheet.xlsx';
+  fileName= 'FindingPendingOCI1.xlsx';
   public resolved: boolean = false;
   public resolvedchart: boolean = false;
   totalfm: object = {};
@@ -1112,22 +1112,31 @@ export class AmMOci1Component implements OnInit {
         // console.log(this.totalfm);
 
         Object.values(this.totalfm).forEach(data => {
+          console.log(data);
+
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
           for (let i = 0; i < array.length; i++) {
             this.totalfm2.splice(this.totalfm2.lenght, 0, array[i]);
           }
+          // console.log(this.totalfm2);
+
 
           for (let elem of this.totalfm2) {
-            if (elem.id_area = 1) {
+            // if(elem)
+
+            if (elem.id_area == 1) {
+              console.log(elem);
+
               if (elem.status_pengerjaan == 'Done') {
                 this.finishexecute += 1;
+                // console.log(elem);
 
               }
               else if (elem.status2 == 'READY') {
                 this.readyexecute += 1;
-              } else if (elem.status1 == 'Done' || elem.status1 == 'None') {
+              } else if (elem.status1 == 'Create' || elem.status1 == 'None' || elem.status1 == 'Emergency') {
                 if (elem.status2 == 'RELEASED' || elem.status2 == 'CREATED') {
                   this.pendingexecute += 1;
                 }
@@ -1137,7 +1146,11 @@ export class AmMOci1Component implements OnInit {
               }
             }
           }
-          // // console.log(this.const2);
+          console.log(this.pendingexecute);
+          console.log(this.finishexecute);
+          console.log(this.readyexecute);
+
+
           new Chart('dum', {
             type: 'bar',
             data: {

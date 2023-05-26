@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
 import * as moment from 'moment';
+import * as XLSX from 'xlsx';
 import { NgxCaptureService } from 'ngx-capture';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CountService } from '../services/count.service';
@@ -12,6 +13,33 @@ import { CountService } from '../services/count.service';
   styleUrls: ['./am-m-fsb.component.css']
 })
 export class AmMFsbComponent implements OnInit {
+
+  exportexcel(): void
+  {
+    /* pass here the table id */
+    let element = document.getElementById('excel-table');
+    console.log(this.findingpending2);
+
+    const ws: XLSX.WorkSheet =XLSX.utils.json_to_sheet(this.findingpending2);
+    ws["!cols"] = [ { wch: 10 },
+                    { wch: 60 },
+                    { wch: 10 },
+                    { wch: 40 },
+                    { wch: 30 },
+                    { wch: 15 },
+                    { wch: 15 },
+                    { wch: 10 },
+                    { wch: 15 }  ];
+
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    /* save to file */
+    XLSX.writeFile(wb, this.fileName);
+
+  }
+
   constructor(private service: CountService, private spinner: NgxSpinnerService, private captureService: NgxCaptureService, private httpClient: HttpClient) { }
   itemsPerPage: number = 0;
   currentPage: number = 1;
@@ -34,6 +62,7 @@ export class AmMFsbComponent implements OnInit {
   absoluteIndex4(indexOnPage: number): number {
     return this.itemsPerPage4 * (this.currentPage4 - 1) + indexOnPage;
   }
+  fileName= 'FindingPendingFSB.xlsx';
   public resolved: boolean = false;
   public resolvedchart: boolean = false;
   totalfm: object = {};
@@ -1062,16 +1091,20 @@ export class AmMFsbComponent implements OnInit {
           for (let i = 0; i < array.length; i++) {
             this.totalfm2.splice(this.totalfm2.lenght, 0, array[i]);
           }
+          console.log(this.totalfm2);
+
 
           for (let elem of this.totalfm2) {
             if (elem.id_area == 3) {
+              console.log(elem);
+
               if (elem.status2 == 'Done') {
                 this.finishexecute += 1;
 
               }
               else if (elem.status2 == 'READY') {
                 this.readyexecute += 1;
-              } else if (elem.status1 == 'Done' || elem.status1 == 'None') {
+              } else if (elem.status1 == 'Create' || elem.status1 == 'None' || elem.status1 == 'Emergency') {
                 if (elem.status2 == 'RELEASED' || elem.status2 == 'CREATED') {
                   this.pendingexecute += 1;
                 }

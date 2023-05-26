@@ -62,7 +62,7 @@ export class AmMOci2Component implements OnInit {
   absoluteIndex4(indexOnPage: number): number {
     return this.itemsPerPage4 * (this.currentPage4 - 1) + indexOnPage;
   }
-  fileName= 'ExcelSheet.xlsx';
+  fileName= 'FindingPendingOCI2.xlsx';
   public resolved: boolean = false;
   public resolvedchart: boolean = false;
   totalfm: object = {};
@@ -1111,13 +1111,13 @@ export class AmMOci2Component implements OnInit {
           }
 
           for (let elem of this.totalfm2) {
-            if (elem.id_area = 2) {
+            if (elem.id_area == 2) {
               if (elem.status_pengerjaan == 'Done') {
                 this.finishexecute += 1;
               }
               if (elem.status2 == 'READY') {
                 this.readyexecute += 1;
-              } else if (elem.status1 == 'Done' || elem.status1 == 'None') {
+              } else if (elem.status1 == 'Create' || elem.status1 == 'None' || elem.status1 == 'Emergency') {
                 if (elem.status2 == 'RELEASED' || elem.status2 == 'CREATED') {
                   this.pendingexecute += 1;
                 }
@@ -1127,6 +1127,12 @@ export class AmMOci2Component implements OnInit {
               }
             }
           }
+          console.log(this.pendingexecute);
+          console.log(this.finishexecute);
+          console.log(this.readyexecute);
+
+
+
           // // console.log(this.const2);
           new Chart('dum', {
             type: 'bar',
