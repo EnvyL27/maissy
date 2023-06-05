@@ -18,15 +18,17 @@
         <div class="flex-auto p-4">
           <div class="flex flex-row -mx-3">
             <div class="flex-none w-2/3 max-w-full px-3">
+              <div (click)="showFinding()">
               <div>
-                <p class="mb-0 font-sans font-semibold leading-normal text-sm">
-                  Total Finding
-                </p>
+                  <p class="mb-0 font-sans font-semibold leading-normal text-sm">
+                    Total Finding
+                  </p>
                 <h5 class="mb-0 font-bold">
                   {{pendingexecute + finishexecute + readyexecute}}
                   <span> / Month</span>
                 </h5>
               </div>
+            </div>
             </div>
             <div class="px-3 text-right basis-1/3">
               <div class="inline-block w-12 h-12 text-center rounded-lg bg-gradient-to-tl from-purple-700 to-pink-500">
@@ -152,6 +154,108 @@
       </div>
     </div>
   </div>
+
+  <div [ngClass]="!totalfindinglist ? '': 'hidden'" class="my-1 px-1 w-full md:w-full lg:my-6 lg:px-6 pt-6" >
+    <div class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
+      <div class="flex-auto p-6">
+        <p class="text-center" >Total Finding List</p>
+
+        <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+          <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400" id="excel-table">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <tr>
+                <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
+                  No
+                </th>
+                <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
+                  Level
+                </th>
+                <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
+                  Finding
+                </th>
+                <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
+                  Status 1
+                </th>
+                <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
+                  Status 2
+                </th>
+                <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
+                  Status Pengerjaan
+                </th>
+                <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
+                  Tanggal Temuan
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              *ngFor="let findingpending of totallevel2 | filter:searchText | paginate: { id: 'pagination1', currentPage: currentPage, itemsPerPage: 5 }; let i = index">
+              <tr class="bg-white border-b Success:bg-gray-900 Success:border-gray-700">
+                <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  {{(currentPage-1) * 5 + i + 1}}
+                </th>
+                <td class="py-4 px-6">
+                  {{findingpending.level}}
+                </td>
+                <td class="py-4 px-6">
+                  {{findingpending.finding}}
+                </td>
+                <td *ngIf="findingpending.status1" class="py-4 px-6">
+                  {{findingpending.status1}}
+                </td>
+                <td *ngIf="!findingpending.status1" class="text-center font-bold py-4 px-6">
+                  -
+                </td>
+                <td *ngIf="findingpending.status2" class="py-4 px-6">
+                  {{findingpending.status2}}
+                </td>
+                <td *ngIf="!findingpending.status2" class="text-center font-bold py-4 px-6">
+                  -
+                </td>
+                <td *ngIf="findingpending.status_pengerjaan" class="py-4 px-6">
+                  {{findingpending.status_pengerjaan}}
+                </td>
+                <td *ngIf="!findingpending.status_pengerjaan" class="text-center font-bold py-4 px-6">
+                  -
+                </td>
+                <td class="py-4 px-6">
+                  {{findingpending.tanggal_temuan}}
+                </td>
+                <!-- <td class="py-4 px-6">
+                  <input class="modal-btn" type="checkbox" id="modal-btn" name="modal-btn" />
+                  <label for="modal-btn">
+                  </label>
+                  <div class="modal">
+                    <div class="modal-wrap xl:ml-68.5">
+                      <img src="http://192.168.9.47/plan_am/files/{{picture}}" class="center">
+                    </div>
+                  </div>
+                  <div *ngIf="findingpending.photo != null" class="row">
+                    <label for="modal-btn">
+                      <img class="animasihf" (click)="getphoto(findingpending.photo)"
+                        src="http://192.168.9.47/plan_am/files/{{findingpending.photo}}" style="width: 100%;
+                        max-width: 150px;
+                        height: auto;">
+                    </label>
+                  </div>
+                </td>
+                <td (click)="data(findingpending.func_loc)" class="py-4 px-6">
+                  <a class="styled-pointer">{{findingpending.func_loc}}</a>
+                </td>
+                <td class="py-4 px-6">
+                  {{findingpending.section}}
+                </td>
+                <td class="py-4 px-6">
+                  {{findingpending.kategori}}
+                </td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <pagination-controls class="text-center" id="pagination1" (pageChange)="currentPage = $event">
+      </pagination-controls>
+    </div>
+    </div>
 
   <div class="flex flex-wrap -mx-3">
     <div class="w-full px-2 py-2 mx-auto">
@@ -326,11 +430,16 @@
         <div class="my-1 px-1 w-full md:w-full lg:my-6 lg:px-6">
           <div
             class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl mb-1 bg-clip-border">
-            <div class="flex-auto p-4">
-              <h5 class="text-center">Finding Pending (Not Closed Yet)</h5>
+            <div (click)="showFindingPending()">
+              <div
+              class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl mb-1 bg-clip-border">
+              <div class="flex-auto p-4">
+                <h5 class="text-center">Finding Pending (Not Closed Yet)</h5>
+              </div>
+            </div>
             </div>
           </div>
-          <div class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
+          <div *ngIf="listoffindingpending == false" class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
             <div class="flex-auto p-6">
               <p class="text-center" style="color: red;">Click Funlock For Show History Finding Closed</p>
               <div class="flex items-center text-center p-4">
@@ -429,13 +538,15 @@
           </div>
         </div>
         <div class="my-1 px-1 w-full md:w-full lg:my-6 lg:px-6">
-          <div
+          <div (click)="showHistoryPending()">
+            <div
             class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl mb-2 bg-clip-border">
             <div class="flex-auto p-4">
               <h5 class="text-center">History Finding Closed</h5>
             </div>
           </div>
-          <div
+          </div>
+          <div [ngClass]="!listofhistorypending ? '': 'hidden'"
             class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl mt-1 mb-1 bg-clip-border">
             <div class="flex-auto p-6">
               <p class="text-center" style="color: red;">Name Machine : {{funloc}}</p>
@@ -540,7 +651,7 @@
           </div>
         </div>
         <div class="my-1 px-1 w-full max-w-full md:w-full lg:my-8 lg:px-6">
-          <div class="flex items-center text-center mt-4 mb-4 flex-wrap bg-white shadow-soft-lg rounded-2xl bg-clip-border">
+          <div [ngClass]="!listofhistorypending ? '': 'hidden'" class="flex items-center text-center mt-4 mb-4 flex-wrap bg-white shadow-soft-lg rounded-2xl bg-clip-border">
               <div class="w-full max-w-full md:w-8/12 xl:w-8/12 p-4  xs:w-8/12">
                 <canvas id="donutfp" width="110"></canvas>
               </div>
@@ -567,11 +678,17 @@
         <div class="my-1 px-1 w-full max-w-full md:w-full lg:my-6 lg:px-6">
           <div
             class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl mb-2 bg-clip-border">
-            <div class="flex-auto p-4">
-              <h5 class="text-center">List Job Finish Today</h5>
+            <div (click)="showListJobFinish()">
+              <div
+              class="relative flex flex-col min-w-0 break-words bg-white mb-1 shadow-soft-lg rounded-2xl bg-clip-border">
+              <div class="flex-auto p-4">
+                <h5 class="text-center">
+                  List Job Finish Today</h5>
+              </div>
+            </div>
             </div>
           </div>
-          <div class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
+          <div [ngClass]="!listjobfinish ? '': 'hidden'" class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
             <div class="flex-auto p-6">
               <p class="text-center" style="color: red;">Click NO WO Get Detail Part</p>
               <div class="flex items-center text-center mb-4">
@@ -675,7 +792,7 @@
             </pagination-controls>
           </div>
         </div>
-        <div class="my-1 px-1 w-full max-w-full md:w-full lg:my-6 lg:px-6">
+        <div [ngClass]="!listjobfinish ? '': 'hidden'" class="my-1 px-1 w-full max-w-full md:w-full lg:my-6 lg:px-6">
           <div class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
             <div class="flex-auto p-6">
               <p class="text-center" style="color: red;" id="target2" #target2>Detail Part</p>
@@ -722,12 +839,17 @@
         <div class="w-full px-1 py-1 mx-auto">
           <div
             class="relative flex flex-col min-w-0 break-words bg-white mb-1 shadow-soft-lg rounded-2xl bg-clip-border">
-            <div class="flex-auto p-4">
-              <h5 class="text-center">
-                Monthly Report Work Order </h5>
+            <div (click)="showMonthlyReport()">
+              <div
+              class="relative flex flex-col min-w-0 break-words bg-white mb-1 shadow-soft-lg rounded-2xl bg-clip-border">
+              <div class="flex-auto p-4">
+                <h5 class="text-center">
+                  Monthly Report Work Order </h5>
+              </div>
+            </div>
             </div>
           </div>
-          <div class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
+          <div class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border" [ngClass]="!listofMonthlyReport ? '': 'hidden'">
             <div class="flex-auto p-6">
               <div class="w-full max-w-full md:w-full">
                 <div class="flex items-center text-center mt-4 mb-4 flex-wrap">
@@ -768,7 +890,7 @@
             </div>
           </div>
         </div>
-        <div class="my-1 px-1 w-full max-w-full md:w-full lg:my-6 lg:px-6">
+        <div [ngClass]="!listofMonthlyReport ? '': 'hidden'" class="my-1 px-1 w-full max-w-full md:w-full lg:my-6 lg:px-6">
           <div class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
             <div class="flex-auto p-6">
               <div class="w-full max-w-full md:w-full">

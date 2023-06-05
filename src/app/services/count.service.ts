@@ -632,4 +632,22 @@ export class CountService {
   getFgOci1(){
     return this.httpClient.get(api + "fgoci1");
   }
+  getCostOci2(){
+    return this.httpClient.get(api + "costoci2");
+  }
+  getCostOci2Past(){
+    return this.httpClient.get(api + "costoci2past");
+  }
+  getFgOci2(){
+    return this.httpClient.get(api + "fgoci2");
+  }
+  getCostFsb(){
+    return this.httpClient.get(api + "costfsb");
+  }
+  getCostFsbPast(){
+    return this.httpClient.get(api + "costfsbpast");
+  }
+  getFgFsb(){
+    return this.httpClient.get(api + "fgfsb");
+  }
 };

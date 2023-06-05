@@ -19,7 +19,7 @@ export class AmMOci1Component implements OnInit {
   {
     /* pass here the table id */
     let element = document.getElementById('excel-table');
-    console.log(this.findingpending2);
+    //console.log(this.findingpending2);
 
     const ws: XLSX.WorkSheet =XLSX.utils.json_to_sheet(this.findingpending2);
     ws["!cols"] = [ { wch: 10 },
@@ -68,6 +68,11 @@ export class AmMOci1Component implements OnInit {
   public resolvedchart: boolean = false;
   totalfm: object = {};
   approvalfinding: number =0;
+  totalfindinglist: boolean = false;
+  listoffindingpending: boolean = false;
+  listofhistorypending: boolean = false;
+  listofMonthlyReport: boolean = false;
+  listjobfinish: boolean = false;
   createorderfinding: number = 0;
   scheduling: number = 0;
   checkexecution: number = 0;
@@ -194,13 +199,13 @@ export class AmMOci1Component implements OnInit {
       block: 'center',
       inline: 'center',
     });
-    //// console.log($event);
+    //// //console.log($event);
     this.funloclist = [];
     this.funloc = $event;
-    // console.log(this.funloc);
+    // //console.log(this.funloc);
     for (let i = 0; i < this.orderarr.length; i++) {
       if (this.orderarr[i].func_loc === this.funloc) {
-        console.log(this.orderarr);
+        //console.log(this.orderarr);
 
         this.total_cost += this.orderarr[i].total_actual;
       }
@@ -211,7 +216,7 @@ export class AmMOci1Component implements OnInit {
       }
     }
     this.funloclist = this.funloclist.filter(function (e: any) { return e != null; });
-    console.log(this.funloclist);
+    //console.log(this.funloclist);
   }
   capture() {
     this.captureService
@@ -300,7 +305,7 @@ export class AmMOci1Component implements OnInit {
 
     this.service.getTotalDataPost(this.tgl3, this.tgl4).subscribe(data => {
       this.totaldata1year.push(data);
-      console.log(data);
+      //console.log(data);
 
       for (let elem of this.totaldata1year[0]) {
         if (elem.bulan == 'January') {
@@ -605,7 +610,53 @@ export class AmMOci1Component implements OnInit {
     });
 
   }
+
+  showFinding(){
+    if(this.totalfindinglist == false){
+      this.totalfindinglist = true;
+    }else if(this.totalfindinglist == true){
+      this.totalfindinglist = false;
+    }
+  }
+
+  showFindingPending(){
+    if(this.listoffindingpending == false){
+      this.listoffindingpending = true;
+    }else if(this.listoffindingpending == true){
+      this.listoffindingpending = false;
+    }
+  }
+
+  showHistoryPending(){
+    if(this.listofhistorypending == false){
+      this.listofhistorypending = true;
+    }else if(this.listofhistorypending == true){
+      this.listofhistorypending = false;
+    }
+  }
+
+  showMonthlyReport(){
+    if(this.listofMonthlyReport == false){
+      this.listofMonthlyReport = true;
+    }else if(this.listofMonthlyReport == true){
+      this.listofMonthlyReport = false;
+    }
+  }
+
+  showListJobFinish(){
+    if(this.listjobfinish == false){
+      this.listjobfinish = true;
+    }else if(this.listjobfinish == true){
+      this.listjobfinish = false;
+    }
+  }
+
   async ngOnInit(): Promise<void> {
+    this.showFinding();
+    this.showFindingPending();
+    this.showHistoryPending();
+    this.showMonthlyReport();
+    this.showListJobFinish();
     window.scrollTo(0, 0);
     this.loaddata = new Promise(resolve => {
       this.datarange.splice(0);
@@ -768,6 +819,12 @@ export class AmMOci1Component implements OnInit {
       });
       this.service.getTotalDataPost(this.tgl3, this.tgl4).subscribe(data => {
         this.totaldata1year.push(data);
+        console.log(this.totaldata1year);
+        console.log(this.tgl3);
+        console.log(this.tgl4);
+
+
+
 
         for (let elem of this.totaldata1year[0]) {
           if (elem.bulan == 'January') {
@@ -872,9 +929,10 @@ export class AmMOci1Component implements OnInit {
         this.januari = this.januari + this.januariclose;
         this.febuari = this.febuari + this.febuariclose;
         this.maret = this.maret + this.maretclose;
-        console.log(this.april);
-        console.log(this.aprilclose);
         this.april = this.april + this.aprilclose;
+        console.log(this.mei);
+        console.log(this.meiclose);
+
         this.mei = this.mei + this.meiclose;
         this.juni = this.juni + this.juniclose;
         this.juli = this.juli + this.juliclose;
@@ -918,8 +976,10 @@ export class AmMOci1Component implements OnInit {
       });
       this.service.getTotalApproval().subscribe(data => {
         this.arrapproval.push(data);
+
         for(let elem of this.arrapproval[0].get){
           if(elem.id_area == '1'){
+            console.log(elem);
             if(elem.status == 'Submit'){
               this.approvalfinding += 1;
             } else if (elem.status == 'Approved' || elem.status == 'Not Yet'){
@@ -932,48 +992,49 @@ export class AmMOci1Component implements OnInit {
       this.service.getOrder().subscribe(data => {
         this.orderobj = data;
         Object.values(this.orderobj).forEach(data => {
-          console.log(data);
+          //console.log(data);
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
-          // // console.log(array);
+          // // //console.log(array);
           for (let i = 0; i < array.length; i++) {
             this.orderarr.splice(this.orderarr.lenght, 0, array[i]);
           }
-          console.log(this.orderarr);
+          //console.log(this.orderarr);
 
-          // // console.log(this.findingpending2);
+          // // //console.log(this.findingpending2);
         })
       });
       this.service.getReadfpSection().subscribe(data => {
         this.fpsect = data;
         Object.values(this.fpsect).forEach(data => {
-          // // console.log(data);
+          // // //console.log(data);
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
-          // console.log(array);
+          // //console.log(array);
           for (let i = 0; i < array.length; i++) {
             this.fpsectarr.splice(this.fpsectarr.lenght, 0, array[i]);
           }
-          // console.log(this.fpsectarr);
+          // //console.log(this.fpsectarr);
 
-          // // console.log(this.findingpending2);
+          // // //console.log(this.findingpending2);
         })
       });
       this.service.getTotalFeeding().subscribe(data => {
         this.totallevel = data;
-        // console.log(this.totallevel);
+        // //console.log(this.totallevel);
 
         Object.values(this.totallevel).forEach(data => {
-          // // console.log(data);
+          // // //console.log(data);
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
-          // console.log(array);
+          // //console.log(array);
 
-          // // console.log(array);
+          // // //console.log(array);
           for (let i = 0; i < array.length; i++) {
+            if(data[i].id_area == 1)
             this.totallevel2.splice(this.totallevel2.lenght, 0, array[i]);
           }
           for (var i = 0; i < this.totallevel2.length; i++) {
@@ -988,6 +1049,7 @@ export class AmMOci1Component implements OnInit {
               this.high += 1;
             }
           }
+
           }
           new Chart('donut2', {
             type: 'doughnut',
@@ -1010,8 +1072,8 @@ export class AmMOci1Component implements OnInit {
               }]
             },
           });
-          // // console.log(this.medium);m
-          // // console.log(this.totallevel2);
+          // // //console.log(this.medium);m
+          // // //console.log(this.totallevel2);
         })
 
 
@@ -1020,34 +1082,34 @@ export class AmMOci1Component implements OnInit {
       this.service.getFuncLoc().subscribe(data => {
         this.funlock = data;
         Object.values(this.funlock).forEach(data => {
-          // console.log(data);
+          // //console.log(data);
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
-          // console.log(array);
+          // //console.log(array);
           for (let i = 0; i < array.length; i++) {
             this.funlockarr.splice(this.funlockarr.lenght, 0, array[i]);
           }
 
-          // console.log(this.funlockarr);
+          // //console.log(this.funlockarr);
 
-          // // console.log(this.findingpending2);
+          // // //console.log(this.findingpending2);
         })
       });
       this.service.getReadFindingPending().subscribe(data => {
         this.findingpending = data;
         Object.values(this.findingpending).forEach(data => {
-          console.log(data);
+          //console.log(data);
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
-          // console.log(array);
+          // //console.log(array);
           for (let i = 0; i < array.length; i++) {
             if(array[i].status != "CLOSED" && array[i].status != "TECO"){
               this.findingpending2.splice(this.findingpending2.lenght, 0, array[i]);
             }
           }
-          // console.log(this.findingpending2);
+          // //console.log(this.findingpending2);
 
           for (var i = 0; i < this.findingpending2.length; i++) {
             if(this.findingpending2[i].area == "OCI-1"){
@@ -1073,7 +1135,7 @@ export class AmMOci1Component implements OnInit {
           }
           }
 
-          //  console.log(this.findingpending2);
+          //  //console.log(this.findingpending2);
         })
 
         new Chart('donutfp', {
@@ -1109,10 +1171,10 @@ export class AmMOci1Component implements OnInit {
       );
       this.service.getTotalFeeding().subscribe(data => {
         this.totalfm = data;
-        // console.log(this.totalfm);
+        // //console.log(this.totalfm);
 
         Object.values(this.totalfm).forEach(data => {
-          console.log(data);
+          //console.log(data);
 
           var array = Object.keys(data).map(function (key) {
             return data[key];
@@ -1120,18 +1182,18 @@ export class AmMOci1Component implements OnInit {
           for (let i = 0; i < array.length; i++) {
             this.totalfm2.splice(this.totalfm2.lenght, 0, array[i]);
           }
-          // console.log(this.totalfm2);
+          // //console.log(this.totalfm2);
 
 
           for (let elem of this.totalfm2) {
             // if(elem)
 
             if (elem.id_area == 1) {
-              console.log(elem);
+              //console.log(elem);
 
               if (elem.status_pengerjaan == 'Done') {
                 this.finishexecute += 1;
-                // console.log(elem);
+                // //console.log(elem);
 
               }
               else if (elem.status2 == 'READY') {
@@ -1146,9 +1208,9 @@ export class AmMOci1Component implements OnInit {
               }
             }
           }
-          console.log(this.pendingexecute);
-          console.log(this.finishexecute);
-          console.log(this.readyexecute);
+          //console.log(this.pendingexecute);
+          //console.log(this.finishexecute);
+          //console.log(this.readyexecute);
 
 
           new Chart('dum', {
@@ -1236,7 +1298,7 @@ export class AmMOci1Component implements OnInit {
           });
           this.spinner.hide();
           this.resolved = true;
-          // // console.log(this.const2.splice(this.const2.lenght,0,array[0]).total);
+          // // //console.log(this.const2.splice(this.const2.lenght,0,array[0]).total);
         })
       })
 

@@ -180,11 +180,11 @@ export class CostComponent implements OnInit {
       this.service.getCountTotalFinding().subscribe(data => {
         this.totalkategori = data;
         Object.values(this.totalkategori).forEach(data => {
-          // // console.log(data);
+          // // ////console.log(data);
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
-          // // console.log(array);
+          // // ////console.log(array);
           for (let i = 0; i < array.length; i++) {
             this.totalkategoriarr.splice(this.totalkategoriarr.lenght, 0, array[i]);
           }
@@ -238,13 +238,13 @@ export class CostComponent implements OnInit {
       );
       forkJoin(this.service.getCostOci1(),
         this.service.getCostOci1Past()).subscribe(([data, data2]) => {
-          // console.log(data);
-          // console.log(data2);
+          // //console.log(data);
+          // //console.log(data2);
           this.cost = data;
           this.cost2 = data2;
 
           this.cost.forEach((element: any, index: number) => {
-            // console.log(element.budget);
+            // //console.log(element.budget);
 
             element.budget = parseInt(element.budget);
             if (element.year == '2023') {
@@ -569,12 +569,12 @@ export class CostComponent implements OnInit {
                 }
               }
             }
-            console.log(this.totalindexjan);
+            //console.log(this.totalindexjan);
 
           });
 
           this.cost2.forEach((element: any, index: any) => {
-            console.log(this.index);
+            //console.log(this.index);
 
             element.budget = parseInt(element.budget);
             element.month = parseInt(element.month);
@@ -634,7 +634,7 @@ export class CostComponent implements OnInit {
               } else if (element.month <= this.index) {
                 this.totalcurrentyear += element.budget;
               }
-              console.log(this.totalcurrentyear);
+              //console.log(this.totalcurrentyear);
 
             }
           });
@@ -677,60 +677,83 @@ export class CostComponent implements OnInit {
 
       forkJoin(this.service.getCostOci1(),
               this.service.getFgOci1()).subscribe(([datacost, datafg]) => {
-                // console.log(datacost);
-                // console.log(datafg);
+                // //console.log(datacost);
+                // //console.log(datafg);
                 this.datafg = datafg;
                 this.dataindex = datacost;
                 // this.indexcostjan =
-                // console.log(this.totalfgjan);
+                // //console.log(this.totalfgjan);
 
 
                 this.datafg.forEach((element:any, index: any) => {
                   element.month = parseInt(element.month);
                   element.fg_eq = parseInt(element.fg_eq);
-                  // console.log(index)
-                  console.log(element);
-                  // console.log(this.totalindexjan);
+                  if(Number.isNaN(element.fg_eq)){
+                    element.fg_eq = 0;
+                  }
+                  // //console.log(index)
+                  //console.log(element);
+                  // //console.log(this.totalindexjan);
                   // this.indexcostjan =
                   if(element.month == 1){
-                    console.log(this.totalindexjan);
-                    console.log(element.fg_eq);
-
-
-                    this.indexcostjan = this.totalindexjan / element.fg_eq
+                    this.indexcostjan = this.totalindexjan / element.fg_eq;
+                    const firstthreedigit = String(this.indexcostjan).slice(0, 3);
+                    this.indexcostjan = parseInt(firstthreedigit);
                   }
                   else if(element.month == 2){
-                    this.indexcostfeb = this.totalindexfeb / element.fg_eq
+                    this.indexcostfeb = this.totalindexfeb / element.fg_eq;
+                    const firstthreedigit = String(this.indexcostfeb).slice(0, 3);
+                    this.indexcostfeb = parseInt(firstthreedigit);
                   }
                   else if(element.month == 3){
                     this.indexcostmar = this.totalindexmar / element.fg_eq
+                    const firstthreedigit = String(this.indexcostmar).slice(0, 3);
+                    this.indexcostmar = parseInt(firstthreedigit);
                   }
                   else if(element.month == 4){
                     this.indexcostapr = this.totalindexapr / element.fg_eq
+                    const firstthreedigit = String(this.indexcostapr).slice(0, 3);
+                    this.indexcostapr = parseInt(firstthreedigit);
                   }
                   else if(element.month == 5){
                     this.indexcostmei = this.totalindexmei / element.fg_eq
+                    const firstthreedigit = String(this.indexcostmei).slice(0, 3);
+                    this.indexcostmei = parseInt(firstthreedigit);
                   }
                   else if(element.month == 6){
                     this.indexcostjun = this.totalindexjun / element.fg_eq
+                    const firstthreedigit = String(this.indexcostjun).slice(0, 3);
+                    this.indexcostjun = parseInt(firstthreedigit);
                   }
                   else if(element.month == 7){
                     this.indexcostjul = this.totalindexjul / element.fg_eq
+                    const firstthreedigit = String(this.indexcostjul).slice(0, 3);
+                    this.indexcostjul = parseInt(firstthreedigit);
                   }
                   else if(element.month == 8){
                     this.indexcostagu = this.totalindexagu / element.fg_eq
+                    const firstthreedigit = String(this.indexcostagu).slice(0, 3);
+                    this.indexcostagu = parseInt(firstthreedigit);
                   }
                   else if(element.month == 9){
                     this.indexcostsep = this.totalindexsep / element.fg_eq
+                    const firstthreedigit = String(this.indexcostsep).slice(0, 3);
+                    this.indexcostsep = parseInt(firstthreedigit);
                   }
                   else if(element.month == 10){
                     this.indexcostokt = this.totalindexokt / element.fg_eq
+                    const firstthreedigit = String(this.indexcostokt).slice(0, 3);
+                    this.indexcostokt = parseInt(firstthreedigit);
                   }
                   else if(element.month == 11){
                     this.indexcostnov = this.totalindexnov / element.fg_eq
+                    const firstthreedigit = String(this.indexcostnov).slice(0, 3);
+                    this.indexcostnov = parseInt(firstthreedigit);
                   }
                   else if(element.month == 12){
                     this.indexcostdes = this.totalindexdes / element.fg_eq
+                    const firstthreedigit = String(this.indexcostdes).slice(0, 3);
+                    this.indexcostdes = parseInt(firstthreedigit);
                   }
 
 
@@ -823,7 +846,7 @@ export class CostComponent implements OnInit {
         },
         {
           name: 'Maintenance Cost',
-          type: 'column',
+          type: 'bar',
           data: [this.totalindexjan, this.totalindexfeb, this.totalindexmar, this.totalindexapr, this.totalindexmei, this.totalindexjun, this.totalindexjul, this.totalindexagu, this.totalindexsep, this.totalindexokt,this.totalindexnov, this.totalindexdes],
 
         },
@@ -853,6 +876,9 @@ export class CostComponent implements OnInit {
       },
       stroke: {
         width: [0, 3],
+      },
+      stroke2: {
+        width: [3, 0],
       },
       legend: {
         position: 'top',
@@ -889,9 +915,10 @@ export class CostComponent implements OnInit {
 
         // enabledOnSeries: [1],
       },
+      colors2: ["#FF1654", "#3ac7e0"],
       colors: [
         '#3ac7e0',
-        '#acdb12',
+        '#FF1654',
         // '#00ABB3',
         // '#00ABB3',
         // '#00ABB3',
@@ -915,10 +942,15 @@ export class CostComponent implements OnInit {
             style: {
               // color: undefined,
               fontSize: '12px',
-              fontFamily: 'Manrope',
+
               fontWeight: 700,
               cssClass: 'apexcharts-yaxis-title',
+              color: "#3ac7e0"
             },
+          },
+          axisBorder: {
+            show: true,
+            color: "#3ac7e0"
           },
           labels: {
             formatter: (value: number) => {
@@ -935,10 +967,15 @@ export class CostComponent implements OnInit {
             style: {
               // color: undefined,
               fontSize: '12px',
-              fontFamily: 'Manrope',
+
               fontWeight: 700,
+              color: "#3ac7e0",
               cssClass: 'apexcharts-yaxis-title',
             },
+          },
+          axisBorder: {
+            show: true,
+            color: "#3ac7e0"
           },
           labels: {
             formatter: (value: number) => {
@@ -955,10 +992,15 @@ export class CostComponent implements OnInit {
             style: {
               // color: undefined,
               fontSize: '12px',
-              fontFamily: 'Manrope',
+
               fontWeight: 700,
+                color: "#3ac7e0",
               cssClass: 'apexcharts-yaxis-title',
             },
+          },
+          axisBorder: {
+            show: true,
+            color: "#3ac7e0"
           },
           labels: {
             formatter: (value: number) => {
@@ -975,10 +1017,15 @@ export class CostComponent implements OnInit {
             style: {
               // color: undefined,
               fontSize: '12px',
-              fontFamily: 'Manrope',
+
               fontWeight: 700,
+              color: "#3ac7e0",
               cssClass: 'apexcharts-yaxis-title',
             },
+          },
+          axisBorder: {
+            show: true,
+            color: "#3ac7e0"
           },
           labels: {
             formatter: (value: number) => {
@@ -995,10 +1042,14 @@ export class CostComponent implements OnInit {
             style: {
               // color: undefined,
               fontSize: '12px',
-              fontFamily: 'Manrope',
               fontWeight: 700,
               cssClass: 'apexcharts-yaxis-title',
+              color: "#3ac7e0"
             },
+          },
+          axisBorder: {
+            show: true,
+            color: "#3ac7e0"
           },
           labels: {
             formatter: (value: number) => {
@@ -1010,24 +1061,55 @@ export class CostComponent implements OnInit {
       ],
       yaxis6: [
         {
-          title: {
-            text: 'Total Comparison Maintenance Cost',
+          seriesName: "Index Cost",
+          opposite: true,
+          axisTicks: {
+            show: true
+          },
+          axisBorder: {
+            show: true,
+            color: "#FF1654"
+          },
+          labels: {
             style: {
-              // color: undefined,
-              fontSize: '12px',
-              fontFamily: 'Manrope',
-              fontWeight: 700,
-              cssClass: 'apexcharts-yaxis-title',
+              color: "#FF1654"
+            }
+          },
+          title: {
+            text: "Index Cost",
+            style: {
+              color: "#FF1654"
+            }
+          }
+        },
+        {
+          seriesName: "Index Maintenance Cost",
+          opposite: false,
+          axisTicks: {
+            show: true
+          },
+          axisBorder: {
+            show: true,
+            color: "#3ac7e0"
+          },
+          title: {
+            text: "Index Maintenance Cost",
+            style: {
+              color: "#3ac7e0"
+            }
+          },
+          labels: {
+            formatter: (value: number) => {
+              return 'Rp. ' + this.numberWithCommas(value);
             },
           },
         },
-
       ],
     };
   };
 
   numberWithCommas(x: any) {
-    var parts = x.toString().split(".");
+    var parts = x?.toString().split(".");
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return parts.join(".");
   }

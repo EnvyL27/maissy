@@ -3,12 +3,14 @@ import { CountService } from '../services/count.service';
 import { Chart } from 'chart.js';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ChartOptions } from './chart';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-cost-fsb',
   templateUrl: './cost-fsb.component.html',
   styleUrls: ['./cost-fsb.component.css']
 })
+
 export class CostFsbComponent implements OnInit {
   public chartOptions!: Partial<ChartOptions> | any;
   public resolved: boolean = false;
@@ -29,7 +31,9 @@ export class CostFsbComponent implements OnInit {
   readyexecute: number = 0;
   //variable for cost maintenance
   cost: any;
-  costarr: any = [];
+  cost2: any;
+  index: number = 0;
+  indexstop: number = 0;
   cmplanjan: any;
   cmplanfeb: any;
   cmplanmar: any;
@@ -42,7 +46,6 @@ export class CostFsbComponent implements OnInit {
   cmplanokt: any;
   cmplannov: any;
   cmplandes: any;
-  cmplanarr: any = [];
   cmactjan: any;
   cmactfeb: any;
   cmactmar: any;
@@ -103,6 +106,70 @@ export class CostFsbComponent implements OnInit {
   pmactokt: any;
   pmactnov: any;
   pmactdes: any;
+  totalcmcurjan: number = 0;
+  totalcmcurfeb: number = 0;
+  totalcmcurmar: number = 0;
+  totalcmcurapr: number = 0;
+  totalcmcurmei: number = 0;
+  totalcmcurjun: number = 0;
+  totalcmcurjul: number = 0;
+  totalcmcuragu: number = 0;
+  totalcmcursep: number = 0;
+  totalcmcurokt: number = 0;
+  totalcmcurnov: number = 0;
+  totalcmcurdes: number = 0;
+  totalcmcpastjan: number = 0;
+  totalcmcpastfeb: number = 0;
+  totalcmcpastmar: number = 0;
+  totalcmcpastapr: number = 0;
+  totalcmcpastmei: number = 0;
+  totalcmcpastjun: number = 0;
+  totalcmcpastjul: number = 0;
+  totalcmcpastagu: number = 0;
+  totalcmcpastsep: number = 0;
+  totalcmcpastokt: number = 0;
+  totalcmcpastnov: number = 0;
+  totalcmcpastdes: number = 0;
+  totalindexjan: number = 0;
+  totalindexfeb: number = 0;
+  totalindexmar: number = 0;
+  totalindexapr: number = 0;
+  totalindexmei: number = 0;
+  totalindexjun: number = 0;
+  totalindexjul: number = 0;
+  totalindexagu: number = 0;
+  totalindexsep: number = 0;
+  totalindexokt: number = 0;
+  totalindexnov: number = 0;
+  totalindexdes: number = 0;
+  datafg: any;
+  dataindex: any;
+  totalfgjan: number = 0;
+  totalfgfeb: number = 0;
+  totalfgmar: number = 0;
+  totalfgapr: number = 0;
+  totalfgmei: number = 0;
+  totalfgjun: number = 0;
+  totalfgjul: number = 0;
+  totalfgagu: number = 0;
+  totalfgsep: number = 0;
+  totalfgokt: number = 0;
+  totalfgnov: number = 0;
+  totalfgdes: number = 0;
+  indexcostjan: number = 0;
+  indexcostfeb: number = 0;
+  indexcostmar: number = 0;
+  indexcostapr: number = 0;
+  indexcostmei: number = 0;
+  indexcostjun: number = 0;
+  indexcostjul: number = 0;
+  indexcostagu: number = 0;
+  indexcostsep: number = 0;
+  indexcostokt: number = 0;
+  indexcostnov: number = 0;
+  indexcostdes: number = 0;
+  totalpastyear: number = 0;
+  totalcurrentyear: number = 0;
 
 
   deskripsi: any = 'Loading..';
@@ -114,11 +181,11 @@ export class CostFsbComponent implements OnInit {
       this.service.getCountTotalFinding().subscribe(data => {
         this.totalkategori = data;
         Object.values(this.totalkategori).forEach(data => {
-          // // console.log(data);
+          // // //console.log(data);
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
-          // // console.log(array);
+          // // //console.log(array);
           for (let i = 0; i < array.length; i++) {
             this.totalkategoriarr.splice(this.totalkategoriarr.lenght, 0, array[i]);
           }
@@ -170,199 +237,538 @@ export class CostFsbComponent implements OnInit {
 
       }
       );
+      forkJoin(this.service.getCostFsb(),
+        this.service.getCostFsbPast()).subscribe(([data, data2]) => {
+          // //console.log(data);
+          // //console.log(data2);
+          this.cost = data;
+          this.cost2 = data2;
 
-      this.service.getCostOci1().subscribe(data => {
-        this.cost = data;
-        console.log(data);
+          this.cost.forEach((element: any, index: number) => {
+            // //console.log(element.budget);
 
+            element.budget = parseInt(element.budget);
+            if (element.year == '2023') {
+              if (element.category == "Corrective Maintenance") {
+                if (element.actual == "Plan") {
+                  if (element.month == "01") {
 
+                    this.cmplanjan = element.budget;
 
-        this.cost.forEach((element: any) => {
-          if (element.category == "Corrective Maintenance") {
-            if (element.actual == "Plan") {
-              if (element.month == "Jan") {
-                this.cmplanjan = element.budget;
-              } else if (element.month == "Feb") {
-                this.cmplanfeb = element.budget;
-              } else if (element.month == "Mar") {
-                this.cmplanmar = element.budget;
-              } else if (element.month == "Apr") {
-                this.cmplanapr = element.budget;
-              } else if (element.month == "May") {
-                this.cmplanmei = element.budget;
-              } else if (element.month == "Jun") {
-                this.cmplanjun = element.budget;
-              } else if (element.month == "Jul") {
-                this.cmplanjul = element.budget;
-              } else if (element.month == "Agu") {
-                this.cmplanaug = element.budget;
-              } else if (element.month == "Sep") {
-                this.cmplansep = element.budget;
-              } else if (element.month == "Okt") {
-                this.cmplanokt = element.budget;
-              } else if (element.month == "Nov") {
-                this.cmplannov = element.budget;
-              } else if (element.month == "Des") {
-                this.cmplandes = element.budget;
-              }
-            } else if (element.actual == "Actual") {
-              if (element.month == "Jan") {
-                this.cmactjan = element.budget;
-              } else if (element.month == "Feb") {
-                this.cmactfeb = element.budget;
-              } else if (element.month == "Mar") {
-                this.cmactmar = element.budget;
-              } else if (element.month == "Apr") {
-                this.cmactapr = element.budget;
-              } else if (element.month == "Mei") {
-                this.cmactmei = element.budget;
-              } else if (element.month == "Jun") {
-                this.cmactjun = element.budget;
-              } else if (element.month == "Jul") {
-                this.cmactjul = element.budget;
-              } else if (element.month == "Agu") {
-                this.cmactaug = element.budget;
-              } else if (element.month == "Sep") {
-                this.cmactsep = element.budget;
-              } else if (element.month == "Okt") {
-                this.cmactokt = element.budget;
-              } else if (element.month == "Nov") {
-                this.cmactnov = element.budget;
-              } else if (element.month == "Des") {
-                this.cmactdes = element.budget;
+                  } else if (element.month == "02") {
+                    this.cmplanfeb = element.budget;
+
+                  } else if (element.month == "03") {
+                    this.cmplanmar = element.budget;
+
+                  } else if (element.month == "04") {
+                    this.cmplanapr = element.budget;
+
+                  } else if (element.month == "05") {
+                    this.cmplanmei = element.budget;
+
+                  } else if (element.month == "06") {
+                    this.cmplanjun = element.budget;
+
+                  } else if (element.month == "07") {
+                    this.cmplanjul = element.budget;
+
+                  } else if (element.month == "08") {
+                    this.cmplanaug = element.budget;
+
+                  } else if (element.month == "09") {
+                    this.cmplansep = element.budget;
+
+                  } else if (element.month == "10") {
+                    this.cmplanokt = element.budget;
+
+                  } else if (element.month == "11") {
+                    this.cmplannov = element.budget;
+
+                  } else if (element.month == "12") {
+                    this.cmplandes = element.budget;
+
+                  }
+                } else if (element.actual == "Actual") {
+                  if (element.month == "01") {
+                    if (element.budget != 0) {
+                      this.index += 1;
+                      this.indexstop = 1;
+                    } else if (element.budget == 0) {
+                      this.indexstop = 0;
+                    }
+                    this.cmactjan = element.budget;
+                    this.totalindexjan += element.budget;
+                    this.totalcmcurjan += element.budget;
+                  } else if (element.month == "02") {
+                    if (element.budget != 0) {
+                      this.index += 1;
+                      this.indexstop = 1;
+                    } else if (element.budget == 0) {
+                      this.indexstop = 0;
+                    }
+                    this.totalindexfeb += element.budget;
+                    this.cmactfeb = element.budget;
+                    this.totalcmcurfeb += element.budget;
+                  } else if (element.month == "03") {
+                    if (element.budget != 0) {
+                      this.index += 1;
+                      this.indexstop = 1;
+                    } else if (element.budget == 0) {
+                      this.indexstop = 0;
+                    }
+                    this.totalindexmar += element.budget;
+                    this.cmactmar = element.budget;
+                    this.totalcmcurmar += element.budget;
+                  } else if (element.month == "04") {
+                    if (element.budget != 0) {
+                      this.index += 1;
+                      this.indexstop = 1;
+                    } else if (element.budget == 0) {
+                      this.indexstop = 0;
+                    }
+                    this.totalindexapr += element.budget;
+                    this.cmactapr = element.budget;
+                    this.totalcmcurapr += element.budget;
+                  } else if (element.month == "05") {
+                    if (element.budget != 0) {
+                      this.index += 1;
+                      this.indexstop = 1;
+                    } else if (element.budget == 0) {
+                      this.indexstop = 0;
+                    }
+                    this.totalindexmei += element.budget;
+                    this.cmactmei = element.budget;
+                    this.totalcmcurmei += element.budget;
+                  } else if (element.month == "06") {
+                    if (element.budget != 0) {
+                      this.index += 1;
+                      this.indexstop = 1;
+                    } else if (element.budget == 0) {
+                      this.indexstop = 0;
+                    }
+                    this.totalindexjun += element.budget;
+                    this.cmactjun = element.budget;
+                    this.totalcmcurjun += element.budget;
+                  } else if (element.month == "07") {
+                    if (element.budget != 0) {
+                      this.index += 1;
+                      this.indexstop = 1;
+                    } else if (element.budget == 0) {
+                      this.indexstop = 0;
+                    }
+                    this.totalindexjul += element.budget;
+                    this.cmactjul = element.budget;
+                    this.totalcmcurjul += element.budget;
+                  } else if (element.month == "08") {
+                    if (element.budget != 0) {
+                      this.index += 1;
+                      this.indexstop = 1;
+                    } else if (element.budget == 0) {
+                      this.indexstop = 0;
+                    }
+                    this.totalindexagu += element.budget;
+                    this.cmactaug = element.budget;
+                    this.totalcmcuragu += element.budget;
+                  } else if (element.month == "09") {
+                    if (element.budget != 0) {
+                      this.index += 1;
+                      this.indexstop = 1;
+                    } else if (element.budget == 0) {
+                      this.indexstop = 0;
+                    }
+                    this.totalindexsep += element.budget;
+                    this.cmactsep = element.budget;
+                    this.totalcmcursep += element.budget;
+                  } else if (element.month == "10") {
+                    if (element.budget != 0) {
+                      this.index += 1;
+                      this.indexstop = 1;
+                    } else if (element.budget == 0) {
+                      this.indexstop = 0;
+                    }
+                    this.totalindexokt += element.budget;
+                    this.cmactokt = element.budget;
+                    this.totalcmcurokt += element.budget;
+                  } else if (element.month == "11") {
+                    if (element.budget != 0) {
+                      this.index += 1;
+                      this.indexstop = 1;
+                    } else if (element.budget == 0) {
+                      this.indexstop = 0;
+                    }
+                    this.totalindexnov += element.budget;
+                    this.cmactnov = element.budget;
+                    this.totalcmcurnov += element.budget;
+                  } else if (element.month == "12") {
+                    if (element.budget != 0) {
+                      this.index += 1;
+                      this.indexstop = 1;
+                    } else if (element.budget == 0) {
+                      this.indexstop = 0;
+                    }
+                    this.totalindexdes += element.budget;
+                    this.cmactdes = element.budget;
+                    this.totalcmcurdes += element.budget;
+                  }
+                }
+              } else if (element.category == "Overhaul") {
+                if (element.actual == "Plan") {
+                  if (element.month == "01") {
+                    this.ovhplanjan = element.budget;
+                  } else if (element.month == "02") {
+                    this.ovhplanfeb = element.budget;
+                  } else if (element.month == "03") {
+                    this.ovhplanmar = element.budget;
+                  } else if (element.month == "04") {
+                    this.ovhplanapr = element.budget;
+                  } else if (element.month == "05") {
+                    this.ovhplanmei = element.budget;
+                  } else if (element.month == "06") {
+                    this.ovhplanjun = element.budget;
+                  } else if (element.month == "07") {
+                    this.ovhplanjul = element.budget;
+                  } else if (element.month == "08") {
+                    this.ovhplanaug = element.budget;
+                  } else if (element.month == "09") {
+                    this.ovhplansep = element.budget;
+                  } else if (element.month == "10") {
+                    this.ovhplanokt = element.budget;
+                  } else if (element.month == "11") {
+                    this.ovhplannov = element.budget;
+                  } else if (element.month == "12") {
+                    this.ovhplandes = element.budget;
+                  }
+                } else if (element.actual == "Actual") {
+                  if (element.month == "01") {
+                    this.totalindexjan += element.budget;
+                    this.ovhactjan = element.budget;
+                    this.totalcmcurjan += element.budget;
+                  } else if (element.month == "02") {
+                    this.totalindexfeb += element.budget;
+                    this.ovhactfeb = element.budget;
+                    this.totalcmcurfeb += element.budget;
+                  } else if (element.month == "03") {
+                    this.totalindexmar += element.budget;
+                    this.ovhactmar = element.budget;
+                    this.totalcmcurmar += element.budget;
+                  } else if (element.month == "04") {
+                    this.totalindexapr += element.budget;
+                    this.ovhactapr = element.budget;
+                    this.totalcmcurapr += element.budget;
+                  } else if (element.month == "05") {
+                    this.totalindexmei += element.budget;
+                    this.ovhactmei = element.budget;
+                    this.totalcmcurmei += element.budget;
+                  } else if (element.month == "06") {
+                    this.totalindexjun += element.budget;
+                    this.ovhactjun = element.budget;
+                    this.totalcmcurjun += element.budget;
+                  } else if (element.month == "07") {
+                    this.totalindexjul += element.budget;
+                    this.ovhactjul = element.budget;
+                    this.totalcmcurjul += element.budget;
+                  } else if (element.month == "08") {
+                    this.totalindexagu += element.budget;
+                    this.ovhactaug = element.budget;
+                    this.totalcmcuragu += element.budget;
+                  } else if (element.month == "09") {
+                    this.totalindexsep += element.budget;
+                    this.ovhactsep = element.budget;
+                    this.totalcmcursep += element.budget;
+                  } else if (element.month == "10") {
+                    this.totalindexsep += element.budget;
+                    this.ovhactokt = element.budget;
+                    this.totalcmcurokt += element.budget;
+                  } else if (element.month == "11") {
+                    this.totalindexokt += element.budget;
+                    this.ovhactnov = element.budget;
+                    this.totalcmcurnov += element.budget;
+                  } else if (element.month == "12") {
+                    this.totalindexdes += element.budget;
+                    this.ovhactdes = element.budget;
+                    this.totalcmcurdes += element.budget;
+                  }
+                }
+              } else if (element.category == "Preventive Maintenance") {
+                if (element.actual == "Plan") {
+                  if (element.month == "01") {
+                    this.pmplanjan = element.budget;
+                  } else if (element.month == "02") {
+                    this.pmplanfeb = element.budget;
+                  } else if (element.month == "03") {
+                    this.pmplanmar = element.budget;
+                  } else if (element.month == "04") {
+                    this.pmplanapr = element.budget;
+                  } else if (element.month == "05") {
+                    this.pmplanmei = element.budget;
+                  } else if (element.month == "06") {
+                    this.pmplanjun = element.budget;
+                  } else if (element.month == "07") {
+                    this.pmplanjul = element.budget;
+                  } else if (element.month == "08") {
+                    this.pmplanaug = element.budget;
+                  } else if (element.month == "09") {
+                    this.pmplansep = element.budget;
+                  } else if (element.month == "10") {
+                    this.pmplanokt = element.budget;
+                  } else if (element.month == "11") {
+                    this.pmplannov = element.budget;
+                  } else if (element.month == "12") {
+                    this.pmplandes = element.budget;
+                  }
+                } else if (element.actual == "Actual") {
+                  if (element.month == "01") {
+                    this.totalindexjan += element.budget;
+                    this.pmactjan = element.budget;
+                    this.totalcmcurjan += element.budget;
+                  } else if (element.month == "02") {
+                    this.totalindexfeb += element.budget;
+                    this.pmactfeb = element.budget;
+                    this.totalcmcurfeb += element.budget;
+                  } else if (element.month == "03") {
+                    this.totalindexmar += element.budget;
+                    this.pmactmar = element.budget;
+                    this.totalcmcurmar += element.budget;
+                  } else if (element.month == "04") {
+                    this.totalindexapr += element.budget;
+                    this.pmactapr = element.budget;
+                    this.totalcmcurapr += element.budget;
+                  } else if (element.month == "05") {
+                    this.totalindexmei += element.budget;
+                    this.pmactmei = element.budget;
+                    this.totalcmcurmei += element.budget;
+                  } else if (element.month == "06") {
+                    this.totalindexjun += element.budget;
+                    this.pmactjun = element.budget;
+                    this.totalcmcurjun += element.budget;
+                  } else if (element.month == "07") {
+                    this.totalindexjul += element.budget;
+                    this.pmactjul = element.budget;
+                    this.totalcmcurjul += element.budget;
+                  } else if (element.month == "08") {
+                    this.totalindexagu += element.budget;
+                    this.pmactaug = element.budget;
+                    this.totalcmcuragu += element.budget;
+                  } else if (element.month == "09") {
+                    this.totalindexsep += element.budget;
+                    this.pmactsep = element.budget;
+                    this.totalcmcursep += element.budget;
+                  } else if (element.month == "10") {
+                    this.totalindexokt += element.budget;
+                    this.pmactokt = element.budget;
+                    this.totalcmcurokt += element.budget;
+                  } else if (element.month == "11") {
+                    this.totalindexnov += element.budget;
+                    this.pmactnov = element.budget;
+                    this.totalcmcurnov += element.budget;
+                  } else if (element.month == "12") {
+                    this.totalindexdes += element.budget;
+                    this.pmactdes = element.budget;
+                    this.totalcmcurdes += element.budget;
+                  }
+                }
               }
             }
-          } else if (element.category == "Overhaul") {
-            if (element.actual == "Plan") {
-              if (element.month == "Jan") {
-                this.ovhplanjan = element.budget;
-              } else if (element.month == "Feb") {
-                this.ovhplanfeb = element.budget;
-              } else if (element.month == "Mar") {
-                this.ovhplanmar = element.budget;
-              } else if (element.month == "Apr") {
-                this.ovhplanapr = element.budget;
-              } else if (element.month == "Mei") {
-                this.ovhplanmei = element.budget;
-              } else if (element.month == "Jun") {
-                this.ovhplanjun = element.budget;
-              } else if (element.month == "Jul") {
-                this.ovhplanjul = element.budget;
-              } else if (element.month == "Agu") {
-                this.ovhplanaug = element.budget;
-              } else if (element.month == "Sep") {
-                this.ovhplansep = element.budget;
-              } else if (element.month == "Okt") {
-                this.ovhplanokt = element.budget;
-              } else if (element.month == "Nov") {
-                this.ovhplannov = element.budget;
-              } else if (element.month == "Des") {
-                this.ovhplandes = element.budget;
-              }
-            } else if (element.actual == "Actual") {
-              if (element.month == "Jan") {
-                this.ovhactjan = element.budget;
-              } else if (element.month == "Feb") {
-                this.ovhactfeb = element.budget;
-              } else if (element.month == "Mar") {
-                this.ovhactmar = element.budget;
-              } else if (element.month == "Apr") {
-                this.ovhactapr = element.budget;
-              } else if (element.month == "Mei") {
-                this.ovhactmei = element.budget;
-              } else if (element.month == "Jun") {
-                this.ovhactjun = element.budget;
-              } else if (element.month == "Jul") {
-                this.ovhactjul = element.budget;
-              } else if (element.month == "Agu") {
-                this.ovhactaug = element.budget;
-              } else if (element.month == "Sep") {
-                this.ovhactsep = element.budget;
-              } else if (element.month == "Okt") {
-                this.ovhactokt = element.budget;
-              } else if (element.month == "Nov") {
-                this.ovhactnov = element.budget;
-              } else if (element.month == "Des") {
-                this.ovhactdes = element.budget;
-              }
+            //console.log(this.totalindexjan);
+
+          });
+
+          this.cost2.forEach((element: any, index: any) => {
+            //console.log(this.index);
+
+            element.budget = parseInt(element.budget);
+            element.month = parseInt(element.month);
+            if (element.month == "01") {
+              this.totalcmcpastjan += element.budget;
+            } else if (element.month == "02") {
+              this.totalcmcpastfeb += element.budget;
+            } else if (element.month == "03") {
+              this.totalcmcpastmar += element.budget;
+            } else if (element.month == "04") {
+              this.totalcmcpastapr += element.budget;
+            } else if (element.month == "05") {
+              this.totalcmcpastmei += element.budget;
+            } else if (element.month == "06") {
+              this.totalcmcpastjun += element.budget;
+            } else if (element.month == "07") {
+              this.totalcmcpastjul += element.budget;
+            } else if (element.month == "08") {
+              this.totalcmcpastagu += element.budget;
+            } else if (element.month == "09") {
+              this.totalcmcpastsep += element.budget;
+            } else if (element.month == "10") {
+              this.totalcmcpastokt += element.budget;
+            } else if (element.month == "11") {
+              this.totalcmcpastnov += element.budget;
+            } else if (element.month == "12") {
+              this.totalcmcpastdes += element.budget;
             }
-          } else if (element.category == "Preventive Maintenance") {
-            if (element.actual == "Plan") {
-              if (element.month == "Jan") {
-                this.pmplanjan = element.budget;
-              } else if (element.month == "Feb") {
-                this.pmplanfeb = element.budget;
-              } else if (element.month == "Mar") {
-                this.pmplanmar = element.budget;
-              } else if (element.month == "Apr") {
-                this.pmplanapr = element.budget;
-              } else if (element.month == "Mei") {
-                this.pmplanmei = element.budget;
-              } else if (element.month == "Jun") {
-                this.pmplanjun = element.budget;
-              } else if (element.month == "Jul") {
-                this.pmplanjul = element.budget;
-              } else if (element.month == "Agu") {
-                this.pmplanaug = element.budget;
-              } else if (element.month == "Sep") {
-                this.pmplansep = element.budget;
-              } else if (element.month == "Okt") {
-                this.pmplanokt = element.budget;
-              } else if (element.month == "Nov") {
-                this.pmplannov = element.budget;
-              } else if (element.month == "Des") {
-                this.pmplandes = element.budget;
+          });
+
+          this.cost.forEach((element: any) => {
+            element.budget = parseInt(element.budget);
+            element.month = parseInt(element.month);
+            if (element.actual == "Actual") {
+              if (element.month <= this.index) {
+                this.totalcurrentyear += element.budget;
+              } else if (element.month <= this.index) {
+                this.totalcurrentyear + element.budget;
+              } else if (element.month <= this.index) {
+                this.totalcurrentyear += element.budget;
+              } else if (element.month <= this.index) {
+                this.totalcurrentyear += element.budget;
+              } else if (element.month <= this.index) {
+                this.totalcurrentyear += element.budget;
+              } else if (element.month <= this.index) {
+                this.totalcurrentyear += element.budget;
+              } else if (element.month <= this.index) {
+                this.totalcurrentyear += element.budget;
+              } else if (element.month <= this.index) {
+                this.totalcurrentyear += element.budget;
+              } else if (element.month <= this.index) {
+                this.totalcurrentyear += element.budget;
+              } else if (element.month <= this.index) {
+                this.totalcurrentyear += element.budget;
+              } else if (element.month <= this.index) {
+                this.totalcurrentyear += element.budget;
+              } else if (element.month <= this.index) {
+                this.totalcurrentyear += element.budget;
               }
-            } else if (element.actual == "Actual") {
-              if (element.month == "Jan") {
-                this.pmactjan = element.budget;
-              } else if (element.month == "Feb") {
-                this.pmactfeb = element.budget;
-              } else if (element.month == "Mar") {
-                this.pmactmar = element.budget;
-              } else if (element.month == "Apr") {
-                this.pmactapr = element.budget;
-              } else if (element.month == "Mei") {
-                this.pmactmei = element.budget;
-              } else if (element.month == "Jun") {
-                this.pmactjun = element.budget;
-              } else if (element.month == "Jul") {
-                this.pmactjul = element.budget;
-              } else if (element.month == "Agu") {
-                this.pmactaug = element.budget;
-              } else if (element.month == "Sep") {
-                this.pmactsep = element.budget;
-              } else if (element.month == "Okt") {
-                this.pmactokt = element.budget;
-              } else if (element.month == "Nov") {
-                this.pmactnov = element.budget;
-              } else if (element.month == "Des") {
-                this.pmactdes = element.budget;
-              }
+              //console.log(this.totalcurrentyear);
+
             }
-          }
+          });
+
+          this.cost2.forEach((element: any) => {
+            element.budget = parseInt(element.budget);
+            element.month = parseInt(element.month);
+            if (element.month <= this.index) {
+              this.totalpastyear += element.budget;
+            } else if (element.month <= this.index) {
+              this.totalpastyear + element.budget;
+            } else if (element.month <= this.index) {
+              this.totalpastyear += element.budget;
+            } else if (element.month <= this.index) {
+              this.totalpastyear += element.budget;
+            } else if (element.month <= this.index) {
+              this.totalpastyear += element.budget;
+            } else if (element.month <= this.index) {
+              this.totalpastyear += element.budget;
+            } else if (element.month <= this.index) {
+              this.totalpastyear += element.budget;
+            } else if (element.month <= this.index) {
+              this.totalpastyear += element.budget;
+            } else if (element.month <= this.index) {
+              this.totalpastyear += element.budget;
+            } else if (element.month <= this.index) {
+              this.totalpastyear += element.budget;
+            } else if (element.month <= this.index) {
+              this.totalpastyear += element.budget;
+            } else if (element.month <= this.index) {
+              this.totalpastyear += element.budget;
+            }
+          });
+
+
+          this.costChart();
+
 
         });
 
-        // this.cmplanjan = this.cmplanjan.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
-        // console.log(this.format(this.cmplanjan));
+      forkJoin(this.service.getCostFsb(),
+              this.service.getFgFsb()).subscribe(([datacost, datafg]) => {
+                // //console.log(datacost);
+                // //console.log(datafg);
+                this.datafg = datafg;
+                this.dataindex = datacost;
+                // this.indexcostjan =
+                // //console.log(this.totalfgjan);
 
-        this.costChart();
-        console.log(this.pmplandes);
-        console.log(this.ovhplandes);
+
+                this.datafg.forEach((element:any, index: any) => {
+                  element.month = parseInt(element.month);
+                  element.fg_eq = parseInt(element.fg_eq);
+                  if(Number.isNaN(element.fg_eq)){
+                    element.fg_eq = 0;
+                  }
+                  // //console.log(index)
+                  //console.log(element);
+                  // //console.log(this.totalindexjan);
+                  // this.indexcostjan =
+                  if(element.month == 1){
+                    this.indexcostjan = this.totalindexjan / element.fg_eq;
+                    const firstthreedigit = String(this.indexcostjan).slice(0, 3);
+                    this.indexcostjan = parseInt(firstthreedigit);
+                  }
+                  else if(element.month == 2){
+                    this.indexcostfeb = this.totalindexfeb / element.fg_eq;
+                    const firstthreedigit = String(this.indexcostfeb).slice(0, 3);
+                    this.indexcostfeb = parseInt(firstthreedigit);
+                  }
+                  else if(element.month == 3){
+                    this.indexcostmar = this.totalindexmar / element.fg_eq
+                    const firstthreedigit = String(this.indexcostmar).slice(0, 3);
+                    this.indexcostmar = parseInt(firstthreedigit);
+                  }
+                  else if(element.month == 4){
+                    this.indexcostapr = this.totalindexapr / element.fg_eq
+                    const firstthreedigit = String(this.indexcostapr).slice(0, 3);
+                    this.indexcostapr = parseInt(firstthreedigit);
+                  }
+                  else if(element.month == 5){
+                    this.indexcostmei = this.totalindexmei / element.fg_eq
+                    const firstthreedigit = String(this.indexcostmei).slice(0, 3);
+                    this.indexcostmei = parseInt(firstthreedigit);
+                  }
+                  else if(element.month == 6){
+                    this.indexcostjun = this.totalindexjun / element.fg_eq
+                    const firstthreedigit = String(this.indexcostjun).slice(0, 3);
+                    this.indexcostjun = parseInt(firstthreedigit);
+                  }
+                  else if(element.month == 7){
+                    this.indexcostjul = this.totalindexjul / element.fg_eq
+                    const firstthreedigit = String(this.indexcostjul).slice(0, 3);
+                    this.indexcostjul = parseInt(firstthreedigit);
+                  }
+                  else if(element.month == 8){
+                    this.indexcostagu = this.totalindexagu / element.fg_eq
+                    const firstthreedigit = String(this.indexcostagu).slice(0, 3);
+                    this.indexcostagu = parseInt(firstthreedigit);
+                  }
+                  else if(element.month == 9){
+                    this.indexcostsep = this.totalindexsep / element.fg_eq
+                    const firstthreedigit = String(this.indexcostsep).slice(0, 3);
+                    this.indexcostsep = parseInt(firstthreedigit);
+                  }
+                  else if(element.month == 10){
+                    this.indexcostokt = this.totalindexokt / element.fg_eq
+                    const firstthreedigit = String(this.indexcostokt).slice(0, 3);
+                    this.indexcostokt = parseInt(firstthreedigit);
+                  }
+                  else if(element.month == 11){
+                    this.indexcostnov = this.totalindexnov / element.fg_eq
+                    const firstthreedigit = String(this.indexcostnov).slice(0, 3);
+                    this.indexcostnov = parseInt(firstthreedigit);
+                  }
+                  else if(element.month == 12){
+                    this.indexcostdes = this.totalindexdes / element.fg_eq
+                    const firstthreedigit = String(this.indexcostdes).slice(0, 3);
+                    this.indexcostdes = parseInt(firstthreedigit);
+                  }
 
 
+                });
 
-      });
+                this.costChart();
 
+              })
     });
-    //// console.log("1");
 
 
     this.spinner.show();
     this.loaddata = await this.loaddata;
   }
-
 
   costChart() {
     this.chartOptions = {
@@ -402,6 +808,51 @@ export class CostFsbComponent implements OnInit {
           data: [this.pmplanjan, this.pmplanfeb, this.pmplanmar, this.pmplanapr, this.pmplanmei, this.pmplanjun, this.pmplanjul, this.pmplanaug, this.pmplansep, this.pmplanokt, this.pmplannov, this.pmplandes],
         },
       ],
+      series4: [
+        {
+          name: '2023',
+          type: 'column',
+
+          data: [this.totalcmcurjan, this.totalcmcurfeb, this.totalcmcurmar, this.totalcmcurapr, this.totalcmcurmei, this.totalcmcurjun, this.totalcmcurjul, this.totalcmcuragu, this.totalcmcursep, this.totalcmcurokt, this.totalcmcurnov, this.totalcmcurdes],
+        },
+        {
+          name: '2022',
+          type: 'column',
+          data: [this.totalcmcpastjan, this.totalcmcpastfeb, this.totalcmcpastmar, this.totalcmcpastapr, this.totalcmcpastmei, this.totalcmcpastjun, this.totalcmcpastjul, this.totalcmcpastagu, this.totalcmcpastsep, this.totalcmcpastokt, this.totalcmcpastnov, this.totalcmcpastdes],
+
+        },
+
+      ],
+      series5: [
+        {
+          name: '2023',
+          type: 'column',
+
+          data: [this.totalcurrentyear],
+        },
+        {
+          name: '2022',
+          type: 'column',
+          data: [this.totalpastyear],
+
+        },
+
+      ],
+      series6: [
+        {
+          name: 'Index Cost',
+          type: 'line',
+
+          data: [this.indexcostjan, this.indexcostfeb, this.indexcostmar, this.indexcostapr, this.indexcostmei, this.indexcostjun, this.indexcostjul, this.indexcostagu, this.indexcostsep, this.indexcostokt, this.indexcostnov, this.indexcostdes],
+        },
+        {
+          name: 'Maintenance Cost',
+          type: 'bar',
+          data: [this.totalindexjan, this.totalindexfeb, this.totalindexmar, this.totalindexapr, this.totalindexmei, this.totalindexjun, this.totalindexjul, this.totalindexagu, this.totalindexsep, this.totalindexokt,this.totalindexnov, this.totalindexdes],
+
+        },
+
+      ],
       chart: {
         height: 600,
         type: 'line',
@@ -416,8 +867,19 @@ export class CostFsbComponent implements OnInit {
 
         },
       },
+      export: {
+        svg: {
+          filename: 'Corrective_maintenance_chart',
+        },
+        png: {
+          filename: 'Corrective_maintenance_chart',
+        }
+      },
       stroke: {
         width: [0, 3],
+      },
+      stroke2: {
+        width: [3, 0],
       },
       legend: {
         position: 'top',
@@ -429,21 +891,35 @@ export class CostFsbComponent implements OnInit {
       //   // text: 'Traffic Sources',
       // },
       dataLabels: {
-        enabled: true,
+        enabled: false,
         style: {
           fontSize: '12px',
         },
         formatter: (x: any) => {
-          return 'Rp. ' + this.separateComma(x);
+          return 'Rp. ' + this.numberWithCommas(x);
         },
         dropShadow: { enabled: true }
 
 
         // enabledOnSeries: [1],
       },
+      dataLabels2: {
+        enabled: false,
+        style: {
+          fontSize: '12px',
+        },
+        formatter: (x: any) => {
+          return 'Rp. ' + this.numberWithCommas(x);
+        },
+        dropShadow: { enabled: true }
+
+
+        // enabledOnSeries: [1],
+      },
+      colors2: ["#FF1654", "#3ac7e0"],
       colors: [
         '#3ac7e0',
-        '#acdb12',
+        '#FF1654',
         // '#00ABB3',
         // '#00ABB3',
         // '#00ABB3',
@@ -467,10 +943,15 @@ export class CostFsbComponent implements OnInit {
             style: {
               // color: undefined,
               fontSize: '12px',
-              fontFamily: 'Manrope',
+
               fontWeight: 700,
               cssClass: 'apexcharts-yaxis-title',
+              color: "#3ac7e0"
             },
+          },
+          axisBorder: {
+            show: true,
+            color: "#3ac7e0"
           },
           labels: {
             formatter: (value: number) => {
@@ -487,10 +968,15 @@ export class CostFsbComponent implements OnInit {
             style: {
               // color: undefined,
               fontSize: '12px',
-              fontFamily: 'Manrope',
+
               fontWeight: 700,
+              color: "#3ac7e0",
               cssClass: 'apexcharts-yaxis-title',
             },
+          },
+          axisBorder: {
+            show: true,
+            color: "#3ac7e0"
           },
           labels: {
             formatter: (value: number) => {
@@ -507,10 +993,15 @@ export class CostFsbComponent implements OnInit {
             style: {
               // color: undefined,
               fontSize: '12px',
-              fontFamily: 'Manrope',
+
               fontWeight: 700,
+                color: "#3ac7e0",
               cssClass: 'apexcharts-yaxis-title',
             },
+          },
+          axisBorder: {
+            show: true,
+            color: "#3ac7e0"
           },
           labels: {
             formatter: (value: number) => {
@@ -520,60 +1011,113 @@ export class CostFsbComponent implements OnInit {
         },
 
       ],
-      // yaxis2: [
-      //   {
-      //     title: {
-      //       text: 'Level (inchH₂O)',
-      //       style: {
-      //         // color: undefined,
-      //         fontSize: '12px',
-      //         fontFamily: 'Manrope',
-      //         fontWeight: 700,
-      //         cssClass: 'apexcharts-yaxis-title',
-      //       },
-      //     },
-      //   },
-      // ],
+      yaxis4: [
+        {
+          title: {
+            text: 'Comparison Maintenance Cost',
+            style: {
+              // color: undefined,
+              fontSize: '12px',
+
+              fontWeight: 700,
+              color: "#3ac7e0",
+              cssClass: 'apexcharts-yaxis-title',
+            },
+          },
+          axisBorder: {
+            show: true,
+            color: "#3ac7e0"
+          },
+          labels: {
+            formatter: (value: number) => {
+              return 'Rp. ' + this.numberWithCommas(value);
+            },
+          },
+        },
+
+      ],
+      yaxis5: [
+        {
+          title: {
+            text: 'Total Comparison Maintenance Cost',
+            style: {
+              // color: undefined,
+              fontSize: '12px',
+              fontWeight: 700,
+              cssClass: 'apexcharts-yaxis-title',
+              color: "#3ac7e0"
+            },
+          },
+          axisBorder: {
+            show: true,
+            color: "#3ac7e0"
+          },
+          labels: {
+            formatter: (value: number) => {
+              return 'Rp. ' + this.numberWithCommas(value);
+            },
+          },
+        },
+
+      ],
+      yaxis6: [
+        {
+          seriesName: "Index Cost",
+          opposite: true,
+          axisTicks: {
+            show: true
+          },
+          axisBorder: {
+            show: true,
+            color: "#FF1654"
+          },
+          labels: {
+            style: {
+              color: "#FF1654"
+            }
+          },
+          title: {
+            text: "Index Cost",
+            style: {
+              color: "#FF1654"
+            }
+          }
+        },
+        {
+          seriesName: "Index Maintenance Cost",
+          opposite: false,
+          axisTicks: {
+            show: true
+          },
+          axisBorder: {
+            show: true,
+            color: "#3ac7e0"
+          },
+          title: {
+            text: "Index Maintenance Cost",
+            style: {
+              color: "#3ac7e0"
+            }
+          },
+          labels: {
+            formatter: (value: number) => {
+              return 'Rp. ' + this.numberWithCommas(value);
+            },
+          },
+        },
+      ],
     };
   };
 
   numberWithCommas(x: any) {
-    var parts = x.toString().split(".");
+    var parts = x?.toString().split(".");
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return parts.join(".");
   }
-  separateComma(val: any) {
-    // remove sign if negative
-    var sign = 1;
-    if (val < 0) {
-      sign = -1;
-      val = -val;
-    }
-    // trim the number decimal point if it exists
-    let num = val.toString().includes('.')
-      ? val.toString().split('.')[0]
-      : val.toString();
-    let len = num.toString().length;
-    let result = '';
-    let count = 1;
-
-    for (let i = len - 1; i >= 0; i--) {
-      result = num.toString()[i] + result;
-      if (count % 3 === 0 && count !== 0 && i !== 0) {
-        result = ',' + result;
-      }
-      count++;
-    }
-
-    // add number after decimal point
-    if (val.toString().includes('.')) {
-      result = result + '.' + val.toString().split('.')[1];
-    }
-    // return result with - sign if negative
-    return sign < 0 ? '-' + result : result;
-  }
 
 };
+
+
 
 
 
