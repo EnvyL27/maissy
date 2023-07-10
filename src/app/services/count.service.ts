@@ -246,6 +246,15 @@ export class CountService {
   getReadTotalPdmAssetoci1() {
     return this.httpClient.get(api + "totalpdmassetoci1");
   }
+  getReadPdmAssetoci1() {
+    return this.httpClient.get(api + "pdmassetoci1");
+  }
+  getReadPdmAssetoci2() {
+    return this.httpClient.get(api + "pdmassetoci2");
+  }
+  getReadPdmAssetFSB() {
+    return this.httpClient.get(api + "pdmassetfsb");
+  }
   getReadTotalPdmAssetoci2() {
     return this.httpClient.get(api + "totalpdmassetoci2");
   }

@@ -15,7 +15,7 @@
         <div class="flex-auto p-4">
           <div class="flex flex-row -mx-3">
             <div class="flex-none w-2/3 max-w-full px-3">
-              <div>
+              <div (click)="totalAsset()">
                 <p class="mb-0 font-sans font-semibold leading-normal text-sm">
                   Total Asset
                 </p>
@@ -32,7 +32,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div>-
     </div>
     <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
       <div class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
@@ -63,7 +63,7 @@
         <div class="flex-auto p-4">
           <div class="flex flex-row -mx-3">
             <div class="flex-none w-2/3 max-w-full px-3">
-              <div>
+              <div (click)="totalSatisfactory();">
                 <p class="mb-0 font-sans font-semibold leading-normal text-xs">
                   Total Satisfactory
                 </p>
@@ -107,6 +107,136 @@
       </div>
     </div>
   </div>
+
+  <div [ngClass]="listoftotalsatisfactory ? '': 'hidden'" class="my-1 px-1 w-full md:w-full lg:my-6 lg:px-6 pt-6">
+    <div class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
+      <div class="flex-auto p-6">
+        <p class="text-center">Total Satisfactory</p>
+
+        <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+          <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400" id="excel-table">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <tr>
+                <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
+                  No
+                </th>
+                <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
+                  Device Name
+                </th>
+                <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
+                  Stat
+                </th>
+                <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
+                  Get Date
+                </th>
+                <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
+                  Do Date
+                </th>
+                <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
+                  PIC
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              *ngFor="let findingpending of listofsatisfactory | filter:searchText | paginate: { id: 'paginationSatisfactory', currentPage: currentPage, itemsPerPage: 5 }; let i = index">
+              <tr class="bg-white border-b Success:bg-gray-900 Success:border-gray-700">
+                <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  {{(currentPage-1) * 5 + i + 1}}
+                </th>
+                <!-- <td class="py-4 px-6">
+                  {{findingpending.device_name}}
+                </td> -->
+                <td (click)="data(findingpending.device_name,findingpending.dodate)"
+                  class="py-4 px-6 font-medium font-semibold" style="color: black;">
+                  <a (click)="abnormalAssetTable()" class="styled-pointer">{{findingpending.device_name}}</a>
+                </td>
+                <td class="py-4 px-6">
+                  {{findingpending.Stat}}
+                </td>
+                <td class="py-4 px-6">
+                  {{findingpending.getdate}}
+                </td>
+                <td class="py-4 px-6">
+                  {{findingpending.dodate}}
+                </td>
+                <td class="py-4 px-6">
+                  {{findingpending.PIC}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <pagination-controls class="text-center" id="paginationSatisfactory" (pageChange)="currentPage = $event">
+      </pagination-controls>
+    </div>
+  </div>
+
+  <div [ngClass]="!listoftotalasset ? '': 'hidden'" class="my-1 px-1 w-full md:w-full lg:my-6 lg:px-6 pt-6">
+    <div class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
+      <div class="flex-auto p-6">
+        <p class="text-center">Total Asset</p>
+
+        <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+          <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400" id="excel-table">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <tr>
+                <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
+                  No
+                </th>
+                <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
+                  Device Name
+                </th>
+                <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
+                  Funcloc
+                </th>
+                <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
+                  Name Area
+                </th>
+                <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
+                  Plan Date
+                </th>
+                <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
+                  Section
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              *ngFor="let findingpending of pdmassetlist | filter:searchText | paginate: { id: 'pagination1', currentPage: currentPage, itemsPerPage: 5 }; let i = index">
+              <tr class="bg-white border-b Success:bg-gray-900 Success:border-gray-700">
+                <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  {{(currentPage-1) * 5 + i + 1}}
+                </th>
+                <!-- <td class="py-4 px-6">
+                  {{findingpending.device_name}}
+                </td> -->
+                <td (click)="data(findingpending.device_name,findingpending.dodate)"
+                  class="py-4 px-6 font-medium font-semibold" style="color: black;">
+                  <a (click)="abnormalAssetTable()" class="styled-pointer">{{findingpending.device_name}}</a>
+                </td>
+
+                <td class="py-4 px-6">
+                  {{findingpending.func_lock}}
+                </td>
+                <td class="py-4 px-6">
+                  {{findingpending.name_area}}
+                </td>
+                <td class="py-4 px-6">
+                  {{findingpending.plan_date}}
+                </td>
+                <td class="py-4 px-6">
+                  {{findingpending.section}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <pagination-controls class="text-center" id="pagination1" (pageChange)="currentPage = $event">
+      </pagination-controls>
+    </div>
+  </div>
+
   <div id="ss" #ss>
     <div class="flex flex-wrap -mx-3">
       <div class="w-full px-1 py-1 mx-auto">
@@ -229,10 +359,10 @@
                         </th>
                         <td (click)="data(header.device_name,header.dodate)" class="py-4 px-6 font-medium font-semibold"
                           style="color: black;">
-                          <a class="styled-pointer">{{header.device_name}}</a>
+                          <a (click)="abnormalAssetTable()" class="styled-pointer">{{header.device_name}}</a>
                         </td>
                         <!-- <td *ngIf="header.Two_H < 2" bgcolor="green" class="text-white text-center"> -->
-                        <td *ngIf="toFloat(header.Two_H) >= 4.50 && toFloat(header.Two_H) <= 7.10"
+                        <td *ngIf="toFloat(header.Two_H) >= 4.0 && toFloat(header.Two_H) <= 7.10"
                           class="py-4 px-6 font-medium font-semibold" style="background-color: #FED033;color: #000000;">
                           {{header.Two_H}}
                         </td>
@@ -241,7 +371,7 @@
                           style="background-color: #EA8686;color: #000000;">
                           {{header.Two_H}}
                         </td>
-                        <td *ngIf="toFloat(header.Two_H) < 4.50" class="py-4 px-6 font-medium font-semibold"
+                        <td *ngIf="toFloat(header.Two_H) < 4.0" class="py-4 px-6 font-medium font-semibold"
                           style="color: black">
                           {{header.Two_H}}
                         </td>
@@ -249,10 +379,21 @@
                           style="color: black">
                           {{header.Two_H}}
                         </td>
-                        <td class="py-4 px-6 font-medium font-semibold" style="color: black">
+                        <td *ngIf="toFloat(header.Thermal_Two_H) > 70" class="py-4 px-6 font-medium font-semibold"
+                          style="background-color: #EA8686;color: #000000;">
                           {{header.Thermal_Two_H}}
                         </td>
-                        <td *ngIf="toFloat(header.CF_Two_H) >= 11 && toFloat(header.CF_Two_H) <= 15"
+                        <td *ngIf="toFloat(header.Thermal_Two_H) >= 60.0  && toFloat(header.Thermal_Two_H) <= 70.0" class="py-4 px-6 font-medium font-semibold"
+                          style="background-color: #FED033;color: #000000;">
+                          {{header.Thermal_Two_H}}
+                        </td>
+                        <td *ngIf="toFloat(header.Thermal_Two_H) < 60.0"  class="py-4 px-6 font-medium font-semibold" style="color: black">
+                          {{header.Thermal_Two_H}}
+                        </td>
+                        <td *ngIf="header.Thermal_Two_H == '-'"  class="py-4 px-6 font-medium font-semibold" style="color: black">
+                          {{header.Thermal_Two_H}}
+                        </td>
+                        <td *ngIf="toFloat(header.CF_Two_H) >= 7 && toFloat(header.CF_Two_H) <= 15"
                           class="py-4 px-6 font-medium font-semibold" style="background-color: #FED033;color: #000000;">
                           {{header.CF_Two_H}}
                         </td>
@@ -260,13 +401,16 @@
                           style="background-color: #EA8686;color: #000000;">
                           {{header.CF_Two_H}}
                         </td>
-                        <td *ngIf="toFloat(header.CF_Two_H) < 11" class="py-4 px-6 font-medium font-semibold"
+                        <td *ngIf="toFloat(header.CF_Two_H) < 7" class="py-4 px-6 font-medium font-semibold"
                           style="color: black">
                           {{header.CF_Two_H}}
                         </td>
                         <td *ngIf="header.CF_Two_H == '-'" class="py-4 px-6 font-medium font-semibold" style="color: black">
                           {{header.CF_Two_H}}
                         </td>
+                        <!-- <td *ngIf="header.CF_Two_H == '-'" class="py-4 px-6 font-medium font-semibold" style="color: black">
+                          {{header.CF_Two_H}}
+                        </td> -->
                         <td class="py-4 px-6 font-medium font-semibold" style="color: black">
                           {{header.Three_H}}
                         </td>
@@ -276,7 +420,8 @@
                         <td class="py-4 px-6 font-medium font-semibold" style="color: black">
                           {{header.CF_Three_H}}
                         </td>
-                        <td class="py-4 px-6 font-medium font-semibold" style="color: black">
+                        <td
+                         class="py-4 px-6 font-medium font-semibold" style="color: black">
                           {{header.R}}
                         </td>
                         <td class="py-4 px-6 font-medium font-semibold" style="color: black">
@@ -304,7 +449,7 @@
                           {{header.VC}}
                         </td>
                         <td *ngIf="header.VC == '1' && header.Stat == 'Satisfactory'"
-                          class="py-4 px-6 font-medium font-semibold" style="background-color: #F5FF25; color: black">
+                          class="py-4 px-6 font-medium font-semibold" style="background-color: #FED033; color: black">
                           {{header.VC}}
                         </td>
                         <td *ngIf="header.VC == '1' && header.Stat != 'Satisfactory' || header.VC == '-'"
@@ -427,15 +572,24 @@
               </div>
             </div>
           </div>
+          <!--Card of chart abnormal asset start-->
           <div class="w-full px-1 py-1 mx-auto">
             <div
               class="relative flex flex-col min-w-0 break-words bg-white mb-1 shadow-soft-lg rounded-2xl bg-clip-border">
               <div class="flex-auto p-4">
-                <h5 class="text-center" id="target" #target>Chart Abnormal Asset</h5>
-                <p class="text-center" style="color: red;">Device Name : {{funloc}}</p>
+                <div (click)="abnormalAsset()">
+                  <div
+                    class="relative flex flex-col min-w-0 break-words bg-white mb-1 shadow-soft-lg rounded-2xl bg-clip-border">
+                    <div class="flex-auto p-4">
+                      <h5 class="text-center" id="target" #target>Chart Abnormal Asset</h5>
+                      <p class="text-center" style="color: red;">Device Name : {{funloc}}</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
+            <div [ngClass]="chartofabnormatasset ? '': 'hidden'"
+              class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
               <div class="flex-auto p-6">
                 <!-- <p class="text-center" style="color: red;">Device Name : {{funloc}}</p> -->
                 <div class="flex flex-wrap -mx-1 lg:-mx-3">
@@ -470,15 +624,25 @@
               </div>
             </div>
           </div>
+          <!--end of card-->
+
           <div class="my-1 px-1 w-full max-w-full md:w-full lg:my-6 lg:px-6">
             <div
               class="relative flex flex-col min-w-0 break-words bg-white mb-1 shadow-soft-lg rounded-2xl bg-clip-border">
-              <div class="flex-auto p-4">
-                <h5 class="text-center">List Abnormal Asset</h5>
-                <p class="text-center" style="color: red;">Click Device Name For Show Note And Chart Abnormal Asset</p>
+              <div (click)="listAbnormalAsset()">
+                <div
+                  class="relative flex flex-col min-w-0 break-words bg-white mb-1 shadow-soft-lg rounded-2xl bg-clip-border">
+                  <div class="flex-auto p-4">
+                    <h5 class="text-center">List Abnormal Asset</h5>
+                    <p class="text-center" style="color: red;">Click Device Name For Show Note And Chart Abnormal Asset
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
+            <!--start of list abnormal asset card-->
+            <div [ngClass]="!listofabnormatasset ? '': 'hidden'"
+              class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
               <div class="flex-auto p-6">
                 <div class="flex items-center text-center mb-4">
                   <div class="relative flex flex-wrap items-stretch w-full transition-all rounded-lg ease-soft">
@@ -540,51 +704,46 @@
               <pagination-controls class="text-center" id="pagination2" (pageChange)="currentPage2 = $event">
               </pagination-controls>
             </div>
+            <!--end of card-->
           </div>
           <div class="w-full px-1 py-1 mx-auto">
             <div
               class="relative flex flex-col min-w-0 break-words bg-white mb-1 shadow-soft-lg rounded-2xl bg-clip-border">
-              <div class="flex-auto p-4">
-                <h5 class="text-center">Finish Check And Not Yet (Section) </h5>
+              <div (click)="finishNotYet()">
+                <div
+                  class="relative flex flex-col min-w-0 break-words bg-white mb-1 shadow-soft-lg rounded-2xl bg-clip-border">
+                  <div class="flex-auto p-4">
+                    <h5 class="text-center">Finish Check And Not Yet (Section) </h5>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
+            <!--start of finish not yet card-->
+            <div *ngIf="!finishnotyet"
+              class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
               <div class="flex-auto p-6">
                 <!-- <p class="text-center" style="color: red;">Device Name : {{funloc}}</p> -->
                 <div class="w-full">
                   <!-- <canvas id="pdmchartfinishnot"></canvas> -->
-                  <apx-chart
-                  [series]="chartOptions.series"
-                  [chart]="chartOptions.chart"
-                  [dataLabels]="chartOptions.dataLabels"
-                  [plotOptions]="chartOptions.plotOptions"
-                  [yaxis]="chartOptions.yaxis"
-                  [legend]="chartOptions.legend"
-                  [fill]="chartOptions.fill"
-                  [stroke]="chartOptions.stroke"
-                  [tooltip]="chartOptions.tooltip"
-                  [xaxis]="chartOptions.xaxis"
-                  [colors]="chartOptions.colors"
-                ></apx-chart>
+                  <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
+                    [dataLabels]="chartOptions.dataLabels" [plotOptions]="chartOptions.plotOptions"
+                    [yaxis]="chartOptions.yaxis" [legend]="chartOptions.legend" [fill]="chartOptions.fill"
+                    [stroke]="chartOptions.stroke" [tooltip]="chartOptions.tooltip" [xaxis]="chartOptions.xaxis"
+                    [colors]="chartOptions.colors"></apx-chart>
                 </div>
               </div>
             </div>
+            <!--end of card-->
           </div>
-
+          <!--list of device name-->
           <div *ngIf="boolprep" class="max-lg:grow p-2 w-full">
-            <div
-              class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl"
-            >
+            <div class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl">
               <h1 class="font-manrope font-[500] text-xl py-2">
                 FINISH CHECK PREPARATION
               </h1>
               <div class="relative overflow-x-auto rounded-lg shadow-md">
-                <table
-                  class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium"
-                >
-                  <thead
-                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900"
-                  >
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium">
+                  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900">
                     <tr>
                       <!-- <th scope="col" class="px-3 py-2 text-center">Area</th> -->
                       <!-- <th scope="col" class="px-3 py-2 text-center">Done</th> -->
@@ -592,7 +751,8 @@
                     </tr>
                   </thead>
                   <tbody *ngFor="let finish of finishnotlist">
-                    <tr *ngIf="this.finish.value != null && this.finish.name_area == 'PREPARATION'"  class="bg-white dark:border-gray-700">
+                    <tr *ngIf="this.finish.value != null && this.finish.name_area == 'PREPARATION'"
+                      class="bg-white dark:border-gray-700">
                       <!-- <td  *ngIf="this.finish.value == null && this.finish.name_area == 'PREPARATION'" class="px-3 py-2 text-center">PREPARATION</td> -->
                       <!-- <td class="px-3 py-2 text-center">{{ this.blow }}</td> -->
                       <td class="px-3 py-2 text-center">{{ this.finish.device_name }}</td>
@@ -604,19 +764,13 @@
           </div>
 
           <div *ngIf="boolinj" class="max-lg:grow p-2 w-full">
-            <div
-              class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl"
-            >
+            <div class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl">
               <h1 class="font-manrope font-[500] text-xl py-2">
                 FINISH CHECK INJECTION
               </h1>
               <div class="relative overflow-x-auto rounded-lg shadow-md">
-                <table
-                  class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium"
-                >
-                  <thead
-                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900"
-                  >
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium">
+                  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900">
                     <tr>
                       <!-- <th scope="col" class="px-3 py-2 text-center">Area</th> -->
                       <!-- <th scope="col" class="px-3 py-2 text-center">Done</th> -->
@@ -624,7 +778,8 @@
                     </tr>
                   </thead>
                   <tbody *ngFor="let finish of finishnotlist">
-                    <tr *ngIf="this.finish.value != null && this.finish.name_area == 'INJECTION'"  class="bg-white dark:border-gray-700">
+                    <tr *ngIf="this.finish.value != null && this.finish.name_area == 'INJECTION'"
+                      class="bg-white dark:border-gray-700">
                       <!-- <td  *ngIf="this.finish.value == null && this.finish.name_area == 'PREPARATION'" class="px-3 py-2 text-center">PREPARATION</td> -->
                       <!-- <td class="px-3 py-2 text-center">{{ this.blow }}</td> -->
                       <td class="px-3 py-2 text-center">{{ this.finish.device_name }}</td>
@@ -636,19 +791,13 @@
           </div>
 
           <div *ngIf="boolblow" class="max-lg:grow p-2 w-full">
-            <div
-              class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl"
-            >
+            <div class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl">
               <h1 class="font-manrope font-[500] text-xl py-2">
                 FINISH CHECK BLOW
               </h1>
               <div class="relative overflow-x-auto rounded-lg shadow-md">
-                <table
-                  class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium"
-                >
-                  <thead
-                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900"
-                  >
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium">
+                  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900">
                     <tr>
                       <!-- <th scope="col" class="px-3 py-2 text-center">Area</th> -->
                       <!-- <th scope="col" class="px-3 py-2 text-center">Done</th> -->
@@ -656,7 +805,8 @@
                     </tr>
                   </thead>
                   <tbody *ngFor="let finish of finishnotlist">
-                    <tr *ngIf="this.finish.value != null && this.finish.name_area == 'BLOW'"  class="bg-white dark:border-gray-700">
+                    <tr *ngIf="this.finish.value != null && this.finish.name_area == 'BLOW'"
+                      class="bg-white dark:border-gray-700">
                       <!-- <td  *ngIf="this.finish.value == null && this.finish.name_area == 'PREPARATION'" class="px-3 py-2 text-center">PREPARATION</td> -->
                       <!-- <td class="px-3 py-2 text-center">{{ this.blow }}</td> -->
                       <td class="px-3 py-2 text-center">{{ this.finish.device_name }}</td>
@@ -668,19 +818,13 @@
           </div>
 
           <div *ngIf="boolfill" class="max-lg:grow p-2 w-full">
-            <div
-              class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl"
-            >
+            <div class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl">
               <h1 class="font-manrope font-[500] text-xl py-2">
                 FINISH CHECK FILLER
               </h1>
               <div class="relative overflow-x-auto rounded-lg shadow-md">
-                <table
-                  class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium"
-                >
-                  <thead
-                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900"
-                  >
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium">
+                  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900">
                     <tr>
                       <!-- <th scope="col" class="px-3 py-2 text-center">Area</th> -->
                       <!-- <th scope="col" class="px-3 py-2 text-center">Done</th> -->
@@ -688,7 +832,8 @@
                     </tr>
                   </thead>
                   <tbody *ngFor="let finish of finishnotlist">
-                    <tr *ngIf="this.finish.value != null && this.finish.name_area == 'FILL'"  class="bg-white dark:border-gray-700">
+                    <tr *ngIf="this.finish.value != null && this.finish.name_area == 'FILL'"
+                      class="bg-white dark:border-gray-700">
                       <!-- <td  *ngIf="this.finish.value == null && this.finish.name_area == 'PREPARATION'" class="px-3 py-2 text-center">PREPARATION</td> -->
                       <!-- <td class="px-3 py-2 text-center">{{ this.blow }}</td> -->
                       <td class="px-3 py-2 text-center">{{ this.finish.device_name }}</td>
@@ -700,19 +845,13 @@
           </div>
 
           <div *ngIf="boolpack" class="max-lg:grow p-2 w-full">
-            <div
-              class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl"
-            >
+            <div class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl">
               <h1 class="font-manrope font-[500] text-xl py-2">
                 FINISH CHECK PACKING
               </h1>
               <div class="relative overflow-x-auto rounded-lg shadow-md">
-                <table
-                  class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium"
-                >
-                  <thead
-                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900"
-                  >
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium">
+                  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900">
                     <tr>
                       <!-- <th scope="col" class="px-3 py-2 text-center">Area</th> -->
                       <!-- <th scope="col" class="px-3 py-2 text-center">Done</th> -->
@@ -720,7 +859,8 @@
                     </tr>
                   </thead>
                   <tbody *ngFor="let finish of finishnotlist">
-                    <tr *ngIf="this.finish.value != null && this.finish.name_area == 'PACK'"  class="bg-white dark:border-gray-700">
+                    <tr *ngIf="this.finish.value != null && this.finish.name_area == 'PACK'"
+                      class="bg-white dark:border-gray-700">
                       <!-- <td  *ngIf="this.finish.value == null && this.finish.name_area == 'PREPARATION'" class="px-3 py-2 text-center">PREPARATION</td> -->
                       <!-- <td class="px-3 py-2 text-center">{{ this.blow }}</td> -->
                       <td class="px-3 py-2 text-center">{{ this.finish.device_name }}</td>
@@ -732,19 +872,13 @@
           </div>
 
           <div *ngIf="boolkanesho" class="max-lg:grow p-2 w-full">
-            <div
-              class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl"
-            >
+            <div class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl">
               <h1 class="font-manrope font-[500] text-xl py-2">
                 FINISH CHECK KANESHO
               </h1>
               <div class="relative overflow-x-auto rounded-lg shadow-md">
-                <table
-                  class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium"
-                >
-                  <thead
-                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900"
-                  >
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium">
+                  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900">
                     <tr>
                       <!-- <th scope="col" class="px-3 py-2 text-center">Area</th> -->
                       <!-- <th scope="col" class="px-3 py-2 text-center">Done</th> -->
@@ -752,7 +886,8 @@
                     </tr>
                   </thead>
                   <tbody *ngFor="let finish of finishnotlist">
-                    <tr *ngIf="this.finish.value != null && this.finish.name_area == 'PF Transfer/KANESHO'"  class="bg-white dark:border-gray-700">
+                    <tr *ngIf="this.finish.value != null && this.finish.name_area == 'PF Transfer/KANESHO'"
+                      class="bg-white dark:border-gray-700">
                       <!-- <td  *ngIf="this.finish.value == null && this.finish.name_area == 'PREPARATION'" class="px-3 py-2 text-center">PREPARATION</td> -->
                       <!-- <td class="px-3 py-2 text-center">{{ this.blow }}</td> -->
                       <td class="px-3 py-2 text-center">{{ this.finish.device_name }}</td>
@@ -764,19 +899,13 @@
           </div>
 
           <div *ngIf="boolstu1" class="max-lg:grow p-2 w-full">
-            <div
-              class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl"
-            >
+            <div class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl">
               <h1 class="font-manrope font-[500] text-xl py-2">
                 FINISH CHECK STU 1
               </h1>
               <div class="relative overflow-x-auto rounded-lg shadow-md">
-                <table
-                  class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium"
-                >
-                  <thead
-                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900"
-                  >
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium">
+                  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900">
                     <tr>
                       <!-- <th scope="col" class="px-3 py-2 text-center">Area</th> -->
                       <!-- <th scope="col" class="px-3 py-2 text-center">Done</th> -->
@@ -784,7 +913,8 @@
                     </tr>
                   </thead>
                   <tbody *ngFor="let finish of finishnotlist">
-                    <tr *ngIf="this.finish.value != null && this.finish.name_area == 'STU1'"  class="bg-white dark:border-gray-700">
+                    <tr *ngIf="this.finish.value != null && this.finish.name_area == 'STU1'"
+                      class="bg-white dark:border-gray-700">
                       <!-- <td  *ngIf="this.finish.value == null && this.finish.name_area == 'PREPARATION'" class="px-3 py-2 text-center">PREPARATION</td> -->
                       <!-- <td class="px-3 py-2 text-center">{{ this.blow }}</td> -->
                       <td class="px-3 py-2 text-center">{{ this.finish.device_name }}</td>
@@ -796,19 +926,13 @@
           </div>
 
           <div *ngIf="boolprepnull" class="max-lg:grow p-2 w-full">
-            <div
-              class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl"
-            >
+            <div class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl">
               <h1 class="font-manrope font-[500] text-xl py-2">
                 NOT YET CHECK PREPARATION
               </h1>
               <div class="relative overflow-x-auto rounded-lg shadow-md">
-                <table
-                  class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium"
-                >
-                  <thead
-                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900"
-                  >
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium">
+                  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900">
                     <tr>
                       <!-- <th scope="col" class="px-3 py-2 text-center">Area</th> -->
                       <!-- <th scope="col" class="px-3 py-2 text-center">Done</th> -->
@@ -816,7 +940,8 @@
                     </tr>
                   </thead>
                   <tbody *ngFor="let finish of finishnotlist">
-                    <tr *ngIf="this.finish.value == null && this.finish.name_area == 'PREPARATION'"  class="bg-white dark:border-gray-700">
+                    <tr *ngIf="this.finish.value == null && this.finish.name_area == 'PREPARATION'"
+                      class="bg-white dark:border-gray-700">
                       <!-- <td  *ngIf="this.finish.value == null && this.finish.name_area == 'PREPARATION'" class="px-3 py-2 text-center">PREPARATION</td> -->
                       <!-- <td class="px-3 py-2 text-center">{{ this.blow }}</td> -->
                       <td class="px-3 py-2 text-center">{{ this.finish.device_name }}</td>
@@ -828,19 +953,13 @@
           </div>
 
           <div *ngIf="boolinjnull" class="max-lg:grow p-2 w-full">
-            <div
-              class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl"
-            >
+            <div class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl">
               <h1 class="font-manrope font-[500] text-xl py-2">
                 NOT YET CHECK INJECTION
               </h1>
               <div class="relative overflow-x-auto rounded-lg shadow-md">
-                <table
-                  class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium"
-                >
-                  <thead
-                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900"
-                  >
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium">
+                  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900">
                     <tr>
                       <!-- <th scope="col" class="px-3 py-2 text-center">Area</th> -->
                       <!-- <th scope="col" class="px-3 py-2 text-center">Done</th> -->
@@ -848,7 +967,8 @@
                     </tr>
                   </thead>
                   <tbody *ngFor="let finish of finishnotlist">
-                    <tr *ngIf="this.finish.value == null && this.finish.name_area == 'INJECTION'"  class="bg-white dark:border-gray-700">
+                    <tr *ngIf="this.finish.value == null && this.finish.name_area == 'INJECTION'"
+                      class="bg-white dark:border-gray-700">
                       <!-- <td  *ngIf="this.finish.value == null && this.finish.name_area == 'PREPARATION'" class="px-3 py-2 text-center">PREPARATION</td> -->
                       <!-- <td class="px-3 py-2 text-center">{{ this.blow }}</td> -->
                       <td class="px-3 py-2 text-center">{{ this.finish.device_name }}</td>
@@ -860,19 +980,13 @@
           </div>
 
           <div *ngIf="boolblow" class="max-lg:grow p-2 w-full">
-            <div
-              class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl"
-            >
+            <div class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl">
               <h1 class="font-manrope font-[500] text-xl py-2">
                 NOT YET CHECK BLOW
               </h1>
               <div class="relative overflow-x-auto rounded-lg shadow-md">
-                <table
-                  class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium"
-                >
-                  <thead
-                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900"
-                  >
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium">
+                  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900">
                     <tr>
                       <!-- <th scope="col" class="px-3 py-2 text-center">Area</th> -->
                       <!-- <th scope="col" class="px-3 py-2 text-center">Done</th> -->
@@ -880,7 +994,8 @@
                     </tr>
                   </thead>
                   <tbody *ngFor="let finish of finishnotlist">
-                    <tr *ngIf="this.finish.value == null && this.finish.name_area == 'BLOW'"  class="bg-white dark:border-gray-700">
+                    <tr *ngIf="this.finish.value == null && this.finish.name_area == 'BLOW'"
+                      class="bg-white dark:border-gray-700">
                       <!-- <td  *ngIf="this.finish.value == null && this.finish.name_area == 'PREPARATION'" class="px-3 py-2 text-center">PREPARATION</td> -->
                       <!-- <td class="px-3 py-2 text-center">{{ this.blow }}</td> -->
                       <td class="px-3 py-2 text-center">{{ this.finish.device_name }}</td>
@@ -892,19 +1007,13 @@
           </div>
 
           <div *ngIf="boolfillnull" class="max-lg:grow p-2 w-full">
-            <div
-              class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl"
-            >
+            <div class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl">
               <h1 class="font-manrope font-[500] text-xl py-2">
                 NOT YET CHECK FILLER
               </h1>
               <div class="relative overflow-x-auto rounded-lg shadow-md">
-                <table
-                  class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium"
-                >
-                  <thead
-                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900"
-                  >
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium">
+                  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900">
                     <tr>
                       <!-- <th scope="col" class="px-3 py-2 text-center">Area</th> -->
                       <!-- <th scope="col" class="px-3 py-2 text-center">Done</th> -->
@@ -912,7 +1021,8 @@
                     </tr>
                   </thead>
                   <tbody *ngFor="let finish of finishnotlist">
-                    <tr *ngIf="this.finish.value == null && this.finish.name_area == 'FILL'"  class="bg-white dark:border-gray-700">
+                    <tr *ngIf="this.finish.value == null && this.finish.name_area == 'FILL'"
+                      class="bg-white dark:border-gray-700">
                       <!-- <td  *ngIf="this.finish.value == null && this.finish.name_area == 'PREPARATION'" class="px-3 py-2 text-center">PREPARATION</td> -->
                       <!-- <td class="px-3 py-2 text-center">{{ this.blow }}</td> -->
                       <td class="px-3 py-2 text-center">{{ this.finish.device_name }}</td>
@@ -924,19 +1034,13 @@
           </div>
 
           <div *ngIf="boolpacknull" class="max-lg:grow p-2 w-full">
-            <div
-              class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl"
-            >
+            <div class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl">
               <h1 class="font-manrope font-[500] text-xl py-2">
                 NOT YET CHECK PACKING
               </h1>
               <div class="relative overflow-x-auto rounded-lg shadow-md">
-                <table
-                  class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium"
-                >
-                  <thead
-                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900"
-                  >
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium">
+                  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900">
                     <tr>
                       <!-- <th scope="col" class="px-3 py-2 text-center">Area</th> -->
                       <!-- <th scope="col" class="px-3 py-2 text-center">Done</th> -->
@@ -944,7 +1048,8 @@
                     </tr>
                   </thead>
                   <tbody *ngFor="let finish of finishnotlist">
-                    <tr *ngIf="this.finish.value == null && this.finish.name_area == 'PACK'"  class="bg-white dark:border-gray-700">
+                    <tr *ngIf="this.finish.value == null && this.finish.name_area == 'PACK'"
+                      class="bg-white dark:border-gray-700">
                       <!-- <td  *ngIf="this.finish.value == null && this.finish.name_area == 'PREPARATION'" class="px-3 py-2 text-center">PREPARATION</td> -->
                       <!-- <td class="px-3 py-2 text-center">{{ this.blow }}</td> -->
                       <td class="px-3 py-2 text-center">{{ this.finish.device_name }}</td>
@@ -956,19 +1061,13 @@
           </div>
 
           <div *ngIf="boolkaneshonull" class="max-lg:grow p-2 w-full">
-            <div
-              class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl"
-            >
+            <div class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl">
               <h1 class="font-manrope font-[500] text-xl py-2">
                 NOT YET CHECK KANESHO
               </h1>
               <div class="relative overflow-x-auto rounded-lg shadow-md">
-                <table
-                  class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium"
-                >
-                  <thead
-                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900"
-                  >
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium">
+                  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900">
                     <tr>
                       <!-- <th scope="col" class="px-3 py-2 text-center">Area</th> -->
                       <!-- <th scope="col" class="px-3 py-2 text-center">Done</th> -->
@@ -976,7 +1075,8 @@
                     </tr>
                   </thead>
                   <tbody *ngFor="let finish of finishnotlist">
-                    <tr *ngIf="this.finish.value == null && this.finish.name_area == 'PF Transfer/KANESHO'"  class="bg-white dark:border-gray-700">
+                    <tr *ngIf="this.finish.value == null && this.finish.name_area == 'PF Transfer/KANESHO'"
+                      class="bg-white dark:border-gray-700">
                       <!-- <td  *ngIf="this.finish.value == null && this.finish.name_area == 'PREPARATION'" class="px-3 py-2 text-center">PREPARATION</td> -->
                       <!-- <td class="px-3 py-2 text-center">{{ this.blow }}</td> -->
                       <td class="px-3 py-2 text-center">{{ this.finish.device_name }}</td>
@@ -988,19 +1088,13 @@
           </div>
 
           <div *ngIf="boolstu1null" class="max-lg:grow p-2 w-full">
-            <div
-              class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl"
-            >
+            <div class="h-full bg-white px-8 py-5 rounded-lg overflow-hidden text-center relative drop-shadow-xl">
               <h1 class="font-manrope font-[500] text-xl py-2">
                 NOT YET CHECK STU 1
               </h1>
               <div class="relative overflow-x-auto rounded-lg shadow-md">
-                <table
-                  class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium"
-                >
-                  <thead
-                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900"
-                  >
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-800 font-medium">
+                  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-900">
                     <tr>
                       <!-- <th scope="col" class="px-3 py-2 text-center">Area</th> -->
                       <!-- <th scope="col" class="px-3 py-2 text-center">Done</th> -->
@@ -1008,7 +1102,8 @@
                     </tr>
                   </thead>
                   <tbody *ngFor="let finish of finishnotlist">
-                    <tr *ngIf="this.finish.value == null && this.finish.name_area == 'STU1'"  class="bg-white dark:border-gray-700">
+                    <tr *ngIf="this.finish.value == null && this.finish.name_area == 'STU1'"
+                      class="bg-white dark:border-gray-700">
                       <!-- <td  *ngIf="this.finish.value == null && this.finish.name_area == 'PREPARATION'" class="px-3 py-2 text-center">PREPARATION</td> -->
                       <!-- <td class="px-3 py-2 text-center">{{ this.blow }}</td> -->
                       <td class="px-3 py-2 text-center">{{ this.finish.device_name }}</td>
@@ -1019,15 +1114,23 @@
             </div>
           </div>
 
+          <!--end of list-->
+
           <div class="w-full px-1 py-1 mx-auto">
             <div
               class="relative flex flex-col min-w-0 break-words bg-white mb-1 shadow-soft-lg rounded-2xl bg-clip-border">
-              <div class="flex-auto p-4">
-                <h5 class="text-center">
-                  Total Data 1 Current Year </h5>
+              <div (click)="dataCurrentYear()">
+                <div
+                  class="relative flex flex-col min-w-0 break-words bg-white mb-1 shadow-soft-lg rounded-2xl bg-clip-border">
+                  <div class="flex-auto p-4">
+                    <h5 class="text-center">
+                      Total Data 1 Current Year </h5>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
+            <div [ngClass]="!totaldatacurrentyear ? '' : 'hidden'"
+              class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
               <div class="flex-auto p-6">
                 <!-- <p class="text-center" style="color: red;">Device Name : {{funloc}}</p> -->
                 <div class="flex flex-wrap -mx-1 lg:-mx-3">
@@ -1036,7 +1139,8 @@
               </div>
             </div>
           </div>
-          <div class="my-1 px-1 w-full max-w-full md:w-full lg:my-6 lg:px-6">
+          <div [ngClass]="!totaldatacurrentyear ? '' : 'hidden'"
+            class="my-1 px-1 w-full max-w-full md:w-full lg:my-6 lg:px-6">
             <div class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
               <div class="flex-auto p-6">
                 <p class="text-left text-md">History Check
@@ -1115,8 +1219,12 @@
                         <th class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap text-white" bgcolor="#878790">
                           {{(currentPage3-1) * showPaginate3 + i + 1}}
                         </th>
-                        <td class="py-4 px-6 font-medium font-semibold" style="color: black;">
+                        <!-- <td class="py-4 px-6 font-medium font-semibold" style="color: black;">
                           {{header.device_name}}
+                        </td> -->
+                        <td (click)="data(header.device_name,header.dodate)" class="py-4 px-6 font-medium font-semibold"
+                          style="color: black;">
+                          <a (click)="abnormalAssetTable()" class="styled-pointer">{{header.device_name}}</a>
                         </td>
                         <td class="py-4 px-6 font-medium font-semibold" style="color: black">
                           {{header.PIC}}

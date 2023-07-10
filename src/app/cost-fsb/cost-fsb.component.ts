@@ -181,11 +181,11 @@ export class CostFsbComponent implements OnInit {
       this.service.getCountTotalFinding().subscribe(data => {
         this.totalkategori = data;
         Object.values(this.totalkategori).forEach(data => {
-          // // //console.log(data);
+          // // ////console.log(data);
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
-          // // //console.log(array);
+          // // ////console.log(array);
           for (let i = 0; i < array.length; i++) {
             this.totalkategoriarr.splice(this.totalkategoriarr.lenght, 0, array[i]);
           }
@@ -239,13 +239,13 @@ export class CostFsbComponent implements OnInit {
       );
       forkJoin(this.service.getCostFsb(),
         this.service.getCostFsbPast()).subscribe(([data, data2]) => {
-          // //console.log(data);
-          // //console.log(data2);
+          // ////console.log(data);
+          // ////console.log(data2);
           this.cost = data;
           this.cost2 = data2;
 
           this.cost.forEach((element: any, index: number) => {
-            // //console.log(element.budget);
+            // ////console.log(element.budget);
 
             element.budget = parseInt(element.budget);
             if (element.year == '2023') {
@@ -570,12 +570,12 @@ export class CostFsbComponent implements OnInit {
                 }
               }
             }
-            //console.log(this.totalindexjan);
+            ////console.log(this.totalindexjan);
 
           });
 
           this.cost2.forEach((element: any, index: any) => {
-            //console.log(this.index);
+            ////console.log(this.index);
 
             element.budget = parseInt(element.budget);
             element.month = parseInt(element.month);
@@ -635,7 +635,7 @@ export class CostFsbComponent implements OnInit {
               } else if (element.month <= this.index) {
                 this.totalcurrentyear += element.budget;
               }
-              //console.log(this.totalcurrentyear);
+              ////console.log(this.totalcurrentyear);
 
             }
           });
@@ -678,12 +678,12 @@ export class CostFsbComponent implements OnInit {
 
       forkJoin(this.service.getCostFsb(),
               this.service.getFgFsb()).subscribe(([datacost, datafg]) => {
-                // //console.log(datacost);
-                // //console.log(datafg);
+                // ////console.log(datacost);
+                // ////console.log(datafg);
                 this.datafg = datafg;
                 this.dataindex = datacost;
                 // this.indexcostjan =
-                // //console.log(this.totalfgjan);
+                // ////console.log(this.totalfgjan);
 
 
                 this.datafg.forEach((element:any, index: any) => {
@@ -692,9 +692,9 @@ export class CostFsbComponent implements OnInit {
                   if(Number.isNaN(element.fg_eq)){
                     element.fg_eq = 0;
                   }
-                  // //console.log(index)
-                  //console.log(element);
-                  // //console.log(this.totalindexjan);
+                  // ////console.log(index)
+                  ////console.log(element);
+                  // ////console.log(this.totalindexjan);
                   // this.indexcostjan =
                   if(element.month == 1){
                     this.indexcostjan = this.totalindexjan / element.fg_eq;

@@ -14,22 +14,21 @@ import { CountService } from '../services/count.service';
 })
 export class AmMOci2Component implements OnInit {
 
-  exportexcel(): void
-  {
+  exportexcel(): void {
     /* pass here the table id */
     let element = document.getElementById('excel-table');
-    //console.log(this.findingpending2);
+    ////console.log(this.findingpending2);
 
-    const ws: XLSX.WorkSheet =XLSX.utils.json_to_sheet(this.findingpending2);
-    ws["!cols"] = [ { wch: 10 },
-                    { wch: 60 },
-                    { wch: 10 },
-                    { wch: 40 },
-                    { wch: 30 },
-                    { wch: 15 },
-                    { wch: 15 },
-                    { wch: 10 },
-                    { wch: 15 }  ];
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.findingpending2);
+    ws["!cols"] = [{ wch: 10 },
+    { wch: 60 },
+    { wch: 10 },
+    { wch: 40 },
+    { wch: 30 },
+    { wch: 15 },
+    { wch: 15 },
+    { wch: 10 },
+    { wch: 15 }];
 
     /* generate workbook and add the worksheet */
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
@@ -62,7 +61,7 @@ export class AmMOci2Component implements OnInit {
   absoluteIndex4(indexOnPage: number): number {
     return this.itemsPerPage4 * (this.currentPage4 - 1) + indexOnPage;
   }
-  fileName= 'FindingPendingOCI2.xlsx';
+  fileName = 'FindingPendingOCI2.xlsx';
   public resolved: boolean = false;
   public resolvedchart: boolean = false;
   totalfindinglist: boolean = false;
@@ -70,8 +69,9 @@ export class AmMOci2Component implements OnInit {
   listofhistorypending: boolean = false;
   listofMonthlyReport: boolean = false;
   listjobfinish: boolean = false;
+  listtemuanperhari: boolean = false;
   totalfm: object = {};
-  approvalfinding: number =0;
+  approvalfinding: number = 0;
   createorderfinding: number = 0;
   scheduling: number = 0;
   checkexecution: number = 0;
@@ -124,6 +124,12 @@ export class AmMOci2Component implements OnInit {
   high: number = 0;
   totalfindingmonitorbar: any = [];
   totalfindingmonitordonut: any = [];
+  temuanperday_label: any = [];
+  temuanperday_data_temp: any = [];
+  temuanperday_data: any = [];
+  temuanperday_dum: number = 0;
+  date: any = [];
+  temuanperday: any = [];
   totalpm: object = {};
   totalpm2: any = [];
   totalrm: object = {};
@@ -198,19 +204,19 @@ export class AmMOci2Component implements OnInit {
       block: 'center',
       inline: 'center',
     });
-    //// //console.log($event);
+    //// ////console.log($event);
     this.funloclist = [];
     this.funloc = $event;
-    //console.log(this.funloc);
+    ////console.log(this.funloc);
     this.total_cost = 0;
     for (let i = 0; i < this.orderarr.length; i++) {
       if (this.orderarr[i].func_loc === this.funloc) {
-        //console.log(this.orderarr);
+        ////console.log(this.orderarr);
 
         this.total_cost += this.orderarr[i].total_actual;
       }
     }
-    //console.log(this.total_cost);
+    ////console.log(this.total_cost);
 
     for (let i = 0; i < this.orderarr.length; i++) {
       if (this.orderarr[i].func_loc === this.funloc) {
@@ -218,7 +224,7 @@ export class AmMOci2Component implements OnInit {
       }
     }
     this.funloclist = this.funloclist.filter(function (e: any) { return e != null; });
-    // //console.log(this.funloclist);
+    // ////console.log(this.funloclist);
   }
   capture() {
     this.captureService
@@ -228,11 +234,11 @@ export class AmMOci2Component implements OnInit {
         this.downloadJson();
       });
   }
-  getphoto(dataget:any){
-    this.picture =dataget;
+  getphoto(dataget: any) {
+    this.picture = dataget;
 
   }
-  detailpart(no_wo:any){
+  detailpart(no_wo: any) {
     this.currentPage4 = 1;
     this.spinner.show();
     this.resolved = false;
@@ -444,7 +450,7 @@ export class AmMOci2Component implements OnInit {
       this.resolved = true;
     });
   }
-  finddatachange(){
+  finddatachange() {
     this.reportharian.splice(0);
     this.spinner.show();
     this.resolved = false;
@@ -607,10 +613,10 @@ export class AmMOci2Component implements OnInit {
     });
 
   }
-  showFinding(){
-    if(this.totalfindinglist == false){
+  showFinding() {
+    if (this.totalfindinglist == false) {
       this.totalfindinglist = true;
-    }else if(this.totalfindinglist == true){
+    } else if (this.totalfindinglist == true) {
       this.totalfindinglist = false;
     }
   }
@@ -619,7 +625,11 @@ export class AmMOci2Component implements OnInit {
     if(this.listoffindingpending == false){
       this.listoffindingpending = true;
     }else if(this.listoffindingpending == true){
+      this.listtemuanperhari = true;
       this.listoffindingpending = false;
+      this.listjobfinish = true;
+      this.listofMonthlyReport = true;
+      this.listofhistorypending = true;
     }
   }
 
@@ -627,6 +637,10 @@ export class AmMOci2Component implements OnInit {
     if(this.listofhistorypending == false){
       this.listofhistorypending = true;
     }else if(this.listofhistorypending == true){
+      this.listtemuanperhari = true;
+      this.listoffindingpending = true;
+      this.listjobfinish = true;
+      this.listofMonthlyReport = true;
       this.listofhistorypending = false;
     }
   }
@@ -635,7 +649,11 @@ export class AmMOci2Component implements OnInit {
     if(this.listofMonthlyReport == false){
       this.listofMonthlyReport = true;
     }else if(this.listofMonthlyReport == true){
+      this.listtemuanperhari = true;
+      this.listoffindingpending = true;
+      this.listjobfinish = true;
       this.listofMonthlyReport = false;
+      this.listofhistorypending = true;
     }
   }
 
@@ -643,15 +661,33 @@ export class AmMOci2Component implements OnInit {
     if(this.listjobfinish == false){
       this.listjobfinish = true;
     }else if(this.listjobfinish == true){
+      this.listtemuanperhari = true;
+      this.listoffindingpending = true;
       this.listjobfinish = false;
+      this.listofMonthlyReport = true;
+      this.listofhistorypending = true;
     }
   }
+
+  showTemuanPerDay(){
+    if(this.listtemuanperhari == false){
+      this.listtemuanperhari = true;
+    }else if(this.listtemuanperhari == true){
+      this.listtemuanperhari = false;
+      this.listoffindingpending = true;
+      this.listjobfinish = true;
+      this.listofMonthlyReport = true;
+      this.listofhistorypending = true;
+    }
+  }
+
   async ngOnInit(): Promise<void> {
     this.showFinding();
     this.showFindingPending();
     this.showHistoryPending();
     this.showMonthlyReport();
     this.showListJobFinish();
+    this.showTemuanPerDay();
     window.scrollTo(0, 0);
     this.loaddata = new Promise(resolve => {
       this.datarange.splice(0);
@@ -802,15 +838,15 @@ export class AmMOci2Component implements OnInit {
       });
       this.service.getTotalApprovalOrderFinish('2').subscribe(data => {
         this.arrorderfinish.push(data);
-      for(let elem of this.arrorderfinish[0]){
-        this.orderfinish = elem.total;
-      }
+        for (let elem of this.arrorderfinish[0]) {
+          this.orderfinish = elem.total;
+        }
       });
       this.service.getTotalApprovalShcedule('2').subscribe(data => {
         this.arrshecdule.push(data);
-      for(let elem of this.arrshecdule[0]){
-        this.ordershecdule = elem.total;
-      }
+        for (let elem of this.arrshecdule[0]) {
+          this.ordershecdule = elem.total;
+        }
       });
       this.service.getTotalDataPost(this.tgl3, this.tgl4).subscribe(data => {
         this.totaldata1year.push(data);
@@ -915,18 +951,18 @@ export class AmMOci2Component implements OnInit {
             }
           }
         }
-      this.januari = this.januari + this.januariclose;
-      this.febuari = this.febuari + this.febuariclose;
-      this.maret = this.maret + this.maretclose;
-      this.april = this.april + this.aprilclose;
-      this.mei = this.mei + this.meiclose;
-      this.juni = this.juni + this.juniclose;
-      this.juli = this.juli + this.juliclose;
-      this.agustus = this.agustus + this.agustusclose;
-      this.september = this.september + this.septemberclose;
-      this.oktober = this.oktober + this.oktoberclose;
-      this.november = this.november + this.novemberclose;
-      this.desember = this.desember + this.desemberclose;
+        this.januari = this.januari + this.januariclose;
+        this.febuari = this.febuari + this.febuariclose;
+        this.maret = this.maret + this.maretclose;
+        this.april = this.april + this.aprilclose;
+        this.mei = this.mei + this.meiclose;
+        this.juni = this.juni + this.juniclose;
+        this.juli = this.juli + this.juliclose;
+        this.agustus = this.agustus + this.agustusclose;
+        this.september = this.september + this.septemberclose;
+        this.oktober = this.oktober + this.oktoberclose;
+        this.november = this.november + this.novemberclose;
+        this.desember = this.desember + this.desemberclose;
         new Chart("valuepermonthchart", {
           type: "bar",
           data: {
@@ -962,11 +998,11 @@ export class AmMOci2Component implements OnInit {
       });
       this.service.getTotalApproval().subscribe(data => {
         this.arrapproval.push(data);
-        for(let elem of this.arrapproval[0].get){
-          if(elem.id_area == '2'){
-            if(elem.status == 'Submit'){
+        for (let elem of this.arrapproval[0].get) {
+          if (elem.id_area == '2') {
+            if (elem.status == 'Submit') {
               this.approvalfinding += 1;
-            } else if (elem.status == 'Approved' || elem.status == 'Not Yet'){
+            } else if (elem.status == 'Approved' || elem.status == 'Not Yet') {
               this.createorderfinding += 1;
             }
           }
@@ -977,18 +1013,18 @@ export class AmMOci2Component implements OnInit {
         this.orderobj = data;
 
         Object.values(this.orderobj).forEach(data => {
-          // // //console.log(data);
+          // // ////console.log(data);
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
-          // // //console.log(array);
+          // // ////console.log(array);
           for (let i = 0; i < array.length; i++) {
             this.orderarr.splice(this.orderarr.lenght, 0, array[i]);
           }
-          // //console.log(this.orderarr);
+          // ////console.log(this.orderarr);
 
 
-          // // //console.log(this.findingpending2);
+          // // ////console.log(this.findingpending2);
         })
 
 
@@ -997,42 +1033,44 @@ export class AmMOci2Component implements OnInit {
       this.service.getReadfpSectionOci2().subscribe(data => {
         this.fpsect = data;
         Object.values(this.fpsect).forEach(data => {
-          // // //console.log(data);
+          // // ////console.log(data);
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
-          // //console.log(array);
+          // ////console.log(array);
           for (let i = 0; i < array.length; i++) {
             this.fpsectarr.splice(this.fpsectarr.lenght, 0, array[i]);
           }
-          // //console.log(this.fpsectarr);
+          // ////console.log(this.fpsectarr);
 
-          // // //console.log(this.findingpending2);
+          // // ////console.log(this.findingpending2);
         })
       });
       this.service.getTotalFeeding().subscribe(data => {
         this.totallevel = data;
         Object.values(this.totallevel).forEach(data => {
-          // // //console.log(data);
+          // // ////console.log(data);
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
-          // // //console.log(array);
+          // // ////console.log(array);
           for (let i = 0; i < array.length; i++) {
-            this.totallevel2.splice(this.totallevel2.lenght, 0, array[i]);
+            if(array[i].id_area == 2){
+              this.totallevel2.splice(this.totallevel2.lenght, 0, array[i]);
+            }
           }
           for (var i = 0; i < this.totallevel2.length; i++) {
-            if(this.totallevel2[i].id_area = 2){
-            if (this.totallevel2[i].level === 'Low') {
-              this.low += 1;
+            if (this.totallevel2[i].id_area = 2) {
+              if (this.totallevel2[i].level === 'Low') {
+                this.low += 1;
+              }
+              if (this.totallevel2[i].level === 'Medium') {
+                this.medium += 1;
+              }
+              if (this.totallevel2[i].level === 'High') {
+                this.high += 1;
+              }
             }
-            if (this.totallevel2[i].level === 'Medium') {
-              this.medium += 1;
-            }
-            if (this.totallevel2[i].level === 'High') {
-              this.high += 1;
-            }
-          }
           }
           new Chart('donut2', {
             type: 'doughnut',
@@ -1055,8 +1093,8 @@ export class AmMOci2Component implements OnInit {
               }]
             },
           });
-          // // //console.log(this.medium);
-          // // //console.log(this.totallevel2);
+          // // ////console.log(this.medium);
+          // // ////console.log(this.totallevel2);
         })
 
 
@@ -1065,55 +1103,55 @@ export class AmMOci2Component implements OnInit {
       this.service.getFuncLocOci2().subscribe(data => {
         this.funlock = data;
         Object.values(this.funlock).forEach(data => {
-          // //console.log(data);
+          // ////console.log(data);
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
-          // //console.log(array);
+          // ////console.log(array);
           for (let i = 0; i < array.length; i++) {
             this.funlockarr.splice(this.funlockarr.lenght, 0, array[i]);
           }
 
-          // //console.log(this.funlockarr);
+          // ////console.log(this.funlockarr);
 
-          // // //console.log(this.findingpending2);
+          // // ////console.log(this.findingpending2);
         })
       });
       this.service.getReadFindingPendingoci2().subscribe(data => {
         this.findingpending = data;
         Object.values(this.findingpending).forEach(data => {
-          // // //console.log(data);
+          // // ////console.log(data);
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
-          // // //console.log(array);
+          // // ////console.log(array);
           for (let i = 0; i < array.length; i++) {
-            if(array[i].status != "CLOSED" && array[i].status != "TECO"){
+            if (array[i].status != "CLOSED" && array[i].status != "TECO") {
               this.findingpending2.splice(this.findingpending2.lenght, 0, array[i]);
             }
           }
 
           for (var i = 0; i < this.findingpending2.length; i++) {
-            if(this.findingpending2[i].area == "OCI-2"){
-            if (this.findingpending2[i].section === 'Preparation') {
-              this.preparation += 1;
+            if (this.findingpending2[i].area == "OCI-2") {
+              if (this.findingpending2[i].section === 'Preparation') {
+                this.preparation += 1;
+              }
+              if (this.findingpending2[i].section === 'Injection') {
+                this.injection += 1;
+              }
+              if (this.findingpending2[i].section === 'Blow') {
+                this.blow += 1;
+              }
+              if (this.findingpending2[i].section === 'Packing') {
+                this.packing += 1;
+              }
+              if (this.findingpending2[i].section === 'Preform Transfer') {
+                this.preform += 1;
+              }
+              if (this.findingpending2[i].section === 'Filling') {
+                this.filling += 1;
+              }
             }
-            if (this.findingpending2[i].section === 'Injection') {
-              this.injection += 1;
-            }
-            if (this.findingpending2[i].section === 'Blow') {
-              this.blow += 1;
-            }
-            if (this.findingpending2[i].section === 'Packing') {
-              this.packing += 1;
-            }
-            if (this.findingpending2[i].section === 'Preform Transfer') {
-              this.preform += 1;
-            }
-            if (this.findingpending2[i].section === 'Filling') {
-              this.filling += 1;
-            }
-          }
           }
 
         })
@@ -1151,6 +1189,7 @@ export class AmMOci2Component implements OnInit {
       );
       this.service.getTotalFeeding().subscribe(data => {
         this.totalfm = data;
+        var date: any = [];
         Object.values(this.totalfm).forEach(data => {
           var array = Object.keys(data).map(function (key) {
             return data[key];
@@ -1159,30 +1198,81 @@ export class AmMOci2Component implements OnInit {
             this.totalfm2.splice(this.totalfm2.lenght, 0, array[i]);
           }
 
-          for (let elem of this.totalfm2) {
+          this.totalfm2.forEach((elem: any, i: number) => {
+            if (elem.id_area == 2 && elem.tanggal_temuan != this.totalfm2[i + 1]?.tanggal_temuan) {
+              date.push(elem.tanggal_temuan)
+            }
+
             if (elem.id_area == 2) {
               if (elem.status_pengerjaan == 'Done') {
                 this.finishexecute += 1;
+                this.temuanperday_data_temp.push(elem)
+
               }
               if (elem.status2 == 'READY') {
                 this.readyexecute += 1;
+                this.temuanperday_data_temp.push(elem)
               } else if (elem.status1 == 'Create' || elem.status1 == 'None' || elem.status1 == 'Emergency') {
                 if (elem.status2 == 'RELEASED' || elem.status2 == 'CREATED') {
                   this.pendingexecute += 1;
+                  this.temuanperday_data_temp.push(elem)
+
                 }
               }
               else if (elem.status1 == 'Draft' || elem.status1 == 'Submit' || elem.status1 == 'Revise' || elem.status1 == 'Approved' || elem.status1 == 'Not Yet') {
                 this.pendingexecute += 1;
+                this.temuanperday_data_temp.push(elem)
               }
             }
-          }
-          //console.log(this.pendingexecute);
-          //console.log(this.finishexecute);
-          //console.log(this.readyexecute);
+          })
 
 
 
-          // // //console.log(this.const2);
+          date.forEach((element: any, i: number) => {
+
+            //console.log(this.temuanperday_data_temp);
+            this.temuanperday_data_temp.forEach((elem: any) => {
+              if (elem.tanggal_temuan == element) {
+                this.temuanperday_dum++
+              }
+            });
+            if(this.temuanperday_dum != 0){
+              this.temuanperday_label.push(element)
+              this.temuanperday_data.push(this.temuanperday_dum)
+            }
+
+            this.temuanperday_dum = 0
+
+
+          });
+
+          new Chart('totalfinding', {
+            type: 'bar',
+            data: {
+              labels: this.temuanperday_label,
+              datasets: [
+                {
+                  label: 'Total Finding',
+                  data: this.temuanperday_data,
+                  backgroundColor: '#7fe7dc',
+                  borderColor: [
+                    'white',
+                  ],
+                  borderWidth: 1
+                },
+              ]
+            }, options: {
+              scales: {
+                yAxes: [{
+                  ticks: {
+                    beginAtZero: true
+                  }
+                }]
+              }
+            }
+          });
+
+
           new Chart('dum', {
             type: 'bar',
             data: {
@@ -1244,31 +1334,31 @@ export class AmMOci2Component implements OnInit {
               }
             }
           });
-          new Chart('donut', {
-            type: 'doughnut',
-            data: {
-              labels: ['On Progress WO', 'Ready execute', 'Finish execute'],
-              datasets: [{
-                label: '# of Votes',
-                data: [this.pendingexecute, this.readyexecute, this.finishexecute],
-                backgroundColor: [
-                  '#ffc13b',
-                  '#ff6e40',
-                  '#316879',
-                ],
-                borderColor: [
-                  'white',
-                  'white',
-                  'white',
-                  'white',
-                ],
-                borderWidth: 1
-              }]
-            },
-          });
+          // new Chart('donut', {
+          //   type: 'doughnut',
+          //   data: {
+          //     labels: ['On Progress WO', 'Ready execute', 'Finish execute'],
+          //     datasets: [{
+          //       label: '# of Votes',
+          //       data: [this.pendingexecute, this.readyexecute, this.finishexecute],
+          //       backgroundColor: [
+          //         '#ffc13b',
+          //         '#ff6e40',
+          //         '#316879',
+          //       ],
+          //       borderColor: [
+          //         'white',
+          //         'white',
+          //         'white',
+          //         'white',
+          //       ],
+          //       borderWidth: 1
+          //     }]
+          //   },
+          // });
           this.spinner.hide();
           this.resolved = true;
-          // // //console.log(this.const2.splice(this.const2.lenght,0,array[0]).total);
+          // // ////console.log(this.const2.splice(this.const2.lenght,0,array[0]).total);
         })
       })
 

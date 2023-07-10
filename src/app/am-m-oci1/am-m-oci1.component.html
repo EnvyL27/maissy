@@ -122,7 +122,7 @@
     </div>
   </div>
   <div class="flex flex-wrap -mx-3 duration-2000">
-    <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4 mt-2">
+    <div class="w-1/5 lg:flex-none  px-3 mt-2">
       <div
         class="relative flex flex-col min-w-0 break-words border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border"
         style="background-color: #f4b8a5;">
@@ -132,7 +132,7 @@
         </div>
       </div>
     </div>
-    <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4 mt-2">
+    <div class="w-1/5 lg:flex-none  px-3 mt-2">
       <div
         class="relative flex flex-col min-w-0 break-words border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border"
         style="background-color: #86b0de;">
@@ -142,7 +142,7 @@
         </div>
       </div>
     </div>
-    <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4 mt-2">
+    <div class="w-1/5 lg:flex-none  px-3 mt-2">
       <div
         class="relative flex flex-col min-w-0 break-words border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border"
         style="background-color: #86b0de;">
@@ -151,7 +151,16 @@
         </div>
       </div>
     </div>
-    <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4 mt-2">
+    <div class="w-1/5 lg:flex-none  px-3 mt-2">
+      <div
+        class="relative flex flex-col min-w-0 break-words border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border"
+        style="background-color: #86b0de;">
+        <div class="flex-auto p-1 pt-0 text-center">
+          <h6 class="mt-1 text-center font-bold">Ready Execution  :<strong class="text-lg"> {{readyexecute}}</strong></h6>
+        </div>
+      </div>
+    </div>
+    <div class="w-1/5 lg:flex-none  px-3 mt-2">
       <div
         class="relative flex flex-col min-w-0 break-words border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border"
         style="background-color: #f4b8a5;">
@@ -196,7 +205,7 @@
               </tr>
             </thead>
             <tbody
-              *ngFor="let findingpending of totallevel2 | filter:searchText | paginate: { id: 'pagination1', currentPage: currentPage, itemsPerPage: 5 }; let i = index">
+              *ngFor="let findingpending of temuanperday_data_temp | filter:searchText | paginate: { id: 'pagination1', currentPage: currentPage, itemsPerPage: 5 }; let i = index">
               <tr class="bg-white border-b Success:bg-gray-900 Success:border-gray-700">
                 <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                   {{(currentPage-1) * 5 + i + 1}}
@@ -228,33 +237,6 @@
                 <td class="py-4 px-6">
                   {{findingpending.tanggal_temuan}}
                 </td>
-                <!-- <td class="py-4 px-6">
-                  <input class="modal-btn" type="checkbox" id="modal-btn" name="modal-btn" />
-                  <label for="modal-btn">
-                  </label>
-                  <div class="modal">
-                    <div class="modal-wrap xl:ml-68.5">
-                      <img src="http://192.168.9.47/plan_am/files/{{picture}}" class="center">
-                    </div>
-                  </div>
-                  <div *ngIf="findingpending.photo != null" class="row">
-                    <label for="modal-btn">
-                      <img class="animasihf" (click)="getphoto(findingpending.photo)"
-                        src="http://192.168.9.47/plan_am/files/{{findingpending.photo}}" style="width: 100%;
-                        max-width: 150px;
-                        height: auto;">
-                    </label>
-                  </div>
-                </td>
-                <td (click)="data(findingpending.func_loc)" class="py-4 px-6">
-                  <a class="styled-pointer">{{findingpending.func_loc}}</a>
-                </td>
-                <td class="py-4 px-6">
-                  {{findingpending.section}}
-                </td>
-                <td class="py-4 px-6">
-                  {{findingpending.kategori}}
-                </td> -->
               </tr>
             </tbody>
           </table>
@@ -269,7 +251,7 @@
   <div class="flex flex-wrap -mx-3">
     <div class="w-full px-2 py-2 mx-auto">
       <div class="flex flex-wrap -mx-1 lg:-mx-3">
-        <div class="my-1 px-1 w-full max-w-full md:w-4/12 lg:my-6 lg:px-6">
+        <div class="my-1 px-1 w-full max-w-full md:w-8/12 lg:my-6 lg:px-6">
           <div
             class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl mb-1 bg-clip-border">
             <div class="flex-auto p-6">
@@ -278,7 +260,7 @@
           </div>
           <div class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
             <div class="flex-auto p-6">
-              <canvas id="dum" width="310" height="300"></canvas>
+              <canvas id="dum" width="310" height="156"></canvas>
               <div class="px-6 pt-4 pb-2 text-center">
                 <span style="background-color: #7fe7dc;"
                   class="text-white inline-block bg-red rounded-full text-md px-3 py-1 font-semibold mr-2 mb-2">Total:
@@ -297,7 +279,7 @@
             </div>
           </div>
         </div>
-        <div class="my-1 px-1 w-full md:w-4/12 lg:my-6 lg:px-6">
+        <!-- <div class="my-1 px-1 w-full md:w-4/12 lg:my-6 lg:px-6">
           <div
             class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl mb-1 bg-clip-border">
             <div class="flex-auto p-6">
@@ -322,7 +304,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="my-1 px-1 w-full md:w-4/12 lg:my-6 lg:px-6">
           <div
             class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl mb-1 bg-clip-border">
@@ -356,86 +338,29 @@
   </div>
 
   <div class="flex flex-wrap -mx-3">
+    <div class="w-full px-2 py-2 mx-auto">
+      <div class="flex flex-wrap -mx-1 lg:-mx-3">
+        <div class="my-1 px-1 w-full max-w-full md:w-12/12 lg:my-6 lg:px-6">
+          <div
+            class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl mb-1 bg-clip-border">
+            <div class="flex-auto p-6">
+              <h5 (click)="showTemuanPerDay()" class="text-center">Jumlah Temuan per Hari</h5>
+            </div>
+          </div>
+          <div [ngClass]="!listtemuanperhari ? '': 'hidden'" class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
+            <div class="flex-auto p-6">
+              <canvas id="totalfinding" width="310" height="156"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="flex flex-wrap -mx-3">
     <div class="w-full px-1 py-1 mx-auto">
-      <!-- <div class="my-1 px-1 place-items-center md:w-3/4 lg:my-6 lg:px-6">
-        <div class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl mb-2 bg-clip-border">
-          <div class="flex-auto p-4">
-            <h5 class="text-center">Total Data</h5>
-          </div>
-        </div>
-        <div class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
-          <div class="flex-auto p-6">
-            <canvas id="dum" height="150px"></canvas>
-            <div class="px-6 pt-4 pb-2 text-center">
-              <span style="background-color: #7fe7dc;"
-                class="text-white inline-block bg-red rounded-full text-md px-3 py-1 font-semibold mr-2 mb-2">Total:
-                {{pendingexecute + finishexecute + readyexecute}}</span>
-              <span style="background-color:#ffc13b"
-                class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">On
-                Progres:
-                {{pendingexecute}}</span>
-              <span style="background-color: #ff6e40;"
-                class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Ready:
-                {{readyexecute}}</span>
-              <span style="background-color: #316879;"
-                class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Finish:
-                {{finishexecute}}</span>
-            </div>
-          </div>
-        </div>
-      </div> -->
       <div class="flex flex-wrap -mx-1 lg:-mx-4">
-        <!-- <div class="my-1 px-1 w-full md:w-1/2 lg:my-6 lg:px-6">
-          <div
-            class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl  mb-1 bg-clip-border">
-            <div class="flex-auto p-4">
-              <h5 class="text-center">Type of Finding</h5>
-            </div>
-          </div>
-          <div
-            class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl mb-1 bg-clip-border">
-            <div class="flex-auto p-6">
-              <canvas id="donut" width="575" height="480"></canvas>
-              <div class="px-6 pt-4 pb-2 text-center">
-                <span style="background-color: #ffc13b"
-                  class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">On
-                  Progres:
-                  {{pendingexecute}}</span>
-                <span style="background-color: #ff6e40;"
-                  class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Ready:
-                  {{readyexecute}}</span>
-                <span style="background-color: #316879;"
-                  class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Finish:
-                  {{finishexecute}}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="my-1 px-1 w-full md:w-1/2 lg:my-6 lg:px-6">
-          <div
-            class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl  mb-1 bg-clip-border">
-            <div class="flex-auto p-4">
-              <h5 class="text-center">Level of Finding</h5>
-            </div>
-          </div>
-          <div
-            class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl mb-1 bg-clip-border">
-            <div class="flex-auto p-6">
-              <canvas id="donut2" width="575" height="480"></canvas>
-              <div class="px-6 pt-4 pb-2 text-center">
-                <span style="background-color: #626d71;"
-                  class="text-white inline-block bg-red rounded-full text-md px-3 py-1 font-semibold mr-2 mb-2">Low:
-                  {{this.low}}</span>
-                <span style="background-color: #ffc13b;"
-                  class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Medium:
-                  {{this.medium}}</span>
-                <span style="background-color: #ff6e40;"
-                  class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">High:
-                  {{this.high}}</span>
-              </div>
-            </div>
-          </div>
-        </div> -->
         <!--Start of Button for finding pending-->
         <div class="my-1 px-1 w-full md:w-full lg:my-6 lg:px-6">
           <div (click)="showFindingPending()">
@@ -451,7 +376,7 @@
 
         <!--Start of finding pending card-->
         <div *ngIf="listoffindingpending == false" class="my-1 px-1 w-full md:w-full lg:my-6 lg:px-6">
-          <div class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
+          <div class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg bg-clip-border">
             <div class="flex-auto p-6">
               <p class="text-center" style="color: red;">Click Funlock For Show History Finding Closed</p>
               <div class="flex items-center text-center p-4">
@@ -518,8 +443,30 @@
                       <td *ngIf="!findingpending.no_wo" class="text-center font-bold py-4 px-6">
                         -
                       </td>
-                      <td *ngIf="findingpending.status" class="py-4 px-6">
+                      <td *ngIf="findingpending.status && findingpending.status == 'READY'" class="text-white text-center py-4 px-6">
+                        <div class="buttonn" style="background-color: #70b26f;">
+                          {{findingpending.status}}
+                        </div>
+                      </td>
+                      <td *ngIf="findingpending.status && findingpending.status == 'RELEASED'" class="text-white text-center py-4 px-6">
+                        <div class="buttonn" style="background-color: #a97e7e;">
+                          {{findingpending.status}}
+                        </div>
+                      </td>
+                      <td *ngIf="findingpending.status && findingpending.status == 'CREATED'" class="text-center text-white py-4 px-6">
+                        <div class="buttonn" style="background-color: #9f9178;">
+                          {{findingpending.status}}
+                        </div>
+                      </td>
+                      <td *ngIf="findingpending.status && findingpending.status == 'CLOSED'" class="text-white text-center py-4 px-6">
+                        <div class="buttonn" style="background-color: #A2A378;">
                         {{findingpending.status}}
+                        </div>
+                      </td>
+                      <td *ngIf="findingpending.status && findingpending.status == 'PARTIAL CONFIRMATION'" class="text-white text-center py-4 px-6">
+                        <div class="buttonn" style="background-color: #675D50;">
+                        {{findingpending.status}}
+                        </div>
                       </td>
                       <td *ngIf="!findingpending.status" class="text-center font-bold py-4 px-6">
                         -
