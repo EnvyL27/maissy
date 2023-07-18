@@ -437,6 +437,10 @@ export class CountService {
   getReadFinishTodayoci1() {
     return this.httpClient.get(api + "finishtodaylistoci1");
   }
+
+  getReadFinishTodayoci1TestName() {
+    return this.httpClient.get(api + "finishtodaylistoci1testname");
+  }
   getReadFinishTodayoci2() {
     return this.httpClient.get(api + "finishtodaylistoci2");
   }

@@ -211,7 +211,7 @@ export const routingComponent = [
   EmptyboxOffComponent,
   PackConveyorOffComponent,
   OxoniaComponent,
-  DocsComponent,
+  // DocsComponent,
   DatabaseComponent,
   TablesComponent,
   CostComponent

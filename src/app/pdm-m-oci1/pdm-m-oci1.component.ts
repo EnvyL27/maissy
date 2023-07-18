@@ -221,6 +221,9 @@ export class PdmMOci1Component implements OnInit {
   unsatis2: any = [];
   totalunsatis: any;
   totalfinishtoday: object = {};
+  totalfinishtdy: object = {};
+  totalfinishresult: any = {};
+  totalfinishtdy2: any = [];
   totalfinishtoday2: any = [];
   totalfinishtoday2down: any = [];
   abnormal: object = {};
@@ -328,7 +331,7 @@ export class PdmMOci1Component implements OnInit {
     return element ? element.id : null;
   }
   date(masukandate: HTMLInputElement) {
-    ////console.log(moment(masukandate.value).format("DD-MM-YYYY"));
+    //////console.log(moment(masukandate.value).format("DD-MM-YYYY"));
     this.currentPage = 1;
     this.searchDate = masukandate.value;
   }
@@ -373,7 +376,7 @@ export class PdmMOci1Component implements OnInit {
   print(): void {
     let printContents, popupWin: any;
     printContents = this.myNameElem.nativeElement.innerHTML;
-    ////console.log(printContents);
+    //////console.log(printContents);
 
     popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
     popupWin.document.open();
@@ -457,7 +460,7 @@ export class PdmMOci1Component implements OnInit {
       }
     }
     this.temperaturelist = this.temperaturelist.filter(function (e: any) { return e != null; });
-    ////console.log(this.temperaturelist);
+    //////console.log(this.temperaturelist);
 
     for (let i = 0; i < this.temperaturelist.length; i++) {
       if (this.temperaturelist[i].test_name === 'Thermal') {
@@ -465,7 +468,7 @@ export class PdmMOci1Component implements OnInit {
         this.temperatureDate.splice(this.temperatureDate.lenght, 0, this.temperaturelist[i].do_date);
       }
     }
-    ////console.log(this.temperatureDate);
+    //////console.log(this.temperatureDate);
 
 
     for (let i = 0; i < this.totalamperelist.length; i++) {
@@ -474,7 +477,7 @@ export class PdmMOci1Component implements OnInit {
       }
     }
     this.amperelist = this.amperelist.filter(function (e: any) { return e != null; });
-    // //console.log(this.amperelist);
+    // ////console.log(this.amperelist);
 
     for (let i = 0; i < this.amperelist.length; i++) {
       if (this.amperelist[i].test_name === 'R') {
@@ -528,10 +531,10 @@ export class PdmMOci1Component implements OnInit {
         },
       ],
     };
-      // //console.log(this.ampereR);
-      // //console.log(this.ampereS);
-      // //console.log(this.ampereT);
-      // //console.log(this.ampereFreq);
+      // ////console.log(this.ampereR);
+      // ////console.log(this.ampereS);
+      // ////console.log(this.ampereT);
+      // ////console.log(this.ampereFreq);
     var dataAmpere = {
       labels: this.ampereDate.reverse(),
       datasets: [
@@ -642,7 +645,7 @@ export class PdmMOci1Component implements OnInit {
         height: 500,
         events: {
           click: (event: any, chartContext: any, config: any) => {
-            // //console.log(config);
+            // ////console.log(config);
 
             if (config.dataPointIndex == '0' && config.seriesIndex == '0') {
               this.changeprep();
@@ -809,12 +812,12 @@ export class PdmMOci1Component implements OnInit {
           this.service.getOci1Valuemonth().subscribe(data => {
             this.valuemonth = data;
             Object.values(this.valuemonth).forEach(data => {
-              // // //console.log(data);
+              // // ////console.log(data);
               var array = Object.keys(data).map(function (key) {
                 return data[key];
               });
 
-              // // //console.log(array);
+              // // ////console.log(array);
               for (let i = 0; i < array.length; i++) {
                 this.valuemonthlist.splice(this.valuemonthlist.lenght, 0, array[i]);
               }
@@ -883,7 +886,7 @@ export class PdmMOci1Component implements OnInit {
       );
       this.service.getReadPdmAssetoci1().subscribe(data=>{
         this.pdmasset = data;
-        //console.log(this.pdmasset);
+        ////console.log(this.pdmasset);
         Object.values(this.pdmasset).forEach(data => {
           var array = Object.keys(data).map(function (key) {
             return data[key];
@@ -891,14 +894,14 @@ export class PdmMOci1Component implements OnInit {
           for(let i = 0; i < array.length; i++){
             this.pdmassetlist.splice(this.pdmassetlist.get, 0, array[i])
           }
-          // //console.log(this.pdmassetlist);
+          // ////console.log(this.pdmassetlist);
 
         })
 
       });
       this.service.getOci1fNotFinish().subscribe(data => {
         this.finishnot = data;
-        // //console.log(data);
+        // ////console.log(data);
         Object.values(this.finishnot).forEach(data => {
           var array = Object.keys(data).map(function (key) {
             return data[key];
@@ -913,9 +916,9 @@ export class PdmMOci1Component implements OnInit {
 
           }
 
-          // //console.log(this.finishnotlist);
-          // //console.log(m);
-          // //console.log(y);
+          // ////console.log(this.finishnotlist);
+          // ////console.log(m);
+          // ////console.log(y);
 
 
 
@@ -939,12 +942,12 @@ export class PdmMOci1Component implements OnInit {
           this.tahun = this.newTanggal.split("-");
           this.tahun = this.tahun[0];
 
-          // //console.log(array);
+          // ////console.log(array);
 
           for (let i = 0; i < this.finishnotlist.length; i++) {
             if(this.finishnotlist[i].month == m){
               if(this.finishnotlist[i].year == y){
-                // //console.log(this.finishnotlist[i]);
+                // ////console.log(this.finishnotlist[i]);
 
                 if (this.finishnotlist[i].name_area == 'PREPARATION') {
                   if (this.finishnotlist[i].value == null) {
@@ -999,19 +1002,19 @@ export class PdmMOci1Component implements OnInit {
 
         }
         )
-        ////console.log(this.finishnotlist);
+        //////console.log(this.finishnotlist);
 
       }
       );
       this.service.getNotePdm().subscribe(data => {
         this.notepdm = data;
         Object.values(this.notepdm).forEach(data => {
-          // // //console.log(data);
+          // // ////console.log(data);
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
 
-          // // //console.log(array);
+          // // ////console.log(array);
           for (let i = 0; i < array.length; i++) {
             this.notepdmlist.splice(this.notepdmlist.lenght, 0, array[i]);
           }
@@ -1023,16 +1026,16 @@ export class PdmMOci1Component implements OnInit {
       this.service.getReadFinishTodayoci1abnormal().subscribe(data => {
         this.abnormalasset = data;
         Object.values(this.abnormalasset).forEach(data => {
-          // // //console.log(data);
+          // // ////console.log(data);
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
 
-          // // //console.log(array);
+          // // ////console.log(array);
           for (let i = 0; i < array.length; i++) {
             this.abnormalassetlist.splice(this.abnormalassetlist.lenght, 0, array[i]);
           }
-          // //console.log(this.abnormalassetlist);
+          // ////console.log(this.abnormalassetlist);
 
           for (let elem of this.abnormalassetlist) {
             if (elem.Stat == 'Good') {
@@ -1045,7 +1048,7 @@ export class PdmMOci1Component implements OnInit {
             } else if (elem.Stat == 'Unacceptable') {
               this.unacc2 += 1;
             }
-            // //console.log(this.listofsatisfactory);
+            // ////console.log(this.listofsatisfactory);
 
           }
           for (let elem of this.abnormalassetlist) {
@@ -1058,7 +1061,7 @@ export class PdmMOci1Component implements OnInit {
             } else if (elem.Stat == 'Unacceptable') {
               this.unacc += 1;
             }
-            //// //console.log(this.good);
+            //// ////console.log(this.good);
 
           }
           this.coba = new Chart('donut', {
@@ -1085,7 +1088,7 @@ export class PdmMOci1Component implements OnInit {
             },
           });
           // this.abnormalassetlist = this.abnormalassetlist.filter((el: any, i: any, a: any) => i === a.indexOf(el))
-          // //console.log(this.abnormalassetlist);
+          // ////console.log(this.abnormalassetlist);
 
           for (let i = 0; i < this.abnormalassetlist.length; i++) {
             if (this.abnormalassetlist[i].Stat == 'Unsatisfactory' || this.abnormalassetlist[i].Stat == 'Unacceptable') {
@@ -1099,16 +1102,16 @@ export class PdmMOci1Component implements OnInit {
       this.service.getTemperatureLineoci1().subscribe(data => {
         this.temperature = data;
         Object.values(this.temperature).forEach(data => {
-          // // //console.log(data);
+          // // ////console.log(data);
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
 
-          // // //console.log(array);
+          // // ////console.log(array);
           for (let i = 0; i < array.length; i++) {
             this.totaltemperaturelist.splice(this.totaltemperaturelist.lenght, 0, array[i]);
             this.totaltemperaturedate.splice(this.totaltemperaturedate.lenght, 0, array[i]);
-            //// //console.log(array[i]);
+            //// ////console.log(array[i]);
           }
         })
       }
@@ -1116,15 +1119,15 @@ export class PdmMOci1Component implements OnInit {
       this.service.getAmpereLineoci1().subscribe(data => {
         this.ampere = data;
         Object.values(this.ampere).forEach(data => {
-          // // //console.log(data);
+          // // ////console.log(data);
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
-          // // //console.log(array);
+          // // ////console.log(array);
           for (let i = 0; i < array.length; i++) {
             this.totalamperelist.splice(this.totalamperelist.lenght, 0, array[i]);
             this.totalamperedate.splice(this.totalamperedate.lenght, 0, array[i]);
-            //// //console.log(array[i]);
+            //// ////console.log(array[i]);
           }
         })
       }
@@ -1132,41 +1135,61 @@ export class PdmMOci1Component implements OnInit {
       this.service.getVibrationLineoci1().subscribe(data => {
         this.vibration = data;
         Object.values(this.vibration).forEach(data => {
-          // // //console.log(data);
+          // // ////console.log(data);
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
-          // // //console.log(array);
+          // // ////console.log(array);
           for (let i = 0; i < array.length; i++) {
             this.totalvibrationlist.splice(this.totalvibrationlist.lenght, 0, array[i]);
             this.totalvibrationdate.splice(this.totalvibrationdate.lenght, 0, array[i]);
-            //// //console.log(array[i]);
+            //// ////console.log(array[i]);
           }
         })
       }
       );
       this.service.getReadFinishTodayoci1().subscribe(data => {
+        //console.log(data);
+
         this.totalfinishtoday = data;
 
         Object.values(this.totalfinishtoday).forEach(data => {
-          // // //console.log(data);
+          // // ////console.log(data);
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
-          // // //console.log(array);
+          // // ////console.log(array);
           for (let i = 0; i < array.length; i++) {
             this.totalfinishtoday2.splice(this.totalfinishtoday2.lenght, 0, array[i]);
             // this.totalfinishtoday2down.splice(this.totalfinishtoday2down.lenght, 0, array[i]);
           }
         })
-        this.totalfinishtoday2.forEach((element:any) => {
-          if(this.totalfinishtoday2.test_name == 'CF+ (2H)'){
-          console.log(element);}else{
-            // console.log('gaada');
 
-          }
+        // Object.values(this.totalfinishtdy).forEach(data => {
+        //   // // ////console.log(data);
+        //   var array = Object.keys(data).map(function (key) {
+        //     return data[key];
+        //   });
+        //   // // ////console.log(array);
+        //   for (let i = 0; i < array.length; i++) {
+        //     this.totalfinishtdy2.splice(this.totalfinishtdy2.lenght, 0, array[i]);
+        //     // this.totalfinishtoday2down.splice(this.totalfinishtoday2down.lenght, 0, array[i]);
+        //   }
+        // })
 
-        });
+        // // //console.log(this.totalfinishtoday2);
+        // //console.log(this.totalfinishtdy2);
+        // for (let i = 0; i < this.totalfinishtoday2.length; i++) {
+        //   this.totalfinishresult[this.totalfinishtoday2[i].device_name] = this.totalfinishtoday2[i];
+        // }
+
+        // for (let i = 0; i < this.totalfinishtdy2.length; i++) {
+        //   this.totalfinishresult[this.totalfinishtdy2[i].device_name] = this.totalfinishtdy2[i];
+        // }
+
+        //console.log(this.totalfinishresult);
+
+
 
       }
       );
@@ -1189,7 +1212,7 @@ export class PdmMOci1Component implements OnInit {
       }
       );
     });
-    //// //console.log("1");
+    //// ////console.log("1");
     this.spinner.show();
     this.loaddata = await this.loaddata;
   }

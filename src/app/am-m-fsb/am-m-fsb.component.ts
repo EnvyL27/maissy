@@ -18,7 +18,7 @@ export class AmMFsbComponent implements OnInit {
   {
     /* pass here the table id */
     let element = document.getElementById('excel-table');
-    ////console.log(this.findingpending2);
+    //////console.log(this.findingpending2);
 
     const ws: XLSX.WorkSheet =XLSX.utils.json_to_sheet(this.findingpending2);
     ws["!cols"] = [ { wch: 10 },
@@ -201,17 +201,17 @@ export class AmMFsbComponent implements OnInit {
       block: 'center',
       inline: 'center',
     });
-    //// ////console.log($event);
+    //// //////console.log($event);
     this.funloclist = [];
     this.funloc = $event;
-    // ////console.log(this.funloc);
+    // //////console.log(this.funloc);
     for (let i = 0; i < this.orderarr.length; i++) {
       if (this.orderarr[i].func_loc === this.funloc) {
         this.funloclist[i] = this.orderarr[i];
       }
     }
     this.funloclist = this.funloclist.filter(function (e: any) { return e != null; });
-    // ////console.log(this.funloclist);
+    // //////console.log(this.funloclist);
   }
   capture() {
     this.captureService
@@ -1000,17 +1000,17 @@ export class AmMFsbComponent implements OnInit {
       this.service.getOrder().subscribe(data => {
         this.orderobj = data;
         Object.values(this.orderobj).forEach(data => {
-          // // ////console.log(data);
+          // // //////console.log(data);
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
-          // // ////console.log(array);
+          // // //////console.log(array);
           for (let i = 0; i < array.length; i++) {
             this.orderarr.splice(this.orderarr.lenght, 0, array[i]);
           }
-          // ////console.log(this.orderarr);
+          // //////console.log(this.orderarr);
 
-          // // ////console.log(this.findingpending2);
+          // // //////console.log(this.findingpending2);
         })
 
 
@@ -1020,27 +1020,27 @@ export class AmMFsbComponent implements OnInit {
       this.service.getReadfpSectionFSB().subscribe(data => {
         this.fpsect = data;
         Object.values(this.fpsect).forEach(data => {
-          // // ////console.log(data);
+          // // //////console.log(data);
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
-          // ////console.log(array);
+          // //////console.log(array);
           for (let i = 0; i < array.length; i++) {
             this.fpsectarr.splice(this.fpsectarr.lenght, 0, array[i]);
           }
-          // ////console.log(this.fpsectarr);
+          // //////console.log(this.fpsectarr);
 
-          // // ////console.log(this.findingpending2);
+          // // //////console.log(this.findingpending2);
         })
       });
       this.service.getTotalFeeding().subscribe(data => {
         this.totallevel = data;
         Object.values(this.totallevel).forEach(data => {
-          // // ////console.log(data);
+          // // //////console.log(data);
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
-          // // ////console.log(array);
+          // // //////console.log(array);
           for (let i = 0; i < array.length; i++) {
             this.totallevel2.splice(this.totallevel2.lenght, 0, array[i]);
           }
@@ -1078,8 +1078,8 @@ export class AmMFsbComponent implements OnInit {
               }]
             },
           });
-          // // ////console.log(this.medium);
-          // // ////console.log(this.totallevel2);
+          // // //////console.log(this.medium);
+          // // //////console.log(this.totallevel2);
         })
 
 
@@ -1088,28 +1088,28 @@ export class AmMFsbComponent implements OnInit {
       this.service.getFuncLocFsb().subscribe(data => {
         this.funlock = data;
         Object.values(this.funlock).forEach(data => {
-          // ////console.log(data);
+          // //////console.log(data);
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
-          // ////console.log(array);
+          // //////console.log(array);
           for (let i = 0; i < array.length; i++) {
             this.funlockarr.splice(this.funlockarr.lenght, 0, array[i]);
           }
 
-          // ////console.log(this.funlockarr);
+          // //////console.log(this.funlockarr);
 
-          // // ////console.log(this.findingpending2);
+          // // //////console.log(this.findingpending2);
         })
       });
       this.service.getReadFindingPendingfsb().subscribe(data => {
         this.findingpending = data;
         Object.values(this.findingpending).forEach(data => {
-          // // ////console.log(data);
+          // // //////console.log(data);
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
-          // // ////console.log(array);
+          // // //////console.log(array);
           for (let i = 0; i < array.length; i++) {
             if(array[i].status != "CLOSED" && array[i].status != "TECO"){
               this.findingpending2.splice(this.findingpending2.lenght, 0, array[i]);
@@ -1177,7 +1177,7 @@ export class AmMFsbComponent implements OnInit {
           for (let i = 0; i < array.length; i++) {
             this.totalfm2.splice(this.totalfm2.lenght, 0, array[i]);
           }
-          ////console.log(this.totalfm2);
+          //////console.log(this.totalfm2);
 
 
           this.totalfm2.forEach((elem:any, i:number) => {
@@ -1185,7 +1185,7 @@ export class AmMFsbComponent implements OnInit {
               date.push(elem.tanggal_temuan)
             }
             if (elem.id_area == 3) {
-              ////console.log(elem);
+              //////console.log(elem);
 
               if (elem.status2 == 'Done') {
                 this.finishexecute += 1;
@@ -1221,7 +1221,7 @@ export class AmMFsbComponent implements OnInit {
             this.temuanperday_dum = 0
 
           });
-          // // ////console.log(this.const2);
+          // // //////console.log(this.const2);
           new Chart('totalfinding', {
             type: 'bar',
             data: {
@@ -1333,7 +1333,7 @@ export class AmMFsbComponent implements OnInit {
           // });
           this.spinner.hide();
           this.resolved = true;
-          // // ////console.log(this.const2.splice(this.const2.lenght,0,array[0]).total);
+          // // //////console.log(this.const2.splice(this.const2.lenght,0,array[0]).total);
         })
       })
 

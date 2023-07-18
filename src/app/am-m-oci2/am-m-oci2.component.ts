@@ -17,7 +17,7 @@ export class AmMOci2Component implements OnInit {
   exportexcel(): void {
     /* pass here the table id */
     let element = document.getElementById('excel-table');
-    ////console.log(this.findingpending2);
+    //////console.log(this.findingpending2);
 
     const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.findingpending2);
     ws["!cols"] = [{ wch: 10 },
@@ -204,19 +204,19 @@ export class AmMOci2Component implements OnInit {
       block: 'center',
       inline: 'center',
     });
-    //// ////console.log($event);
+    //// //////console.log($event);
     this.funloclist = [];
     this.funloc = $event;
-    ////console.log(this.funloc);
+    //////console.log(this.funloc);
     this.total_cost = 0;
     for (let i = 0; i < this.orderarr.length; i++) {
       if (this.orderarr[i].func_loc === this.funloc) {
-        ////console.log(this.orderarr);
+        //////console.log(this.orderarr);
 
         this.total_cost += this.orderarr[i].total_actual;
       }
     }
-    ////console.log(this.total_cost);
+    //////console.log(this.total_cost);
 
     for (let i = 0; i < this.orderarr.length; i++) {
       if (this.orderarr[i].func_loc === this.funloc) {
@@ -224,7 +224,7 @@ export class AmMOci2Component implements OnInit {
       }
     }
     this.funloclist = this.funloclist.filter(function (e: any) { return e != null; });
-    // ////console.log(this.funloclist);
+    // //////console.log(this.funloclist);
   }
   capture() {
     this.captureService
@@ -1013,18 +1013,18 @@ export class AmMOci2Component implements OnInit {
         this.orderobj = data;
 
         Object.values(this.orderobj).forEach(data => {
-          // // ////console.log(data);
+          // // //////console.log(data);
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
-          // // ////console.log(array);
+          // // //////console.log(array);
           for (let i = 0; i < array.length; i++) {
             this.orderarr.splice(this.orderarr.lenght, 0, array[i]);
           }
-          // ////console.log(this.orderarr);
+          // //////console.log(this.orderarr);
 
 
-          // // ////console.log(this.findingpending2);
+          // // //////console.log(this.findingpending2);
         })
 
 
@@ -1033,27 +1033,27 @@ export class AmMOci2Component implements OnInit {
       this.service.getReadfpSectionOci2().subscribe(data => {
         this.fpsect = data;
         Object.values(this.fpsect).forEach(data => {
-          // // ////console.log(data);
+          // // //////console.log(data);
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
-          // ////console.log(array);
+          // //////console.log(array);
           for (let i = 0; i < array.length; i++) {
             this.fpsectarr.splice(this.fpsectarr.lenght, 0, array[i]);
           }
-          // ////console.log(this.fpsectarr);
+          // //////console.log(this.fpsectarr);
 
-          // // ////console.log(this.findingpending2);
+          // // //////console.log(this.findingpending2);
         })
       });
       this.service.getTotalFeeding().subscribe(data => {
         this.totallevel = data;
         Object.values(this.totallevel).forEach(data => {
-          // // ////console.log(data);
+          // // //////console.log(data);
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
-          // // ////console.log(array);
+          // // //////console.log(array);
           for (let i = 0; i < array.length; i++) {
             if(array[i].id_area == 2){
               this.totallevel2.splice(this.totallevel2.lenght, 0, array[i]);
@@ -1093,8 +1093,8 @@ export class AmMOci2Component implements OnInit {
               }]
             },
           });
-          // // ////console.log(this.medium);
-          // // ////console.log(this.totallevel2);
+          // // //////console.log(this.medium);
+          // // //////console.log(this.totallevel2);
         })
 
 
@@ -1103,28 +1103,28 @@ export class AmMOci2Component implements OnInit {
       this.service.getFuncLocOci2().subscribe(data => {
         this.funlock = data;
         Object.values(this.funlock).forEach(data => {
-          // ////console.log(data);
+          // //////console.log(data);
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
-          // ////console.log(array);
+          // //////console.log(array);
           for (let i = 0; i < array.length; i++) {
             this.funlockarr.splice(this.funlockarr.lenght, 0, array[i]);
           }
 
-          // ////console.log(this.funlockarr);
+          // //////console.log(this.funlockarr);
 
-          // // ////console.log(this.findingpending2);
+          // // //////console.log(this.findingpending2);
         })
       });
       this.service.getReadFindingPendingoci2().subscribe(data => {
         this.findingpending = data;
         Object.values(this.findingpending).forEach(data => {
-          // // ////console.log(data);
+          // // //////console.log(data);
           var array = Object.keys(data).map(function (key) {
             return data[key];
           });
-          // // ////console.log(array);
+          // // //////console.log(array);
           for (let i = 0; i < array.length; i++) {
             if (array[i].status != "CLOSED" && array[i].status != "TECO") {
               this.findingpending2.splice(this.findingpending2.lenght, 0, array[i]);
@@ -1230,7 +1230,7 @@ export class AmMOci2Component implements OnInit {
 
           date.forEach((element: any, i: number) => {
 
-            //console.log(this.temuanperday_data_temp);
+            ////console.log(this.temuanperday_data_temp);
             this.temuanperday_data_temp.forEach((elem: any) => {
               if (elem.tanggal_temuan == element) {
                 this.temuanperday_dum++
@@ -1358,7 +1358,7 @@ export class AmMOci2Component implements OnInit {
           // });
           this.spinner.hide();
           this.resolved = true;
-          // // ////console.log(this.const2.splice(this.const2.lenght,0,array[0]).total);
+          // // //////console.log(this.const2.splice(this.const2.lenght,0,array[0]).total);
         })
       })
 
