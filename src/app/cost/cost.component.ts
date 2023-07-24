@@ -169,10 +169,33 @@ export class CostComponent implements OnInit {
   indexcostdes: number = 0;
   totalpastyear: number = 0;
   totalcurrentyear: number = 0;
+  listofcorrective: boolean = false;
+  listofpreventive: boolean = false;
+  listofoverhaul: boolean = false;
+  listofindex: boolean = false;
+  listcompare: boolean = false;
+  listtotalcompare: boolean = false;
 
 
   deskripsi: any = 'Loading..';
   constructor(private service: CountService, private spinner: NgxSpinnerService) { }
+
+  showListOfCorrective(){
+    if(this.listofcorrective == false){
+      this.listofcorrective = true;
+    }else{
+      this.listofcorrective = false;
+    }
+  }
+
+  showListOfPreventive(){
+    if(this.listofpreventive == false){
+      this.listofpreventive = true;
+    }else{
+      this.listofpreventive = false;
+    }
+  }
+
   async ngOnInit(): Promise<void> {
     this.costChart();
     window.scrollTo(0, 0);

@@ -200,14 +200,18 @@ export class AmMOci1Component implements OnInit {
   @ViewChild("target2")
   target2!: ElementRef;
   data($event: any) {
-    this.target.nativeElement.scrollIntoView({
-      behavior: 'smooth',
-      block: 'center',
-      inline: 'center',
-    });
+    console.log(this.target);
+
+    this.target.nativeElement.scrollIntoView();
+    //   behavior: 'smooth',
+    //   block: 'center',
+    //   inline: 'center',
+    // });
     //// //////console.log($event);
     this.funloclist = [];
     this.funloc = $event;
+    console.log(this.funloc);
+
     // //////console.log(this.funloc);
     for (let i = 0; i < this.orderarr.length; i++) {
       if (this.orderarr[i].func_loc === this.funloc) {
@@ -641,7 +645,19 @@ export class AmMOci1Component implements OnInit {
       this.listofhistorypending = true;
     }else if(this.listofhistorypending == true){
       this.listtemuanperhari = true;
-      this.listoffindingpending = true;
+      // this.listoffindingpending = true;
+      this.listjobfinish = true;
+      this.listofMonthlyReport = true;
+      this.listofhistorypending = false;
+    }
+  }
+
+  showFindingHistory(){
+    if(this.listofhistorypending == false){
+      // this.listofhistorypending = true;
+    }else if(this.listofhistorypending == true){
+      this.listtemuanperhari = true;
+      // this.listoffindingpending = true;
       this.listjobfinish = true;
       this.listofMonthlyReport = true;
       this.listofhistorypending = false;
@@ -684,8 +700,14 @@ export class AmMOci1Component implements OnInit {
     }
   }
 
+  scrollPoint1(el: HTMLElement) {
+    // el.scrollIntoView({behavior: "smooth"});
+    el.scrollIntoView();
+  }
+
   async ngOnInit(): Promise<void> {
     this.showFinding();
+    this.showFindingHistory();
     this.showFindingPending();
     this.showHistoryPending();
     this.showMonthlyReport();
@@ -712,6 +734,9 @@ export class AmMOci1Component implements OnInit {
       this.service.getReportingHarianam(this.tglsearch, '1').subscribe(data => {
         this.reportharian.push(data);
       })
+
+
+
       this.service.getTotalDataPost(this.tgl1, this.tgl2).subscribe(data => {
         this.datarange.push(data);
         for (let elem of this.datarange[0]) {

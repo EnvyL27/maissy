@@ -416,6 +416,7 @@ export class PdmMOci1Component implements OnInit {
 
   }
   data($event: any, $event2: any) {
+
     this.target.nativeElement.scrollIntoView();
     // window.scrollTo({
     //   top: 100,

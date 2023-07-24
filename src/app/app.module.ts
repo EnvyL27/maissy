@@ -28,6 +28,7 @@ import { TablesComponent } from './docs/tables/tables.component';
 import { CostComponent } from './cost/cost.component';
 import { CostOci2Component } from './cost-oci2/cost-oci2.component';
 import { CostFsbComponent } from './cost-fsb/cost-fsb.component';
+import { CiltComponent } from './cilt/cilt.component';
 
 
 
@@ -48,6 +49,7 @@ import { CostFsbComponent } from './cost-fsb/cost-fsb.component';
     CostComponent,
     CostOci2Component,
     CostFsbComponent,
+    CiltComponent,
   ],
   imports: [
     Ng2SearchPipeModule,
