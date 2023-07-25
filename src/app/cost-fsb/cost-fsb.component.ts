@@ -170,10 +170,107 @@ export class CostFsbComponent implements OnInit {
   indexcostdes: number = 0;
   totalpastyear: number = 0;
   totalcurrentyear: number = 0;
+  listofcorrective: boolean = false;
+  listofpreventive: boolean = false;
+  listofoverhaul: boolean = false;
+  listofindex: boolean = false;
+  listcompare: boolean = false;
+  listtotalcompare: boolean = false;
 
 
   deskripsi: any = 'Loading..';
   constructor(private service: CountService, private spinner: NgxSpinnerService) { }
+
+  showListOfCorrective(){
+    this.listofcorrective = !this.listofcorrective
+    if(this.listofpreventive == true){
+      this.listofpreventive = !this.listofpreventive
+    }else if(this.listofoverhaul == true){
+      this.listofoverhaul = !this.listofoverhaul
+    }else if(this.listofindex == true){
+      this.listofindex = !this.listofindex
+    }else if(this.listcompare == true){
+      this.listcompare = !this.listcompare
+    }else if(this.listtotalcompare == true){
+      this.listtotalcompare = !this.listtotalcompare
+    }
+  }
+
+  showListOfPreventive(){
+    this.listofpreventive = !this.listofpreventive
+    if(this.listofcorrective == true){
+      this.listofcorrective = !this.listofcorrective
+    }else if(this.listofoverhaul == true){
+      this.listofoverhaul = !this.listofoverhaul
+    }else if(this.listofindex == true){
+      this.listofindex = !this.listofindex
+    }else if(this.listcompare == true){
+      this.listcompare = !this.listcompare
+    }else if(this.listtotalcompare == true){
+      this.listtotalcompare = !this.listtotalcompare
+    }
+  }
+
+  showListOfOverhaul(){
+    this.listofoverhaul = !this.listofoverhaul
+    if(this.listofcorrective == true){
+      this.listofcorrective = !this.listofcorrective
+    }else if(this.listofpreventive == true){
+      this.listofpreventive = !this.listofpreventive
+    }else if(this.listofindex == true){
+      this.listofindex = !this.listofindex
+    }else if(this.listcompare == true){
+      this.listcompare = !this.listcompare
+    }else if(this.listtotalcompare == true){
+      this.listtotalcompare = !this.listtotalcompare
+    }
+  }
+
+  showListOfIndex(){
+    this.listofindex = !this.listofindex
+    if(this.listofcorrective == true){
+      this.listofcorrective = !this.listofcorrective
+    }else if(this.listofpreventive == true){
+      this.listofpreventive = !this.listofpreventive
+    }else if(this.listofoverhaul == true){
+      this.listofoverhaul = !this.listofoverhaul
+    }else if(this.listcompare == true){
+      this.listcompare = !this.listcompare
+    }else if(this.listtotalcompare == true){
+      this.listtotalcompare = !this.listtotalcompare
+    }
+  }
+
+  showListOfCompare(){
+    this.listcompare = !this.listcompare
+    if(this.listofcorrective == true){
+      this.listofcorrective = !this.listofcorrective
+    }else if(this.listofpreventive == true){
+      this.listofpreventive = !this.listofpreventive
+    }else if(this.listofoverhaul == true){
+      this.listofoverhaul = !this.listofoverhaul
+    }else if(this.listofindex == true){
+      this.listofindex = !this.listofindex
+    }else if(this.listtotalcompare == true){
+      this.listtotalcompare = !this.listtotalcompare
+    }
+  }
+
+  showListOfTotalCompare(){
+    this.listtotalcompare = !this.listtotalcompare
+    if(this.listofcorrective == true){
+      this.listofcorrective = !this.listofcorrective
+    }else if(this.listofpreventive == true){
+      this.listofpreventive = !this.listofpreventive
+    }else if(this.listofoverhaul == true){
+      this.listofoverhaul = !this.listofoverhaul
+    }else if(this.listofindex == true){
+      this.listofindex = !this.listofindex
+    }else if(this.listcompare == true){
+      this.listcompare = !this.listcompare
+    }
+  }
+
   async ngOnInit(): Promise<void> {
     this.costChart();
     window.scrollTo(0, 0);

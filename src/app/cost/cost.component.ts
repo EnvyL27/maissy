@@ -181,18 +181,92 @@ export class CostComponent implements OnInit {
   constructor(private service: CountService, private spinner: NgxSpinnerService) { }
 
   showListOfCorrective(){
-    if(this.listofcorrective == false){
-      this.listofcorrective = true;
-    }else{
-      this.listofcorrective = false;
+    this.listofcorrective = !this.listofcorrective
+    if(this.listofpreventive == true){
+      this.listofpreventive = !this.listofpreventive
+    }else if(this.listofoverhaul == true){
+      this.listofoverhaul = !this.listofoverhaul
+    }else if(this.listofindex == true){
+      this.listofindex = !this.listofindex
+    }else if(this.listcompare == true){
+      this.listcompare = !this.listcompare
+    }else if(this.listtotalcompare == true){
+      this.listtotalcompare = !this.listtotalcompare
     }
   }
 
   showListOfPreventive(){
-    if(this.listofpreventive == false){
-      this.listofpreventive = true;
-    }else{
-      this.listofpreventive = false;
+    this.listofpreventive = !this.listofpreventive
+    if(this.listofcorrective == true){
+      this.listofcorrective = !this.listofcorrective
+    }else if(this.listofoverhaul == true){
+      this.listofoverhaul = !this.listofoverhaul
+    }else if(this.listofindex == true){
+      this.listofindex = !this.listofindex
+    }else if(this.listcompare == true){
+      this.listcompare = !this.listcompare
+    }else if(this.listtotalcompare == true){
+      this.listtotalcompare = !this.listtotalcompare
+    }
+  }
+
+  showListOfOverhaul(){
+    this.listofoverhaul = !this.listofoverhaul
+    if(this.listofcorrective == true){
+      this.listofcorrective = !this.listofcorrective
+    }else if(this.listofpreventive == true){
+      this.listofpreventive = !this.listofpreventive
+    }else if(this.listofindex == true){
+      this.listofindex = !this.listofindex
+    }else if(this.listcompare == true){
+      this.listcompare = !this.listcompare
+    }else if(this.listtotalcompare == true){
+      this.listtotalcompare = !this.listtotalcompare
+    }
+  }
+
+  showListOfIndex(){
+    this.listofindex = !this.listofindex
+    if(this.listofcorrective == true){
+      this.listofcorrective = !this.listofcorrective
+    }else if(this.listofpreventive == true){
+      this.listofpreventive = !this.listofpreventive
+    }else if(this.listofoverhaul == true){
+      this.listofoverhaul = !this.listofoverhaul
+    }else if(this.listcompare == true){
+      this.listcompare = !this.listcompare
+    }else if(this.listtotalcompare == true){
+      this.listtotalcompare = !this.listtotalcompare
+    }
+  }
+
+  showListOfCompare(){
+    this.listcompare = !this.listcompare
+    if(this.listofcorrective == true){
+      this.listofcorrective = !this.listofcorrective
+    }else if(this.listofpreventive == true){
+      this.listofpreventive = !this.listofpreventive
+    }else if(this.listofoverhaul == true){
+      this.listofoverhaul = !this.listofoverhaul
+    }else if(this.listofindex == true){
+      this.listofindex = !this.listofindex
+    }else if(this.listtotalcompare == true){
+      this.listtotalcompare = !this.listtotalcompare
+    }
+  }
+
+  showListOfTotalCompare(){
+    this.listtotalcompare = !this.listtotalcompare
+    if(this.listofcorrective == true){
+      this.listofcorrective = !this.listofcorrective
+    }else if(this.listofpreventive == true){
+      this.listofpreventive = !this.listofpreventive
+    }else if(this.listofoverhaul == true){
+      this.listofoverhaul = !this.listofoverhaul
+    }else if(this.listofindex == true){
+      this.listofindex = !this.listofindex
+    }else if(this.listcompare == true){
+      this.listcompare = !this.listcompare
     }
   }
 

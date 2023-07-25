@@ -195,13 +195,13 @@
           </div>
         </div>
         <div class="my-1 px-1 w-full max-w-full md:w-full lg:my-6 lg:px-8">
-          <div
+          <div (click)="showListOfOverhaul()"
             class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl mb-1 bg-clip-border">
             <div class="flex-auto p-4">
               <h5 class="text-center">Overhaul Cost OCI-1</h5>
             </div>
           </div>
-          <div
+          <div  *ngIf="listofoverhaul"
             class="relative flex flex-col mb-2 min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
             <div class="flex-auto p-6">
               <apx-chart
@@ -222,13 +222,13 @@
           </div>
         </div>
         <div class="my-1 px-1 w-full max-w-full md:w-full lg:my-6 lg:px-8">
-          <div
+          <div (click)="showListOfIndex()"
             class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl mb-1 bg-clip-border">
             <div class="flex-auto p-4">
               <h5 class="text-center">Index Maintenance Cost OCI-1</h5>
             </div>
           </div>
-          <div
+          <div *ngIf="listofindex"
             class="relative flex flex-col mb-2 min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
             <div class="flex-auto p-6">
               <apx-chart
@@ -249,13 +249,13 @@
           </div>
         </div>
         <div class="my-1 px-1 w-full max-w-full md:w-full lg:my-6 lg:px-8">
-          <div
+          <div (click)="showListOfCompare()"
             class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl mb-1 bg-clip-border">
             <div class="flex-auto p-4">
               <h5 class="text-center">Comparison Maintenance Cost</h5>
             </div>
           </div>
-          <div
+          <div *ngIf="listcompare"
             class="relative flex flex-col mb-2 min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
             <div class="flex-auto p-6">
               <apx-chart
@@ -276,13 +276,13 @@
           </div>
         </div>
         <div class="my-1 px-1 w-full max-w-full md:w-full lg:my-6 lg:px-8">
-          <div
+          <div (click)="showListOfTotalCompare()"
             class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl mb-1 bg-clip-border">
             <div class="flex-auto p-4">
               <h5 class="text-center">Total Comparison Maintenance Cost</h5>
             </div>
           </div>
-          <div
+          <div *ngIf="listtotalcompare"
             class="relative flex flex-col mb-2 min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
             <div class="flex-auto p-6">
               <apx-chart

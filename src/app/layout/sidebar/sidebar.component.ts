@@ -45,12 +45,9 @@ export class SidebarComponent implements OnInit {
   }
   pdmmonitoringsub(){
     this.sub2 = !this.sub2;
-    console.log(this.sub2);
-
   }
   costmonitoringsub(){
     this.subCost = !this.subCost;
-    console.log(this.subCost);
 
   }
   gamessub(){
