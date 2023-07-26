@@ -29,6 +29,8 @@ import { CostComponent } from './cost/cost.component';
 import { CostOci2Component } from './cost-oci2/cost-oci2.component';
 import { CostFsbComponent } from './cost-fsb/cost-fsb.component';
 import { CiltComponent } from './cilt/cilt.component';
+import { CiltMOci2Component } from './cilt-m-oci2/cilt-m-oci2.component';
+import { CiltMFsbComponent } from './cilt-m-fsb/cilt-m-fsb.component';
 
 
 
@@ -50,6 +52,8 @@ import { CiltComponent } from './cilt/cilt.component';
     CostOci2Component,
     CostFsbComponent,
     CiltComponent,
+    CiltMOci2Component,
+    CiltMFsbComponent,
   ],
   imports: [
     Ng2SearchPipeModule,

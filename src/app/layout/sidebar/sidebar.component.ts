@@ -18,6 +18,7 @@ export class SidebarComponent implements OnInit {
   public sub3: boolean = false;
   public sub4: boolean = false;
   public subCost: boolean = false;
+  public ciltsub: boolean = false;
   public lubisub: boolean = false;
   public lubiplantsub: boolean = false;
   currentDate = new Date();
@@ -48,7 +49,9 @@ export class SidebarComponent implements OnInit {
   }
   costmonitoringsub(){
     this.subCost = !this.subCost;
-
+  }
+  ciltmonitoringsub(){
+    this.ciltsub = !this.ciltsub;
   }
   gamessub(){
     this.sub3 = !this.sub3;

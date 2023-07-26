@@ -72,6 +72,8 @@ import { CostComponent } from './cost/cost.component';
 import { CostOci2Component } from './cost-oci2/cost-oci2.component';
 import { CostFsbComponent } from './cost-fsb/cost-fsb.component';
 import { CiltComponent } from './cilt/cilt.component';
+import { CiltMOci2Component } from './cilt-m-oci2/cilt-m-oci2.component';
+import { CiltMFsbComponent } from './cilt-m-fsb/cilt-m-fsb.component';
 
 const routes: Routes = [
   {path: '', component: DashboardComponent},
@@ -141,7 +143,9 @@ const routes: Routes = [
   {path: 'cost_oci_1', component: CostComponent},
   {path: 'cost_oci_2', component: CostOci2Component},
   {path: 'cost_fsb', component: CostFsbComponent},
-  {path: 'cilt', component: CiltComponent},
+  {path: 'cilt_m_oci1', component: CiltComponent},
+  {path: 'cilt_m_oci2', component: CiltMOci2Component},
+  {path: 'cilt_m_fsb', component: CiltMFsbComponent},
   {path: '**', component: NotFoundComponent},
 
 ];
