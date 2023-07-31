@@ -663,4 +663,10 @@ export class CountService {
   getFgFsb(){
     return this.httpClient.get(api + "fgfsb");
   }
+  getCurrentCycle(){
+    return this.httpClient.get(api + "curcycle");
+  }
+  getCiltOci1(){
+    return this.httpClient.get(api + "ciltoci1");
+  }
 };
