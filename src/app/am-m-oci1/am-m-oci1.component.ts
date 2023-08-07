@@ -67,6 +67,7 @@ export class AmMOci1Component implements OnInit {
   public resolved: boolean = false;
   public resolvedchart: boolean = false;
   totalfm: object = {};
+  screenWidth : number = window.innerWidth;
   approvalfinding: number =0;
   totalfindinglist: boolean = false;
   listoffindingpending: boolean = false;
@@ -139,6 +140,18 @@ export class AmMOci1Component implements OnInit {
   temuanperday_data: any = [];
   temuanperday_data_temp: any = [];
   temuanperday_dum: number = 0 ;
+  termuanperday_jan: number = 0;
+  termuanperday_feb: number = 0;
+  termuanperday_mar: number = 0;
+  termuanperday_apr: number = 0;
+  termuanperday_mei: number = 0;
+  termuanperday_jun: number = 0;
+  termuanperday_jul: number = 0;
+  termuanperday_ags: number = 0;
+  termuanperday_sep: number = 0;
+  termuanperday_okt: number = 0;
+  termuanperday_nov: number = 0;
+  termuanperday_des: number = 0;
   totalfinding1: any;
   januari: number = 0;
   febuari: number = 0;
@@ -188,19 +201,20 @@ export class AmMOci1Component implements OnInit {
   chartdestroy: any;
   finishexecute: number = 0;
   imgBase64 = '';
-  tgl1: any = moment().format("YYYY-MM") + "-01";;
+  tgl1: any = moment().format("YYYY-MM") + "-01";
   tgl2: any = moment().format("YYYY-MM-DD");
   tglsearch: any = moment().format("YYYY-MM-DD");
   tgl3: any = moment().format("YYYY") + "-01-" + "01";
   tgl4: any = moment().format("YYYY-MM-DD");
   autodate: any = moment().format("YYYY");
+  month: any = moment().format("M");
   readyexecute: number = 0;
   @ViewChild("target")
   target!: ElementRef;
   @ViewChild("target2")
   target2!: ElementRef;
   data($event: any) {
-    console.log(this.target);
+    // console.log(this.scree);
 
     this.target.nativeElement.scrollIntoView();
     //   behavior: 'smooth',
@@ -226,7 +240,7 @@ export class AmMOci1Component implements OnInit {
       }
     }
     this.funloclist = this.funloclist.filter(function (e: any) { return e != null; });
-    //////console.log(this.funloclist);
+    console.log(this.funloclist);
   }
   capture() {
     this.captureService
@@ -1275,10 +1289,46 @@ export class AmMOci1Component implements OnInit {
             }
           })
 
+
+          this.temuanperday_data_temp.forEach((element:any) => {
+            console.log(this.screenWidth);
+
+            if(element.tahun == this.autodate){
+              if(element.bulan == 1){
+                this.termuanperday_jan++
+              }else if(element.bulan == 2){
+                this.termuanperday_feb++
+              }else if(element.bulan == 3){
+                this.termuanperday_mar++
+              }else if(element.bulan == 4){
+                this.termuanperday_apr++
+              }else if(element.bulan == 5){
+                this.termuanperday_mei++
+              }else if(element.bulan == 6){
+                this.termuanperday_jun++
+              }else if(element.bulan == 7){
+                this.termuanperday_jul++
+              }else if(element.bulan == 8){
+                this.termuanperday_ags++
+              }else if(element.bulan == 9){
+                this.termuanperday_sep++
+              }else if(element.bulan == 10){
+                this.termuanperday_nov++
+              }else if(element.bulan == 11){
+                this.termuanperday_okt++
+              }else if(element.bulan == 12){
+                this.termuanperday_des++
+              }
+            }
+          });
+
           date.forEach((element: any) => {
-            this.temuanperday_data_temp.forEach((elem: any, j:number) => {
-              if (elem.tanggal_temuan == element) {
-                this.temuanperday_dum++
+
+            this.temuanperday_data_temp.forEach((elem: any) => {
+              if(elem.bulan == this.month){
+                if (elem.tanggal_temuan == element) {
+                  this.temuanperday_dum++
+                }
               }
             });
             if(this.temuanperday_dum != 0){
@@ -1290,14 +1340,66 @@ export class AmMOci1Component implements OnInit {
 
           });
 
+          new Chart('totalfindingbulan', {
+            type: 'bar',
+            data: {
+              labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
+              datasets: [
+                {
+                  label: 'Total Finding Bulan',
+                  data: [this.termuanperday_jan, this.termuanperday_feb, this.termuanperday_mar, this.termuanperday_apr, this.termuanperday_mei, this.termuanperday_jun, this.termuanperday_jul, this.termuanperday_ags, this.termuanperday_sep, this.termuanperday_okt, this.termuanperday_nov, this.termuanperday_des],
+                  backgroundColor: '#FFD6A5',
+                  borderColor: [
+                    'white',
+                  ],
+                  borderWidth: 1
+                },
+              ]
+            }, options: {
+              scales: {
+                yAxes: [{
+                  ticks: {
+                    beginAtZero: true
+                  }
+                }]
+              }
+            }
+          });
+
           new Chart('totalfinding', {
             type: 'bar',
             data: {
               labels: this.temuanperday_label,
               datasets: [
                 {
-                  label: 'Total Finding',
+                  label: 'Total Finding Per Hari',
                   data: this.temuanperday_data,
+                  backgroundColor: '#CBFFA9',
+                  borderColor: [
+                    'white',
+                  ],
+                  borderWidth: 1
+                },
+              ]
+            }, options: {
+              scales: {
+                yAxes: [{
+                  ticks: {
+                    beginAtZero: true
+                  }
+                }]
+              }
+            }
+          });
+
+          new Chart('totalfindingbulan', {
+            type: 'bar',
+            data: {
+              labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
+              datasets: [
+                {
+                  label: 'Total Finding Per Bulan',
+                  data: [this.termuanperday_jan, this.termuanperday_feb, this.termuanperday_mar, this.termuanperday_apr, this.termuanperday_mei, this.termuanperday_jun, this.termuanperday_jul, this.termuanperday_ags, this.termuanperday_sep, this.termuanperday_okt, this.termuanperday_nov, this.termuanperday_des],
                   backgroundColor: '#7fe7dc',
                   borderColor: [
                     'white',

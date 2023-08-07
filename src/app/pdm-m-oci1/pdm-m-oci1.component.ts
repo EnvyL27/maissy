@@ -133,7 +133,7 @@ export class PdmMOci1Component implements OnInit {
   public resolved: boolean = false;
   public exportdata: boolean = false;
   public paginatereset: boolean = false;
-  @ViewChild('screen', { static: true }) screen: any;
+  // @ViewChild('screen', { static: true }) screen: any;
   good: number = 0;
   satis: number = 0;
   unsatisf: number = 0;
@@ -155,13 +155,18 @@ export class PdmMOci1Component implements OnInit {
   taptap!: ElementRef;
   @ViewChild("target")
   target!: ElementRef;
+  @ViewChild('screen', { static: true }) screen: any;
   capture() {
     this.captureService
       .getImage(this.taptap.nativeElement, true)
       .subscribe((img: any) => {
         this.imgBase64 = img;
+        console.log(this.imgBase64);
         this.downloadJson();
       });
+  }
+  saveImage(img: string) {
+    this.img = img;
   }
 
   downloadJson() {
@@ -320,6 +325,7 @@ export class PdmMOci1Component implements OnInit {
   listofabnormatasset: boolean = false;
   finishnotyet: boolean = false;
   totaldatacurrentyear: boolean = false;
+  forcapture: boolean = false;
   selectorarrabnormal: any = [];
   isNumber(value: any) {
     return Number.isNaN(value);
@@ -341,6 +347,7 @@ export class PdmMOci1Component implements OnInit {
     this.currentPage = 1;
     this.currentPage2 = 1;
     this.exportdata = !this.exportdata;
+    this.forcapture = !this.forcapture;
   }
   resetPaginate() {
     this.currentPage3 = 1;
@@ -358,6 +365,7 @@ export class PdmMOci1Component implements OnInit {
     this.showPaginate2 = 5;
     this.currentPage = 1;
     this.currentPage2 = 1;
+    this.forcapture = !this.forcapture;
   }
   exportTable() {
     TableUtil.exportTableToExcel("prinsection");

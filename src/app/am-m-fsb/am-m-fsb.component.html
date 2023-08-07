@@ -114,8 +114,9 @@
       </div>
     </div>
   </div>
-  <div class="hidden flex flex-wrap -mx-3 duration-2000">
-    <div class="w-1/5 lg:flex-none  px-3 mt-2">
+
+  <div [ngClass]="screenWidth > 600 ? '' : 'hidden'" class="  flex flex-wrap -mx-3 duration-2000">
+    <div class="w-1/5 px-3 mt-2">
       <div
         class="relative flex flex-col min-w-0 break-words border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border"
         style="background-color: #f4b8a5;">
@@ -125,7 +126,7 @@
         </div>
       </div>
     </div>
-    <div class="w-1/5 lg:flex-none  px-3 mt-2">
+    <div class="w-1/5 px-3 mt-2">
       <div
         class="relative flex flex-col min-w-0 break-words border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border"
         style="background-color: #86b0de;">
@@ -164,8 +165,8 @@
     </div>
   </div>
 
-  <div class="max-lg:hidden  flex flex-wrap -mx-3 duration-2000">
-    <div class="w-1/5 px-3 mt-2">
+  <div [ngClass]="screenWidth < 600 ? '' : 'hidden'" class=" flex flex-wrap -mx-3 duration-2000">
+    <div class="w-1/2 px-3 mt-2">
       <div
         class="relative flex flex-col min-w-0 break-words border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border"
         style="background-color: #f4b8a5;">
@@ -175,7 +176,7 @@
         </div>
       </div>
     </div>
-    <div class="w-1/5 px-3 mt-2">
+    <div class="w-1/2 px-3 mt-2">
       <div
         class="relative flex flex-col min-w-0 break-words border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border"
         style="background-color: #86b0de;">
@@ -185,7 +186,7 @@
         </div>
       </div>
     </div>
-    <div class="w-1/5 lg:flex-none  px-3 mt-2">
+    <div class="w-1/2 lg:flex-none  px-3 mt-2">
       <div
         class="relative flex flex-col min-w-0 break-words border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border"
         style="background-color: #86b0de;">
@@ -194,7 +195,7 @@
         </div>
       </div>
     </div>
-    <div class="w-1/5 lg:flex-none  px-3 mt-2">
+    <div class="w-1/2 lg:flex-none  px-3 mt-2">
       <div
         class="relative flex flex-col min-w-0 break-words border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border"
         style="background-color: #86b0de;">
@@ -203,7 +204,7 @@
         </div>
       </div>
     </div>
-    <div class="w-1/5 lg:flex-none  px-3 mt-2">
+    <div class="w-1/2 lg:flex-none  px-3 mt-2">
       <div
         class="relative flex flex-col min-w-0 break-words border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border"
         style="background-color: #f4b8a5;">
@@ -446,9 +447,16 @@
               <h5 (click)="showTemuanPerDay()" class="text-center">Jumlah Temuan per Hari</h5>
             </div>
           </div>
-          <div [ngClass]="!listtemuanperhari ? '': 'hidden'" class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border">
-            <div class="flex-auto p-6">
-              <canvas id="totalfinding" width="310" height="156"></canvas>
+          <div class="flex">
+            <div [ngClass]="!listtemuanperhari ? '': 'hidden'" class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border w-1/2 my-4 mx-4">
+              <div class="flex-wrap p-6">
+                  <canvas id="totalfinding" width="310" height="250"></canvas>
+              </div>
+            </div>
+            <div [ngClass]="!listtemuanperhari ? '': 'hidden'" class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl bg-clip-border w-1/2 my-4 mx-4">
+              <div class="flex-wrap p-6">
+                  <canvas id="totalfindingbulan" width="310" height="250"></canvas>
+              </div>
             </div>
           </div>
         </div>
@@ -642,6 +650,30 @@
             <pagination-controls class="text-center" id="pagination1" (pageChange)="currentPage = $event">
             </pagination-controls>
           </div>
+          <div [ngClass]="!listoffindingpending ? '': 'hidden'" class="flex items-center text-center mt-4 mb-4 flex-wrap bg-white shadow-soft-lg rounded-2xl bg-clip-border">
+            <div class="w-full max-w-full md:w-8/12 xl:w-8/12 p-4  xs:w-8/12">
+              <canvas id="donutfp" width="110"></canvas>
+            </div>
+            <div class="w-full max-w-full md:w-4/12 xl:w-4/12 xs:w-4/12">
+              <div class="px-6 pt-4 pb-2 text-center">
+                <span style="background-color: #006d77;"
+                  class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Baking-Cooling:
+                  {{bakingcooling}}</span>
+                <span style="background-color: #83c5be;"
+                  class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Mixing:
+                  {{mixing}}</span>
+                <span style="background-color: #BCD9B4;"
+                  class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Weighing:
+                  {{weighing}}</span>
+                <span style="background-color: #FF9C7A;"
+                  class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Packaging:
+                  {{packaging}}</span>
+                <span style="background-color: #e29578;"
+                  class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Forming:
+                  {{forming}}</span>
+            </div>
+        </div>
+      </div>
         </div>
         <div class="my-1 px-1 w-full md:w-full lg:my-6 lg:px-6">
           <div (click)="showHistoryPending()">
@@ -757,30 +789,7 @@
           </div>
         </div>
         <div class="my-1 px-1 w-full max-w-full md:w-full lg:my-8 lg:px-6">
-          <div [ngClass]="!listofhistorypending ? '': 'hidden'" class="flex items-center text-center mt-4 mb-4 flex-wrap bg-white shadow-soft-lg rounded-2xl bg-clip-border">
-              <div class="w-full max-w-full md:w-8/12 xl:w-8/12 p-4  xs:w-8/12">
-                <canvas id="donutfp" width="110"></canvas>
-              </div>
-              <div class="w-full max-w-full md:w-4/12 xl:w-4/12 xs:w-4/12">
-                <div class="px-6 pt-4 pb-2 text-center">
-                  <span style="background-color: #006d77;"
-                    class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Baking-Cooling:
-                    {{bakingcooling}}</span>
-                  <span style="background-color: #83c5be;"
-                    class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Mixing:
-                    {{mixing}}</span>
-                  <span style="background-color: #BCD9B4;"
-                    class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Weighing:
-                    {{weighing}}</span>
-                  <span style="background-color: #FF9C7A;"
-                    class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Packaging:
-                    {{packaging}}</span>
-                  <span style="background-color: #e29578;"
-                    class="text-white inline-block bg-red rounded-full px-3 py-1 text-md font-semibold mr-2 mb-2">Forming:
-                    {{forming}}</span>
-              </div>
-          </div>
-        </div>
+
         <div class="my-1 px-1 w-full max-w-full md:w-full lg:my-6 lg:px-6">
           <div
             class="relative flex flex-col min-w-0 break-words bg-white shadow-soft-lg rounded-2xl mb-2 bg-clip-border">

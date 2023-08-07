@@ -717,7 +717,7 @@
             </div>
           </div>
           <!--Card of chart abnormal asset start-->
-          <div class="w-full px-1 py-1 mx-auto">
+          <div [ngClass]="!forcapture ? '' : 'hidden'" class="w-full px-1 py-1 mx-auto">
             <div
               class="relative flex flex-col min-w-0 break-words bg-white mb-1 shadow-soft-lg rounded-2xl bg-clip-border">
               <div class="flex-auto p-4">
@@ -770,7 +770,7 @@
           </div>
           <!--end of card-->
 
-          <div class="my-1 px-1 w-full max-w-full md:w-full lg:my-6 lg:px-6">
+          <div [ngClass]="!forcapture ? '' : 'hidden'" class="my-1 px-1 w-full max-w-full md:w-full lg:my-6 lg:px-6">
             <div
               class="relative flex flex-col min-w-0 break-words bg-white mb-1 shadow-soft-lg rounded-2xl bg-clip-border">
               <div (click)="listAbnormalAsset()">
@@ -850,7 +850,7 @@
             </div>
             <!--end of card-->
           </div>
-          <div class="w-full px-1 py-1 mx-auto">
+          <div [ngClass]="!forcapture ? '' : 'hidden'" class="w-full px-1 py-1 mx-auto">
             <div
               class="relative flex flex-col min-w-0 break-words bg-white mb-1 shadow-soft-lg rounded-2xl bg-clip-border">
               <div (click)="finishNotYet()">
@@ -1260,7 +1260,7 @@
 
           <!--end of list-->
 
-          <div class="w-full px-1 py-1 mx-auto">
+          <div [ngClass]="!forcapture ? '' : 'hidden'" class="w-full px-1 py-1 mx-auto">
             <div
               class="relative flex flex-col min-w-0 break-words bg-white mb-1 shadow-soft-lg rounded-2xl bg-clip-border">
               <div (click)="dataCurrentYear()">
