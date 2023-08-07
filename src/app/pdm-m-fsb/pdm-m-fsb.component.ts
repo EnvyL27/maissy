@@ -292,6 +292,7 @@ export class PdmMFsbComponent implements OnInit {
   oktober: number = 0;
   november: number = 0;
   desember: number = 0;
+  forcapture : boolean = false;
   selectorarrabnormal: any = [];
   filterMetadata = { count: 0 };
   filtre: any;
@@ -322,6 +323,7 @@ export class PdmMFsbComponent implements OnInit {
     this.currentPage = 1;
     this.currentPage2 = 1;
     this.exportdata = !this.exportdata;
+    this.forcapture = !this.forcapture;
   }
   done() {
     this.exportdata = !this.exportdata;
@@ -329,6 +331,7 @@ export class PdmMFsbComponent implements OnInit {
     this.showPaginate2 = 5;
     this.currentPage = 1;
     this.currentPage2 = 1;
+    this.forcapture = !this.forcapture;
   }
   exportTable() {
     TableUtil.exportTableToExcel("prinsection");

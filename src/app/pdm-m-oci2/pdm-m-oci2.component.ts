@@ -308,6 +308,7 @@ export class PdmMOci2Component implements OnInit {
   listofabnormatasset: boolean = false;
   finishnotyet: boolean = false;
   totaldatacurrentyear: boolean = false;
+  forcapture: boolean = false;
   selectorarrabnormal:any = [];
   isNumber(value: any) {
     return Number.isNaN(value);
@@ -329,6 +330,7 @@ export class PdmMOci2Component implements OnInit {
     this.currentPage = 1;
     this.currentPage2 = 1;
     this.exportdata = !this.exportdata;
+    this.forcapture = !this.forcapture;
   }
   done() {
     this.exportdata = !this.exportdata;
@@ -336,6 +338,7 @@ export class PdmMOci2Component implements OnInit {
     this.showPaginate2 = 5;
     this.currentPage = 1;
     this.currentPage2 = 1;
+    this.forcapture = !this.forcapture;
   }
   exportTable() {
     TableUtil.exportTableToExcel("prinsection");
