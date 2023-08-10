@@ -1172,6 +1172,8 @@ export class PdmMOci1Component implements OnInit {
             this.totalfinishtoday2.splice(this.totalfinishtoday2.lenght, 0, array[i]);
             // this.totalfinishtoday2down.splice(this.totalfinishtoday2down.lenght, 0, array[i]);
           }
+          this.spinner.hide();
+          this.resolved = true;
         })
 
         // Object.values(this.totalfinishtdy).forEach(data => {
@@ -1215,8 +1217,7 @@ export class PdmMOci1Component implements OnInit {
             this.totalfinish = elem.total;
           }
 
-          this.spinner.hide();
-          this.resolved = true;
+
         })
       }
       );

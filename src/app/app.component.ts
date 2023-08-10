@@ -1,6 +1,7 @@
 import { Component, Input, OnInit,EventEmitter, Injectable, Output, HostListener } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
+import { Router,NavigationEnd  } from '@angular/router';
 
 
 @Component({
@@ -11,6 +12,15 @@ import { SidebarComponent } from './layout/sidebar/sidebar.component';
 export class AppComponent {
   public isShow: boolean = false;
   topPosToStartShowing = 100;
+  name = 'Get Current Url Route Demo';
+  currentRoute: string | undefined;
+  
+  constructor(public router: Router ) {
+   
+  
+  }
+
+
 
   @HostListener('window:scroll')
   checkScroll() {

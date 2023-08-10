@@ -1142,6 +1142,8 @@ export class PdmMOci2Component implements OnInit {
             this.totalfinishtoday2.splice(this.totalfinishtoday2.lenght, 0, array[i]);
           }
         })
+        this.spinner.hide();
+        this.resolved = true;
       }
       );
       this.service.getReadPdmFinishoci2().subscribe(data => {
@@ -1156,8 +1158,7 @@ export class PdmMOci2Component implements OnInit {
           for (let elem of this.finish2) {
             this.totalfinish = elem.total;
           }
-          this.spinner.hide();
-          this.resolved = true;
+
         })
       }
       );

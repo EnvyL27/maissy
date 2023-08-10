@@ -1,6 +1,7 @@
 import { NgModule} from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { SignInComponent } from './sign-in/sign-in.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
@@ -77,6 +78,7 @@ import { CiltMFsbComponent } from './cilt-m-fsb/cilt-m-fsb.component';
 
 const routes: Routes = [
   {path: '', component: DashboardComponent},
+  {path: 'login', component: SignInComponent},
   {path: 'pdm_dashboard', component: PdmDashboardComponent},
   {path: 'am_m_oci1',component: AmMOci1Component},
   {path: 'am_m_oci2',component: AmMOci2Component},

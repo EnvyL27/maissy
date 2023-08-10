@@ -1219,22 +1219,24 @@ export class AmMOci2Component implements OnInit {
 
             if (elem.id_area == 2) {
               if (elem.status_pengerjaan == 'Done') {
-                this.finishexecute += 1;
+                if (elem.bulan == this.month){this.finishexecute += 1;}
                 this.temuanperday_data_temp.push(elem)
 
               }
               if (elem.status2 == 'READY') {
-                this.readyexecute += 1;
+                if (elem.bulan == this.month){this.readyexecute += 1;}
                 this.temuanperday_data_temp.push(elem)
               } else if (elem.status1 == 'Create' || elem.status1 == 'None' || elem.status1 == 'Emergency') {
                 if (elem.status2 == 'RELEASED' || elem.status2 == 'CREATED') {
-                  this.pendingexecute += 1;
+                  if (elem.bulan == this.month){this.pendingexecute += 1;}
+                  
                   this.temuanperday_data_temp.push(elem)
 
                 }
               }
               else if (elem.status1 == 'Draft' || elem.status1 == 'Submit' || elem.status1 == 'Revise' || elem.status1 == 'Approved' || elem.status1 == 'Not Yet') {
-                this.pendingexecute += 1;
+                if (elem.bulan == this.month){this.pendingexecute += 1;}
+                
                 this.temuanperday_data_temp.push(elem)
               }
             }

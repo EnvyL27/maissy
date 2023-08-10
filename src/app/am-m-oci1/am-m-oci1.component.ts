@@ -1263,27 +1263,30 @@ export class AmMOci1Component implements OnInit {
             if (elem.id_area == 1 && elem.tanggal_temuan != this.totalfm2[i + 1]?.tanggal_temuan) {
               date.push(elem.tanggal_temuan)
             }
-            // ////console.log(date);
-
+            console.log(elem.tanggal_temuan);
 
               if (elem.id_area == 1) {
 
 
               if (elem.status_pengerjaan == 'Done') {
-                this.finishexecute += 1;
+                if (elem.bulan == this.month){this.finishexecute += 1;}
+              
                 this.temuanperday_data_temp.push(elem)
               }
               else if (elem.status2 == 'READY') {
-                this.readyexecute += 1;
+                if (elem.bulan == this.month){this.readyexecute += 1;}
+                
                 this.temuanperday_data_temp.push(elem)
               } else if (elem.status1 == 'Create' || elem.status1 == 'None' || elem.status1 == 'Emergency') {
                 if (elem.status2 == 'RELEASED' || elem.status2 == 'CREATED') {
-                  this.pendingexecute += 1;
+                  if (elem.bulan == this.month){this.pendingexecute += 1;}
+                  
                   this.temuanperday_data_temp.push(elem)
                 }
               }
               else if (elem.status1 == 'Draft' || elem.status1 == 'Submit' || elem.status1 == 'Revise' || elem.status1 == 'Approved' || elem.status1 == 'Not Yet') {
-                this.pendingexecute += 1;
+                if (elem.bulan == this.month){this.pendingexecute += 1;}
+            
                 this.temuanperday_data_temp.push(elem)
               }
             }

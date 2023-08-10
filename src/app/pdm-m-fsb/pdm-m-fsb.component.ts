@@ -1118,6 +1118,8 @@ export class PdmMFsbComponent implements OnInit {
             this.totalfinishtoday2.splice(this.totalfinishtoday2.lenght, 0, array[i]);
           }
         })
+        this.spinner.hide();
+        this.resolved = true; 
       }
       );
       this.service.getReadPdmFinishfsb().subscribe(data => {
@@ -1132,8 +1134,7 @@ export class PdmMFsbComponent implements OnInit {
           for (let elem of this.finish2) {
             this.totalfinish = elem.total;
           }
-          this.spinner.hide();
-          this.resolved = true;
+
         })
       }
       );
