@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { CountService } from '../services/count.service';
 import { Chart } from 'chart.js';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 // import { ChartOptions } from './chart';
 import { forkJoin } from 'rxjs';
 import {
@@ -10,7 +11,7 @@ import {
   ChartComponent,
   ApexDataLabels,
   ApexXAxis,
-  ApexPlotOptions
+  ApexPlotOptions,
 } from "ng-apexcharts";
 
 export type ChartOptions = {
@@ -35,17 +36,27 @@ export class CiltComponent implements OnInit {
   public chartPerBulan!: Partial<ChartOptions> | any;
   public chartResume!: Partial<ChartOptions> | any;
 
-  constructor(private service: CountService, private spinner: NgxSpinnerService) { }
+  constructor(private service: CountService, private spinner: NgxSpinnerService, private http: HttpClient) { }
   public resolved: boolean = false;
   public loaddata: any;
   deskripsi: any = 'Loading..';
 
-  dataPengecekan: object = [];
-  dataMaxCycle: object = [];
-  maxCycle: any = [];
-  totalPengecekan: any = [];
-  activePlan: any = [];
-  ExpiredPlan: any = [];
+  dataPengecekan: any[] = [];
+  arrayPengecekan: any[] = [];
+  dataMaxCycle: any[] = [];
+  maxCycle: number = 0;
+  totalPengecekan: number = 0;
+  pendingPlan: number = 0;
+  activePlan: number = 0;
+  expiredPlan: number = 0;
+  prep: number = 0;
+  prepFinish: number = 0;
+  ibf: number = 0;
+  ibfFinish: number = 0;
+  label: number = 0;
+  labelFinish: number = 0;
+  caser: number = 0;
+  caserFinish: number = 0;
   curCycle: any = [];
 
   async ngOnInit(): Promise<void> {
@@ -65,77 +76,122 @@ export class CiltComponent implements OnInit {
     });
 
     this.service.getCurrentCycle().subscribe(data => {
-      this.dataMaxCycle = data;
-      Object.values(this.dataMaxCycle).forEach(data => {
-        // // //////console.log(data);
-        var array = Object.keys(data).map(function (key) {
-          return data[key];
-        });
-        for (let i = 0; i < array.length; i++) {
-          this.maxCycle.splice(this.maxCycle.lenght, 0, array[i]);
-        }
-        console.log(this.maxCycle);
+      this.dataMaxCycle.push(data)
 
-      })
+      console.log(this.dataMaxCycle[0]);
+      for (let elem of this.dataMaxCycle[0]) {
+        this.maxCycle = elem.id_max_cycle
+
+      }
+      console.log(this.maxCycle);
+
+
+
     });
 
     this.service.getCiltOci1().subscribe(data => {
-      console.log(data);
-      this.dataPengecekan = data;
-      Object.values(this.dataPengecekan).forEach(data => {
-        // // //////console.log(data);
-        var array = Object.keys(data).map(function (key) {
-          return data[key];
-        });
-        console.log(this.dataPengecekan);
 
-        for (let i = 0; i < array.length; i++) {
-          this.totalPengecekan.splice(this.totalPengecekan.length, 0, array[i]);
+      this.dataPengecekan.push(data);
+      // console.log(this.dataPengecekan);
+
+      this.arrayPengecekan.push(...this.dataPengecekan[0]);
+      console.log(this.arrayPengecekan.length);
+      this.totalPengecekan = this.arrayPengecekan.length
+
+      for (let elem of this.arrayPengecekan) {
+
+        if (elem.id_cycle == this.maxCycle && elem.result == null) {
+          this.pendingPlan++
+        } else if (elem.result != null) {
+          this.activePlan++
+        } else if (elem.id_cycle < this.maxCycle && elem.result == null) {
+          this.expiredPlan++
         }
-        for (let i = 0; i < this.totalPengecekan.length; i++) {
-          console.log(i);
+      }
 
-
+      for (let elem of this.arrayPengecekan) {
+        if (elem.sub_section == 'Preparation') {
+          if (elem.result != null) {
+            this.prepFinish++
+          }
+          this.prep++
+        } else if (elem.sub_section == 'Injection' || elem.sub_section == 'Blow' || elem.sub_section == 'Filling') {
+          if (elem.result != null) {
+            this.ibfFinish++
+          }
+          this.ibf++
+        } else if (elem.sub_section == 'Label') {
+          if (elem.result != null) {
+            this.labelFinish++
+          }
+          this.label++
+        } else if (elem.sub_section == 'Caser') {
+          if (elem.result != null) {
+            this.caserFinish++
+          }
+          this.caser++
         }
-        console.log(this.totalPengecekan);
+      }
+      if(this.prepFinish != 0 || this.prep != 0){
+        this.prepFinish = (this.prepFinish / this.prep * 100)
+      }else if(this.ibf != 0 || this.ibfFinish != 0){
+        this.ibfFinish = (this.ibfFinish / this.ibf * 100)
+      }else if(this.label != 0 || this.labelFinish != 0){
+        this.labelFinish = (this.labelFinish / this.label * 100)
+      }else if(this.caser != 0 || this.caserFinish != 0){
+        this.caserFinish = (this.caserFinish / this.caser * 100)
+      }
 
-      })
+
+      // console.log(this.ibfFinish);
+      
+      // for(let i = 0; this.arrayPengecekan.length; i++){
+      //   this.totalPengecekan++
+      // }
+
+      // Handle the data here
+      this.chartOptions = {
+        series: [
+          {
+            name: "basic",
+            data: [this.prepFinish, this.ibfFinish, this.labelFinish, this.caserFinish]
+          }
+        ],
+        chart: {
+          type: "bar",
+          height: 350
+        },
+        plotOptions: {
+          bar: {
+            horizontal: true,
+            dataLabels: {
+              position: 'top', // This places the data labels on top of the bars
+            },
+            borderRadius: 10,
+          }
+        },
+        dataLabels: {
+          enabled: false
+        },
+        
+        xaxis: {
+          categories: [
+            "Preparation",
+            "IBF",
+            "Label Area",
+            "Caser Area"
+          ]
+        }
+  
+      }
     });
 
 
-    this.chartOptions = {
-      series: [
-        {
-          name: "basic",
-          data: [400, 430, 448, 470]
-        }
-      ],
-      chart: {
-        type: "bar",
-        height: 350
-      },
-      plotOptions: {
-        bar: {
-          horizontal: true,
-          dataLabels: {
-            position: 'top', // This places the data labels on top of the bars
-          },
-          borderRadius: 10,
-        }
-      },
-      dataLabels: {
-        enabled: false
-      },
-      xaxis: {
-        categories: [
-          "Preparation",
-          "IBF",
-          "Label Area",
-          "Caser Area"
-        ]
-      }
+console.log(this.ibfFinish);
 
-    }
+
+
+
 
     this.chartDonus = {
       series: [44, 55, 41, 17],
@@ -168,9 +224,9 @@ export class CiltComponent implements OnInit {
         }
       },
       labels: ["Preparation",
-      "IBF",
-      "Label Area",
-      "Caser Area"],
+        "IBF",
+        "Label Area",
+        "Caser Area"],
       dataLabels: {
         dropShadow: {
           blur: 3,

@@ -301,6 +301,8 @@ export class CostComponent implements OnInit {
       );
 
       this.service.getCountTotalFinding().subscribe(data => {
+        console.log(data);
+        
         this.const = data;
         Object.values(this.const).forEach(data => {
           var array = Object.keys(data).map(function (key) {
