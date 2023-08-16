@@ -669,4 +669,10 @@ export class CountService {
   getCiltOci1(){
     return this.httpClient.get(api + "ciltoci1");
   }
+  getCiltOci2(){
+    return this.httpClient.get(api + "ciltoci2");
+  }
+  getCiltFsb(){
+    return this.httpClient.get(api + "ciltfsb");
+  }
 };

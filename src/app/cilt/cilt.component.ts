@@ -1,26 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CountService } from '../services/count.service';
+import * as moment from 'moment';
 import { Chart } from 'chart.js';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 // import { ChartOptions } from './chart';
 import { forkJoin } from 'rxjs';
-import {
-  ApexAxisChartSeries,
-  ApexChart,
-  ChartComponent,
-  ApexDataLabels,
-  ApexXAxis,
-  ApexPlotOptions,
-} from "ng-apexcharts";
-
-export type ChartOptions = {
-  series: ApexAxisChartSeries;
-  chart: ApexChart;
-  dataLabels: ApexDataLabels;
-  plotOptions: ApexPlotOptions;
-  xaxis: ApexXAxis;
-};
+import { ChartOptions } from './chart';
 
 
 @Component({
@@ -30,7 +16,6 @@ export type ChartOptions = {
 })
 export class CiltComponent implements OnInit {
 
-  @ViewChild("chart") chart: ChartComponent | undefined;
   public chartOptions!: Partial<ChartOptions> | any;
   public chartDonus!: Partial<ChartOptions> | any;
   public chartPerBulan!: Partial<ChartOptions> | any;
@@ -41,9 +26,12 @@ export class CiltComponent implements OnInit {
   public loaddata: any;
   deskripsi: any = 'Loading..';
 
+  month: any = moment().format("MMMM");
+  year: any = moment().format("YYYY");
   dataPengecekan: any[] = [];
   arrayPengecekan: any[] = [];
-  dataMaxCycle: any[] = [];
+  dataMaxCycle: object | undefined;
+  dataCycle: any = [];
   maxCycle: number = 0;
   totalPengecekan: number = 0;
   pendingPlan: number = 0;
@@ -58,10 +46,38 @@ export class CiltComponent implements OnInit {
   caser: number = 0;
   caserFinish: number = 0;
   curCycle: any = [];
+  resPres1 : number = 0;
+  resPres2 : number = 0;
+  resPres3 : number = 0;
+  resPres4 : number = 0;
+  resFill1 : number = 0;
+  resFill2 : number = 0;
+  resFill3 : number = 0;
+  resFill4 : number = 0;
+  resBlow1 : number = 0;
+  resBlow2 : number = 0;
+  resBlow3 : number = 0;
+  resBlow4 : number = 0;
+  resInj1 : number = 0;
+  resInj2 : number = 0;
+  resInj3 : number = 0;
+  resInj4 : number = 0;
+  resLab1 : number = 0;
+  resLab2 : number = 0;
+  resLab3 : number = 0;
+  resLab4 : number = 0;
+  resCas1 : number = 0;
+  resCas2 : number = 0;
+  resCas3 : number = 0;
+  resCas4 : number = 0;
+  resOff1 : number = 0;
+  resOff2 : number = 0;
+  resOff3 : number = 0;
+  resOff4 : number = 0;
+  
 
   async ngOnInit(): Promise<void> {
     window.scrollTo(0, 0);
-    this.spinner.show();
     this.loaddata = await this.loaddata;
     var count = 0;
     this.loaddata = new Promise(resolve => {
@@ -76,28 +92,38 @@ export class CiltComponent implements OnInit {
     });
 
     this.service.getCurrentCycle().subscribe(data => {
-      this.dataMaxCycle.push(data)
+      this.dataMaxCycle = data
+      //console.log(this.dataMaxCycle);
+      this.spinner.show();
+      Object.values(this.dataMaxCycle).forEach(data => {
+        var array = Object.keys(data).map(function (key) {
+          return data[key];
+        });
 
-      console.log(this.dataMaxCycle[0]);
-      for (let elem of this.dataMaxCycle[0]) {
-        this.maxCycle = elem.id_max_cycle
-
-      }
-      console.log(this.maxCycle);
-
-
-
+        for (let i = 0; i < array.length; i++) {
+          this.dataCycle.splice(this.dataCycle.lenght, 0, array[i]);
+        }
+        this.maxCycle = this.dataCycle[0]
+        for(let i = 0; i < this.dataCycle.lenght; i++){
+          
+          if(this.dataCycle[i+1] > this.dataCycle[i]){
+            this.maxCycle = this.dataCycle[i+1]
+          }else{
+            break
+          }
+        }       
+        
+      })
+ 
     });
 
     this.service.getCiltOci1().subscribe(data => {
-
       this.dataPengecekan.push(data);
-      // console.log(this.dataPengecekan);
+      // //console.log(this.dataPengecekan);
 
       this.arrayPengecekan.push(...this.dataPengecekan[0]);
-      console.log(this.arrayPengecekan.length);
       this.totalPengecekan = this.arrayPengecekan.length
-
+      this.spinner.show();
       for (let elem of this.arrayPengecekan) {
 
         if (elem.id_cycle == this.maxCycle && elem.result == null) {
@@ -108,6 +134,96 @@ export class CiltComponent implements OnInit {
           this.expiredPlan++
         }
       }
+
+
+
+        for(let elem of this.arrayPengecekan){
+        //console.log(this.month);
+        
+        
+          
+          if(elem.section == 'Injection' || elem.section == 'Preform Transfer'){
+            //console.log('masuk if');
+            if(elem.id_cycle == this.dataCycle[0]){
+              this.resInj1++
+            }else if(elem.id_cycle == this.dataCycle[1]){
+              this.resInj2++
+            }else if(elem.id_cycle == this.dataCycle[2]){
+              this.resInj3++
+            }else if(elem.id_cycle == this.dataCycle[3]){
+              this.resInj4++
+            }
+          }else if(elem.section == 'Preparation'){
+            if(elem.id_cycle == this.dataCycle[0]){
+              this.resPres1++
+            }else if(elem.id_cycle == this.dataCycle[1]){
+              this.resPres2++
+            }else if(elem.id_cycle == this.dataCycle[2]){
+              this.resPres3++
+            }else if(elem.id_cycle == this.dataCycle[3]){
+              this.resPres4++
+            }
+          }else if(elem.section == 'Blow'){
+            if(elem.id_cycle == this.dataCycle[0]){
+              this.resBlow1++
+            }else if(elem.id_cycle == this.dataCycle[1]){
+              this.resBlow2++
+            }else if(elem.id_cycle == this.dataCycle[2]){
+              this.resBlow3++
+            }else if(elem.id_cycle == this.dataCycle[3]){
+              this.resBlow4++
+            }
+          }else if(elem.section == 'Filling'){
+            if(elem.id_cycle == this.dataCycle[0]){
+              this.resFill1++
+            }else if(elem.id_cycle == this.dataCycle[1]){
+              this.resFill2++
+            }else if(elem.id_cycle == this.dataCycle[2]){
+              this.resFill3++
+            }else if(elem.id_cycle == this.dataCycle[3]){
+              this.resFill4++
+            }
+          }else if(elem.section == 'Packing' && elem.sub_section == 'Label'){
+            if(elem.id_cycle == this.dataCycle[0]){
+              this.resLab1++
+            }else if(elem.id_cycle == this.dataCycle[1]){
+              this.resLab2++
+            }else if(elem.id_cycle == this.dataCycle[2]){
+              this.resLab3++
+            }else if(elem.id_cycle == this.dataCycle[3]){
+              this.resLab4++
+            }
+          }else if(elem.section == 'Packing' && elem.sub_section == 'Packer'){
+            if(elem.id_cycle == this.dataCycle[0]){
+              this.resCas1++
+            }else if(elem.id_cycle == this.dataCycle[1]){
+              this.resCas2++
+            }else if(elem.id_cycle == this.dataCycle[2]){
+              this.resCas3++
+            }else if(elem.id_cycle == this.dataCycle[3]){
+              this.resCas4++
+            }
+          }else if(elem.section == 'Packing' && elem.sub_section == 'Offline'){
+            if(elem.id_cycle == this.dataCycle[0]){
+              this.resOff1++
+            }else if(elem.id_cycle == this.dataCycle[1]){
+              this.resOff2++
+            }else if(elem.id_cycle == this.dataCycle[2]){
+              this.resOff3++
+            }else if(elem.id_cycle == this.dataCycle[3]){
+              this.resOff4++
+            }
+          
+          
+          
+        }
+        //console.log(this.resInj1);
+        //console.log(this.resInj2);
+        //console.log(this.resInj3);
+        //console.log(this.resInj4);
+        
+      }
+      
 
       for (let elem of this.arrayPengecekan) {
         if (elem.sub_section == 'Preparation') {
@@ -141,140 +257,104 @@ export class CiltComponent implements OnInit {
       }else if(this.caser != 0 || this.caserFinish != 0){
         this.caserFinish = (this.caserFinish / this.caser * 100)
       }
-
-
-      // console.log(this.ibfFinish);
+      // //console.log(this.ibfFinish);
       
       // for(let i = 0; this.arrayPengecekan.length; i++){
       //   this.totalPengecekan++
       // }
 
       // Handle the data here
-      this.chartOptions = {
-        series: [
-          {
-            name: "basic",
-            data: [this.prepFinish, this.ibfFinish, this.labelFinish, this.caserFinish]
-          }
-        ],
-        chart: {
-          type: "bar",
-          height: 350
-        },
-        plotOptions: {
-          bar: {
-            horizontal: true,
-            dataLabels: {
-              position: 'top', // This places the data labels on top of the bars
-            },
-            borderRadius: 10,
-          }
-        },
-        dataLabels: {
-          enabled: false
-        },
-        
-        xaxis: {
-          categories: [
-            "Preparation",
-            "IBF",
-            "Label Area",
-            "Caser Area"
-          ]
-        }
-  
-      }
+
+      this.chartOptionss();
+      this.chartdonuss();
+      this.chartRes();
     });
 
+    this.loaddata = await this.loaddata;
+  }
 
-console.log(this.ibfFinish);
-
-
-
-
-
-    this.chartDonus = {
-      series: [44, 55, 41, 17],
-      chart: {
-        type: "donut",
-        height: 400,
-        dropShadow: {
-          enabled: true,
-          color: "#111",
-          top: -1,
-          left: 3,
-          blur: 3,
-          opacity: 0.2
+  chartRes(){
+    //console.log();
+    
+    this.chartResume = {
+      series: [
+        {
+          name: "Cycle " + this.dataCycle[3],
+          data: [this.resPres4, this.resFill4, this.resBlow4, this.resInj4, this.resLab4, this.resCas4, this.resOff4]
+        },
+        {
+          name: "Cycle " + this.dataCycle[2],
+          data: [this.resPres3, this.resFill3, this.resBlow3, this.resInj3, this.resLab3, this.resCas3, this.resOff3]
+        },
+        {
+          name: "Cycle " + this.dataCycle[1],
+          data: [this.resPres2, this.resFill2, this.resBlow2, this.resInj2, this.resLab2, this.resCas2, this.resOff2]
+        },
+        {
+          name: "Cycle " + this.dataCycle[0],
+          data: [this.resPres1, this.resFill1, this.resBlow1, this.resInj1, this.resLab1, this.resCas1, this.resOff1]
         }
+      ],
+      chart: {
+        type: "bar",
+        height: 600,
+       
+      },
+      colors:['#F5F0BB', '#C4DFAA', '#90C8AC', '#73A9AD'],
+      plotOptions: {
+        bar: {
+          borderRadiusApplication: 'last',
+          dataLabels: {
+            position: 'top', // This places the data labels on top of the bars
+          },
+          borderRadius: 20,
+        }
+      },
+      dataLabels: {
+        enabled: false
       },
       stroke: {
-        width: 0
+        show: true,
+        width: 2,
+        colors: ["transparent"]
       },
-      plotOptions: {
-        pie: {
-          donut: {
-            labels: {
-              show: true,
-              total: {
-                showAlways: true,
-                show: true
-              }
+      xaxis: {
+        categories: [
+          "Preparation",
+          "Filling",
+          "Blow",
+          "Injection",
+          "Label",
+          "Packer",
+          "Offline"
+        ]
+      },
+      responsive: [{
+        breakpoint: 1000,
+        options: {
+          plotOptions: {
+            bar: {
+              borderRadiusApplication: 'last',
+              dataLabels: {
+                position: 'top', // This places the data labels on top of the bars
+              },
+              borderRadius: 0,
             }
-          }
-        }
-      },
-      labels: ["Preparation",
-        "IBF",
-        "Label Area",
-        "Caser Area"],
-      dataLabels: {
-        dropShadow: {
-          blur: 3,
-          opacity: 0.8
+          },
+        },
+    }],
+      yaxis: {
+        title: {
+          text: "$ (thousands)"
         }
       },
       fill: {
-        type: "pattern",
-        opacity: 1,
-        pattern: {
-          enabled: true,
-          style: [
-            "verticalLines",
-            "squares",
-            "horizontalLines",
-            "circles",
-            "slantedLines"
-          ]
-        }
+        opacity: 1
       },
-      states: {
-        hover: {
-          filter: {
-            type: "none"
-          }
-        }
-      },
-      theme: {
-        palette: "palette2"
-      },
-      title: {
-        text: "Favourite Movie Type"
-      },
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 200
-            },
-            legend: {
-              position: "bottom"
-            }
-          }
-        }
-      ]
     };
+  }
 
+  chartBulan(){
     this.chartPerBulan = {
       series: [
         {
@@ -322,60 +402,107 @@ console.log(this.ibfFinish);
         opacity: 1
       },
     };
+  }
 
-    this.chartResume = {
-      series: [
-        {
-          name: "Revenue",
-          data: [76, 85, 101, 98, 75]
+  async chartOptionss(){
+          this.chartOptions = {
+        series: [
+          {
+            name: "basic",
+            data: [this.prepFinish.toFixed(2), this.ibfFinish.toFixed(2), this.labelFinish.toFixed(2), this.caserFinish.toFixed(2)]
+          }
+        ],
+        chart: {
+          type: "bar",
+          height: 350
         },
-        {
-          name: "Revenue",
-          data: [76, 85, 101, 98, 80]
+        colors:['#FD8A8A', '#F1F7B5', '#A8D1D1', '#9EA1D4'],
+        plotOptions: {
+          bar: {
+            borderRadiusApplication: 'last',
+            horizontal: true,
+            dataLabels: {
+              position: 'top', // This places the data labels on top of the bars
+            },
+            borderRadius: 10,
+          }
         },
-        {
-          name: "Free Cash Flow",
-          data: [35, 41, 36, 26, 34]
+        dataLabels: {
+          enabled: true,
+          formatter: function (val:any) {
+            return val + '%'
+        },
+        textAnchor: 'middle',
+        offsetX: -30,
+        },
+        
+        xaxis: {
+          categories: [
+            "Preparation",
+            "IBF",
+            "Label Area",
+            "Caser Area"
+          ],
+          labels: {
+            formatter: function (val:any) {
+              return val + '%'
+          },
+        },
+        
+          max: 100,
         }
-      ],
+  
+      }
+  }
+
+  chartdonuss(){
+    this.chartDonus = {
+      series: [(this.activePlan ? ((this.activePlan * 100 / (this.totalPengecekan)).toFixed(2)) : '0')],
+      labels: [["Progress CILT", 'OCI 1']],
       chart: {
-        type: "bar",
-        height: 600
+        height: 385,
+        type: "radialBar"
       },
+      colors : '#AEE2FF',
       plotOptions: {
-        bar: {
-          horizontal: false,
-          columnWidth: "55%",
-          endingShape: "rounded"
+        radialBar: {
+          hollow: {
+            margin: 0,
+            size: "60%",
+            background: "#fff",
+            image: undefined,
+            position: "front",
+            dropShadow: {
+              enabled: true,
+              top: 3,
+              left: 0,
+              blur: 4,
+              opacity: 0.24
+            }
+          },
+        dataLabels: {
+          name: {
+            show: true,
+            fontSize: '16px',
+            fontFamily: undefined,
+            fontWeight: 600,
+            color: undefined,
+            offsetY: -10
+          },
+          value: {
+            show: true,
+            fontSize: '14px',
+            fontFamily: undefined,
+            fontWeight: 400,
+            color: undefined,
+            offsetY: 16,
+          },
+        },
+        borderRadius: 10,
         }
       },
-      dataLabels: {
-        enabled: false
-      },
-      stroke: {
-        show: true,
-        width: 2,
-        colors: ["transparent"]
-      },
-      xaxis: {
-        categories: [
-          "Preparation",
-          "Filling",
-          "Blow",
-          "Label",
-          "Caser",
-        ]
-      },
-      yaxis: {
-        title: {
-          text: "$ (thousands)"
-        }
-      },
-      fill: {
-        opacity: 1
-      },
+      
     };
-
   }
 
 

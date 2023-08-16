@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  baseUrlApi: 'http://localhost:3887/',
-  // baseUrlApi: 'http://192.168.9.47:3887/',
-  // baseUrlApi: 'http://192.168.153.147:3887/',
+  // baseUrlApi: 'http://localhost:3887/',
+  baseUrlApi: 'http://192.168.9.47:3887/',
+  // baseUrlApi: 'http://192.168.153.227:3887/',
   // baseUrlApi: 'http://192.168.152.47:3000/',-
 };
 
