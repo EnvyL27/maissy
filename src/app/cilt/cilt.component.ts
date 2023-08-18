@@ -77,24 +77,15 @@ export class CiltComponent implements OnInit {
   
 
   async ngOnInit(): Promise<void> {
+    this.spinner.show();
     window.scrollTo(0, 0);
     this.loaddata = await this.loaddata;
     var count = 0;
-    this.loaddata = new Promise(resolve => {
-      var a = setInterval(() => {
-        count++;
-        this.spinner.hide();
-        this.resolved = true;
-        if (count = 1) {
-          clearInterval(a);
-        }
-      }, 100);
-    });
+
 
     this.service.getCurrentCycle().subscribe(data => {
       this.dataMaxCycle = data
       //console.log(this.dataMaxCycle);
-      this.spinner.show();
       Object.values(this.dataMaxCycle).forEach(data => {
         var array = Object.keys(data).map(function (key) {
           return data[key];
@@ -114,16 +105,27 @@ export class CiltComponent implements OnInit {
         }       
         
       })
+
+      this.loaddata = new Promise(resolve => {
+        var a = setInterval(() => {
+          count++;
+          this.spinner.hide();
+          this.resolved = true;
+          if (count = 1) {
+            clearInterval(a);
+          }
+        }, 100);
+      });
  
     });
 
     this.service.getCiltOci1().subscribe(data => {
+      
       this.dataPengecekan.push(data);
       // //console.log(this.dataPengecekan);
 
       this.arrayPengecekan.push(...this.dataPengecekan[0]);
       this.totalPengecekan = this.arrayPengecekan.length
-      this.spinner.show();
       for (let elem of this.arrayPengecekan) {
 
         if (elem.id_cycle == this.maxCycle && elem.result == null) {
