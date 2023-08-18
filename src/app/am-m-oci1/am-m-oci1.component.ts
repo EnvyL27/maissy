@@ -52,7 +52,8 @@ export class AmMOci1Component implements OnInit {
   currentPage2: number = 1;
   absoluteIndex2(indexOnPage: number): number {
     return this.itemsPerPage2 * (this.currentPage2 - 1) + indexOnPage;
-  }
+  } 
+  
   itemsPerPage3: number = 0;
   currentPage3: number = 1;
   absoluteIndex3(indexOnPage: number): number {
