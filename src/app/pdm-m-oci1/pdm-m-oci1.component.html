@@ -301,15 +301,13 @@
                         <th colspan="3" scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                           3H
                         </th>
-                        <th colspan="3" scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
+                        <th colspan="4" scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                           AMPERE
                         </th>
                         <th scope="col" rowspan="2" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                           Therm
                         </th>
-                        <th scope="col" rowspan="2" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
-                          Freq
-                        </th>
+                      
                         <th scope="col" rowspan="2" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                           VC
                         </th>
@@ -347,6 +345,9 @@
                         </th>
                         <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
                           T
+                        </th>
+                        <th scope="col" class="py-3 px-6 dark:bg-gray-800 text-white" bgcolor="#878790">
+                          Freq
                         </th>
                       </tr>
                     </thead>
@@ -549,6 +550,22 @@
                         class="py-4 px-6 font-medium font-semibold" style="color: black">
                          {{header.T}}
                        </td>
+                       <td *ngIf="header.test_name == 'freq' && header.Stat == 'Satisfactory'" class="py-4 px-6 font-medium font-semibold" style="background-color: #FED033;color: #000000;">
+                        {{header.Frequency}}
+                      </td>
+                      <td *ngIf="header.test_name == 'freq' && header.Stat == 'Unsatisfactory'" class="py-4 px-6 font-medium font-semibold" style="background-color: #fea933;color: #000000;">
+                        {{header.Frequency}}
+                      </td>
+                      <td *ngIf="header.test_name == 'freq' && header.Stat == 'Unacceptable'" class="py-4 px-6 font-medium font-semibold" style="background-color: #EA8686;color: #000000;">
+                        {{header.Frequency}}
+                      </td>
+                      <td *ngIf="header.test_name != 'freq' && header.Stat != 'Good'"
+                     class="py-4 px-6 font-medium font-semibold"  style="color: black">
+                      {{header.Frequency}}
+                    </td>
+                      <td *ngIf="header.Stat == 'Good'" class="py-4 px-6 font-medium font-semibold" style="color: #000000;">
+                        {{header.Frequency}}
+                      </td>
                         <td *ngIf="header.test_name == 'Thermal' && header.Stat == 'Satisfactory'" class="py-4 px-6 font-medium font-semibold" style="background-color: #FED033;color: #000000;">
                           {{header.Thermal}}
                         </td>
@@ -565,22 +582,7 @@
                         <td *ngIf="header.Stat == 'Good'" class="py-4 px-6 font-medium font-semibold" style="color: #000000;">
                           {{header.Thermal}}
                         </td>
-                        <td *ngIf="header.test_name == 'freq' && header.Stat == 'Satisfactory'" class="py-4 px-6 font-medium font-semibold" style="background-color: #FED033;color: #000000;">
-                          {{header.Frequency}}
-                        </td>
-                        <td *ngIf="header.test_name == 'freq' && header.Stat == 'Unsatisfactory'" class="py-4 px-6 font-medium font-semibold" style="background-color: #fea933;color: #000000;">
-                          {{header.Frequency}}
-                        </td>
-                        <td *ngIf="header.test_name == 'freq' && header.Stat == 'Unacceptable'" class="py-4 px-6 font-medium font-semibold" style="background-color: #EA8686;color: #000000;">
-                          {{header.Frequency}}
-                        </td>
-                        <td *ngIf="header.test_name != 'freq' && header.Stat != 'Good'"
-                       class="py-4 px-6 font-medium font-semibold"  style="color: black">
-                        {{header.Frequency}}
-                      </td>
-                        <td *ngIf="header.Stat == 'Good'" class="py-4 px-6 font-medium font-semibold" style="color: #000000;">
-                          {{header.Frequency}}
-                        </td>
+                      
                         <!-- <td class="py-4 px-6 font-medium font-semibold" style="color: black">
                           {{header.Frequency}}
                         </td> -->
