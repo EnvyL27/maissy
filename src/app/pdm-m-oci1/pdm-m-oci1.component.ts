@@ -273,6 +273,8 @@ export class PdmMOci1Component implements OnInit {
   ampereDate: any = [];
   vibration2H: any = [];
   vibrationCF: any = [];
+  vibration3H: any = [];
+  vibration3CF: any = [];
   vibrationDate: any = [];
   temperatureThermal: any = [];
   temperatureDate: any = [];
@@ -449,6 +451,8 @@ export class PdmMOci1Component implements OnInit {
     this.ampereFreq = [];
     this.vibration2H = [];
     this.vibrationCF = [];
+    this.vibration3H = [];
+    this.vibration3CF = [];
     this.temperatureThermal = [];
     this.funloc = $event;
     this.funlocabnormaldate = $event2;
@@ -486,7 +490,7 @@ export class PdmMOci1Component implements OnInit {
       }
     }
     this.amperelist = this.amperelist.filter(function (e: any) { return e != null; });
-    // //////console.log(this.amperelist);
+    console.log(this.amperelist);
 
     for (let i = 0; i < this.amperelist.length; i++) {
       if (this.amperelist[i].test_name === 'R') {
@@ -507,14 +511,20 @@ export class PdmMOci1Component implements OnInit {
         this.vibrationlist.splice(this.vibrationlist.lenght, 0, this.totalvibrationlist[i]);
       }
     }
-
+    
     this.vibrationlist = this.vibrationlist.filter(function (e: any) { return e != null; });
+
     for (let i = 0; i < this.vibrationlist.length; i++) {
+
       if (this.vibrationlist[i].test_name === '2H') {
         this.vibration2H.splice(this.vibration2H.lenght, 0, this.vibrationlist[i].value);
         this.vibrationDate.splice(this.vibrationDate.lenght, 0, this.vibrationlist[i].do_date);
       } else if (this.vibrationlist[i].test_name === 'CF+ (2H)') {
         this.vibrationCF.splice(this.vibrationCF.lenght, 0, this.vibrationlist[i].value);
+      } else if (this.vibrationlist[i].test_name === '3H') {
+        this.vibration3H.splice(this.vibration3H.lenght, 0, this.vibrationlist[i].value);
+      } else if (this.vibrationlist[i].test_name === 'CF+ (3H)') {
+        this.vibration3CF.splice(this.vibration3CF.lenght, 0, this.vibrationlist[i].value);
       }
     }
     var dataVibration = {
@@ -534,6 +544,24 @@ export class PdmMOci1Component implements OnInit {
           data: this.vibrationCF.reverse(),
           backgroundColor: 'green',
           borderColor: 'lightgreen',
+          fill: false,
+          lineTension: 0,
+          radius: 6,
+        },
+        {
+          label: '3H',
+          data: this.vibration3H.reverse(),
+          backgroundColor: 'red',
+          borderColor: 'red',
+          fill: false,
+          lineTension: 0,
+          radius: 6,
+        },
+        {
+          label: 'CF+ 3H',
+          data: this.vibration3CF.reverse(),
+          backgroundColor: 'yellow',
+          borderColor: 'yellow',
           fill: false,
           lineTension: 0,
           radius: 6,
